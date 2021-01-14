@@ -4,6 +4,8 @@ from cloudinary.models import CloudinaryField
 
 
 class Category(models.Model):
+    parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True,
+                               verbose_name='Родительская категория', related_name='child')
     title = models.CharField('Название категории', max_length=255)
     description = models.TextField('Описание категории', max_length=200, help_text='Не болле 200 символов')
     image = CloudinaryField('Миниатюра', folder='posShop/categories')
@@ -54,13 +56,14 @@ class Product(models.Model):
                                  verbose_name='Категория', related_name='products')
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, blank=True,
                               verbose_name='Бренд', related_name='products')
-    title = models.CharField('Название товара', max_length=255)
-    article = models.CharField('Артикул товара', blank=True, null=True)
-    image = CloudinaryField('Основное изображение товара', folder='posShop/products')
-    price = models.PositiveSmallIntegerField('Цена товара')
-    old_price = models.PositiveSmallIntegerField('Старая цена товара (необзяательно)', null=True, blank=True)
+    labels = models.ManyToManyField(Label, blank=True, verbose_name='Метки', related_name='products')
+    title = models.CharField('Название товара', max_length=255, db_index=True)
+    article = models.CharField('Артикул товара', max_length=100, blank=True, null=True)
     description = models.TextField('Краткое описание товара')
     info = RichTextUploadingField('Дополнительная информация', null=True, blank=True)
+    price = models.PositiveSmallIntegerField('Цена товара')
+    old_price = models.PositiveSmallIntegerField('Старая цена товара (необзяательно)', null=True, blank=True)
+    image = CloudinaryField('Основное изображение товара', folder='posShop/products')
     rating = models.PositiveSmallIntegerField('Рейтинг товара', default=5)
     kaspi_url = models.URLField('Ссылка на kaspi', blank=True, null=True)
     kaspi_kod = models.TextField('Код html kaspi', blank=True, null=True)
@@ -94,5 +97,34 @@ class Image(models.Model):
         verbose_name = 'Дополнительное изображение'
         verbose_name_plural = 'Дополнительные изображения'
 
+
 class Option(models.Model):
-    title = models.CharField('')
+    title = models.CharField('Заголовок', max_length=100)
+    value = models.CharField('Значение', max_length=100)
+    order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Техническая характеристика'
+        verbose_name_plural = 'Технические характеристики'
+        ordering = ('order',)
+
+
+class Review(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True,
+                                verbose_name='Товар', related_name='reviews')
+    name = models.CharField('Имя', max_length=255)
+    text = models.TextField('Отзыв')
+    rating = models.PositiveSmallIntegerField('Оценка')
+    pub_date = models.DateTimeField('Дата создания', auto_now_add=True)
+    public = models.BooleanField('Опубликовать', default=False)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
+        ordering = ('-pub_date',)
