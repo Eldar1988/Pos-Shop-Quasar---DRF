@@ -1,0 +1,527 @@
+{
+  "companyInfo": {
+    "id": 1,
+    "logo": "image/upload/v1610641515/posshop/lff1yzlstsxt3gsuvwbt.jpg",
+    "title": "Pos-shop - оборудование для автоматизации торговли",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dignissim interdum sapien pulvinar suscipit. Aenean scelerisque, neque vulputate ullamcorper maximus, metus quam congue velit, vitae port"
+  },
+  "pages": [
+    {
+      "id": 1,
+      "title": "Автоматизация торговли",
+      "slug": "avto"
+    },
+    {
+      "id": 2,
+      "title": "Оплата",
+      "slug": "oplata"
+    },
+    {
+      "id": 3,
+      "title": "Доставка",
+      "slug": "dostavka"
+    }
+  ],
+  "contacts": {
+    "id": 1,
+    "title": "Контакты",
+    "description": "Вы можете связаться с нами любым удобным способом",
+    "phone": "+7-778-166-5240",
+    "whatsapp": "77078553710",
+    "address": "г. Алматы, ул.Брюсова 4, офис 5Б",
+    "body": "<p><strong>Наш телефон:</strong></p>\r\n\r\n<p><strong>+7 (747) 723-23-07</strong></p>\r\n\r\n<p><strong>+7 (707) 745-45-20</strong></p>\r\n\r\n<p><strong>+7 (702) 436-08-32</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Режим работы:</strong></p>\r\n\r\n<p>Ежедневно c 10:00 до 20:00</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Адрес:</strong></p>\r\n\r\n<p>г. Алматы, ул.Брюсова 4, офис 5Б</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Данные организации</strong></p>\r\n\r\n<p>ИП &laquo;Телибаев Максат Турсынгазиевич&raquo;</p>\r\n\r\n<p>Директор Телибаев Максат Турсынгазиевич</p>",
+    "map_frame": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2169.391807534281!2d72.59092230616939!3d49.71350939400472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x424374e78d15d499%3A0x3697ba0e52392f3b!2z0J_RgNC-0LTRg9C60YLQvtCy0YvQuSDQvNCw0LPQsNC30LjQvSAi0JLQuNGI0LXQvdC60LAi!5e0!3m2!1sru!2skz!4v1610643205132!5m2!1sru!2skz\" width=\"600\" height=\"450\" frameborder=\"0\" style=\"border:0;\" allowfullscreen=\"\" aria-hidden=\"false\" tabindex=\"0\"></iframe>"
+  },
+  "socials": [
+    {
+      "id": 1,
+      "title": "vk",
+      "icon": "vk",
+      "url": "https://materialdesignicons.com/"
+    },
+    {
+      "id": 2,
+      "title": "facebook",
+      "icon": "facebook",
+      "url": "https://materialdesignicons.com/"
+    },
+    {
+      "id": 3,
+      "title": "instagram",
+      "icon": "instagram",
+      "url": "https://materialdesignicons.com/"
+    }
+  ],
+  "clients": [
+    {
+      "id": 1,
+      "logo": "http://res.cloudinary.com/space-developers/image/upload/v1610643931/posshop/clients/blmrfsjhlgps22xp7jpu.jpg",
+      "title": "client",
+      "url": "http://pos-shop.kz/pages/contacts"
+    },
+    {
+      "id": 2,
+      "logo": "http://res.cloudinary.com/space-developers/image/upload/v1610643964/posshop/clients/wem6ffyllpppw3dnp8st.png",
+      "title": "Client 2",
+      "url": "http://pos-shop.kz/pages/contacts"
+    },
+    {
+      "id": 3,
+      "logo": "http://res.cloudinary.com/space-developers/image/upload/v1610643973/posshop/clients/nkjhpnnbvbdhg81lacx6.jpg",
+      "title": "3",
+      "url": "http://pos-shop.kz/pages/contacts"
+    },
+    {
+      "id": 4,
+      "logo": "http://res.cloudinary.com/space-developers/image/upload/v1610643979/posshop/clients/b3gyftpijbz56jgw0omr.jpg",
+      "title": "4",
+      "url": "http://pos-shop.kz/pages/contacts"
+    },
+    {
+      "id": 5,
+      "logo": "http://res.cloudinary.com/space-developers/image/upload/v1610643988/posshop/clients/rvlcxke3u4ssximwixgj.jpg",
+      "title": "5",
+      "url": "http://pos-shop.kz/pages/contacts"
+    },
+    {
+      "id": 6,
+      "logo": "http://res.cloudinary.com/space-developers/image/upload/v1610643997/posshop/clients/qfeflunonsrfnyjqfygh.jpg",
+      "title": "6",
+      "url": "http://pos-shop.kz/pages/contacts"
+    },
+    {
+      "id": 7,
+      "logo": "http://res.cloudinary.com/space-developers/image/upload/v1610644004/posshop/clients/fyhthqlefezqflgmotv4.png",
+      "title": "7",
+      "url": "http://pos-shop.kz/pages/contacts"
+    }
+  ],
+  "slider": [
+    {
+      "id": 1,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610643680/poshop/sldies/oeczaq5zmahoo6xghq0b.png",
+      "title": "Заголовок слайда 1",
+      "url": "-",
+      "btn_text": "Перейти",
+      "order": 1
+    },
+    {
+      "id": 2,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610643697/poshop/sldies/ezoavvrpxg1cdiwgwewz.png",
+      "title": "Заголовок слайда 2",
+      "url": "-",
+      "btn_text": "Перейти",
+      "order": 2
+    }
+  ],
+  "banners": [
+    {
+      "id": 1,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610643488/poshop/sldies/qf4ptqhgptjmrbagxjr4.jpg",
+      "title": "Баннер 1",
+      "url": "-",
+      "btn_text": "Подробнее"
+    },
+    {
+      "id": 2,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610643500/poshop/sldies/ettcighmtm4mb7o9rkfo.jpg",
+      "title": "Баннер 2",
+      "url": "-",
+      "btn_text": "Подробнее"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+      "parent": null,
+      "title": "Pos-терминалы",
+      "full_description": null,
+      "slug": "pos"
+    },
+    {
+      "id": 2,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644246/posShop/categories/mnzyc5uys1yojmcgfnba.jpg",
+      "parent": null,
+      "title": "Сканеры штрих-кода",
+      "full_description": null,
+      "slug": "cat12"
+    },
+    {
+      "id": 4,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644333/posShop/categories/tbhcbfmank0wfeibgtot.jpg",
+      "parent": {
+        "id": 2,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644246/posShop/categories/mnzyc5uys1yojmcgfnba.jpg",
+        "title": "Сканеры штрих-кода",
+        "full_description": null,
+        "slug": "cat12",
+        "parent": null
+      },
+      "title": "Проводные сканеры",
+      "full_description": null,
+      "slug": "cat1233"
+    },
+    {
+      "id": 3,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644306/posShop/categories/n7mbe0ujr1wmo8uy555q.jpg",
+      "parent": {
+        "id": 2,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644246/posShop/categories/mnzyc5uys1yojmcgfnba.jpg",
+        "title": "Сканеры штрих-кода",
+        "full_description": null,
+        "slug": "cat12",
+        "parent": null
+      },
+      "title": "Беспроводные сканеры",
+      "full_description": null,
+      "slug": "cat123"
+    },
+    {
+      "id": 5,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644364/posShop/categories/kud9g5hroca8ehko9df9.jpg",
+      "parent": {
+        "id": 2,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644246/posShop/categories/mnzyc5uys1yojmcgfnba.jpg",
+        "title": "Сканеры штрих-кода",
+        "full_description": null,
+        "slug": "cat12",
+        "parent": null
+      },
+      "title": "Стационарные сканеры",
+      "full_description": null,
+      "slug": "cat12333"
+    },
+    {
+      "id": 6,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644428/posShop/categories/bugvnlanyywj9qzffdx8.jpg",
+      "parent": null,
+      "title": "Принтеры чеков",
+      "full_description": null,
+      "slug": "cawdwad232132131345"
+    },
+    {
+      "id": 7,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644459/posShop/categories/rexnfksg6z8ipyasozot.jpg",
+      "parent": null,
+      "title": "Мобильные принтеры",
+      "full_description": null,
+      "slug": "cawdwad232132131345231"
+    },
+    {
+      "id": 8,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644542/posShop/categories/y7vm60uxcgv7abkbs41w.png",
+      "parent": null,
+      "title": "Принтеры этикеток",
+      "full_description": null,
+      "slug": "2313dwdwad"
+    },
+    {
+      "id": 9,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644579/posShop/categories/maifrv77y1uepnhwnu4n.jpg",
+      "parent": null,
+      "title": "Термотрансферные принтеры",
+      "full_description": null,
+      "slug": "2313dwdwad32132"
+    },
+    {
+      "id": 10,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644728/posShop/categories/afkjq3mu9y4w8j6uggms.jpg",
+      "parent": null,
+      "title": "Pos моноблоки",
+      "full_description": "",
+      "slug": "2313dwdwad3213232"
+    },
+    {
+      "id": 11,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644755/posShop/categories/n9krefmisoweyy4k1v8f.jpg",
+      "parent": null,
+      "title": "ИБП, стабилизаторы напряжения",
+      "full_description": "",
+      "slug": "2313dwdwad321323223"
+    },
+    {
+      "id": 12,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644792/posShop/categories/mkbezjhnwjbiszlja8ar.jpg",
+      "parent": null,
+      "title": "Денежные ящики",
+      "full_description": "",
+      "slug": "2313dwdwad321323223321"
+    },
+    {
+      "id": 13,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610644827/posShop/categories/pi0868c0r3cvnhkhpa3s.jpg",
+      "parent": null,
+      "title": "Торговые весы",
+      "full_description": "",
+      "slug": "2313dwdwad321323223321231"
+    }
+  ],
+  "brands": [
+    {
+      "id": 1,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610620784/posShop/brands/rozp5adzqk6h1co3lavf.png",
+      "title": "Samsung",
+      "full_description": null,
+      "slug": "samsung"
+    }
+  ],
+  "hitProducts": [
+    {
+      "id": 14,
+      "title": "Товар 13",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 50000,
+      "old_price": 55000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646838/posShop/products/zmmkhp7lpojd7kioj1jv.jpg",
+      "rating": 4
+    },
+    {
+      "id": 1,
+      "title": "POS моноблок T610D 2Gb/32Gb",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 135000,
+      "old_price": 140000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610621033/posShop/products/uczinfxjj6bgmhciuhz1.jpg",
+      "rating": 5
+    },
+    {
+      "id": 2,
+      "title": "Товар 1",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 135000,
+      "old_price": 140000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646459/posShop/products/bth1hmi51lghrvhz4e5r.webp",
+      "rating": 5
+    },
+    {
+      "id": 3,
+      "title": "Товар 2",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 160000,
+      "old_price": 180000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646571/posShop/products/f7z9sgumysk2d6rc5cga.jpg",
+      "rating": 5
+    },
+    {
+      "id": 4,
+      "title": "Товар 3",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 160000,
+      "old_price": 180000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646679/posShop/products/esbnptfsjqbcnxgxknoc.webp",
+      "rating": 5
+    },
+    {
+      "id": 5,
+      "title": "Товар 4",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 160000,
+      "old_price": 180000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646698/posShop/products/gqepyggt1jrox6tdlo7p.webp",
+      "rating": 5
+    },
+    {
+      "id": 6,
+      "title": "Товар 5",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 160000,
+      "old_price": 180000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646715/posShop/products/xpj8obpo0nvoh4lcru7e.jpg",
+      "rating": 5
+    },
+    {
+      "id": 7,
+      "title": "Товар 6",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 160000,
+      "old_price": 180000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646730/posShop/products/q7hdkwkmnmomispu1esq.webp",
+      "rating": 5
+    },
+    {
+      "id": 8,
+      "title": "Товар 7",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 160000,
+      "old_price": 180000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646745/posShop/products/x5lgqtovhpsqyiujt8m9.webp",
+      "rating": 5
+    },
+    {
+      "id": 9,
+      "title": "Товар 8",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 90000,
+      "old_price": 95000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646770/posShop/products/hkfkh4dq9j1mp4ri4x4j.webp",
+      "rating": 5
+    },
+    {
+      "id": 10,
+      "title": "Товар 9",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 90000,
+      "old_price": 95000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646786/posShop/products/bpxn1svdnrxbjbsnocvc.jpg",
+      "rating": 5
+    },
+    {
+      "id": 11,
+      "title": "Товар 10",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 50000,
+      "old_price": 55000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646803/posShop/products/swsaeqw81jdzop9jw5pp.jpg",
+      "rating": 5
+    },
+    {
+      "id": 12,
+      "title": "Товар 11",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 50000,
+      "old_price": 55000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646818/posShop/products/an79dtizuwih6huljq4l.jpg",
+      "rating": 5
+    },
+    {
+      "id": 13,
+      "title": "Товар 12",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 50000,
+      "old_price": 55000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646828/posShop/products/ogw0gkvk7r8al6n6n6rj.webp",
+      "rating": 5
+    },
+    {
+      "id": 15,
+      "title": "Товар 14",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 50000,
+      "old_price": 55000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646851/posShop/products/rifhzvz8lkcqfqfq9c9g.jpg",
+      "rating": 5
+    },
+    {
+      "id": 16,
+      "title": "Товар 15",
+      "category": {
+        "id": 1,
+        "image": "http://res.cloudinary.com/space-developers/image/upload/v1610603106/posShop/categories/cyawizxrt9oxtphyvdho.jpg",
+        "parent": null,
+        "title": "Pos-терминалы",
+        "full_description": null,
+        "slug": "pos"
+      },
+      "price": 250000,
+      "old_price": 290000,
+      "image": "http://res.cloudinary.com/space-developers/image/upload/v1610646873/posShop/products/rvt5umnuxbiet6euhehw.jpg",
+      "rating": 5
+    }
+  ]
+}

@@ -13,7 +13,14 @@ admin.site.register(Social)
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('title', 'logo', 'url')
+    list_display = ('get_image', 'title', 'url')
+    save_as = True
+    save_on_top = True
+
+    def get_image(self, obj):
+        return mark_safe(f"<img src={obj.logo.url} height=30px>")
+
+    get_image.short_description = 'Логотип'
 
 
 @admin.register(Slider)

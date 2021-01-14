@@ -23,9 +23,8 @@ class Page(models.Model):
     title = models.CharField('Заголовок страницы', max_length=255)
     description = models.TextField('Карткое описание', max_length=200, help_text='Для тега description не более 200 символов')
     body = RichTextUploadingField('Контент')
-    slug = models.SlugField('Slug', help_text='Маленькими буквами на латинице, без пробелов и спецсимволов'),
+    slug = models.SlugField('Slug', help_text='Маленькими буквами на латинице, без пробелов и спецсимволов', null=True, blank=True)
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
-    pub_date = models.DateTimeField('Дата пуликации')
 
     def __str__(self):
         return self.title
@@ -85,7 +84,7 @@ class Client(models.Model):
     """Клиенты компании"""
     title = models.CharField('Название компании', max_length=255, db_index=True)
     logo = CloudinaryField('Логотип', folder='posshop/clients')
-    url = models.URLField('ССылка на сайт')
+    url = models.URLField('Ссылка на сайт')
 
     def __str__(self):
         return self.title
@@ -121,5 +120,5 @@ class Banner(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = 'Слайд'
-        verbose_name_plural = 'Слайдер'
+        verbose_name = 'Баннер'
+        verbose_name_plural = 'Баннеры'

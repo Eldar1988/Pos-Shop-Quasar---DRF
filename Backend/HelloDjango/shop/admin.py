@@ -1,14 +1,15 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Category, Brand, Label, Product, Image, Option, Review
+from .models import Category, Brand, Label, Product, Image, Review
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'slug', 'order')
-    list_editable = ('title', 'slug', 'order')
+    list_display = ('get_image', 'title', 'parent', 'slug', 'order')
+    list_editable = ('title', 'slug', 'order', 'parent')
     search_fields = ('title',)
+    list_filter = ('parent',)
 
     save_as = True
     save_on_top = True
@@ -54,20 +55,23 @@ class ReviewInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'rating', 'future', 'hit', 'latest', 'public', 'order')
-    list_editable = ('title', 'category', 'brand', 'price', 'old_price', 'rating', 'future', 'hit', 'latest', 'public', 'order')
+    list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'rating', 'show_on_home_page',
+                    'future', 'hit', 'latest', 'public', 'order')
+    list_display_links = ('get_image', 'title')
+    list_editable = ('price', 'old_price', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
     list_filter = ('category', 'brand', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date', 'update')
     search_fields = ('title',)
     filter_horizontal = ('labels',)
     filter_vertical = ('labels',)
     inlines = [ImageInline, ReviewInline]
     fields = [
-        ('title', 'article'),
+        ('title', 'article', 'slug'),
         ('category', 'brand'),
         ('price', 'old_price'),
         ('image',), ('description',),
         ('future', 'hit', 'latest', 'public'),
-        ('kaspi_url', 'kaspi_kod'),
+        ('kaspi_url'),
+        ('kaspi_kod'),
         ('labels',),
         ('info',),
         ('rating', 'order'),
