@@ -1,13 +1,17 @@
 <template>
   <q-page class="">
-    <pos-page-header :title="companyInfo.title" />
-    <pos-slider />
-    <pos-hot-products-slider />
-    <pos-banners />
-    <pos-product-tabs />
+    <pos-page-header :title="companyInfo.title"/>
+    <pos-slider/>
+    <section class="section">
+      <pos-section-title title="Новинки" />
+      <pos-hot-products-slider class="q-mt-sm"/>
+    </section>
+
+    <pos-banners/>
+    <pos-product-tabs/>
     <section class="q-mt-xl q-px-sm q-py-xl bg-grey-2">
-      <pos-section-title title="Категории" />
-      <pos-categories :categories="categories" class="q-mt-lg" />
+      <pos-section-title title="Категории"/>
+      <pos-categories :categories="categories" class="q-mt-lg"/>
     </section>
   </q-page>
 </template>
@@ -20,18 +24,20 @@ import PosBanners from "components/shop/posBanners";
 import PosCategories from "components/shop/posCategories";
 import PosSectionTitle from "components/service/posSectionTitle";
 import PosHotProductsSlider from "components/homePage/posHotProductsSlider";
+
 export default {
   name: 'PageIndex',
   components: {
     PosHotProductsSlider,
-    PosSectionTitle, PosCategories, PosBanners, PosProductTabs, PosSlider, PosPageHeader},
+    PosSectionTitle, PosCategories, PosBanners, PosProductTabs, PosSlider, PosPageHeader
+  },
   computed: {
     companyInfo() {
       return this.$store.getters.getCompanyInfo
     },
-      categories() {
-        return this.$store.getters.getCategories
-      }
+    categories() {
+      return this.$store.getters.getCategories
+    }
   }
 }
 </script>

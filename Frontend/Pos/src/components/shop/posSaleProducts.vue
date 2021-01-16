@@ -23,7 +23,7 @@ export default {
   methods: {
     async loadSaleProducts() {
       try {
-        this.products = await this.$axios.get(`${this.$store.getters.getServerURL}/shop/sale_products/`)
+        this.products = await this.$axios.get(`${this.$store.getters.getServerURL}/shop/home_sale_products/`)
         .then(({data}) => {
           return data.results
         })

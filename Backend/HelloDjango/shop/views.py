@@ -7,13 +7,13 @@ from .serializers import ProductListSerializer
 from .service import ProductsPagination
 
 
-class SaleProductView(viewsets.ReadOnlyModelViewSet):
-    queryset = Product.objects.filter(public=True, old_price__gte=1)
+class HomeSaleProductView(viewsets.ReadOnlyModelViewSet):
+    queryset = Product.objects.filter(public=True, old_price__gte=1, show_on_home_page=True)[:30]
     serializer_class = ProductListSerializer
     pagination_class = ProductsPagination
 
 
-class FutureProducts(viewsets.ReadOnlyModelViewSet):
-    queryset = Product.objects.filter(public=True, future=True)
+class HomeFutureProducts(viewsets.ReadOnlyModelViewSet):
+    queryset = Product.objects.filter(public=True, future=True, show_on_home_page=True)[:30]
     serializer_class = ProductListSerializer
     pagination_class = ProductsPagination

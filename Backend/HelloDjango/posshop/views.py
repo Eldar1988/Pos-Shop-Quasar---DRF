@@ -48,9 +48,13 @@ class MainInfoView(APIView):
         brands_serializer = BrandListSerializer(brands, many=True)
         response_data['brands'] = brands_serializer.data
 
-        hit_products = Product.objects.filter(public=True, hit=True, show_on_home_page=True)
+        hit_products = Product.objects.filter(public=True, hit=True, show_on_home_page=True)[:30]
         products_serializer = ProductListSerializer(hit_products, many=True)
         response_data['hitProducts'] = products_serializer.data
+
+        latest_products = Product.objects.filter(public=True, latest=True, show_on_home_page=True)[:20]
+        products_serializer = ProductListSerializer(latest_products, many=True)
+        response_data['latestProducts'] = products_serializer.data
 
         return Response(response_data)
 

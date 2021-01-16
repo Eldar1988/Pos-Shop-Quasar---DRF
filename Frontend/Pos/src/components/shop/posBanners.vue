@@ -1,5 +1,5 @@
 <template>
-<section class="q-pa-sm">
+<section class="section q-pa-sm">
   <div v-if="!reloadBannersStatus" class="banners-wrapper">
     <article
       v-for="banner in banners"
