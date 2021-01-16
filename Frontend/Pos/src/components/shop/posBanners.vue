@@ -23,8 +23,8 @@
   </div>
   <div v-else class="banners-wrapper">
     <q-skeleton
-      v-for="i in 3"
-      :key="i"
+      v-for="(i, index) in 3"
+      :key="index"
       class="full-width banner-image"
     />
   </div>
@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       banners: [],
-      reloadBannersStatus: false
+      reloadBannersStatus: true
     }
   },
   mounted() {
@@ -74,6 +74,26 @@ export default {
 
 .banner-image
   height: 250px
+
+@media screen and (max-width: 1402px)
+  .banner-image
+    height: 200px
+
+@media screen and (max-width: 1300px)
+  .banner-image
+    height: 170px
+
+@media screen and (max-width: 1100px)
+  .banner-image
+    height: 120px
+
+@media screen and (max-width: 1023px)
+  .banner-image
+    height: 170px
+
+@media screen and (max-width: 800px)
+  .banner-image
+    height: 130px
 
 @media screen and (max-width: 650px)
   .banners-wrapper

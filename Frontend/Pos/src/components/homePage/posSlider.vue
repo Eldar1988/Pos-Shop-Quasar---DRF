@@ -22,7 +22,7 @@
       >
         <q-img
           :src="slide.image"
-          :style="slide.contain ? `background-size: contain; background-repeat: no-repeat` : ``"
+          :contain="slide.contain"
           class="home-slider"
         >
           <template v-slot:loading>
@@ -94,9 +94,13 @@ export default {
   font-weight: 700
   padding: 7px 25px
 
+@media screen and (max-width: 1280px)
+  .home-slider
+    height: 400px
+
 @media screen and (max-width: 650px)
   .home-slider
-    height: 300px
+    height: 250px
 
   .slider-meta-content
     background: rgba(0,0,0,.7)
