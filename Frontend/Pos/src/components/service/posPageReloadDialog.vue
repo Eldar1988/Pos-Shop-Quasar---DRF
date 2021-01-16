@@ -1,16 +1,5 @@
 <template>
-  <section class="q-pa-sm" v-if="serverUnloadedStatus">
-    <q-card class="bg-dark text-white flex flex-center text-center">
-      <q-card-section>
-        Извините, соединение с сервером не установлено. {{ }}<br>
-        <q-btn
-          label="Перезагрузите страницу"
-          class="q-mt-md text-weight-bold"
-          outline
-          @click="reload"
-        />
-      </q-card-section>
-    </q-card>
+  <section >
   </section>
 </template>
 

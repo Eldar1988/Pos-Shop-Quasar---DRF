@@ -4,7 +4,7 @@
       v-model="tab"
       align="justify"
       narrow-indicator
-      class="q-mb-lg bg-grey-3 border-radius-6"
+      class="q-mb-lg bg-grey-3 border-radius-6 home-tabs"
       active-bg-color="primary"
       active-color="white"
       indicator-color="primary"
@@ -28,11 +28,11 @@
         </q-tab-panel>
 
         <q-tab-panel name="sales">
-
+          <pos-sale-products />
         </q-tab-panel>
 
         <q-tab-panel name="future">
-
+          <pos-future-products />
         </q-tab-panel>
       </q-tab-panels>
 
@@ -43,9 +43,13 @@
 <script>
 import PosProductsWrapper from "components/shop/posProductsWrapper";
 import PosSkeletonProducts from "components/service/posSkeletonProducts";
+import PosSaleProducts from "components/shop/posSaleProducts";
+import scrollTo from "src/functions/scroll_to";
+import PosFutureProducts from "components/shop/posFutureProducts";
+
 export default {
   name: "posProductTabs",
-  components: {PosSkeletonProducts, PosProductsWrapper},
+  components: {PosFutureProducts, PosSaleProducts, PosSkeletonProducts, PosProductsWrapper},
   data() {
     return {
       tab: 'hits'
@@ -63,11 +67,7 @@ export default {
 
   },
   methods: {
-    // async LoadSaleProducts() {
-    //   try {
-    //
-    //   }
-    // }
+    scrollTo
   }
 }
 </script>

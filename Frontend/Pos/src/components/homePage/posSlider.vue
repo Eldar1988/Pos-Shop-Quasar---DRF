@@ -6,7 +6,6 @@
       animated
       v-model="slide"
       :navigation="slider.dots"
-      :thumbnails="slider.thumbnails"
       infinite
       :autoplay="slider.autoplay"
       :arrows="slider.arrows"
@@ -20,27 +19,35 @@
         v-for="(slide, index) in slider.slides"
         :key="index"
         :name="index"
-        :style="slide.contain ? `background-size: contain; background-repeat: no-repeat` : ``"
-        :img-src="slide.image"
       >
-        <div class="slider-meta">
-          <div class="text-center">
-            <h2 v-if="slide.title">
+        <q-img
+          :src="slide.image"
+          :style="slide.contain ? `background-size: contain; background-repeat: no-repeat` : ``"
+          class="home-slider"
+        >
+          <template v-slot:loading>
+            <q-skeleton class="full-width home-slider" />
+          </template>
+          <div class="slider-meta">
+            <div class="text-center">
+              <h2 v-if="slide.title">
               <span class="slider-meta-content border-radius-6">
               {{ slide.title }}
                 </span>
-            </h2>
-            <q-btn
-              v-if="slide.btn_text"
-              :label="slide.btn_text"
-              color="accent"
-              class="text-weight-bold q-my-sm q-px-md border-radius-6"
-              icon-right="keyboard_arrow_right"
-              :to="slide.url"
-              unelevated
-            />
+              </h2>
+              <q-btn
+                v-if="slide.btn_text"
+                :label="slide.btn_text"
+                color="negative"
+                class="text-weight-bold q-my-sm q-px-md border-radius-6"
+                icon-right="keyboard_arrow_right"
+                :to="slide.url"
+                unelevated
+              />
+            </div>
           </div>
-        </div>
+        </q-img>
+
       </q-carousel-slide>
     </q-carousel>
     <q-skeleton

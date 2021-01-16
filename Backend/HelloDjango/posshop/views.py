@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import viewsets
 
 from .models import Info, Page, Contacts, Social, Client, Slider, Banner
 from .serializers import ShortInfoSerializer, PagesListSerializer, ContactInfoSerializer, SocialsSerializer, \
@@ -39,10 +40,6 @@ class MainInfoView(APIView):
         slider_serializer = SliderSerializer(slider, many=False)
         response_data['slider'] = slider_serializer.data
 
-        banners = Banner.objects.all()
-        banners_serializer = BannerSerializer(banners, many=True)
-        response_data['banners'] = banners_serializer.data
-
         categories = Category.objects.all()
         categories_serializer = CategoryListSerializer(categories, many=True)
         response_data['categories'] = categories_serializer.data
@@ -56,4 +53,9 @@ class MainInfoView(APIView):
         response_data['hitProducts'] = products_serializer.data
 
         return Response(response_data)
+
+
+class BannersView(viewsets.ReadOnlyModelViewSet):
+    queryset = Banner.objects.all().order_by('?')[:3]
+    serializer_class = BannerSerializer
 

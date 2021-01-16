@@ -9,7 +9,8 @@
     >
       <!--      Sale      -->
       <q-btn
-        color="red"
+        v-if="product.old_price"
+        color="accent"
         round
         :size="this.$q.platform.is.mobile ? 'sm' : 'md'"
         unelevated
@@ -41,14 +42,14 @@
       <div class="product-card-actions">
           <q-btn
             label="В 1 клик"
-            color="secondary"
+            color="negative"
             icon="done_outline"
             size="sm"
             class="text-bold full-width border-radius-6"
             unelevated
           />
         <q-btn
-          color="secondary"
+          color="negative"
           size="sm"
           icon="add_shopping_cart"
           class="text-bold full-width border-radius-6"

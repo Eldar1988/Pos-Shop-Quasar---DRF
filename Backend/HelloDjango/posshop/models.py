@@ -36,7 +36,7 @@ class Page(models.Model):
 
 
 class Contacts(models.Model):
-    """Контактная иформация"""
+    """Контактная информация"""
     title = models.CharField('Заголовок для страницы контактов', max_length=255)
     description = models.TextField('Краткое описание')
     phone = models.CharField('Основной телефон', max_length=20)
@@ -68,6 +68,7 @@ class Driver(models.Model):
 
 
 class Social(models.Model):
+    """Социальные сети"""
     title = models.CharField('Название сети', max_length=100)
     icon = models.CharField('Иконка сети', max_length=100, help_text='https://materialdesignicons.com/')
     url = models.URLField('URL')
@@ -99,7 +100,6 @@ class Slider(models.Model):
     title = models.CharField('Название слайдера', max_length=255)
     arrows = models.BooleanField('Показать стрелки', default=True)
     dots = models.BooleanField('Показать точки', default=True)
-    thumbnails = models.BooleanField('Показать миниатюры', default=False)
     autoplay = models.BooleanField('Автоматическая смена слайдов', default=True)
 
     def __str__(self):
@@ -134,10 +134,12 @@ class Slide(models.Model):
 
 
 class Banner(models.Model):
+    """Баннеры"""
     title = models.CharField('Заголовок Баннера', max_length=255)
     image = CloudinaryField('Картинка', folder='poshop/sldies')
-    url = models.SlugField('Slug')
-    btn_text = models.CharField('Текст на кнопке', max_length=50)
+    url = models.SlugField('Slug', null=True, blank=True)
+    btn_text = models.CharField('Текст на кнопке', max_length=50, null=True, blank=True)
+    contain = models.BooleanField('Не растягивать баннер', default=False)
 
     def __str__(self):
         return self.title

@@ -40,8 +40,8 @@ class SliderAdmin(admin.ModelAdmin):
 
 @admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'url', 'btn_text')
-    list_editable = ('title', 'url', 'btn_text')
+    list_display = ('get_image', 'title', 'url', 'btn_text', 'contain')
+    list_editable = ('title', 'url', 'btn_text', 'contain')
 
     save_as = True
     save_on_top = True
