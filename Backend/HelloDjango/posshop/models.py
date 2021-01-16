@@ -95,18 +95,41 @@ class Client(models.Model):
 
 
 class Slider(models.Model):
-    title = models.CharField('Заголовок слайда', max_length=255)
-    image = CloudinaryField('Картинка', folder='poshop/sldies')
-    url = models.SlugField('Slug')
-    btn_text = models.CharField('Текст на кнопке', max_length=100)
-    order = models.PositiveSmallIntegerField('Порядковый номер')
+    """Слайдер"""
+    title = models.CharField('Название слайдера', max_length=255)
+    arrows = models.BooleanField('Показать стрелки', default=True)
+    dots = models.BooleanField('Показать точки', default=True)
+    thumbnails = models.BooleanField('Показать миниатюры', default=False)
+    autoplay = models.BooleanField('Автоматическая смена слайдов', default=True)
 
     def __str__(self):
         return self.title
 
     class Meta:
+        verbose_name = 'Слайдeр'
+        verbose_name_plural = 'Слайдeр'
+
+
+class Slide(models.Model):
+    """Слайд для слайдера"""
+    slider = models.ForeignKey(Slider, on_delete=models.SET_NULL, null=True, blank=True,
+                               verbose_name='Слайдер', related_name='slides')
+    title = models.CharField('Заголовок слайда (необязательно)', max_length=255, null=True, blank=True)
+    image = CloudinaryField('Картинка', folder='poshop/slides')
+    url = models.SlugField('Slug (необязательно)', null=True, blank=True)
+    btn_text = models.CharField('Текст на кнопке (необязательно)', max_length=100, null=True, blank=True)
+    contain = models.BooleanField('Не растягивать слайд', default=False,
+                                  help_text='Слайд не будет растягиваться по ширине слайдера')
+    order = models.PositiveSmallIntegerField('Порядковый номер')
+
+    def __str__(self):
+        if self.title:
+            return self.title
+        return f'{self.id}'
+
+    class Meta:
         verbose_name = 'Слайд'
-        verbose_name_plural = 'Слайдер'
+        verbose_name_plural = 'Слайды'
         ordering = ('order',)
 
 

@@ -20,22 +20,24 @@
     </q-drawer>
 
     <q-page-container>
+      <!--    Page reload dialog-->
+      <pos-page-reload-dialog />
+      <!--    xxxxx   -->
       <router-view/>
     </q-page-container>
 
-    <!--    Page reload dialog-->
-<!--    <pos-page-reload-dialog :dialog="backendError"/>-->
-    <!--    xxxxx   -->
+
   </q-layout>
 </template>
 
 <script>
 import PosCallBack from "components/siteHead/posCallBack";
 import PosRightDrawerContent from "components/siteHead/posRightDrawerContent";
+import PosPageReloadDialog from "components/service/posPageReloadDialog";
 // import PosPageReloadDialog from "components/service/posPageReloadDialog";
 
 export default {
-  components: {PosRightDrawerContent, PosCallBack},
+  components: {PosPageReloadDialog, PosRightDrawerContent, PosCallBack},
   data() {
     return {
       right: false,

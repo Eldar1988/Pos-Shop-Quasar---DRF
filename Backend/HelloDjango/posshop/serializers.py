@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Page, Info, Contacts, Driver, Social, Client, Slider, Banner
+from .models import Page, Info, Contacts, Driver, Social, Client, Slider, Banner, Slide
 
 
 class PagesListSerializer(serializers.ModelSerializer):
@@ -66,9 +66,21 @@ class ClientsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class SlidesSerializer(serializers.ModelSerializer):
+    """Слайды"""
+    image = serializers.SerializerMethodField('get_image_url')
+
+    def get_image_url(self, obj):
+        return obj.image.url
+
+    class Meta:
+        model = Slide
+        fields = '__all__'
+
+
 class SliderSerializer(serializers.ModelSerializer):
     """Слайдер"""
-    image = serializers.SerializerMethodField('get_image_url')
+    slides = SlidesSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
         return obj.image.url

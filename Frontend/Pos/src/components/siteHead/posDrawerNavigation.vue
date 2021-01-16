@@ -1,7 +1,7 @@
 <template>
   <nav>
     <q-toolbar class="bg-grey-4">
-      <q-toolbar-title class="text-uppercase text-weight-bold text-subtitle1 letter-5">Категории</q-toolbar-title>
+      <q-toolbar-title class="text-uppercase text-weight-bold text-subtitle1 letter-5">Магазин</q-toolbar-title>
     </q-toolbar>
     <q-list>
       <!--    Category skeletons-->
@@ -53,6 +53,8 @@
         clickable
         v-ripple
         class="border-bottom"
+        exact-active-class="text-primary"
+        to="/"
       >
         <q-item-section avatar>
           <q-icon name="home"/>

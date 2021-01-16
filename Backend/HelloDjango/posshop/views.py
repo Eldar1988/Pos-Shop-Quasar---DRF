@@ -35,8 +35,8 @@ class MainInfoView(APIView):
         clients_serializer = ClientsSerializer(clients, many=True)
         response_data['clients'] = clients_serializer.data
 
-        slider = Slider.objects.all()
-        slider_serializer = SliderSerializer(slider, many=True)
+        slider = Slider.objects.last()
+        slider_serializer = SliderSerializer(slider, many=False)
         response_data['slider'] = slider_serializer.data
 
         banners = Banner.objects.all()
