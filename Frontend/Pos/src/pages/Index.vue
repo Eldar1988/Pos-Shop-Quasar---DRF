@@ -2,6 +2,7 @@
   <q-page class="">
     <pos-page-header :title="companyInfo.title" />
     <pos-slider />
+    <pos-hot-products-slider />
     <pos-banners />
     <pos-product-tabs />
     <section class="q-mt-xl q-px-sm q-py-xl bg-grey-2">
@@ -18,9 +19,12 @@ import PosProductTabs from "components/homePage/posProductTabs";
 import PosBanners from "components/shop/posBanners";
 import PosCategories from "components/shop/posCategories";
 import PosSectionTitle from "components/service/posSectionTitle";
+import PosHotProductsSlider from "components/homePage/posHotProductsSlider";
 export default {
   name: 'PageIndex',
-  components: {PosSectionTitle, PosCategories, PosBanners, PosProductTabs, PosSlider, PosPageHeader},
+  components: {
+    PosHotProductsSlider,
+    PosSectionTitle, PosCategories, PosBanners, PosProductTabs, PosSlider, PosPageHeader},
   computed: {
     companyInfo() {
       return this.$store.getters.getCompanyInfo
