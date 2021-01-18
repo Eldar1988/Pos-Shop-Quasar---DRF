@@ -28,17 +28,65 @@
         v-for="category in categories"
         :key="category.id"
       >
+<!--        Parent category   -->
+        <q-expansion-item
+          v-if="category.child.length > 0"
+          expand-separator
+          icon="perm_identity"
+          :label="category.title"
+          class="border-bottom"
+        >
+          <template v-slot:header>
+            <q-item-section avatar>
+              <q-img :src="category.image" class="circle-image"/>
+
+            </q-item-section>
+            <q-item-section><span class="text-subtitle2 text-weight-bold text-dark">{{ category.title }}</span></q-item-section>
+          </template>
+          <!--          Childs    -->
+          <q-item
+            clickable
+            v-ripple
+            class="q-ml-sm border-bottom"
+            :to="`/shop/${category.slug}`"
+            exact-active-class="text-primary"
+          >
+            <q-item-section class="text-subtitle2 text-weight-bold text-dark text-center">Все {{ category.title }}</q-item-section>
+          </q-item>
+          <q-item
+            v-for="category in category.child"
+            :key="category.id"
+            clickable
+            v-ripple
+            class="q-ml-sm border-bottom"
+            :to="`/shop/${category.slug}`"
+            exact-active-class="text-primary"
+          >
+            <q-item-section avatar>
+              <q-img :src="category.image" class="circle-image"/>
+            </q-item-section>
+            <q-item-section class="text-dark">{{ category.title }}</q-item-section>
+          </q-item>
+
+        </q-expansion-item>
+<!--        xxxxx   -->
+
         <q-item
+          v-if="category.parent === null && category.child.length === 0"
           clickable
           v-ripple
-          v-if="!category.parent"
           class="border-bottom"
+          :to="`/shop/${category.slug}`"
+          exact-active-class="text-primary"
         >
           <q-item-section avatar>
             <q-img :src="category.image" class="circle-image"/>
           </q-item-section>
           <q-item-section class="text-subtitle2 text-weight-bold text-dark">{{ category.title }}</q-item-section>
+
+
         </q-item>
+
       </div>
       <!--    xxxxx   -->
     </q-list>

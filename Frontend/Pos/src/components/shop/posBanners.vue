@@ -14,6 +14,14 @@
         :contain="banner.contain"
         class="banner-image"
       >
+        <q-btn
+          v-if="banner.btn_text"
+          :label="banner.btn_text"
+          color="negative"
+          style="position: absolute; bottom: 10px; right: 10px; z-index: 30"
+          size="sm" unelevated
+          class="text-bold"
+        />
         <template v-slot:loading>
           <q-skeleton class="banner-image full-width" />
         </template>

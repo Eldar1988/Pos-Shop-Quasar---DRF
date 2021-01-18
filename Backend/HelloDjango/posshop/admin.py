@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Info, Page, Contacts, Driver, Social, Client, Slider, Banner, Slide
+from .models import Info, Page, Contacts, Driver, Social, Client, Slider, Banner, Slide, ShopReview
 
 
 admin.site.register(Info)
@@ -10,6 +10,19 @@ admin.site.register(Contacts)
 admin.site.register(Driver)
 admin.site.register(Social)
 admin.site.register(Slider)
+
+
+@admin.register(ShopReview)
+class ShopReviewAdmin(admin.ModelAdmin):
+    list_display = ('get_image', 'name', 'rating', 'order', )
+    list_editable = ('name', 'rating', 'order', )
+    save_as = True
+    save_on_top = True
+
+    def get_image(self, obj):
+        return mark_safe(f"<img src={obj.avatar.url} height=30px>")
+
+    get_image.short_description = 'Фото'
 
 
 @admin.register(Client)

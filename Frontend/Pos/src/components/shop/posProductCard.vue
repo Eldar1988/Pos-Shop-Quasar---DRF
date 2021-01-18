@@ -1,33 +1,52 @@
 <template>
   <q-card
-    class="grey-border border-radius-6 product-card"
+    class="grey-border full-width border-radius-6 product-card relative-position"
   >
-    <q-img
-      :src="product.image"
-      contain
-      class="product-card-image"
+    <!--    Add to wish button   -->
+    <q-btn
+      icon="favorite"
+      style="position: absolute; top:10px; right:10px;z-index:30"
+      flat round
     >
-      <!--      Sale      -->
-      <q-btn
-        v-if="product.old_price"
-        color="accent"
-        round
-        :size="this.$q.platform.is.mobile ? 'sm' : 'md'"
-        unelevated
-        class="q-ma-sm"
+      <q-tooltip>Добавить в избранное</q-tooltip>
+    </q-btn>
+    <!--    xxxxx   -->
+    <router-link :to="`/product/${product.slug}/`">
+      <!--      Image   -->
+      <q-img
+        :src="product.image"
+        contain
+        class="product-card-image"
+        title="Подробнее"
       >
-        {{ getSalePercent }}
-      </q-btn>
-      <!--      Rating   -->
-      <div class="rating-wrapper">
-        <q-rating v-model="product.rating" color="orange" size="18px" readonly/>
-      </div>
-    </q-img>
+        <template v-slot:loading>
+          <q-skeleton class="product-card-image full-width"/>
+        </template>
+        <!--      Sale      -->
+        <q-btn
+          v-if="product.old_price"
+          color="accent"
+          round
+          :size="this.$q.platform.is.mobile ? 'sm' : 'md'"
+          unelevated
+          class="q-ma-sm"
+        >
+          {{ getSalePercent }}
+          <q-tooltip>Размер скидки</q-tooltip>
+        </q-btn>
+        <!--      Rating   -->
+        <div class="rating-wrapper">
+          <q-rating v-model="product.rating" color="orange" size="18px" readonly/>
+        </div>
+      </q-img>
+    </router-link>
     <div class="product-meta">
       <!--      Product title   -->
-      <p class="product-card-title text-center">
-        {{ product.title }}
-      </p>
+      <router-link :to="`/product/${product.slug}/`" title="Подробнее">
+        <p class="product-card-title text-center">
+          {{ product.title }}
+        </p>
+      </router-link>
 
       <!--      Product price   -->
       <div class="product-card-price-wrapper text-center text-secondary">
@@ -40,14 +59,14 @@
 
       <!--      Actions   -->
       <div class="product-card-actions">
-          <q-btn
-            label="В 1 клик"
-            color="negative"
-            icon="done_outline"
-            size="sm"
-            class="text-bold full-width border-radius-6"
-            unelevated
-          />
+        <q-btn
+          label="В 1 клик"
+          color="negative"
+          icon="done_outline"
+          size="sm"
+          class="text-bold full-width border-radius-6"
+          unelevated
+        />
         <q-btn
           color="negative"
           size="sm"
@@ -134,6 +153,8 @@ export default {
   .product-card-image
     height: 200px
 
+  .scroll-x-products .product-card-image
+    height: 300px !important
   .product-card-title
     font-size: 14px
 

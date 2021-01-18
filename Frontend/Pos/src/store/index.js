@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import main from './modules/main'
+import shop from './modules/shop'
 
 // import example from './module-example'
 
@@ -18,7 +19,8 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      main
+      main,
+      shop
     },
     state: {
       // serverURL: 'http://192.168.0.155:8000'

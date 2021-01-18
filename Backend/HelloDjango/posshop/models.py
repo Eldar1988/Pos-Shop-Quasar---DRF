@@ -147,3 +147,23 @@ class Banner(models.Model):
     class Meta:
         verbose_name = 'Баннер'
         verbose_name_plural = 'Баннеры'
+
+
+class ShopReview(models.Model):
+    """Отзывы о магазине"""
+
+    name = models.CharField('Имя', max_length=255)
+    avatar = CloudinaryField('Фото', folder='posshop/avatars',
+                             help_text='Желательно размером не более 500х500 пикселей, лицо должно быть в центре')
+    text = models.TextField('Отзыв')
+    rating = models.PositiveSmallIntegerField('Оценка')
+    pub_date = models.DateTimeField('Дата создания', auto_now_add=True)
+    order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Отзыв о магазине'
+        verbose_name_plural = 'Отзывы о магазине'
+        ordering = ('-pub_date',)

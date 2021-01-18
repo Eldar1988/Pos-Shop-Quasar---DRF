@@ -6,17 +6,19 @@
         :key="category.id"
         class="category-card"
       >
+        <router-link :to="`/shop/${category.slug}`">
         <q-card
-          class="grey-border shadow-0 q-pa-sm relative-position"
+          class="grey-border shadow-0 q-pa-sm relative-position shadow-on-hover"
           style="min-height: 100%"
         >
           <q-img
             :src="category.image"
-            class="category-card-image"
+            class="category-card-image border-radius-6"
             contain
           />
           <p class="text-bold q-pt-sm">{{ category.title }}</p>
         </q-card>
+        </router-link>
       </article>
     </div>
   </div>
