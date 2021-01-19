@@ -13,11 +13,12 @@
           <p class="text-subtitle1 text-bold">На сумму: {{ cartSum|formatPrice }} <q-icon name="mdi-currency-kzt" class="icon-wrapper" /></p>
         </div>
         <div class="cart-form">
-
+          <pos-checkout-form />
         </div>
       </div>
     </section>
 
+<!--    Empty cart alert   -->
     <section
       v-if="products.length === 0"
       class="q-px-sm"
@@ -39,6 +40,7 @@
         </div>
       </q-card>
     </section>
+<!--    xxxxx   -->
   </q-page>
 </template>
 
@@ -46,10 +48,11 @@
 import PosCartItem from "components/cart/posCartItem";
 import PosSectionTitle from "components/service/posSectionTitle";
 import formatPrice from "src/filters/format_price";
+import PosCheckoutForm from "components/cart/posCheckoutForm";
 
 export default {
   name: "Cart",
-  components: {PosSectionTitle, PosCartItem},
+  components: {PosCheckoutForm, PosSectionTitle, PosCartItem},
   filters: {formatPrice},
   data() {
     return {

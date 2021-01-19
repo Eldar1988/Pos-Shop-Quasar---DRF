@@ -151,7 +151,6 @@ class Banner(models.Model):
 
 class ShopReview(models.Model):
     """Отзывы о магазине"""
-
     name = models.CharField('Имя', max_length=255)
     avatar = CloudinaryField('Фото', folder='posshop/avatars',
                              help_text='Желательно размером не более 500х500 пикселей, лицо должно быть в центре')

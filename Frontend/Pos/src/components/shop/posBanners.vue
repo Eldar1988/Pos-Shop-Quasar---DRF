@@ -83,7 +83,7 @@ export default {
 .banner-image
   height: 250px
 
-@media screen and (max-width: 1402px)
+@media screen and (max-width: 1442px)
   .banner-image
     height: 200px
 
