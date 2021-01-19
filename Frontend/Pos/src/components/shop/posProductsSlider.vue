@@ -5,23 +5,25 @@
         v-for="product in products"
         :key="product.id"
       >
-        <pos-product-card :product="product"/>
+        <pos-product-card :product="product" />
       </splide-slide>
     </splide>
   </div>
 </template>
 
 <script>
-import {Splide, SplideSlide} from '../../../node_modules/@splidejs/vue-splide';
-import '../../../node_modules/@splidejs/splide/dist/css/themes/splide-sea-green.min.css';
-import PosProductCard from "components/shop/posProductCard";
+import PosProductCard from "components/shop/posProductCard"
+import {Splide, SplideSlide} from '../../../node_modules/@splidejs/vue-splide'
+import '../../../node_modules/@splidejs/splide/dist/css/themes/splide-sea-green.min.css'
 
 export default {
-  name: "posHotProductsSlider",
-  components: {
-    PosProductCard,
-    Splide,
-    SplideSlide
+  name: "posProductsSlider",
+  components: {PosProductCard, Splide, SplideSlide},
+  props: {
+    products: {
+      type: Array,
+      default: null
+    }
   },
   data() {
     return {
@@ -46,11 +48,6 @@ export default {
       },
     }
   },
-  computed: {
-    products() {
-      return this.$store.getters.getHitProducts
-    }
-  }
 }
 </script>
 

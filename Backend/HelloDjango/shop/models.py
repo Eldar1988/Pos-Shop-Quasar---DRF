@@ -61,8 +61,11 @@ class Product(models.Model):
     labels = models.ManyToManyField(Label, blank=True, verbose_name='Метки', related_name='products')
     title = models.CharField('Название товара', max_length=255, db_index=True)
     article = models.CharField('Артикул товара', max_length=100, blank=True, null=True)
-    description = models.TextField('Краткое описание товара')
-    info = RichTextUploadingField('Дополнительная информация', null=True, blank=True)
+    description = models.TextField('Краткое описание товара', max_length=300, help_text='Не более 300 символов')
+    info = RichTextUploadingField('Дополнительная информация', null=True, blank=True, help_text='Необязательно')
+    characteristic = RichTextUploadingField('Характеристики', null=True, blank=True, help_text='Необязательно')
+    video = models.CharField('Видео обзор с Youtube', max_length=255, null=True, blank=True,
+                             help_text='Скопировать код в url после знака =')
     price = models.PositiveSmallIntegerField('Цена товара')
     old_price = models.PositiveSmallIntegerField('Старая цена', null=True, blank=True, help_text='Необязательно')
     image = CloudinaryField('Основное изображение товара', folder='posShop/products')
@@ -89,13 +92,12 @@ class Product(models.Model):
 
 
 class Image(models.Model):
-    title = models.CharField('Название фото', max_length=255)
     image = CloudinaryField('Избражение', folder='posShop/products')
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True,
                                 verbose_name='Товар', related_name='images')
 
     def __str__(self):
-        return self.title
+        return f'{self.id}'
 
     class Meta:
         verbose_name = 'Дополнительное изображение'

@@ -3,15 +3,21 @@
 
     <q-header elevated class="bg-primary text-white" height-hint="98">
       <q-toolbar>
+        <!--        Shop logo   -->
         <q-toolbar-title>
           <span class="text-uppercase text-weight-bold logo-title">Pos-shop</span>
         </q-toolbar-title>
+        <!--        xxxxx   -->
+        <!--        Call back   -->
         <pos-call-back class="hide-on-mobile q-mr-lg"/>
+        <!--        xxxxx   -->
+        <!--        Header tabs   -->
         <q-tabs align="center" stretch>
           <q-route-tab to="/" icon="roofing" class="small-tabs"/>
-          <q-route-tab to="/" icon="store" class="small-tabs"/>
+          <q-route-tab to="/" icon="favorite" class="small-tabs"/>
           <q-route-tab to="/" icon="shopping_bag" class="small-tabs"/>
         </q-tabs>
+        <!--        xxxxx   -->
         <q-btn size="lg" dense flat round icon="view_list" @click="right = !right"/>
       </q-toolbar>
     </q-header>
@@ -21,7 +27,7 @@
 
     <q-page-container>
       <!--    Page reload dialog-->
-      <pos-page-reload-dialog />
+      <pos-page-reload-dialog/>
       <!--    xxxxx   -->
       <router-view/>
     </q-page-container>

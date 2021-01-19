@@ -2,8 +2,8 @@ from rest_framework import serializers
 from .models import Category, Brand, Label, Product, Image, Review
 
 
-class ParentCategoryListSerializer(serializers.ModelSerializer):
-    """Категория главная"""
+class ChildCategoryListSerializer(serializers.ModelSerializer):
+    """Подкатегория"""
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
@@ -17,7 +17,7 @@ class ParentCategoryListSerializer(serializers.ModelSerializer):
 class CategoryListSerializer(serializers.ModelSerializer):
     """Категория (список)"""
     image = serializers.SerializerMethodField('get_image_url')
-    parent = ParentCategoryListSerializer(many=False, read_only=True)
+    child = ChildCategoryListSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
         return obj.image.url
@@ -57,7 +57,7 @@ class ProductListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'rating')
+        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'rating', 'slug')
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -80,10 +80,25 @@ class ReviewSerializer(serializers.ModelSerializer):
         exclude = ('pub_date', 'public')
 
 
+class ChildCategoryDetailSerializer(serializers.ModelSerializer):
+    """Категория (детали)"""
+    image = serializers.SerializerMethodField('get_image_url')
+    products = ProductListSerializer(many=True, read_only=True)
+
+    def get_image_url(self, obj):
+        return obj.image.url
+
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+
 class CategoryDetailSerializer(serializers.ModelSerializer):
     """Категория (детали)"""
     image = serializers.SerializerMethodField('get_image_url')
     products = ProductListSerializer(many=True, read_only=True)
+    child = ChildCategoryDetailSerializer(many=True, read_only=True)
+    parent = ChildCategoryListSerializer(many=False, read_only=True)
 
     def get_image_url(self, obj):
         return obj.image.url
@@ -110,9 +125,6 @@ class LabelDetailSerializer(serializers.ModelSerializer):
     """Метка (детали)"""
     products = ProductListSerializer(many=True, read_only=True)
 
-    def get_image_url(self, obj):
-        return obj.image.url
-
     class Meta:
         model = Label
         fields = '__all__'
@@ -133,6 +145,5 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         exclude = ('future', 'hit', 'latest', 'public', 'order', 'pub_date', 'update')
-
 
 

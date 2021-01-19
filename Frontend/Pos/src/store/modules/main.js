@@ -20,6 +20,7 @@ export default {
       state.companyInfo = data.companyInfo
       state.homeSlider = data.slider
       state.hitProducts = data.hitProducts
+      state.reviews = data.reviews
 
     },
     setMainDataUnloaded(state) {
@@ -32,7 +33,8 @@ export default {
     pages: [],
     companyInfo: {},
     homeSlider: [],
-    hitProducts: []
+    hitProducts: [],
+    reviews: []
   },
   getters: {
     getMainDataStatus: (state) => state.mainDataUnloaded,
@@ -41,6 +43,7 @@ export default {
     getServerStatus: (state) => state.mainDataUnloaded,
     getCompanyInfo: (state) => state.companyInfo,
     getHomeSlider: (state) => state.homeSlider,
-    getHitProducts: (state) => state.hitProducts
+    getHitProducts: (state) => state.hitProducts,
+    getShopReviews: (state) => state.reviews
   }
 }

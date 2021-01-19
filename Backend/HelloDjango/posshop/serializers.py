@@ -1,5 +1,17 @@
 from rest_framework import serializers
-from .models import Page, Info, Contacts, Driver, Social, Client, Slider, Banner, Slide
+from .models import Page, Info, Contacts, Driver, Social, Client, Slider, Banner, Slide, ShopReview
+
+
+class ShopReviewSerializer(serializers.ModelSerializer):
+    """Отзывы о магазине"""
+    avatar = serializers.SerializerMethodField('get_image_url')
+
+    def get_image_url(self, obj):
+        return obj.avatar.url
+
+    class Meta:
+        model = ShopReview
+        exclude = ('order', 'pub_date')
 
 
 class PagesListSerializer(serializers.ModelSerializer):

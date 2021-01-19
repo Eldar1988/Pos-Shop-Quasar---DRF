@@ -2,9 +2,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 
-from .models import Info, Page, Contacts, Social, Client, Slider, Banner
+from .models import Info, Page, Contacts, Social, Client, Slider, Banner, ShopReview
 from .serializers import ShortInfoSerializer, PagesListSerializer, ContactInfoSerializer, SocialsSerializer, \
-    ClientsSerializer, SliderSerializer, BannerSerializer
+    ClientsSerializer, SliderSerializer, BannerSerializer, ShopReviewSerializer
 
 from shop.models import Category, Brand, Product
 from shop.serializers import CategoryListSerializer, BrandListSerializer, ProductListSerializer
@@ -55,6 +55,10 @@ class MainInfoView(APIView):
         latest_products = Product.objects.filter(public=True, latest=True, show_on_home_page=True)[:20]
         products_serializer = ProductListSerializer(latest_products, many=True)
         response_data['latestProducts'] = products_serializer.data
+
+        reviews = ShopReview.objects.all()
+        reviews_serializer = ShopReviewSerializer(reviews, many=True)
+        response_data['reviews'] = reviews_serializer.data
 
         return Response(response_data)
 

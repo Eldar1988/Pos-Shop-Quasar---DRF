@@ -2,7 +2,7 @@
   <section class="page-header q-pa-sm">
     <div
       v-if="title"
-      class="shadow-lt border-radius-6 q-pa-md"
+      class="border-radius-6 q-pa-md"
     >
       <h1 class="page-header-text">{{ title }}</h1>
     </div>

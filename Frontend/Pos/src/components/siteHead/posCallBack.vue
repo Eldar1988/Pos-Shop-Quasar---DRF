@@ -5,7 +5,8 @@
     icon-right="phone_callback"
     outline
     :color="color"
-    class="text-weight-bold full-width"
+    class="text-weight-bold full-width border-radius-6"
+    unelevated
   />
 </div>
 </template>

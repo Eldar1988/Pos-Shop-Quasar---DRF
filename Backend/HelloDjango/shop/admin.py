@@ -74,7 +74,8 @@ class ProductAdmin(admin.ModelAdmin):
         ('kaspi_kod'),
         ('labels',),
         ('info',),
-        ('rating', 'order'),
+        ('characteristic',),
+        ('video', 'rating', 'order'),
         ('pub_date', 'update')
     ]
     readonly_fields = ('pub_date', 'update')
@@ -90,9 +91,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'product')
-    list_editable = ('title',)
-    search_fields = ('title',)
+    list_display = ('get_image', 'product')
 
     save_as = True
     save_on_top = True
