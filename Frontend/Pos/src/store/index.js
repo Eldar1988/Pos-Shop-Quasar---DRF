@@ -21,8 +21,8 @@ export default function (/* { ssrContext } */) {
       main
     },
     state: {
-      // serverURL: 'http://192.168.0.155:8000'
-      serverURL: 'http://192.168.0.199:8000'
+      serverURL: 'http://192.168.0.155:8000'
+      // serverURL: 'http://192.168.0.199:8000'
     },
     getters: {
       getServerURL:(state) => state.serverURL
