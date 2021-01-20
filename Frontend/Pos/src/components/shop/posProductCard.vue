@@ -4,9 +4,11 @@
   >
     <!--    Add to wish button   -->
     <q-btn
-      icon="favorite"
-      style="position: absolute; top:10px; right:10px;z-index:30"
+      :icon="productInWishList ? 'favorite' : 'favorite_border'"
+      style="position: absolute; top:2px; right:2px;z-index:30"
       flat round
+      color="accent"
+      @click="addToWishList(product)"
     >
       <q-tooltip>Добавить в избранное</q-tooltip>
     </q-btn>
@@ -25,7 +27,7 @@
         <!--      Sale      -->
         <q-btn
           v-if="product.old_price"
-          color="accent"
+          color="primary"
           round
           :size="this.$q.platform.is.mobile ? 'sm' : 'md'"
           unelevated
@@ -49,7 +51,7 @@
       </router-link>
 
       <!--      Product price   -->
-      <div class="product-card-price-wrapper text-center text-secondary">
+      <div class="product-card-price-wrapper text-center text-positive">
         <p class="text-weight-bold product-card-price">
           {{ product.price|formatPrice }}
           <q-icon name="mdi-currency-kzt" class="icon-wrapper"/>
@@ -66,6 +68,7 @@
           size="sm"
           class="text-bold full-width border-radius-6"
           unelevated
+          @click="addToCart(product, 1, true)"
         />
         <q-btn
           color="negative"
@@ -73,6 +76,7 @@
           icon="add_shopping_cart"
           class="text-bold full-width border-radius-6"
           unelevated outline
+          @click="addToCart(product, 1, false)"
         />
       </div>
     </div>
@@ -81,14 +85,21 @@
 </template>
 
 <script>
-import formatPrice from "src/filters/format_price";
+import formatPrice from "src/filters/format_price"
+import addToCart from "src/functions/add_to_cart"
+import addToWishList from "src/functions/add_to_wishlist"
 
 export default {
   name: "posProductCard",
   props: {
     product: {
       type: Object,
-      default: null
+      default: null,
+    }
+  },
+  data() {
+    return {
+      productInWishList: false
     }
   },
   filters: {
@@ -99,6 +110,34 @@ export default {
       let percent = Math.round(100 - (this.product.price * 100 / this.product.old_price))
       return `-${percent}%`
     }
+  },
+  mounted() {
+    this.checkWishList()
+  },
+  methods: {
+    addToCart(product, quantity, redirect) {
+      addToCart(product, quantity)
+      this.$root.$emit('updateCart')
+      if (redirect) this.$router.push('/cart')
+      else {
+        this.$q.notify({message: `Товар ${product.title.toLowerCase()} добавлен в корзину`, color: 'positive'})
+      }
+    },
+    addToWishList(product) {
+      addToWishList(product)
+      this.productInWishList = true
+      this.$root.$emit('updateWishList')
+    },
+    async checkWishList() {
+      if (localStorage.getItem('wishList') !== null) {
+        let wishList = JSON.parse(localStorage.wishList)
+        wishList.forEach((item) => {
+          if (item.id === this.product.id) {
+            this.productInWishList = true
+          }
+        })
+      }
+    },
   }
 
 }

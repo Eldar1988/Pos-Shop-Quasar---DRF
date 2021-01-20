@@ -238,7 +238,10 @@ export default {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
       }).then(response => {
+        console.log(response)
         if (response.status === 200) {
+          let cart = []
+          localStorage.setItem('cart', JSON.stringify(cart))
           setTimeout(() => {
             this.$q.loading.hide()
             this.$router.push(`/thanks/${slug}`)

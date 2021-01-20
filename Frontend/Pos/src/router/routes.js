@@ -15,6 +15,13 @@ const routes = [
     ]
   },
   {
+    path: '/wishlist',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/WishList.vue') }
+    ]
+  },
+  {
     path: '/shop/:slug',
     params: 'slug',
     component: () => import('layouts/MainLayout.vue'),

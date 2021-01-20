@@ -94,6 +94,7 @@
               />
             </div>
             <div class="col-12 col-md-6 q-pa-sm q-mt-sm">
+              <div class="buttons-grid">
               <q-btn
                 label="В корзину"
                 color="negative"
@@ -102,6 +103,14 @@
                 icon-right="add_shopping_cart"
                 @click="selfAddToCart(productData.product, quantity, false)"
               />
+                <q-btn
+                  color="accent"
+                  @click="addToWishList(productData.product)"
+                  flat outline
+                  :icon="productInWishList ? 'favorite' : 'favorite_border'"
+                  class="border-radius-6"
+                />
+              </div>
             </div>
             <div class="q-mt-sm q-ml-sm" id="dynamic"></div>
             <q-separator inset="" class="q-mt-sm"/>
@@ -224,6 +233,7 @@ import PosProductsScrollX from "components/shop/posProductsScrollX";
 import PosBanners from "components/shop/posBanners";
 import addToCart from "src/functions/add_to_cart";
 import PosAddedToCartDialog from "components/cart/posAddedToCartDialog";
+import addToWishList from "src/functions/add_to_wishlist";
 
 export default {
   name: "posProductDetail",
@@ -234,6 +244,7 @@ export default {
       lastSeanProducts: [],
       quantity: 1,
       cartDialog: false,
+      productInWishList: false
     }
   },
   computed: {
@@ -249,16 +260,17 @@ export default {
     this.setLastSeanProducts()
     this.getLastSeanProducts()
     this.kaspiButton()
+    this.checkWishList()
   },
   watch: {
     async productData() {
       await this.setLastSeanProducts()
       await this.getLastSeanProducts()
+      await this.checkWishList()
       await this.kaspiButton()
     }
   },
   methods: {
-
     setLastSeanProducts() {
       // Push self product to last sean products
       let productInLasts = false
@@ -297,8 +309,24 @@ export default {
       document.getElementById('dynamic').innerHTML = `<div class="ks-widget" data-template="button" data-merchant-sku="${this.productData.product.article}" data-merchant-code="Posshopkz" data-city="750000000" ></div>`
       // you should run this method to recheck buttons in DOM:
       ksWidgetInitializer.reinit()
-
-    }
+    },
+    addToWishList(product) {
+      addToWishList(product)
+      this.productInWishList = true
+      this.$root.$emit('updateWishList')
+    },
+    checkWishList() {
+      this.productInWishList = false
+      if (localStorage.getItem('wishList') !== null) {
+        let wishList = JSON.parse(localStorage.wishList)
+        wishList.forEach((item) => {
+          if (item.id === this.productData.product.id) {
+            this.productInWishList = true
+          }
+        })
+      }
+      console.log(this.productInWishList)
+    },
   },
   preFetch({store, currentRoute}) {
     return store.dispatch('fetchProductDetailData', currentRoute.params.slug)
@@ -333,6 +361,11 @@ export default {
   grid-gap: 5px
   max-width: 120px
   height: 25px
+
+.buttons-grid
+  display: grid
+  grid-template-columns: 4fr 1fr
+  grid-gap: 5px
 
 
 @media screen and (max-width: 1210px)

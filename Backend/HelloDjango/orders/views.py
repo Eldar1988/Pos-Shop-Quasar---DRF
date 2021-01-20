@@ -1,11 +1,13 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.generic.base import View
 from rest_framework import viewsets
+from rest_framework.response import Response
 from rest_framework.views import APIView
+from .tg_bot import tg_send_order
+
 from .models import PaymentMethod, Order, OrderItem
 from .serializers import PaymentMethodSerializer
-
-from .tg_bot import tg_send_order
+from shop.serializers import ProductDetailSerializer
 
 
 class PaymentMethodsView(viewsets.ReadOnlyModelViewSet):
@@ -37,5 +39,6 @@ class CreateOrderView(APIView):
             )
 
         tg_send_order(order)
+        serializer = ProductDetailSerializer(many=False)
 
-        return HttpResponse('success')
+        return Response(serializer.data)

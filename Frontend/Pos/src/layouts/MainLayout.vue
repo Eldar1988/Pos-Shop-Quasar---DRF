@@ -12,11 +12,7 @@
         <pos-call-back class="hide-on-mobile q-mr-lg"/>
         <!--        xxxxx   -->
         <!--        Header tabs   -->
-        <q-tabs align="center" stretch>
-          <q-route-tab to="/" icon="roofing" class="small-tabs"/>
-          <q-route-tab to="/" icon="favorite" class="small-tabs"/>
-          <q-route-tab to="/" icon="shopping_bag" class="small-tabs"/>
-        </q-tabs>
+        <pos-header-icons />
         <!--        xxxxx   -->
         <q-btn size="lg" dense flat round icon="view_list" @click="right = !right"/>
       </q-toolbar>
@@ -40,10 +36,11 @@
 import PosCallBack from "components/siteHead/posCallBack";
 import PosRightDrawerContent from "components/siteHead/posRightDrawerContent";
 import PosPageReloadDialog from "components/service/posPageReloadDialog";
+import PosHeaderIcons from "components/siteHead/posHeaderIcons";
 // import PosPageReloadDialog from "components/service/posPageReloadDialog";
 
 export default {
-  components: {PosPageReloadDialog, PosRightDrawerContent, PosCallBack},
+  components: {PosHeaderIcons, PosPageReloadDialog, PosRightDrawerContent, PosCallBack},
   data() {
     return {
       right: false,
