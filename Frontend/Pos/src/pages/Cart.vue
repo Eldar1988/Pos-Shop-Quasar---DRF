@@ -1,47 +1,51 @@
 <template>
-  <q-page>
-    <pos-section-title class="q-mt-lg" title="Ваша корзина"/>
-    <section  v-if="products.length > 0" class="q-px-sm q-mt-lg" >
-      <div class="cart-wrapper">
-        <div class="cart-items ">
-          <pos-cart-item
-            v-for="product in products"
-            :key="product.id"
-            :product="product"
-          />
-          <p class="text-subtitle1 text-bold q-pt-sm">Всего товаров: {{ cartLen }}</p>
-          <p class="text-subtitle1 text-bold">На сумму: {{ cartSum|formatPrice }} <q-icon name="mdi-currency-kzt" class="icon-wrapper" /></p>
+  <div>
+    <q-page>
+      <pos-section-title class="q-mt-lg" title="Ваша корзина"/>
+      <section v-if="products.length > 0" class="q-px-sm q-mt-lg">
+        <div class="cart-wrapper">
+          <div class="cart-items ">
+            <pos-cart-item
+              v-for="product in products"
+              :key="product.id"
+              :product="product"
+            />
+            <p class="text-subtitle1 text-bold q-pt-sm">Всего товаров: {{ cartLen }}</p>
+            <p class="text-subtitle1 text-bold">На сумму: {{ cartSum|formatPrice }}
+              <q-icon name="mdi-currency-kzt" class="icon-wrapper"/>
+            </p>
+          </div>
+          <div class="cart-form">
+            <pos-checkout-form :cartSum="cartSum" :cartLen="cartLen" :products="products"/>
+          </div>
         </div>
-        <div class="cart-form">
-          <pos-checkout-form />
-        </div>
-      </div>
-    </section>
-
-<!--    Empty cart alert   -->
-    <section
-      v-if="products.length === 0"
-      class="q-px-sm"
-    >
-      <q-card
-        class="bg-negative red-shadow q-px-sm q-py-xl flex flex-center q-mt-lg"
+      </section>
+      <!--    Empty cart alert   -->
+      <section
+        v-if="products.length === 0"
+        class="q-px-sm"
       >
-        <div class="text-center">
-          <p class="text-subtitle1 text-white">
-            Ваша корзина пуста.
-          </p>
-          <q-btn
-            label="вернуться в магазин"
-            outline
-            color="white"
-            class="border-radius-6 q-mt-md text-bold"
-            to="/"
-          />
-        </div>
-      </q-card>
-    </section>
-<!--    xxxxx   -->
-  </q-page>
+        <q-card
+          class="bg-negative red-shadow q-px-sm q-py-xl flex flex-center q-mt-lg"
+        >
+          <div class="text-center">
+            <p class="text-subtitle1 text-white">
+              Ваша корзина пуста.
+            </p>
+            <q-btn
+              label="вернуться в магазин"
+              outline
+              color="white"
+              class="border-radius-6 q-mt-md text-bold"
+              to="/"
+            />
+          </div>
+        </q-card>
+      </section>
+      <!--    xxxxx   -->
+    </q-page>
+    <pos-banners/>
+  </div>
 </template>
 
 <script>
@@ -49,10 +53,11 @@ import PosCartItem from "components/cart/posCartItem";
 import PosSectionTitle from "components/service/posSectionTitle";
 import formatPrice from "src/filters/format_price";
 import PosCheckoutForm from "components/cart/posCheckoutForm";
+import PosBanners from "components/shop/posBanners";
 
 export default {
   name: "Cart",
-  components: {PosCheckoutForm, PosSectionTitle, PosCartItem},
+  components: {PosBanners, PosCheckoutForm, PosSectionTitle, PosCartItem},
   filters: {formatPrice},
   data() {
     return {

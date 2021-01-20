@@ -37,6 +37,7 @@ export default {
     }
   },
   preFetch({store, currentRoute}) {
+    let price = 2000
     return store.dispatch('fetchBrandData', currentRoute.params.slug)
   }
 }

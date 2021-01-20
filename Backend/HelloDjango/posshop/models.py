@@ -116,7 +116,7 @@ class Slide(models.Model):
                                verbose_name='Слайдер', related_name='slides')
     title = models.CharField('Заголовок слайда (необязательно)', max_length=255, null=True, blank=True)
     image = CloudinaryField('Картинка', folder='poshop/slides')
-    url = models.SlugField('Slug (необязательно)', null=True, blank=True)
+    url = models.CharField('Slug (необязательно)', max_length=255, null=True, blank=True)
     btn_text = models.CharField('Текст на кнопке (необязательно)', max_length=100, null=True, blank=True)
     contain = models.BooleanField('Не растягивать слайд', default=False,
                                   help_text='Слайд не будет растягиваться по ширине слайдера')
@@ -137,7 +137,7 @@ class Banner(models.Model):
     """Баннеры"""
     title = models.CharField('Заголовок Баннера', max_length=255)
     image = CloudinaryField('Картинка', folder='poshop/sldies')
-    url = models.SlugField('Slug', null=True, blank=True)
+    url = models.CharField('Slug', max_length=255, null=True, blank=True)
     btn_text = models.CharField('Текст на кнопке', max_length=50, null=True, blank=True)
     contain = models.BooleanField('Не растягивать баннер', default=False)
 

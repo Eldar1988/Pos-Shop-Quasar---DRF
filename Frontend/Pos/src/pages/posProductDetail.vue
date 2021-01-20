@@ -70,7 +70,8 @@
                     size="sm"
                     @click="quantity > 1 ? quantity -- : null"
                   />
-                  <q-input v-model="quantity" type="tel" class="border-radius-6" input-class="text-center text-bold text-dark"/>
+                  <q-input v-model="quantity" type="tel" class="border-radius-6"
+                           input-class="text-center text-bold text-dark"/>
                   <q-btn
                     icon="add"
                     class="border-radius-6"
@@ -102,6 +103,7 @@
                 @click="selfAddToCart(productData.product, quantity, false)"
               />
             </div>
+            <div class="q-mt-sm q-ml-sm" id="dynamic"></div>
             <q-separator inset="" class="q-mt-sm"/>
           </div>
           <!--          xxxxx   -->
@@ -203,6 +205,7 @@
     </section>
     <!--    xxxxx   -->
     <!--    Banners   -->
+
     <pos-banners/>
     <!--   xxxxx   -->
     <!--    Cart dialog  -->
@@ -230,7 +233,7 @@ export default {
     return {
       lastSeanProducts: [],
       quantity: 1,
-      cartDialog: false
+      cartDialog: false,
     }
   },
   computed: {
@@ -245,11 +248,13 @@ export default {
   mounted() {
     this.setLastSeanProducts()
     this.getLastSeanProducts()
+    this.kaspiButton()
   },
   watch: {
     async productData() {
       await this.setLastSeanProducts()
       await this.getLastSeanProducts()
+      await this.kaspiButton()
     }
   },
   methods: {
@@ -287,8 +292,13 @@ export default {
           this.cartDialog = false
         }, 5000)
       }
-    }
+    },
+    kaspiButton() {
+      document.getElementById('dynamic').innerHTML = `<div class="ks-widget" data-template="button" data-merchant-sku="${this.productData.product.article}" data-merchant-code="Posshopkz" data-city="750000000" ></div>`
+      // you should run this method to recheck buttons in DOM:
+      ksWidgetInitializer.reinit()
 
+    }
   },
   preFetch({store, currentRoute}) {
     return store.dispatch('fetchProductDetailData', currentRoute.params.slug)

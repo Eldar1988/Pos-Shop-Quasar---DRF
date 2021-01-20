@@ -95,6 +95,7 @@ name: "posCartItem",
       })
       localStorage.setItem('cart', JSON.stringify(items))
       this.$root.$emit('updateCart')
+      this.$q.notify({message: 'Товар удален из корзины', position: 'top'})
     }
   }
 }

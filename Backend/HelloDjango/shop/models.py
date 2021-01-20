@@ -70,8 +70,6 @@ class Product(models.Model):
     old_price = models.PositiveSmallIntegerField('Старая цена', null=True, blank=True, help_text='Необязательно')
     image = CloudinaryField('Основное изображение товара', folder='posShop/products')
     rating = models.PositiveSmallIntegerField('Рейтинг товара', default=5)
-    kaspi_url = models.URLField('Ссылка на kaspi', blank=True, null=True)
-    kaspi_kod = models.TextField('Код html kaspi', blank=True, null=True)
     show_on_home_page = models.BooleanField('На главной', default=False, help_text='Отобразить товар на глваной странице')
     future = models.BooleanField('Рекомендуем?', default=False)
     hit = models.BooleanField('Хит продаж', default=False)

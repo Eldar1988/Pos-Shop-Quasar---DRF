@@ -10,12 +10,13 @@ class CategoryAdmin(admin.ModelAdmin):
     list_editable = ('title', 'slug', 'order', 'parent')
     search_fields = ('title',)
     list_filter = ('parent',)
+    readonly_fields = ('get_image',)
 
     save_as = True
     save_on_top = True
 
     def get_image(self, obj):
-        return mark_safe(f"<img src={obj.image.url} height=30px>")
+        return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: contain;">')
 
     get_image.short_description = 'Миниатюра'
 
@@ -25,12 +26,13 @@ class BrandAdmin(admin.ModelAdmin):
     list_display = ('get_image', 'title', 'slug', 'order')
     list_editable = ('title', 'slug', 'order')
     search_fields = ('title',)
+    readonly_fields = ('get_image',)
 
     save_as = True
     save_on_top = True
 
     def get_image(self, obj):
-        return mark_safe(f"<img src={obj.image.url} height=30px>")
+        return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: contain;">')
 
     get_image.short_description = 'Лого'
 
@@ -47,10 +49,18 @@ class LabelAdmin(admin.ModelAdmin):
 
 class ImageInline(admin.TabularInline):
     model = Image
+    extra = 0
+    readonly_fields = ['get_image']
+
+    def get_image(self, obj):
+        return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: cover;">')
+
+    get_image.short_description = 'Миниатюра'
 
 
 class ReviewInline(admin.TabularInline):
     model = Review
+    extra = 0
 
 
 @admin.register(Product)
@@ -68,23 +78,21 @@ class ProductAdmin(admin.ModelAdmin):
         ('title', 'article', 'slug'),
         ('category', 'brand'),
         ('price', 'old_price'),
-        ('image',), ('description',),
+        ('image', 'get_image'), ('description',),
         ('future', 'hit', 'latest', 'public'),
-        ('kaspi_url'),
-        ('kaspi_kod'),
         ('labels',),
         ('info',),
         ('characteristic',),
         ('video', 'rating', 'order'),
         ('pub_date', 'update')
     ]
-    readonly_fields = ('pub_date', 'update')
+    readonly_fields = ('get_image', 'pub_date', 'update')
 
     save_as = True
     save_on_top = True
 
     def get_image(self, obj):
-        return mark_safe(f"<img src={obj.image.url} height=30px>")
+        return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: contain;">')
 
     get_image.short_description = 'Фото'
 
@@ -97,7 +105,7 @@ class ImageAdmin(admin.ModelAdmin):
     save_on_top = True
 
     def get_image(self, obj):
-        return mark_safe(f"<img src={obj.image.url} height=30px>")
+        return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: contain;">')
 
     get_image.short_description = 'Миниатюра'
 
