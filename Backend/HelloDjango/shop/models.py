@@ -1,15 +1,18 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from cloudinary.models import CloudinaryField
+from easy_thumbnails.fields import ThumbnailerImageField
 
 
 class Category(models.Model):
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True,
                                verbose_name='Родительская категория', related_name='child')
     title = models.CharField('Название категории', max_length=255)
-    description = models.TextField('Описание категории', max_length=200, help_text='Не болле 200 символов')
+    description = models.TextField('Описание категории', max_length=200, help_text='Не более 200 символов')
     full_description = RichTextUploadingField('Полное описание', null=True, blank=True)
-    image = CloudinaryField('Миниатюра', folder='posShop/categories')
+    image = ThumbnailerImageField('Изображение', upload_to='categories/',
+                                  resize_source={'size': (300, 300), 'crop': 'scale'},
+                                  help_text='Пропорции 1:1 (квадрат)')
     slug = models.SlugField('Slug', unique=True, help_text='Маленькие буквы на латинице без пробелов и спецсимволов')
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
 
@@ -26,7 +29,9 @@ class Brand(models.Model):
     title = models.CharField('Название бренда', max_length=255)
     description = models.TextField('Описание бренда', max_length=200, help_text='Не болле 200 символов')
     full_description = RichTextUploadingField('Полное описание', null=True, blank=True)
-    image = CloudinaryField('Логотип', folder='posShop/brands')
+    image = ThumbnailerImageField('Логотип', upload_to='brands/',
+                                  resize_source={'size': (300, 300), 'crop': 'scale'},
+                                  help_text='Пропорции 1:1 (квадрат)')
     slug = models.SlugField('Slug', unique=True, help_text='Маленькие буквы на латинице без пробелов и спецсимволов')
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
 
@@ -68,7 +73,12 @@ class Product(models.Model):
                              help_text='Скопировать код в url после знака =')
     price = models.PositiveSmallIntegerField('Цена товара')
     old_price = models.PositiveSmallIntegerField('Старая цена', null=True, blank=True, help_text='Необязательно')
-    image = CloudinaryField('Основное изображение товара', folder='posShop/products')
+    image = ThumbnailerImageField('Миниатюра', upload_to='products/',
+                                  resize_source={'size': (300, 300), 'crop': 'scale'},
+                                  help_text='Пропорции 1:1 (квадрат). Будет использоваться в каталоге товаров')
+    full_image = ThumbnailerImageField('Фото товара', upload_to='products/', null=True, blank=True,
+                                       resize_source={'size': (1200, 1200), 'crop': 'scale'},
+                                       help_text='Пропорции 1:1 (квадрат). Будет использоваться на странице товара')
     rating = models.PositiveSmallIntegerField('Рейтинг товара', default=5)
     show_on_home_page = models.BooleanField('На главной', default=False, help_text='Отобразить товар на глваной странице')
     future = models.BooleanField('Рекомендуем?', default=False)
@@ -90,9 +100,10 @@ class Product(models.Model):
 
 
 class Image(models.Model):
-    image = CloudinaryField('Избражение', folder='posShop/products')
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True,
-                                verbose_name='Товар', related_name='images')
+    image = ThumbnailerImageField('Фото товара', upload_to='products/',
+                                  resize_source={'size': (1200, 1200), 'crop': 'scale'})
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Товар',
+                                related_name='images')
 
     def __str__(self):
         return f'{self.id}'
