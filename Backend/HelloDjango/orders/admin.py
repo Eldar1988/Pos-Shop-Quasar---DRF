@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Order, OrderItem, PaymentMethod
+from .models import Order, OrderItem, PaymentMethod, CallBack
 
 
 admin.site.register(PaymentMethod)
@@ -24,3 +24,13 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemInline]
     list_display_links = ['id', 'name']
     search_fields = ['name', 'phone', 'notice', 'id', 'city', 'region']
+
+
+@admin.register(CallBack)
+class CallBackAdmin(admin.ModelAdmin):
+    list_display = ['name', 'phone', 'processed', 'date', 'update']
+    list_filter = ['processed', 'date', 'update']
+    list_editable = ['processed']
+    readonly_fields = ['name', 'phone', 'date', 'update']
+    search_fields = ['name', 'phone', 'notice']
+

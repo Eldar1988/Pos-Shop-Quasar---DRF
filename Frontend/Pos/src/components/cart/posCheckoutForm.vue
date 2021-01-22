@@ -148,10 +148,11 @@
       <!--      xxxxx   -->
       <template v-slot:navigation>
         <q-stepper-navigation>
-          <q-btn :label="step === 4 ? 'Готово' : 'Далее'" color="primary" @click="$refs.stepper.next()"
-                 class="q-px-md text-bold border-radius-6"/>
-          <q-btn v-if="step > 1" class="q-ml-sm border-radius-6" color="primary" flat label="Назад"
+          <q-btn v-if="step > 1" class="border-radius-6" color="primary" flat icon="west"
                  @click="$refs.stepper.previous()"/>
+          <q-btn :label="step === 4 ? 'Готово' : 'Далее'" color="primary" @click="$refs.stepper.next()"
+                 class="q-px-md text-bold border-radius-6 q-ml-sm"/>
+
         </q-stepper-navigation>
       </template>
     </q-stepper>
@@ -208,8 +209,10 @@ export default {
       if (dataName === '') {
         this.$q.notify({message: `${message}`, position: 'top', color: 'negative'})
         this.step = step
-        return null
+        this.$q.loading.hide()
+        return false
       }
+      return true
     },
     // New order
     async createNewOrder(paymentMethod, slug) {
@@ -221,13 +224,15 @@ export default {
         message: 'Секунду...',
         messageColor: 'white'
       })
-
-      this.checkData(this.formData.name, 'Необходимо указать имя*', 1)
-      this.checkData(this.formData.phone, 'Необходимо указать номер телефона*', 1)
-      this.checkData(this.formData.region, 'Необходимо указать область доставки*', 2)
-      this.checkData(this.formData.city, 'Необходимо указать город доставки*', 2)
-      this.checkData(this.formData.address, 'Необходимо указать адрес доставки*', 2)
-
+      if (
+        !this.checkData(this.formData.name, 'Необходимо указать имя*', 1) ||
+        !this.checkData(this.formData.phone, 'Необходимо указать номер телефона*', 1) ||
+        !this.checkData(this.formData.region, 'Необходимо указать область доставки*', 2) ||
+        !this.checkData(this.formData.city, 'Необходимо указать город доставки*', 2) ||
+        !this.checkData(this.formData.address, 'Необходимо указать адрес доставки*', 2)
+      ) {
+        return null
+      }
       let data = this.formData
       data.products = this.products
       data.order_sum = this.cartSum

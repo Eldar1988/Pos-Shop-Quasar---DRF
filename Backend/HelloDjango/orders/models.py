@@ -67,3 +67,20 @@ class OrderItem(models.Model):
         verbose_name_plural = 'Товары в заказе'
 
 
+class CallBack(models.Model):
+    """Обратный звонок"""
+    name = models.TextField('Имя', max_length=255)
+    phone = models.CharField('Телефон', max_length=30)
+    notice = models.TextField('Заметка', null=True, blank=True)
+    processed = models.BooleanField('Обработано', default=False)
+    date = models.DateTimeField('Дата', auto_now_add=True)
+    update = models.DateTimeField('Обновлено', auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Заявка'
+        verbose_name_plural = 'Заявки (обратный звонок)'
+        ordering = ('-date',)
+

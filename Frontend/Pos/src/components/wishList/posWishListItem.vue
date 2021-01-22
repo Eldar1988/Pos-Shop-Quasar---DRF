@@ -21,6 +21,7 @@
               unelevated
               color="positive"
               class="q-mt-sm border-radius-6 text-bold"
+              @click="addToCart(product)"
             />
           </div>
           <q-btn
@@ -40,7 +41,9 @@
 </template>
 
 <script>
-import formatPrice from "src/filters/format_price";
+import formatPrice from "src/filters/format_price"
+import addToCartFunc from "src/functions/add_to_cart";
+import addToCart from "src/functions/add_to_cart";
 
 export default {
   name: "posWishListItem",
@@ -54,6 +57,12 @@ export default {
     }
   },
   methods: {
+    addToCart(product) {
+      addToCart(product, 1)
+      this.$root.$emit('updateCart')
+      this.$q.notify({message: `Товар ${product.title.toLowerCase()} добавлен в корзину`, color: 'positive'})
+      this.delWishItem(product.id)
+    },
     delWishItem(id) {
       let items = JSON.parse(localStorage.wishList)
       items.forEach((item) => {

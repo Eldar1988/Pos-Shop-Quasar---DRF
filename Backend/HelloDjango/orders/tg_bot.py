@@ -5,7 +5,19 @@ bot = telebot.TeleBot('1587261399:AAF_VbkxIue05PA6JnkNYAHvXyH9oISwuU8')
 chat_id = '-1001374586109'
 
 
+def tg_send_call_back(callback):
+    """Заявка на обратный звонок"""
+    name = callback['name'].value
+    phone = callback['phone'].value
+    text = f'=====   Обратный звонок ===== \n\n' \
+           f'Имя: {name} \n' \
+           f'Телефон: {phone} \n'
+
+    bot.send_message(chat_id, text)
+
+
 def tg_send_order(order):
+    """Новый заказ"""
     order_items = OrderItem.objects.filter(order_id=order.id)
     text = f"=== Новый заказ # 100{order} === \n\n" \
            "Заказчик: \n" \
