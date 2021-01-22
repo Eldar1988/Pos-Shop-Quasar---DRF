@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Category, Brand, Label, Product, Image, Review
+from django.conf import settings
 
 
 class ChildCategoryListSerializer(serializers.ModelSerializer):
@@ -7,7 +8,7 @@ class ChildCategoryListSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Category
@@ -20,7 +21,7 @@ class CategoryListSerializer(serializers.ModelSerializer):
     child = ChildCategoryListSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Category
@@ -32,7 +33,7 @@ class BrandListSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Brand
@@ -53,7 +54,7 @@ class ProductListSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Product
@@ -65,7 +66,7 @@ class ImageSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Image
@@ -86,7 +87,7 @@ class ChildCategoryDetailSerializer(serializers.ModelSerializer):
     products = ProductListSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Category
@@ -101,7 +102,7 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
     parent = ChildCategoryListSerializer(many=False, read_only=True)
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Category
@@ -114,7 +115,7 @@ class BrandDetailSerializer(serializers.ModelSerializer):
     products = ProductListSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Brand
@@ -132,6 +133,7 @@ class LabelDetailSerializer(serializers.ModelSerializer):
 
 class ProductDetailSerializer(serializers.ModelSerializer):
     """Товар (детали)"""
+    full_image = serializers.SerializerMethodField('get_full_image_url')
     image = serializers.SerializerMethodField('get_image_url')
     category = CategoryListSerializer(many=False)
     brand = BrandListSerializer(many=False)
@@ -140,7 +142,10 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
+
+    def get_full_image_url(self, obj):
+        return f'{settings.APP_PATH}{obj.full_image.url}'
 
     class Meta:
         model = Product

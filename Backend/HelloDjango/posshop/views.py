@@ -16,6 +16,10 @@ class MainInfoView(APIView):
     def get(self, request):
         response_data = {}
 
+        categories = Category.objects.all()
+        categories_serializer = CategoryListSerializer(categories, many=True)
+        response_data['categories'] = categories_serializer.data
+
         info = Info.objects.last()
         info_serializer = ShortInfoSerializer(info, many=False)
         response_data['companyInfo'] = info_serializer.data
@@ -39,10 +43,6 @@ class MainInfoView(APIView):
         slider = Slider.objects.last()
         slider_serializer = SliderSerializer(slider, many=False)
         response_data['slider'] = slider_serializer.data
-
-        categories = Category.objects.all()
-        categories_serializer = CategoryListSerializer(categories, many=True)
-        response_data['categories'] = categories_serializer.data
 
         brands = Brand.objects.all()
         brands_serializer = BrandListSerializer(brands, many=True)

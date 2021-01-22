@@ -11,9 +11,10 @@ export default function addToWishList(product= {}) {
   else {
     wishList = JSON.parse(localStorage.wishList)
     wishList.forEach((item) => {
-      if (item.title === product.title) {
+      if (item.id === product.id) {
         productInWish = true
-        Notify.create({message: 'Товар уже в избранном'})
+        wishList.splice(wishList.indexOf(item), 1)
+        Notify.create({message: `Товар ${product.title.toLowerCase()} удален из избранного`})
       }
     })
     if(!productInWish) {

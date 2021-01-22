@@ -55,11 +55,17 @@ class SliderAdmin(admin.ModelAdmin):
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('get_image', 'title', 'url', 'btn_text', 'contain')
     list_editable = ('title', 'url', 'btn_text', 'contain')
+    readonly_fields = ('get_image',)
 
     save_as = True
     save_on_top = True
 
     def get_image(self, obj):
-        return mark_safe(f"<img src={obj.image.url} height=50px>")
+        # return 'wad'
+        return mark_safe(f"<img src='{obj.image.url}' height=50px>")
 
     get_image.short_description = 'Баннер'
+
+
+admin.site.site_title = 'Shop'
+admin.site.site_header = 'Shop - администрирование'

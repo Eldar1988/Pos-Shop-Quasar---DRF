@@ -30,6 +30,8 @@ DEBUG = True
 # ALLOWED_HOSTS = ['192.168.0.155']
 ALLOWED_HOSTS = ['192.168.0.199']
 
+APP_PATH = 'http://192.168.0.199:8000'
+
 
 # Application definition
 

@@ -16,7 +16,7 @@
           <!--          Slider   -->
           <pos-product-detail-images-slider
             :images="productData.product.images"
-            :image="productData.product.image"
+            :image="productData.product.full_image"
             :title="productData.product.title"
           />
           <!--          xxxxx   -->
@@ -233,7 +233,7 @@ import PosProductsScrollX from "components/shop/posProductsScrollX";
 import PosBanners from "components/shop/posBanners";
 import addToCart from "src/functions/add_to_cart";
 import PosAddedToCartDialog from "components/cart/posAddedToCartDialog";
-import addToWishList from "src/functions/add_to_wishlist";
+import addToWishListFunc from "src/functions/add_to_wishlist";
 
 export default {
   name: "posProductDetail",
@@ -259,14 +259,14 @@ export default {
   mounted() {
     this.setLastSeanProducts()
     this.getLastSeanProducts()
-    this.kaspiButton()
     this.checkWishList()
+    this.kaspiButton()
   },
   watch: {
     async productData() {
+      await this.checkWishList()
       await this.setLastSeanProducts()
       await this.getLastSeanProducts()
-      await this.checkWishList()
       await this.kaspiButton()
     }
   },
@@ -311,13 +311,14 @@ export default {
       ksWidgetInitializer.reinit()
     },
     addToWishList(product) {
-      addToWishList(product)
-      this.productInWishList = true
-      this.$root.$emit('updateWishList')
+      addToWishListFunc(product)
+      this.checkWishList()
     },
     checkWishList() {
+      console.log('1')
       this.productInWishList = false
       if (localStorage.getItem('wishList') !== null) {
+        console.log('cherck')
         let wishList = JSON.parse(localStorage.wishList)
         wishList.forEach((item) => {
           if (item.id === this.productData.product.id) {
@@ -325,7 +326,6 @@ export default {
           }
         })
       }
-      console.log(this.productInWishList)
     },
   },
   preFetch({store, currentRoute}) {

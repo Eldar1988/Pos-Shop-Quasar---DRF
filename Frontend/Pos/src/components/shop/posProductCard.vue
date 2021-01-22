@@ -87,7 +87,8 @@
 <script>
 import formatPrice from "src/filters/format_price"
 import addToCart from "src/functions/add_to_cart"
-import addToWishList from "src/functions/add_to_wishlist"
+import addToWishListFunc from "src/functions/add_to_wishlist"
+import addToWishList from "src/functions/add_to_wishlist";
 
 export default {
   name: "posProductCard",
@@ -112,6 +113,10 @@ export default {
     }
   },
   mounted() {
+    this.$root.$on('updateWishList', () => {
+      this.productInWishList = false
+      this.checkWishList()
+    })
     this.checkWishList()
   },
   methods: {
@@ -124,8 +129,7 @@ export default {
       }
     },
     addToWishList(product) {
-      addToWishList(product)
-      this.productInWishList = true
+      addToWishListFunc(product)
       this.$root.$emit('updateWishList')
     },
     async checkWishList() {

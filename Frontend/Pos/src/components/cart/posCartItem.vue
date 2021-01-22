@@ -10,7 +10,7 @@
           <p class="ellipsis text-subtitle1">{{ product.title }}</p>
           <p class="ellipsis text-bold">Цена: {{ product.price|formatPrice }} <q-icon name="mdi-currency-kzt" class="icon-wrapper" /></p>
           <div class="cart-item-quantity">
-            <div class="full-width flex justify-center">
+            <div class="full-width flex justify-start">
               <div class="">
                 <div class="quantity-wrapper q-mt-sm">
                   <q-btn

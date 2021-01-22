@@ -8,7 +8,7 @@ class Category(models.Model):
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True,
                                verbose_name='Родительская категория', related_name='child')
     title = models.CharField('Название категории', max_length=255)
-    description = models.TextField('Описание категории', max_length=200, help_text='Не более 200 символов')
+    description = models.TextField('Описание категории', max_length=300, help_text='Не более 300 символов')
     full_description = RichTextUploadingField('Полное описание', null=True, blank=True)
     image = ThumbnailerImageField('Изображение', upload_to='categories/',
                                   resize_source={'size': (300, 300), 'crop': 'scale'},
@@ -71,8 +71,8 @@ class Product(models.Model):
     characteristic = RichTextUploadingField('Характеристики', null=True, blank=True, help_text='Необязательно')
     video = models.CharField('Видео обзор с Youtube', max_length=255, null=True, blank=True,
                              help_text='Скопировать код в url после знака =')
-    price = models.PositiveSmallIntegerField('Цена товара')
-    old_price = models.PositiveSmallIntegerField('Старая цена', null=True, blank=True, help_text='Необязательно')
+    price = models.IntegerField('Цена товара')
+    old_price = models.IntegerField('Старая цена', null=True, blank=True, help_text='Необязательно')
     image = ThumbnailerImageField('Миниатюра', upload_to='products/',
                                   resize_source={'size': (300, 300), 'crop': 'scale'},
                                   help_text='Пропорции 1:1 (квадрат). Будет использоваться в каталоге товаров')

@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.conf import settings
 from .models import Page, Info, Contacts, Driver, Social, Client, Slider, Banner, Slide, ShopReview
 
 
@@ -7,7 +8,7 @@ class ShopReviewSerializer(serializers.ModelSerializer):
     avatar = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return obj.avatar.url
+        return f'{settings.APP_PATH}{obj.avatar.url}'
 
     class Meta:
         model = ShopReview
@@ -24,6 +25,10 @@ class PagesListSerializer(serializers.ModelSerializer):
 
 class ShortInfoSerializer(serializers.ModelSerializer):
     """Краткая информация о компании"""
+    logo = serializers.SerializerMethodField('get_image_url')
+
+    def get_image_url(self, obj):
+        return f'{settings.APP_PATH}{obj.logo.url}'
 
     class Meta:
         model = Info
@@ -32,6 +37,10 @@ class ShortInfoSerializer(serializers.ModelSerializer):
 
 class InfoSerializer(serializers.ModelSerializer):
     """Полная информация о компании"""
+    logo = serializers.SerializerMethodField('get_image_url')
+
+    def get_image_url(self, obj):
+        return f'{settings.APP_PATH}{obj.logo.url}'
 
     class Meta:
         model = Info
@@ -51,7 +60,7 @@ class DriversSerializer(serializers.ModelSerializer):
     file = serializers.SerializerMethodField('get_file_url')
 
     def get_file_url(self, obj):
-        return obj.file.url
+        return f'{settings.APP_PATH}{obj.file.url}'
 
     class Meta:
         model = Driver
@@ -71,7 +80,7 @@ class ClientsSerializer(serializers.ModelSerializer):
     logo = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return obj.logo.url
+        return f'{settings.APP_PATH}{obj.logo.url}'
 
     class Meta:
         model = Client
@@ -83,7 +92,7 @@ class SlidesSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Slide
@@ -95,7 +104,7 @@ class SliderSerializer(serializers.ModelSerializer):
     slides = SlidesSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.img.url}'
 
     class Meta:
         model = Slider
@@ -107,7 +116,7 @@ class BannerSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Banner

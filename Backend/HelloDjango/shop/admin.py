@@ -67,8 +67,7 @@ class ReviewInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'rating', 'show_on_home_page',
                     'future', 'hit', 'latest', 'public', 'order')
-    list_display_links = ('get_image', 'title')
-    list_editable = ('price', 'old_price', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
+    list_editable = ('title', 'price', 'category', 'old_price', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
     list_filter = ('category', 'brand', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date', 'update')
     search_fields = ('title',)
     filter_horizontal = ('labels',)
@@ -78,15 +77,17 @@ class ProductAdmin(admin.ModelAdmin):
         ('title', 'article', 'slug'),
         ('category', 'brand'),
         ('price', 'old_price'),
-        ('image', 'get_image'), ('description',),
-        ('future', 'hit', 'latest', 'public'),
+        ('image', 'get_image'),
+        ('full_image', 'get_full_image'),
+        ('description',),
+        ('show_on_home_page','future', 'hit', 'latest', 'public'),
         ('labels',),
         ('info',),
         ('characteristic',),
         ('video', 'rating', 'order'),
         ('pub_date', 'update')
     ]
-    readonly_fields = ('get_image', 'pub_date', 'update')
+    readonly_fields = ('get_image', 'get_full_image', 'pub_date', 'update')
 
     save_as = True
     save_on_top = True
@@ -94,7 +95,11 @@ class ProductAdmin(admin.ModelAdmin):
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: contain;">')
 
-    get_image.short_description = 'Фото'
+    def get_full_image(self, obj):
+        return mark_safe(f'<img src={obj.full_image.url} style="height: 50px; width: 50px; object-fit: contain;">')
+
+    get_image.short_description = 'Миниатюра'
+    get_full_image.short_description = 'Фото'
 
 
 @admin.register(Image)

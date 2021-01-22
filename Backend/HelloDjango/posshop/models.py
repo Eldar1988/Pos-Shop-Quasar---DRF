@@ -1,11 +1,11 @@
 from django.db import models
-from cloudinary.models import CloudinaryField
+from easy_thumbnails.fields import ThumbnailerImageField
 from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Info(models.Model):
     """Основная информация"""
-    logo = CloudinaryField('Логотип', folder='posshop')
+    logo = ThumbnailerImageField('Логотип', upload_to='site/', resize_source={'size': (400, 400), 'crop': 'scale'})
     title = models.CharField('Заголовок сайта', max_length=255, help_text='Будет отображаться на главной + title сайта')
     description = models.TextField('Краткое описание компании', max_length=200, help_text='до 200 символов')
     info = RichTextUploadingField('Полное описание компании')
@@ -21,9 +21,11 @@ class Info(models.Model):
 class Page(models.Model):
     """Информационные страницы"""
     title = models.CharField('Заголовок страницы', max_length=255)
-    description = models.TextField('Карткое описание', max_length=200, help_text='Для тега description не более 200 символов')
+    description = models.TextField('Карткое описание', max_length=200,
+                                   help_text='Для тега description не более 200 символов')
     body = RichTextUploadingField('Контент')
-    slug = models.SlugField('Slug', help_text='Маленькими буквами на латинице, без пробелов и спецсимволов', null=True, blank=True)
+    slug = models.SlugField('Slug', help_text='Маленькими буквами на латинице, без пробелов и спецсимволов', null=True,
+                            blank=True)
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
 
     def __str__(self):
@@ -78,13 +80,13 @@ class Social(models.Model):
 
     class Meta:
         verbose_name = 'Социальная сеть'
-        verbose_name_plural ='Социальные сети'
+        verbose_name_plural = 'Социальные сети'
 
 
 class Client(models.Model):
     """Клиенты компании"""
     title = models.CharField('Название компании', max_length=255, db_index=True)
-    logo = CloudinaryField('Логотип', folder='posshop/clients')
+    logo = ThumbnailerImageField('Логотип', upload_to='clients/', resize_source={'size': (200, 200), 'crop': 'scale'})
     url = models.URLField('Ссылка на сайт')
 
     def __str__(self):
@@ -115,7 +117,8 @@ class Slide(models.Model):
     slider = models.ForeignKey(Slider, on_delete=models.SET_NULL, null=True, blank=True,
                                verbose_name='Слайдер', related_name='slides')
     title = models.CharField('Заголовок слайда (необязательно)', max_length=255, null=True, blank=True)
-    image = CloudinaryField('Картинка', folder='poshop/slides')
+    image = ThumbnailerImageField('Картинка', upload_to='slides/',
+                                  resize_source={'size': (1200, 1200), 'crop': 'scale'})
     url = models.CharField('Slug (необязательно)', max_length=255, null=True, blank=True)
     btn_text = models.CharField('Текст на кнопке (необязательно)', max_length=100, null=True, blank=True)
     contain = models.BooleanField('Не растягивать слайд', default=False,
@@ -135,8 +138,9 @@ class Slide(models.Model):
 
 class Banner(models.Model):
     """Баннеры"""
-    title = models.CharField('Заголовок Баннера', max_length=255)
-    image = CloudinaryField('Картинка', folder='poshop/sldies')
+    title = models.CharField('Заголовок баннера', max_length=255)
+    image = ThumbnailerImageField('Картинка', upload_to='more/',
+                                   resize_source={'size': (600, 600), 'crop': 'scale'}, null=True, blank=True)
     url = models.CharField('Slug', max_length=255, null=True, blank=True)
     btn_text = models.CharField('Текст на кнопке', max_length=50, null=True, blank=True)
     contain = models.BooleanField('Не растягивать баннер', default=False)
@@ -152,8 +156,9 @@ class Banner(models.Model):
 class ShopReview(models.Model):
     """Отзывы о магазине"""
     name = models.CharField('Имя', max_length=255)
-    avatar = CloudinaryField('Фото', folder='posshop/avatars',
-                             help_text='Желательно размером не более 500х500 пикселей, лицо должно быть в центре')
+    avatar = ThumbnailerImageField('Аватар', upload_to='testimonials/',
+                                   resize_source={'size': (500, 500), 'crop': 'scale'},
+                                   help_text='Желательно размером не более 500х500 пикселей, лицо должно быть в центре')
     text = models.TextField('Отзыв')
     rating = models.PositiveSmallIntegerField('Оценка')
     pub_date = models.DateTimeField('Дата создания', auto_now_add=True)
