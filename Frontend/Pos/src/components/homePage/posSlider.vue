@@ -30,7 +30,7 @@
           </template>
           <div class="slider-meta">
             <div class="text-center">
-              <h2 v-if="slide.title">
+              <h2 v-if="slide.title" class="q-mb-md">
               <span class="slider-meta-content border-radius-6">
               {{ slide.title }}
                 </span>

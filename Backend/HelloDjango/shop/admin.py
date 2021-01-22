@@ -121,6 +121,7 @@ class ReviewAdmin(admin.ModelAdmin):
     list_editable = ('rating', 'public', 'product')
     readonly_fields = ('name', 'text')
     search_fields = ('name', 'text')
+    list_filter = ('public', 'pub_date', 'rating')
 
     save_as = True
     save_on_top = True

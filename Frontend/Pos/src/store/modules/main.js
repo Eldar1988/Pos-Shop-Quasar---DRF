@@ -21,7 +21,7 @@ export default {
       state.homeSlider = data.slider
       state.hitProducts = data.hitProducts
       state.reviews = data.reviews
-
+      state.contacts = data.contacts
     },
     setMainDataUnloaded(state) {
       state.mainDataUnloaded = true
@@ -34,7 +34,8 @@ export default {
     companyInfo: {},
     homeSlider: [],
     hitProducts: [],
-    reviews: []
+    reviews: [],
+    contacts: {}
   },
   getters: {
     getMainDataStatus: (state) => state.mainDataUnloaded,
@@ -44,6 +45,7 @@ export default {
     getCompanyInfo: (state) => state.companyInfo,
     getHomeSlider: (state) => state.homeSlider,
     getHitProducts: (state) => state.hitProducts,
-    getShopReviews: (state) => state.reviews
+    getShopReviews: (state) => state.reviews,
+    getContacts: (state) => state.contacts
   }
 }

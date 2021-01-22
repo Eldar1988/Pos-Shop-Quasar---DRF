@@ -2,9 +2,9 @@ from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework.response import Response
 
-
 from .models import Product, Category, Label, Brand
-from .serializers import ProductListSerializer, CategoryDetailSerializer, ProductDetailSerializer, LabelDetailSerializer, BrandDetailSerializer
+from .serializers import ProductListSerializer, CategoryDetailSerializer, ProductDetailSerializer, \
+    LabelDetailSerializer, BrandDetailSerializer, ReviewSerializer
 from .service import ProductsPagination
 
 
@@ -22,6 +22,7 @@ class HomeFutureProducts(viewsets.ReadOnlyModelViewSet):
 
 class CategoryDetailView(APIView):
     """Категория детали"""
+
     def get(self, request, slug):
         category = Category.objects.get(slug=slug)
         category_serializer = CategoryDetailSerializer(category, many=False)
@@ -30,14 +31,16 @@ class CategoryDetailView(APIView):
 
 class LabelDetailView(APIView):
     """Категория детали"""
+
     def get(self, request, slug):
         label = Label.objects.get(slug=slug)
-        label_serializer =LabelDetailSerializer(label, many=False)
+        label_serializer = LabelDetailSerializer(label, many=False)
         return Response(label_serializer.data)
 
 
 class BrandDetailView(APIView):
     """Бренд детали"""
+
     def get(self, request, slug):
         brand = Brand.objects.get(slug=slug)
         brand_serializer = BrandDetailSerializer(brand, many=False)
@@ -46,6 +49,7 @@ class BrandDetailView(APIView):
 
 class ProductDetailView(APIView):
     """Детали товара"""
+
     def get(self, request, slug):
         response_data = {}
         product = Product.objects.get(slug=slug)
@@ -57,3 +61,18 @@ class ProductDetailView(APIView):
         response_data['products'] = products_serializer.data
 
         return Response(response_data)
+
+
+class CreateReviewView(APIView):
+    """Создание отзывы"""
+
+    def post(self, request):
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=201)
+
+        print(serializer.errors)
+
+        return Response(status=500)
+

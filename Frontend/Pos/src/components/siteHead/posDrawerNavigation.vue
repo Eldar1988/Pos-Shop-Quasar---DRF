@@ -28,7 +28,7 @@
         v-for="category in categories"
         :key="category.id"
       >
-<!--        Parent category   -->
+        <!--        Parent category   -->
         <q-expansion-item
           v-if="category.child.length > 0"
           expand-separator
@@ -41,7 +41,8 @@
               <q-img :src="category.image" class="circle-image"/>
 
             </q-item-section>
-            <q-item-section><span class="text-subtitle2 text-weight-bold text-dark">{{ category.title }}</span></q-item-section>
+            <q-item-section><span class="text-subtitle2 text-weight-bold text-dark">{{ category.title }}</span>
+            </q-item-section>
           </template>
           <!--          Childs    -->
           <q-item
@@ -51,7 +52,10 @@
             :to="`/shop/${category.slug}`"
             exact-active-class="text-primary"
           >
-            <q-item-section class="text-subtitle2 text-weight-bold text-dark text-center">Все {{ category.title }}</q-item-section>
+            <q-item-section class="text-subtitle2 text-weight-bold text-dark text-center">Все {{
+                category.title
+              }}
+            </q-item-section>
           </q-item>
           <q-item
             v-for="category in category.child"
@@ -69,7 +73,7 @@
           </q-item>
 
         </q-expansion-item>
-<!--        xxxxx   -->
+        <!--        xxxxx   -->
 
         <q-item
           v-if="category.parent === null && category.child.length === 0"
@@ -100,7 +104,7 @@
       <q-item
         clickable
         v-ripple
-        class="border-bottom"
+        class="border-bottom text-dark"
         exact-active-class="text-primary"
         to="/"
       >
@@ -126,6 +130,22 @@
         </q-item-section>
       </q-item>
       <!--      xxxxx   -->
+      <!--      Contacts   -->
+      <q-item
+        clickable
+        v-ripple
+        class="border-bottom"
+        exact-active-class="text-primary"
+        to="/contacts"
+      >
+        <q-item-section avatar>
+          <q-icon name="place"/>
+        </q-item-section>
+        <q-item-section class="text-subtitle2 text-weight-bold">
+          Контакты
+        </q-item-section>
+      </q-item>
+      <!--      xxxxx   -->
       <!--      Pages   -->
       <q-item
         v-for="page in pages"
@@ -133,12 +153,29 @@
         clickable
         v-ripple
         class="border-bottom"
+        :to="`/info/${page.slug}`"
       >
         <q-item-section avatar>
           <q-icon name="keyboard_arrow_right"/>
         </q-item-section>
         <q-item-section class="text-subtitle2 text-weight-bold">
           {{ page.title }}
+        </q-item-section>
+      </q-item>
+      <!--      xxxxx   -->
+      <!--      Privacy policy   -->
+      <q-item
+        clickable
+        v-ripple
+        class="border-bottom"
+        exact-active-class="text-primary"
+        to="/privacy_policy"
+      >
+        <q-item-section avatar>
+          <q-icon name="assignment"/>
+        </q-item-section>
+        <q-item-section class="text-subtitle2 text-weight-bold">
+          Политика конфиденицальности
         </q-item-section>
       </q-item>
       <!--      xxxxx   -->

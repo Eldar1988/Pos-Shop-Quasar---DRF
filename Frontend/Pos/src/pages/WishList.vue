@@ -20,11 +20,11 @@
       class="q-px-sm"
     >
       <q-card
-        class="bg-negative red-shadow q-px-sm q-py-xl flex flex-center q-mt-lg"
+        class="bg-negative red-shadow q-px-sm q-py-xl flex flex-center q-mt-md"
       >
         <div class="text-center">
           <p class="text-subtitle1 text-white">
-            Ваш список избранны товаров пуст.
+            Ваш список избранных товаров пуст.
           </p>
           <q-btn
             label="вернуться в магазин"

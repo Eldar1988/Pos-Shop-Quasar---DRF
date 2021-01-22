@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import main from './modules/main'
 import shop from './modules/shop'
+import pages from './modules/pages'
 
 // import example from './module-example'
 
@@ -20,7 +21,8 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       main,
-      shop
+      shop,
+      pages
     },
     state: {
       // serverURL: 'http://192.168.0.155:8000'

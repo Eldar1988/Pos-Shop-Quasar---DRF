@@ -61,6 +61,28 @@ const routes = [
       { path: '', component: () => import('pages/Thanks.vue') }
     ]
   },
+  {
+    path: '/privacy_policy',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/PrivacyPolicy') }
+    ]
+  },
+  {
+    path: '/info/:slug',
+    params: 'slug',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/InfoPage.vue') }
+    ]
+  },
+  {
+    path: '/contacts',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Contacts') }
+    ]
+  },
 
   // Always leave this as last one,
   // but you can also remove it

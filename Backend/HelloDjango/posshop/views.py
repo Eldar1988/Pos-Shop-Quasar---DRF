@@ -2,9 +2,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 
-from .models import Info, Page, Contacts, Social, Client, Slider, Banner, ShopReview
+from .models import Info, Page, Contacts, Social, Client, Slider, Banner, ShopReview, PrivacyPolicy
 from .serializers import ShortInfoSerializer, PagesListSerializer, ContactInfoSerializer, SocialsSerializer, \
-    ClientsSerializer, SliderSerializer, BannerSerializer, ShopReviewSerializer
+    ClientsSerializer, SliderSerializer, BannerSerializer, ShopReviewSerializer, PrivacyPolicySerializer, PageDetailSerializer
 
 from shop.models import Category, Brand, Product
 from shop.serializers import CategoryListSerializer, BrandListSerializer, ProductListSerializer
@@ -61,6 +61,22 @@ class MainInfoView(APIView):
         response_data['reviews'] = reviews_serializer.data
 
         return Response(response_data)
+
+
+class PrivacyPolicyView(APIView):
+    """Политика конфиденциальности"""
+    def get(self, request):
+        policy = PrivacyPolicy.objects.last()
+        serializer = PrivacyPolicySerializer(policy, many=False)
+        return Response(serializer.data)
+
+
+class InfoPageDetailView(APIView):
+    """Информационная страница"""
+    def get(self, request, slug):
+        page = Page.objects.get(slug=slug)
+        serializer = PageDetailSerializer(page, many=False)
+        return Response(serializer.data)
 
 
 class BannersView(viewsets.ReadOnlyModelViewSet):

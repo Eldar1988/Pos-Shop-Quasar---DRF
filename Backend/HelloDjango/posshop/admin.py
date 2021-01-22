@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Info, Page, Contacts, Driver, Social, Client, Slider, Banner, Slide, ShopReview
+from .models import Info, Page, Contacts, Driver, Social, Client, Slider, Banner, Slide, ShopReview, PrivacyPolicy
 
 
 admin.site.register(Info)
@@ -10,6 +10,7 @@ admin.site.register(Contacts)
 admin.site.register(Driver)
 admin.site.register(Social)
 admin.site.register(Slider)
+admin.site.register(PrivacyPolicy)
 
 
 @admin.register(ShopReview)

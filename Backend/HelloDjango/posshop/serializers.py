@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.conf import settings
-from .models import Page, Info, Contacts, Driver, Social, Client, Slider, Banner, Slide, ShopReview
+from .models import Page, Info, Contacts, Driver, Social, Client, Slider, Banner, Slide, ShopReview, PrivacyPolicy
 
 
 class ShopReviewSerializer(serializers.ModelSerializer):
@@ -121,3 +121,18 @@ class BannerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Banner
         fields = '__all__'
+
+
+class PrivacyPolicySerializer(serializers.ModelSerializer):
+    """Политика конфиденицальности"""
+    class Meta:
+        model = PrivacyPolicy
+        fields = '__all__'
+
+
+class PageDetailSerializer(serializers.ModelSerializer):
+    """Информационные страницы"""
+    class Meta:
+        model = Page
+        fields = '__all__'
+

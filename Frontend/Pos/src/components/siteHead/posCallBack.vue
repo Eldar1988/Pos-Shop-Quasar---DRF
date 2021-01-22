@@ -37,7 +37,7 @@
           <q-btn
             color="accent"
             label="Отправить"
-            class="q-px-lg text-bold red-shadow border-radius-6"
+            class="q-py-sm full-width text-bold red-shadow border-radius-6"
             icon-right="forward_to_inbox"
             unelevated
             :loading="loading"

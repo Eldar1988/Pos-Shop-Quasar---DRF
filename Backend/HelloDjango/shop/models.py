@@ -8,6 +8,7 @@ class Category(models.Model):
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True,
                                verbose_name='Родительская категория', related_name='child')
     title = models.CharField('Название категории', max_length=255)
+    label = models.CharField('Ярлык', max_length=50, help_text='Например: "Скидки до 50%"', null=True, blank=True)
     description = models.TextField('Описание категории', max_length=300, help_text='Не более 300 символов')
     full_description = RichTextUploadingField('Полное описание', null=True, blank=True)
     image = ThumbnailerImageField('Изображение', upload_to='categories/',
@@ -80,7 +81,7 @@ class Product(models.Model):
                                        resize_source={'size': (1200, 1200), 'crop': 'scale'},
                                        help_text='Пропорции 1:1 (квадрат). Будет использоваться на странице товара')
     rating = models.PositiveSmallIntegerField('Рейтинг товара', default=5)
-    show_on_home_page = models.BooleanField('На главной', default=False, help_text='Отобразить товар на глваной странице')
+    show_on_home_page = models.BooleanField('На главной', default=False, help_text='Отобразить товар на главной странице')
     future = models.BooleanField('Рекомендуем?', default=False)
     hit = models.BooleanField('Хит продаж', default=False)
     latest = models.BooleanField('Новинка', default=False)

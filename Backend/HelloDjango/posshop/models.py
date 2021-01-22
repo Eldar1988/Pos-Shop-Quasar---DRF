@@ -37,6 +37,19 @@ class Page(models.Model):
         ordering = ('order',)
 
 
+class PrivacyPolicy(models.Model):
+    """Политика конфиденциальности"""
+    title = models.CharField('Заголовок', max_length=255, default='Политика конфиденциальности')
+    body = RichTextUploadingField('Текст')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Политика конфиденциальности'
+        verbose_name_plural = 'Политика конфиденциальности'
+
+
 class Contacts(models.Model):
     """Контактная информация"""
     title = models.CharField('Заголовок для страницы контактов', max_length=255)

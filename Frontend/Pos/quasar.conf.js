@@ -103,7 +103,8 @@ cfg.module.rules.push({
       // Quasar plugins
       plugins: [
         'Notify',
-        'Loading'
+        'Loading',
+        'Meta'
       ]
     },
 

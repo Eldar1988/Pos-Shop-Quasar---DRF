@@ -33,6 +33,9 @@ export default {
         arrows: false,
         perPage: 5,
         breakpoints: {
+          1600: {
+            perPage: 4
+          },
           1400: {
             perPage: 3
           },

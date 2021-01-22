@@ -22,11 +22,13 @@
           <!--          xxxxx   -->
         </div>
         <div class="q-pa-sm">
+          <div class="flex justify-between" style="align-items: center">
           <!--            Title   -->
           <h1 class="product-header-text">{{ productData.product.title }}</h1>
           <!--          Rating   -->
-          <div class="product-info-section">
+          <div v-if="productData.product.rating" class="">
             <q-rating v-model="productData.product.rating" size="28px" color="orange" readonly/>
+          </div>
           </div>
           <!--          Product price   -->
           <div class="product-info-section">
@@ -48,12 +50,6 @@
           <div class="product-info-section">
             <p>{{ productData.product.description }}</p>
           </div>
-          <!--          Article  -->
-          <div class="product-info-section">
-            <p class="text-bold">
-              Артикул: {{ productData.product.article }}
-            </p>
-          </div>
           <!--          Actions   -->
           <div class="row q-my-lg">
             <q-separator inset=""/>
@@ -70,8 +66,10 @@
                     size="sm"
                     @click="quantity > 1 ? quantity -- : null"
                   />
-                  <q-input v-model="quantity" type="tel" class="border-radius-6"
-                           input-class="text-center text-bold text-dark"/>
+                  <div style="height: 30px; overflow: hidden;">
+                    <q-input v-model="quantity" type="tel" class="border-radius-6"
+                             input-class="text-center text-bold text-dark " input-style="max-height: 30px;"/>
+                  </div>
                   <q-btn
                     icon="add"
                     class="border-radius-6"
@@ -95,14 +93,14 @@
             </div>
             <div class="col-12 col-md-6 q-pa-sm q-mt-sm">
               <div class="buttons-grid">
-              <q-btn
-                label="В корзину"
-                color="negative"
-                outline
-                class="border-radius-6 full-width q-py-sm text-bold"
-                icon-right="add_shopping_cart"
-                @click="selfAddToCart(productData.product, quantity, false)"
-              />
+                <q-btn
+                  label="В корзину"
+                  color="negative"
+                  outline
+                  class="border-radius-6 full-width q-py-sm text-bold"
+                  icon-right="add_shopping_cart"
+                  @click="selfAddToCart(productData.product, quantity, false)"
+                />
                 <q-btn
                   color="accent"
                   @click="addToWishList(productData.product)"
@@ -116,6 +114,23 @@
             <q-separator inset="" class="q-mt-sm"/>
           </div>
           <!--          xxxxx   -->
+
+          <div class="flex" style="align-items: center">
+            <!--          Article  -->
+            <div v-if="productData.product.article" class="product-info-section">
+              <p class="text-bold">
+                Артикул: <span class="text-weight-regular">{{ productData.product.article }}</span>
+              </p>
+            </div>
+            <!--          Brand   -->
+            <div v-if="productData.product.brand" class="product-info-section flex q-ml-md" style="align-items: center">
+              <p class="text-bold">Бренд: </p>
+              <router-link :to="`/brand/${productData.product.brand.slug}`">
+                <q-img :src="productData.product.brand.image" height="30px" contain width="100px" class="q-ml-sm"/>
+              </router-link>
+            </div>
+            <!--          xxxxx   -->
+          </div>
           <!--          Category   -->
           <div class="product-info-section flex" style="align-items: center">
             <p class="text-bold">Категория: </p>
@@ -125,7 +140,7 @@
           </div>
           <!--          xxxxx   -->
           <!--          Labels   -->
-          <div class="product-info-section flex">
+          <div v-if="productData.product.labels.length > 0" class="product-info-section flex">
             <p class="text-bold">Метки: </p>
             <q-btn
               v-for="label in productData.product.labels"
@@ -137,17 +152,21 @@
             />
           </div>
           <!--          xxxxx   -->
-          <!--          Brand   -->
-          <div class="product-info-section flex" style="align-items: center">
-            <p class="text-bold">Бренд: </p>
-            <router-link :to="`/brand/${productData.product.brand.slug}`">
-              <q-img :src="productData.product.brand.image" height="30px" contain width="100px" class="q-ml-sm"/>
-            </router-link>
+          <!--          Reviews   -->
+          <div class="product-reviews q-mt-lg">
+            <q-expansion-item
+              dense-toggle
+              expand-separator
+              icon="chat_bubble_outline"
+              label="Отзывы"
+              class="grey-border border-radius-6 text-center text-bold"
+            >
+              <pos-product-reviews :reviews="productData.product.reviews" :productId="productData.product.id"/>
+            </q-expansion-item>
           </div>
           <!--          xxxxx   -->
-
           <!--          Characters   -->
-          <div v-if="productData.product.characteristic" class="q-mt-lg">
+          <div v-if="productData.product.characteristic" class="q-mt-sm">
             <q-expansion-item
               dense-toggle
               expand-separator
@@ -234,10 +253,14 @@ import PosBanners from "components/shop/posBanners";
 import addToCart from "src/functions/add_to_cart";
 import PosAddedToCartDialog from "components/cart/posAddedToCartDialog";
 import addToWishListFunc from "src/functions/add_to_wishlist";
+import PosProductReviews from "components/shop/posProductReviews";
 
 export default {
   name: "posProductDetail",
-  components: {PosAddedToCartDialog, PosBanners, PosProductsScrollX, PosSectionTitle, PosProductDetailImagesSlider},
+  components: {
+    PosProductReviews,
+    PosAddedToCartDialog, PosBanners, PosProductsScrollX, PosSectionTitle, PosProductDetailImagesSlider
+  },
   filters: {formatPrice},
   data() {
     return {

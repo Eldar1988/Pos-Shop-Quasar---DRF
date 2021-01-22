@@ -78,7 +78,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        exclude = ('pub_date', 'public')
+        exclude = ('pub_date',)
 
 
 class ChildCategoryDetailSerializer(serializers.ModelSerializer):
