@@ -2,14 +2,20 @@ import telebot
 from .models import OrderItem
 from shop_settings.models import TelegramBot
 
-bot_settings = TelegramBot.objects.last()
-
+try:
+    bot_settings = TelegramBot.objects.last()
+except:
+    bot_settings = ''
 # bot = telebot.TeleBot('1587261399:AAF_VbkxIue05PA6JnkNYAHvXyH9oISwuU8')
 # chat_id = '-1001374586109'
 #
 if bot_settings:
-    bot = telebot.TeleBot(bot_settings.token)
-    chat_id = bot_settings.chat_id
+    try:
+        bot = telebot.TeleBot(bot_settings.token)
+        chat_id = bot_settings.chat_id
+    except:
+        bot = ''
+        chat_id = ''
 
 
 def tg_send_call_back(callback):

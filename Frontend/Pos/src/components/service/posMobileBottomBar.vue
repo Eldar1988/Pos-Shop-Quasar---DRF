@@ -1,5 +1,7 @@
 <template>
-  <div class="mobile-bottom-bar bg-primary">
+  <div class="mobile-bottom-bar bg-primary"
+       :style="this.$q.platform.is.ios ? `height: 70px` : `height: 52px`"
+  >
     <div class="flex flex-center">
       <a :href="`tel:${contacts.phone}`">
         <q-btn
@@ -81,11 +83,10 @@ export default {
   left: 0
   right: 0
   width: 100%
-  height: 45px
   color: white
   display: grid
   grid-template-columns: repeat(5, 1fr)
   align-items: start
   z-index: 1000
-  padding: 0
+  padding: 3px 0 0
 </style>

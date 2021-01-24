@@ -60,8 +60,8 @@ class Contacts(models.Model):
     phone = models.CharField('Основной телефон', max_length=20)
     whatsapp = models.CharField('Whatsapp', max_length=20, help_text='в формате 7707*******')
     address = models.TextField('Адрес компании')
-    body = RichTextUploadingField('Дополнительная информация')
-    map_frame = models.TextField('iframe карты')
+    body = RichTextUploadingField('Дополнительная информация', blank=True, null=True)
+    map_frame = models.TextField('iframe карты', null=True)
 
     def __str__(self):
         return self.title

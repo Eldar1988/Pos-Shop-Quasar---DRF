@@ -52,6 +52,7 @@
           <div class="product-info-section">
             <p>{{ productData.product.description }}</p>
           </div>
+          <pos-share class="q-mt-md" :description="productData.product.description" :image="productData.product.image" />
           <!--          Actions   -->
           <div class="row q-my-lg">
             <q-separator inset=""/>
@@ -270,10 +271,12 @@ import addToCart from "src/functions/add_to_cart";
 import PosAddedToCartDialog from "components/cart/posAddedToCartDialog";
 import addToWishListFunc from "src/functions/add_to_wishlist";
 import PosProductReviews from "components/shop/posProductReviews";
+import PosShare from "components/service/posShare";
 
 export default {
   name: "posProductDetail",
   components: {
+    PosShare,
     PosProductReviews,
     PosAddedToCartDialog, PosBanners, PosProductsScrollX, PosSectionTitle, PosProductDetailImagesSlider
   },
