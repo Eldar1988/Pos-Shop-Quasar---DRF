@@ -4,9 +4,9 @@
     <q-header class="text-primary bg-white shadow-5" height-hint="98">
       <q-toolbar>
         <!--        Shop logo   -->
-        <q-toolbar-title class="text-left">
+        <q-toolbar-title>
           <router-link to="/">
-            <q-img :src="info.logo" height="40px" contain class="text-left" style="width: 190px; max-width: 90%">
+            <q-img :src="info.logo" height="40px" contain style="width: 190px; max-width: 90%;" position="left">
               <template v-slot:loading><q-skeleton height="40px"  style="width: 190px; max-width: 90%"/></template>
             </q-img>
 <!--            <span class="text-uppercase text-primary text-weight-bold logo-title">{{ info.name }}</span>-->
