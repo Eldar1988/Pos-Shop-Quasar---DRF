@@ -76,3 +76,13 @@ class CreateReviewView(APIView):
 
         return Response(status=500)
 
+
+class SearchView(APIView):
+    """Результаты поиска"""
+    def get(self, request):
+        search_request = request.GET.get('search')
+        products = Product.objects.filter(title__icontains=search_request)
+        serializer = ProductListSerializer(products, many=True)
+        return Response(serializer.data)
+
+

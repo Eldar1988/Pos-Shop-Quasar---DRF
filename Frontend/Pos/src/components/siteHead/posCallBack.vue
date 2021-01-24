@@ -3,10 +3,9 @@
     <q-btn
       label="Обратный звонок"
       icon-right="phone_callback"
-      outline
+      text-color="white"
       :color="color"
-      class="text-weight-bold full-width border-radius-6"
-      unelevated
+      class="text-weight-bold full-width border-radius-6 shadow-2"
       @click="dialog = true"
     />
 
@@ -27,10 +26,10 @@
         </q-card-section>
         <q-card-section class="">
           <q-input v-model="formData.name" label="Ваше имя*" outlined type="text"/>
-            <small class="text-negative">{{ errorTextName }}</small>
+            <small v-if="formData.name === ''" class="text-negative">{{ errorTextName }}</small>
           <q-input v-model="formData.phone" label="Номер телефона*" outlined type="tel" mask="#-###-###-####"
                    class="q-mt-md"/>
-          <small class="text-negative">{{ errorTextPhone }}</small>
+          <small v-if="formData.phone === ''" class="text-negative">{{ errorTextPhone }}</small>
         </q-card-section>
 
         <q-card-actions align="center" class="bg-white text-teal q-pa-md">
@@ -56,7 +55,7 @@ export default {
   props: {
     color: {
       type: String,
-      default: 'white'
+      default: 'primary'
     }
   },
   data() {
@@ -71,16 +70,22 @@ export default {
       loading: false
     }
   },
+  mounted() {
+    this.$root.$on('callBack', () => {
+      this.dialog = !this.dialog
+    })
+  },
   methods: {
-
     async callBack() {
       this.loading = true
       if (this.formData.name === '') {
         this.errorTextName = 'Как к вам обращаться?'
+        this.loading = false
         return null
       }
       if (this.formData.phone === '') {
         this.errorTextPhone = 'Укажите ваш номер телефона'
+        this.loading = false
         return null
       }
       await fetch(`${this.$store.getters.getServerURL}/orders/call_back/`,{
@@ -98,7 +103,6 @@ export default {
           this.loading = false
           this.$q.notify({message: 'Извините, произошла ошибка. Попробуйте еще раз', position: 'top'})
         }
-
       })
     }
   }

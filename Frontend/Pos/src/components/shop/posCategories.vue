@@ -14,7 +14,7 @@
           <div class="category-card-wrapper">
             <div>
               <p class="text-bold q-pt-sm text-left q-pb-sm">{{ category.title }}</p>
-              <p v-if="category.label" class="category-card-label text-left border-radius-6 text-bold">{{ category.label }}</p>
+              <p v-if="category.label" class="category-card-label bg-accent text-left border-radius-6 text-bold">{{ category.label }}</p>
             </div>
             <div>
           <q-img
@@ -51,7 +51,6 @@ export default {
   align-items: center
 
 .category-card-label
-  background: $accent
   color: white
   display: flex
   justify-content: center

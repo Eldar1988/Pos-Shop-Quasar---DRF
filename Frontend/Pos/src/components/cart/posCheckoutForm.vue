@@ -216,6 +216,7 @@ export default {
     },
     // New order
     async createNewOrder(paymentMethod, slug) {
+
       this.$q.loading.show({
         spinner: QSpinnerFacebook,
         spinnerColor: 'white',
@@ -243,12 +244,14 @@ export default {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
       }).then(response => {
-        console.log(response)
         if (response.status === 200) {
+
           let cart = []
           localStorage.setItem('cart', JSON.stringify(cart))
+          this.$root.$emit('updateCart')
           setTimeout(() => {
             this.$q.loading.hide()
+
             this.$router.push(`/thanks/${slug}`)
           }, 1500)
         } else {

@@ -1,5 +1,9 @@
 <template>
   <q-page>
+    <q-breadcrumbs class="q-pa-sm q-mt-md">
+      <q-breadcrumbs-el icon="home" to="/"/>
+      <q-breadcrumbs-el label="Избранные товары"/>
+    </q-breadcrumbs>
     <pos-page-header title="Избранные товары"/>
     <section v-if="products.length > 0">
       <div  class="row q-pa-sm">
@@ -64,6 +68,12 @@ export default {
   methods: {
     getWishProducts() {
       this.products = JSON.parse(localStorage.wishList)
+    }
+  },
+  meta() {
+    let siteTitle = this.$store.getters.getCompanyInfo.name
+    return {
+      title: `Ваш список желаний | ${siteTitle}`,
     }
   }
 }

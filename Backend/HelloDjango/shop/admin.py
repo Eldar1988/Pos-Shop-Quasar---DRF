@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Category, Brand, Label, Product, Image, Review
+from .models import Category, Brand, Label, Product, Image, Review, Video
 
 
 @admin.register(Category)
@@ -27,6 +27,7 @@ class BrandAdmin(admin.ModelAdmin):
     list_editable = ('title', 'slug', 'order')
     search_fields = ('title',)
     readonly_fields = ('get_image',)
+    list_per_page = 10
 
     save_as = True
     save_on_top = True
@@ -42,6 +43,7 @@ class LabelAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'order')
     list_editable = ('slug', 'order')
     search_fields = ('title',)
+    list_per_page = 10
 
     save_as = True
     save_on_top = True
@@ -58,6 +60,11 @@ class ImageInline(admin.TabularInline):
     get_image.short_description = 'Миниатюра'
 
 
+class VideoInline(admin.TabularInline):
+    model = Video
+    extra = 0
+
+
 class ReviewInline(admin.TabularInline):
     model = Review
     extra = 0
@@ -72,13 +79,15 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('title',)
     filter_horizontal = ('labels',)
     filter_vertical = ('labels',)
-    inlines = [ImageInline, ReviewInline]
+    list_per_page = 10
+    inlines = [VideoInline, ImageInline, ReviewInline]
     fields = [
         ('title', 'article', 'slug'),
         ('category', 'brand'),
         ('price', 'old_price'),
         ('image', 'get_image'),
         ('full_image', 'get_full_image'),
+        ('image_contain'),
         ('description',),
         ('show_on_home_page','future', 'hit', 'latest', 'public'),
         ('labels',),
@@ -102,19 +111,6 @@ class ProductAdmin(admin.ModelAdmin):
     get_full_image.short_description = 'Фото'
 
 
-@admin.register(Image)
-class ImageAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'product')
-
-    save_as = True
-    save_on_top = True
-
-    def get_image(self, obj):
-        return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: contain;">')
-
-    get_image.short_description = 'Миниатюра'
-
-
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('name', 'product', 'rating', 'pub_date', 'public')
@@ -122,6 +118,7 @@ class ReviewAdmin(admin.ModelAdmin):
     readonly_fields = ('name', 'text')
     search_fields = ('name', 'text')
     list_filter = ('public', 'pub_date', 'rating')
+    list_per_page = 10
 
     save_as = True
     save_on_top = True

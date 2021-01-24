@@ -11,13 +11,38 @@
       />
     </q-toolbar>
     <!--    xxxxx   -->
+    <!--    Contacts   -->
+    <div class="manu-contacts q-py-md q-px-sm full-width">
+      <a :href="`tel:${contacts.phone}`" title="Позвонить">
+        <q-btn
+          :label="contacts.phone"
+          class="full-width border-radius-6 text-bold"
+          color="primary"
+          outline
+          unelevated
+          icon="call"
+
+        />
+      </a>
+      <a :href="`https://wa.me/${contacts.whatsapp}`" title="Позвонить" class="q-mt-sm block">
+        <q-btn
+          :label="contacts.whatsapp"
+          class="full-width border-radius-6 text-bold"
+          color="green"
+          outline
+          unelevated
+          icon="mdi-whatsapp"
+        />
+      </a>
+    </div>
+    <!--    xxxxx   -->
     <!--    Mobile callback button   -->
     <div class="q-pa-sm hide-on-desktop">
       <pos-call-back color="primary"/>
     </div>
     <!--    xxxxx    -->
     <!--    Navigation   -->
-    <pos-drawer-navigation />
+    <pos-drawer-navigation/>
     <!--    xxxxx   -->
   </div>
 </template>
@@ -28,7 +53,12 @@ import PosDrawerNavigation from "components/siteHead/posDrawerNavigation";
 
 export default {
   name: "posRightDrawerContent",
-  components: {PosDrawerNavigation, PosCallBack}
+  components: {PosDrawerNavigation, PosCallBack},
+  computed: {
+    contacts() {
+      return this.$store.getters.getContacts
+    }
+  }
 }
 </script>
 

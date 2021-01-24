@@ -22,7 +22,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name_plural = '2.1 Категории'
         ordering = ('order',)
 
 
@@ -41,7 +41,7 @@ class Brand(models.Model):
 
     class Meta:
         verbose_name = 'Бренд'
-        verbose_name_plural = 'Бренды'
+        verbose_name_plural = '2.2 Бренды'
         ordering = ('order',)
 
 
@@ -55,7 +55,7 @@ class Label(models.Model):
 
     class Meta:
         verbose_name = 'Метка товара'
-        verbose_name_plural = 'Метки товара'
+        verbose_name_plural = '2.3 Метки товаров'
         ordering = ('order',)
 
 
@@ -70,7 +70,7 @@ class Product(models.Model):
     description = models.TextField('Краткое описание товара', max_length=300, help_text='Не более 300 символов')
     info = RichTextUploadingField('Дополнительная информация', null=True, blank=True, help_text='Необязательно')
     characteristic = RichTextUploadingField('Характеристики', null=True, blank=True, help_text='Необязательно')
-    video = models.CharField('Видео обзор с Youtube', max_length=255, null=True, blank=True,
+    video = models.CharField('Видео с Youtube', max_length=255, null=True, blank=True,
                              help_text='Скопировать код в url после знака =')
     price = models.IntegerField('Цена товара')
     old_price = models.IntegerField('Старая цена', null=True, blank=True, help_text='Необязательно')
@@ -80,7 +80,9 @@ class Product(models.Model):
     full_image = ThumbnailerImageField('Фото товара', upload_to='products/', null=True, blank=True,
                                        resize_source={'size': (1200, 1200), 'crop': 'scale'},
                                        help_text='Пропорции 1:1 (квадрат). Будет использоваться на странице товара')
-    rating = models.PositiveSmallIntegerField('Рейтинг товара', default=5)
+    image_contain = models.BooleanField('Растянуть фото товара', default=False,
+                                        help_text='Фото растянется на всю высоту и ширину карточки, с сохранением пропорций')
+    rating = models.PositiveSmallIntegerField('Рейтинг товара', default=5, null=True, blank=True)
     show_on_home_page = models.BooleanField('На главной', default=False, help_text='Отобразить товар на главной странице')
     future = models.BooleanField('Рекомендуем?', default=False)
     hit = models.BooleanField('Хит продаж', default=False)
@@ -96,7 +98,7 @@ class Product(models.Model):
 
     class Meta:
         verbose_name = 'Товар'
-        verbose_name_plural = 'Товары'
+        verbose_name_plural = '2.4 Товары'
         ordering = ('order', 'price')
 
 
@@ -105,6 +107,8 @@ class Image(models.Model):
                                   resize_source={'size': (1200, 1200), 'crop': 'scale'})
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Товар',
                                 related_name='images')
+    contain = models.BooleanField('Растянуть фото товара', default=False,
+                                  help_text='Фото растянется на всю высоту и ширину карточки, с сохранением пропорций')
 
     def __str__(self):
         return f'{self.id}'
@@ -112,6 +116,21 @@ class Image(models.Model):
     class Meta:
         verbose_name = 'Дополнительное изображение'
         verbose_name_plural = 'Дополнительные изображения'
+
+
+class Video(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True,
+                                verbose_name='Товар', related_name='videos')
+    video = models.CharField('Видео с Youtube', max_length=255, help_text='Скопировать код в url после знака =')
+    order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.id}'
+
+    class Meta:
+        verbose_name = 'Дополнительное видео'
+        verbose_name_plural = 'Дополнительное видео'
+        ordering = ('order',)
 
 
 class Review(models.Model):
@@ -128,5 +147,5 @@ class Review(models.Model):
 
     class Meta:
         verbose_name = 'Отзыв'
-        verbose_name_plural = 'Отзывы'
+        verbose_name_plural = '2.5 Отзывы'
         ordering = ('-pub_date',)

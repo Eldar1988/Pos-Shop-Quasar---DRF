@@ -18,7 +18,7 @@ class PaymentMethod(models.Model):
 
     class Meta:
         verbose_name = 'Способ оплаты'
-        verbose_name_plural = 'Способы оплаты'
+        verbose_name_plural = '3.3 Способы оплаты'
         ordering = ('order',)
 
 
@@ -27,7 +27,7 @@ class Order(models.Model):
     name = models.CharField('ФИО покупателя', max_length=100, db_index=True)
     phone = models.CharField('Телефон покупателя', max_length=20)
     email = models.EmailField('Email покупателя', null=True, blank=True)
-    region = models.CharField('Область доставки', max_length=200)
+    region = models.CharField('Область', max_length=200)
     city = models.CharField('Город', max_length=200)
     address = models.CharField('Адрес', max_length=200)
     order_sum = models.DecimalField('Общая сумма заказа', max_digits=15, decimal_places=0, null=True, blank=True)
@@ -46,7 +46,7 @@ class Order(models.Model):
 
     class Meta:
         verbose_name = 'Заказ'
-        verbose_name_plural = 'Заказы'
+        verbose_name_plural = '3.1 Заказы'
         ordering = ('-created',)
 
 
@@ -81,6 +81,6 @@ class CallBack(models.Model):
 
     class Meta:
         verbose_name = 'Заявка'
-        verbose_name_plural = 'Заявки (обратный звонок)'
+        verbose_name_plural = '3.2 Заявки (обратный звонок)'
         ordering = ('-date',)
 

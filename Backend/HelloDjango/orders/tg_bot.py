@@ -1,8 +1,15 @@
 import telebot
 from .models import OrderItem
+from shop_settings.models import TelegramBot
 
-bot = telebot.TeleBot('1587261399:AAF_VbkxIue05PA6JnkNYAHvXyH9oISwuU8')
-chat_id = '-1001374586109'
+bot_settings = TelegramBot.objects.last()
+
+# bot = telebot.TeleBot('1587261399:AAF_VbkxIue05PA6JnkNYAHvXyH9oISwuU8')
+# chat_id = '-1001374586109'
+#
+if bot_settings:
+    bot = telebot.TeleBot(bot_settings.token)
+    chat_id = bot_settings.chat_id
 
 
 def tg_send_call_back(callback):
@@ -13,7 +20,10 @@ def tg_send_call_back(callback):
            f'Имя: {name} \n' \
            f'Телефон: {phone} \n'
 
-    bot.send_message(chat_id, text)
+    try:
+        bot.send_message(chat_id, text)
+    except:
+        return
 
 
 def tg_send_order(order):
@@ -43,4 +53,7 @@ def tg_send_order(order):
 
         text += text_order
 
-    bot.send_message(chat_id, text=text)
+    try:
+        bot.send_message(chat_id, text=text)
+    except:
+        return

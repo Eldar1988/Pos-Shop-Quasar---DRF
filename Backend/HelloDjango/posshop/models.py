@@ -5,9 +5,12 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 class Info(models.Model):
     """Основная информация"""
+    site_url = models.URLField('Адрес вашего магазина', null=True, blank=True,
+                               help_text='Например: https://shop.kz (без слэша / в конце)')
+    name = models.CharField('Название магазина', max_length=50, null=True, blank=True)
     logo = ThumbnailerImageField('Логотип', upload_to='site/', resize_source={'size': (400, 400), 'crop': 'scale'})
     title = models.CharField('Заголовок сайта', max_length=255, help_text='Будет отображаться на главной + title сайта')
-    description = models.TextField('Краткое описание компании', max_length=200, help_text='до 200 символов')
+    description = models.TextField('Краткое описание компании', max_length=300, help_text='до 300 символов')
     info = RichTextUploadingField('Полное описание компании')
 
     def __str__(self):
@@ -15,7 +18,7 @@ class Info(models.Model):
 
     class Meta:
         verbose_name = 'Информация о магазине'
-        verbose_name_plural = 'Информация о магазине'
+        verbose_name_plural = '1.1 Информация о магазине'
 
 
 class Page(models.Model):
@@ -33,7 +36,7 @@ class Page(models.Model):
 
     class Meta:
         verbose_name = 'Информационная страница'
-        verbose_name_plural = 'Информационные страницы'
+        verbose_name_plural = '1.4 Информационные страницы'
         ordering = ('order',)
 
 
@@ -65,7 +68,7 @@ class Contacts(models.Model):
 
     class Meta:
         verbose_name = 'Контакт'
-        verbose_name_plural = 'Контакты'
+        verbose_name_plural = '1.2 Контакты'
 
 
 class Driver(models.Model):
@@ -122,7 +125,7 @@ class Slider(models.Model):
 
     class Meta:
         verbose_name = 'Слайдeр'
-        verbose_name_plural = 'Слайдeр'
+        verbose_name_plural = '1.5 Слайдeр'
 
 
 class Slide(models.Model):
@@ -145,7 +148,7 @@ class Slide(models.Model):
 
     class Meta:
         verbose_name = 'Слайд'
-        verbose_name_plural = 'Слайды'
+        verbose_name_plural = '1.6 Слайды'
         ordering = ('order',)
 
 
@@ -163,7 +166,7 @@ class Banner(models.Model):
 
     class Meta:
         verbose_name = 'Баннер'
-        verbose_name_plural = 'Баннеры'
+        verbose_name_plural = '1.7 Баннеры'
 
 
 class ShopReview(models.Model):
@@ -182,5 +185,39 @@ class ShopReview(models.Model):
 
     class Meta:
         verbose_name = 'Отзыв о магазине'
-        verbose_name_plural = 'Отзывы о магазине'
+        verbose_name_plural = '1.9 Отзывы о магазине'
         ordering = ('-pub_date',)
+
+
+class Benefit(models.Model):
+    """Преимущества магазина"""
+    title = models.CharField('Заголовок преимущества', max_length=100)
+    icon = models.CharField('Иконка', max_length=100, help_text='Иконки тут https://materialdesignicons.com/')
+    text = models.TextField('Описание', max_length=300, help_text='До 300 символов')
+    order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Преимущество'
+        verbose_name_plural = '1.3 Преимущества'
+        ordering = ('order',)
+
+
+class QuestionAndAnswer(models.Model):
+    """Вопросы и ответы"""
+    question = models.CharField('Вопрос', max_length=255)
+    answer = RichTextUploadingField('Ответ')
+    order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
+
+    def __str__(self):
+        return self.question
+
+    class Meta:
+        verbose_name = 'Вопрос и ответ'
+        verbose_name_plural = '1.8 Вопросы и ответы'
+        ordering = ('order',)
+
+
+

@@ -39,6 +39,39 @@ export default {
   preFetch({store, currentRoute}) {
     let price = 2000
     return store.dispatch('fetchBrandData', currentRoute.params.slug)
+  },
+  meta() {
+    let brand = this.$store.getters.getBrandDetail
+    let siteTitle = this.$store.getters.getCompanyInfo.name
+    return {
+      title: `${brand.title} | ${siteTitle}`,
+      meta: {
+        description: {
+          name: "description",
+          content: brand.description,
+        },
+        ogType: {
+          property: "og:type",
+          content: "website",
+        },
+        ogTitle: {
+          property: "og:title",
+          content: `${brand.title} | ${siteTitle}`,
+        },
+        ogUrl: {
+          property: "og:url",
+          content: `${this.$store.getters.getCompanyInfo.site_url}/brand/${brand.slug}`,
+        },
+        ogDescription: {
+          property: "og:description",
+          content: brand.description,
+        },
+        ogImage: {
+          property: "og:image",
+          content: brand.image
+        }
+      }
+    }
   }
 }
 </script>

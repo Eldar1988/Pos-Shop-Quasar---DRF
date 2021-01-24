@@ -19,7 +19,7 @@
               label="Добавить в корзину"
               size="sm"
               unelevated
-              color="positive"
+              color="accent"
               class="q-mt-sm border-radius-6 text-bold"
               @click="addToCart(product)"
             />

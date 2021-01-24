@@ -8,7 +8,8 @@
         <q-breadcrumbs-el :label="productData.product.title"/>
       </q-breadcrumbs>
     </section>
-
+    <script type="application/ld+json" v-html="schema"></script>
+    <script type="application/ld+json" v-html="navigationSchema"></script>
     <!--    Product Detail   -->
     <article>
       <div class="product-detail-wrapper q-mt-sm">
@@ -18,6 +19,7 @@
             :images="productData.product.images"
             :image="productData.product.full_image"
             :title="productData.product.title"
+            :first-image-contain="productData.product.image_contain"
           />
           <!--          xxxxx   -->
         </div>
@@ -31,7 +33,7 @@
           </div>
           </div>
           <!--          Product price   -->
-          <div class="product-info-section">
+          <div v-if="productData.product.price" class="product-info-section">
             <p class="product-detail-price text-positive text-bold">
               {{ productData.product.price|formatPrice }}
               <q-icon name="mdi-currency-kzt" class="icon-wrapper" size="24px"/>
@@ -161,7 +163,7 @@
               label="Отзывы"
               class="grey-border border-radius-6 text-center text-bold"
             >
-              <pos-product-reviews :reviews="productData.product.reviews" :productId="productData.product.id"/>
+              <pos-product-reviews :reviews="productData.product.reviews" :productId="`${productData.product.id}`"/>
             </q-expansion-item>
           </div>
           <!--          xxxxx   -->
@@ -212,14 +214,28 @@
     </article>
     <q-separator inset="" class="q-mt-xl"/>
     <!--    xxxxx   -->
+
+<!--    Videos   -->
     <section v-if="productData.product.video" class="section q-pa-sm">
-      <pos-section-title title="Видео обзор"/>
+      <pos-section-title title="Видео"/>
       <q-video
         :ratio="this.$q.platform.is.mobile ? 16/9 : 16/6"
         :src="`https://www.youtube.com/embed/${productData.product.video}`"
         class="border-radius-6 q-mt-lg"
       />
+      <div
+        v-for="video in productData.product.videos"
+        :key="video.id"
+      >
+        <q-video
+          :ratio="16/9"
+          :src="`https://www.youtube.com/embed/${video.video}`"
+          class="border-radius-6 q-mt-md"
+        />
+      </div>
+
     </section>
+<!--    xxxxx   -->
     <!--    More products   -->
     <section v-if="productData.products.length > 0" class="q-mt-xl q-py-lg bg-grey-2">
       <pos-section-title title="Смотрите также:"/>
@@ -267,7 +283,7 @@ export default {
       lastSeanProducts: [],
       quantity: 1,
       cartDialog: false,
-      productInWishList: false
+      productInWishList: false,
     }
   },
   computed: {
@@ -277,7 +293,68 @@ export default {
     getSaleSum: function () {
       let sum = this.productData.product.old_price - this.productData.product.price
       return `экономия ${sum} тенге`
+    },
+    navigationSchema() {
+      return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+          "@type": "ListItem",
+          "position": 1,
+          "name": this.$store.getters.getProductDetailData.product.category.title,
+          "item": `${this.$store.getters.getCompanyInfo.site_url}/shop/${this.$store.getters.getProductDetailData.product.category.slug}`
+        },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": this.$store.getters.getProductDetailData.product.title,
+            "item": `${this.$store.getters.getCompanyInfo.site_url}/product/${this.$store.getters.getProductDetailData.product.slug}`
+          }]
+      }
+    },
+    schema() {
+      return {
+        "@context": "https://schema.org/",
+        "@type": "Product",
+        "name": this.$store.getters.getProductDetailData.product.title,
+        "image": [
+          this.$store.getters.getProductDetailData.product.full_image
+        ],
+        "description": this.$store.getters.getProductDetailData.product.description,
+        "sku": this.$store.getters.getProductDetailData.product.article,
+        "mpn": "",
+        "brand": {
+          "@type": "Brand",
+          "name": this.$store.getters.getProductDetailData.product.brand.title
+        },
+        "review": {
+          "@type": "Review",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": this.$store.getters.getProductDetailData.product.reviews[0] !== undefined ? this.$store.getters.getProductDetailData.product.reviews[0].rating : '5',
+            "bestRating": "5"
+          },
+          "author": {
+            "@type": "Person",
+            "name": this.$store.getters.getProductDetailData.product.reviews[0] !== undefined ? this.$store.getters.getProductDetailData.product.reviews[0].name : 'Александр'
+          }
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": this.$store.getters.getProductDetailData.product.rating,
+          "reviewCount": this.$store.getters.getProductDetailData.product.reviews.length
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": `${this.$store.getters.getCompanyInfo.site_url}/product/${this.productData.product.slug}`,
+          "priceCurrency": "KZT",
+          "price": this.$store.getters.getProductDetailData.product.price,
+          "itemCondition": "https://schema.org/UsedCondition",
+          "availability": "https://schema.org/InStock"
+        }
+      }
     }
+
   },
   mounted() {
     this.setLastSeanProducts()
@@ -336,12 +413,11 @@ export default {
     addToWishList(product) {
       addToWishListFunc(product)
       this.checkWishList()
+      this.$root.$emit('updateWishList')
     },
     checkWishList() {
-      console.log('1')
       this.productInWishList = false
       if (localStorage.getItem('wishList') !== null) {
-        console.log('cherck')
         let wishList = JSON.parse(localStorage.wishList)
         wishList.forEach((item) => {
           if (item.id === this.productData.product.id) {
@@ -353,6 +429,39 @@ export default {
   },
   preFetch({store, currentRoute}) {
     return store.dispatch('fetchProductDetailData', currentRoute.params.slug)
+  },
+  meta() {
+    let data = this.$store.getters.getProductDetailData.product
+    let siteTitle = this.$store.getters.getCompanyInfo.name
+    return {
+      title: `${data.title} | ${siteTitle}`,
+      meta: {
+        description: {
+          name: "description",
+          content: data.description,
+        },
+        ogType: {
+          property: "og:type",
+          content: "product",
+        },
+        ogTitle: {
+          property: "og:title",
+          content: `${data.title} | ${siteTitle}`,
+        },
+        ogUrl: {
+          property: "og:url",
+          content: `${this.$store.getters.getCompanyInfo.site_url}/product/${this.productData.product.slug}`,
+        },
+        ogDescription: {
+          property: "og:description",
+          content: data.description,
+        },
+        ogImage: {
+          property: "og:image",
+          content: data.full_image
+        }
+      }
+    }
   }
 
 }
@@ -362,6 +471,7 @@ export default {
 .product-detail-wrapper
   display: grid
   grid-template-columns: 1fr 1fr
+  align-items: center
 
 .product-header-text
   font-size: 22px

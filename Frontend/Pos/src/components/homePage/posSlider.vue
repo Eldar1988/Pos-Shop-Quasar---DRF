@@ -38,7 +38,7 @@
               <q-btn
                 v-if="slide.btn_text"
                 :label="slide.btn_text"
-                color="negative"
+                color="accent"
                 class="text-weight-bold q-my-sm q-px-md border-radius-6"
                 icon-right="keyboard_arrow_right"
                 :to="slide.url"

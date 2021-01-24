@@ -31,6 +31,39 @@ export default {
   },
   preFetch({store, currentRoute}) {
     return store.dispatch('fetchLabelData', currentRoute.params.slug)
+  },
+  meta() {
+    let label = this.$store.getters.getLabelDetail
+    let siteTitle = this.$store.getters.getCompanyInfo.name
+    return {
+      title: `${label.title} | ${siteTitle}`,
+      meta: {
+        description: {
+          name: "description",
+          content: label.description,
+        },
+        ogType: {
+          property: "og:type",
+          content: "website",
+        },
+        ogTitle: {
+          property: "og:title",
+          content: `${label.title} | ${siteTitle}`,
+        },
+        ogUrl: {
+          property: "og:url",
+          content: `${this.$store.getters.getCompanyInfo.site_url}/brand/${label.slug}`,
+        },
+        ogDescription: {
+          property: "og:description",
+          content: label.description,
+        },
+        ogImage: {
+          property: "og:image",
+          content: `${this.$store.getters.getCompanyInfo.logo}`
+        }
+      }
+    }
   }
 }
 </script>

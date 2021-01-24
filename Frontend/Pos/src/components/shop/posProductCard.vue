@@ -17,7 +17,7 @@
       <!--      Image   -->
       <q-img
         :src="product.image"
-        contain
+        :contain="!product.image_contain"
         class="product-card-image"
         title="Подробнее"
       >

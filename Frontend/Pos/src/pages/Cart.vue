@@ -1,6 +1,10 @@
 <template>
   <div>
     <q-page>
+      <q-breadcrumbs class="q-pa-sm q-mt-md">
+        <q-breadcrumbs-el icon="home" to="/"/>
+        <q-breadcrumbs-el label="Корзина"/>
+      </q-breadcrumbs>
       <pos-section-title class="q-mt-lg" title="Ваша корзина"/>
       <section v-if="products.length > 0" class="q-px-sm q-mt-lg">
         <div class="cart-wrapper">
@@ -88,6 +92,12 @@ export default {
       })
       this.cartSum = sum
       this.cartLen = cartLen
+    }
+  },
+  meta() {
+    let siteTitle = this.$store.getters.getCompanyInfo.name
+    return {
+      title: `Корзина | ${siteTitle}`,
     }
   }
 }

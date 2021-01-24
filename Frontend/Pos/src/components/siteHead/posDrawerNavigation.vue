@@ -121,12 +121,30 @@
         clickable
         v-ripple
         class="border-bottom"
+        exact-active-class="text-primary"
+        to="/about"
       >
         <q-item-section avatar>
           <q-icon name="store"/>
         </q-item-section>
         <q-item-section class="text-subtitle2 text-weight-bold">
           О магазине
+        </q-item-section>
+      </q-item>
+      <!--      xxxxx   -->
+      <!--      Questions   -->
+      <q-item
+        clickable
+        v-ripple
+        class="border-bottom"
+        exact-active-class="text-primary"
+        to="/questions"
+      >
+        <q-item-section avatar>
+          <q-icon name="question_answer"/>
+        </q-item-section>
+        <q-item-section class="text-subtitle2 text-weight-bold">
+          Вопросы и ответы
         </q-item-section>
       </q-item>
       <!--      xxxxx   -->

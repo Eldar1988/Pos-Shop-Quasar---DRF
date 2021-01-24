@@ -68,6 +68,39 @@ export default {
   },
   preFetch({store, currentRoute}) {
     return store.dispatch('fetchCategoryData', currentRoute.params.slug)
+  },
+  meta() {
+    let category = this.$store.getters.getCategoryDetail
+    let siteTitle = this.$store.getters.getCompanyInfo.name
+    return {
+      title: `${category.title} | ${siteTitle}`,
+      meta: {
+        description: {
+          name: "description",
+          content: category.description,
+        },
+        ogType: {
+          property: "og:type",
+          content: "website",
+        },
+        ogTitle: {
+          property: "og:title",
+          content: `${category.title} | ${siteTitle}`,
+        },
+        ogUrl: {
+          property: "og:url",
+          content: `${this.$store.getters.getCompanyInfo.site_url}/shop/${category.slug}`,
+        },
+        ogDescription: {
+          property: "og:description",
+          content: category.description,
+        },
+        ogImage: {
+          property: "og:image",
+          content: category.image
+        }
+      }
+    }
   }
 }
 </script>

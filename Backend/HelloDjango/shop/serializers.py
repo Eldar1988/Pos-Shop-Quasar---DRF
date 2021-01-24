@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Brand, Label, Product, Image, Review
+from .models import Category, Brand, Label, Product, Image, Review, Video
 from django.conf import settings
 
 
@@ -58,7 +58,7 @@ class ProductListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'rating', 'slug')
+        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'rating', 'slug', 'image_contain')
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -131,6 +131,13 @@ class LabelDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class VideoSerializer(serializers.ModelSerializer):
+    """Дополнительное виедо товара"""
+    class Meta:
+        model = Video
+        exclude = ('order', 'product')
+
+
 class ProductDetailSerializer(serializers.ModelSerializer):
     """Товар (детали)"""
     full_image = serializers.SerializerMethodField('get_full_image_url')
@@ -140,6 +147,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     labels = LabelListSerializer(many=True, read_only=True)
     reviews = ReviewSerializer(many=True, read_only=True)
     images = ImageSerializer(many=True, read_only=True)
+    videos = VideoSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
         return f'{settings.APP_PATH}{obj.image.url}'

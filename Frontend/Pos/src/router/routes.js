@@ -80,9 +80,31 @@ const routes = [
     path: '/contacts',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Contacts') }
+      { path: '', component: () => import('pages/Contacts.vue') }
     ]
   },
+  {
+    path: '/about',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/About.vue') }
+    ]
+  },
+  {
+    path: '/questions',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Questions.vue') }
+    ]
+  },
+  {
+    path: '/search',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/SearchPage.vue') }
+    ]
+  },
+
 
   // Always leave this as last one,
   // but you can also remove it

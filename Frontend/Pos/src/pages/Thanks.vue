@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center column bg-grey-2">
+  <q-page class="flex flex-center column">
     <div class="text-center">
       <pos-page-header title="Спасибо!"/>
       <q-card
@@ -30,6 +30,14 @@ export default {
       this.thanksText = '<p>Ваша заявка принята<br>Мы свяжемся с Вами в ближайшее время</p>'
     } else {
       this.thanksText = '<p>Ваш заказ принят в обработку<br>Мы свяжемся с Вами в ближайшее время</p>'
+    }
+  },
+  mounted() {
+    window.scrollTo(0,0)
+  },
+  meta() {
+    return {
+      title: `Спасибо!`,
     }
   }
 }

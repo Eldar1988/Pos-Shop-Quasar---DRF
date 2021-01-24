@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Info, Page, Contacts, Driver, Social, Client, Slider, Banner, Slide, ShopReview, PrivacyPolicy
-
+from .models import Info, Page, Contacts, Driver, Social, Client, Slider, Banner, Slide, ShopReview, PrivacyPolicy, \
+    Benefit, QuestionAndAnswer
 
 admin.site.register(Info)
 admin.site.register(Page)
@@ -15,8 +15,8 @@ admin.site.register(PrivacyPolicy)
 
 @admin.register(ShopReview)
 class ShopReviewAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'name', 'rating', 'order', )
-    list_editable = ('name', 'rating', 'order', )
+    list_display = ('get_image', 'name', 'rating', 'order',)
+    list_editable = ('name', 'rating', 'order',)
     save_as = True
     save_on_top = True
 
@@ -68,5 +68,23 @@ class BannerAdmin(admin.ModelAdmin):
     get_image.short_description = 'Баннер'
 
 
-admin.site.site_title = 'Shop'
-admin.site.site_header = 'Shop - администрирование'
+@admin.register(Benefit)
+class BenefitAdmin(admin.ModelAdmin):
+    list_display = ('title', 'icon', 'order')
+    list_editable = ('icon', 'order')
+
+    save_as = True
+    save_on_top = True
+
+
+@admin.register(QuestionAndAnswer)
+class QuestionAndAnswerAdmin(admin.ModelAdmin):
+    list_display = ('question', 'order')
+    list_editable = ('order',)
+
+    save_as = True
+    save_on_top = True
+
+
+admin.site.site_title = 'JS Shop v1.0.0'
+admin.site.site_header = 'JS Shop v1.0.0 - администрирование'

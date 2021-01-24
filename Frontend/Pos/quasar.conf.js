@@ -128,7 +128,7 @@ cfg.module.rules.push({
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#523ee8',
+        theme_color: '#ffffff',
         icons: [
           {
             src: 'icons/icon-128x128.png',
