@@ -38,7 +38,7 @@
         >
           <template v-slot:header>
             <q-item-section avatar>
-              <q-img :src="category.image" class="circle-image"/>
+              <q-img :src="category.image" class="circle-image" img-class="circle-image"/>
 
             </q-item-section>
             <q-item-section><span class="text-subtitle2 text-weight-bold text-dark">{{ category.title }}</span>
@@ -84,7 +84,7 @@
           exact-active-class="text-primary"
         >
           <q-item-section avatar>
-            <q-img :src="category.image" class="circle-image"/>
+            <q-img :src="category.image" class="circle-image" img-class="circle-image" contain />
           </q-item-section>
           <q-item-section class="text-subtitle2 text-weight-bold text-dark">{{ category.title }}</q-item-section>
 
@@ -145,6 +145,22 @@
         </q-item-section>
         <q-item-section class="text-subtitle2 text-weight-bold">
           Вопросы и ответы
+        </q-item-section>
+      </q-item>
+      <!--      xxxxx   -->
+      <!--      Questions   -->
+      <q-item
+        clickable
+        v-ripple
+        class="border-bottom"
+        exact-active-class="text-primary"
+        to="/files"
+      >
+        <q-item-section avatar>
+          <q-icon name="cloud_download"/>
+        </q-item-section>
+        <q-item-section class="text-subtitle2 text-weight-bold">
+          Файлы
         </q-item-section>
       </q-item>
       <!--      xxxxx   -->

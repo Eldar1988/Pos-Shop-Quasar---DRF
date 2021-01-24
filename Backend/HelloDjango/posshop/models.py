@@ -73,16 +73,18 @@ class Contacts(models.Model):
 
 class Driver(models.Model):
     """Драйвера"""
-    title = models.CharField('Название драйвера', max_length=255)
-    description = models.TextField('Описание драйвера')
-    file = models.FileField('Файл', upload_to='drivers/')
+    title = models.CharField('Название файла', max_length=255)
+    description = models.TextField('Описание файла')
+    file = models.FileField('Файл', upload_to='files/')
+    order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = 'Драйвер'
-        verbose_name_plural = 'Драйвера'
+        verbose_name = 'Файл'
+        verbose_name_plural = 'Файлы'
+        ordering = ('order',)
 
 
 class Social(models.Model):

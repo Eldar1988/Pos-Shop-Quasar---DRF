@@ -7,5 +7,6 @@ urlpatterns = [
     path('info_page/<slug:slug>/', views.InfoPageDetailView.as_view()),
     path('about/', views.AboutShopDetailView.as_view()),
     path('questions/', views.QuestionsView.as_view()),
+    path('files/', views.DriversView.as_view()),
     path('', views.MainInfoView.as_view()),
 ]

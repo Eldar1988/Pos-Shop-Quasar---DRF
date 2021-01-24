@@ -2,10 +2,11 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import viewsets
 
-from .models import Info, Page, Contacts, Social, Client, Slider, Banner, ShopReview, PrivacyPolicy, Benefit, QuestionAndAnswer
+from .models import Info, Page, Contacts, Social, Client, Slider, Banner, ShopReview, PrivacyPolicy, Benefit, \
+    QuestionAndAnswer, Driver
 from .serializers import ShortInfoSerializer, PagesListSerializer, ContactInfoSerializer, SocialsSerializer, \
     ClientsSerializer, SliderSerializer, BannerSerializer, ShopReviewSerializer, PrivacyPolicySerializer, \
-    PageDetailSerializer, InfoSerializer, BenefitSerializer, QuestionAndAnswerSerializer
+    PageDetailSerializer, InfoSerializer, BenefitSerializer, QuestionAndAnswerSerializer, DriversSerializer
 
 from shop.models import Category, Brand, Product
 from shop.serializers import CategoryListSerializer, BrandListSerializer, ProductListSerializer
@@ -104,10 +105,16 @@ class BannersView(viewsets.ReadOnlyModelViewSet):
 
 class QuestionsView(APIView):
     """Вопросы и ответы"""
+
     def get(self, request):
         questions = QuestionAndAnswer.objects.all()
         serializer = QuestionAndAnswerSerializer(questions, many=True)
         return Response(serializer.data)
 
 
-
+class DriversView(APIView):
+    """Файлы"""
+    def get(self, request):
+        files = Driver.objects.all()
+        serializer = DriversSerializer(files, many=True)
+        return Response(serializer.data)

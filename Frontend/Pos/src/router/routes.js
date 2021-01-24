@@ -104,6 +104,13 @@ const routes = [
       { path: '', component: () => import('pages/SearchPage.vue') }
     ]
   },
+  {
+    path: '/files',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Files.vue') }
+    ]
+  },
 
 
   // Always leave this as last one,

@@ -7,7 +7,6 @@ from .models import Info, Page, Contacts, Driver, Social, Client, Slider, Banner
 admin.site.register(Info)
 admin.site.register(Page)
 admin.site.register(Contacts)
-admin.site.register(Driver)
 admin.site.register(Social)
 admin.site.register(Slider)
 admin.site.register(PrivacyPolicy)
@@ -77,6 +76,15 @@ class BenefitAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
+@admin.register(Driver)
+class DriverAdmin(admin.ModelAdmin):
+    list_display = ('title', 'order')
+    list_editable = ('order',)
+
+    save_as = True
+    save_on_top = True
+
+
 @admin.register(QuestionAndAnswer)
 class QuestionAndAnswerAdmin(admin.ModelAdmin):
     list_display = ('question', 'order')
@@ -86,5 +94,5 @@ class QuestionAndAnswerAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
-admin.site.site_title = 'JS Shop v1.0.0'
-admin.site.site_header = 'JS Shop v1.0.0 - администрирование'
+admin.site.site_title = 'JS Shop v0.0.1'
+admin.site.site_header = 'JS Shop v0.0.1 - администрирование'

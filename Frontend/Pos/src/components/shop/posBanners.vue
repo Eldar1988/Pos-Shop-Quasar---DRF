@@ -53,23 +53,12 @@ export default {
   },
   methods: {
     async loadBanners() {
-      try {
         this.banners = await this.$axios.get(`${this.$store.getters.getServerURL}/banners/`)
           .then(({data}) => {
             this.reloadBannersStatus = false
             return data
           })
       }
-      catch (e) {
-        this.reloadBannersStatus = true
-        this.reloadBanners()
-      }
-    },
-    reloadBanners() {
-      let reload = setInterval(() => {
-        this.reloadBannersStatus ? this.loadBanners() : clearInterval(reload)
-      }, 5000)
-    }
   }
 }
 </script>
