@@ -86,5 +86,5 @@ class QuestionAndAnswerAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
-admin.site.site_title = 'JS Shop v0.0.1'
-admin.site.site_header = 'JS Shop v0.0.1 - администрирование'
+admin.site.site_title = 'JS Shop v1.0.0'
+admin.site.site_header = 'JS Shop v1.0.0 - администрирование'
