@@ -9,7 +9,8 @@ class Category(models.Model):
                                verbose_name='Родительская категория', related_name='child')
     title = models.CharField('Название категории', max_length=255)
     label = models.CharField('Ярлык', max_length=50, help_text='Например: "Скидки до 50%"', null=True, blank=True)
-    description = models.TextField('Описание категории', max_length=300, help_text='Не более 300 символов')
+    description = models.TextField('Описание категории', max_length=300, help_text='Не более 300 символов',
+                                   null=True, blank=True)
     full_description = RichTextUploadingField('Полное описание', null=True, blank=True)
     image = ThumbnailerImageField('Изображение', upload_to='categories/',
                                   resize_source={'size': (300, 300), 'crop': 'scale'},
@@ -28,7 +29,8 @@ class Category(models.Model):
 
 class Brand(models.Model):
     title = models.CharField('Название бренда', max_length=255)
-    description = models.TextField('Описание бренда', max_length=200, help_text='Не болле 200 символов')
+    description = models.TextField('Описание бренда', max_length=200, help_text='Не болле 200 символов',
+                                   null=True, blank=True)
     full_description = RichTextUploadingField('Полное описание', null=True, blank=True)
     image = ThumbnailerImageField('Логотип', upload_to='brands/',
                                   resize_source={'size': (300, 300), 'crop': 'scale'},
@@ -90,6 +92,7 @@ class Product(models.Model):
     public = models.BooleanField('Опубликовать', default=True)
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
+    views = models.IntegerField('Кол-во просмотров', default=0)
     pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
     update = models.DateTimeField('Обновлено', auto_now=True)
 

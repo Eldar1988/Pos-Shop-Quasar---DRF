@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     async loadBanners() {
-        this.banners = await this.$axios.get(`${this.$store.getters.getServerURL}/banners/`)
+        this.banners = await this.$axios.get(`${this.$store.getters.getServerURL}/images/`)
           .then(({data}) => {
             this.reloadBannersStatus = false
             return data

@@ -13,7 +13,6 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-import cloudinary
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -29,9 +28,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['192.168.0.155']
 ALLOWED_HOSTS = ['192.168.0.199']
-
 APP_PATH = 'http://192.168.0.199:8000'
-
 
 # Application definition
 
@@ -178,9 +175,15 @@ CACHES = {
     }
 }
 
-CLOUDINARY_URL = 'https://res.cloudinary.com/space-developers/'
-cloudinary.config(
-  cloud_name="space-developers",
-  api_key="432633785332378",
-  api_secret="HS-iGAgZl1FWxAebV_LfedLMaD8"
-)
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'elfarych@yandex.kz'
+# EMAIL_PASSWORD = 'Eldar198804'
+# EMAIL_USE_TLS = True
+#
+# SERVER_EMAIL = EMAIL_HOST_USER
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+

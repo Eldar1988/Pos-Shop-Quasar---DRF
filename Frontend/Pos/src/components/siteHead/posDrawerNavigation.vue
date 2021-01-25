@@ -38,8 +38,7 @@
         >
           <template v-slot:header>
             <q-item-section avatar>
-              <q-img :src="category.image" class="circle-image" img-class="circle-image"/>
-
+              <q-img :src="category.image" class="border-radius-6"/>
             </q-item-section>
             <q-item-section><span class="text-subtitle2 text-weight-bold text-dark">{{ category.title }}</span>
             </q-item-section>
@@ -48,11 +47,12 @@
           <q-item
             clickable
             v-ripple
-            class="q-ml-sm border-bottom"
+            class="q-ml-sm border-bottom bg-grey-2"
             :to="`/shop/${category.slug}`"
             exact-active-class="text-primary"
+            :title="category.title"
           >
-            <q-item-section class="text-subtitle2 text-weight-bold text-dark text-center">Все {{
+            <q-item-section class="text-subtitle2 text-weight-bold text-dark">Все {{
                 category.title
               }}
             </q-item-section>
@@ -65,9 +65,10 @@
             class="q-ml-sm border-bottom"
             :to="`/shop/${category.slug}`"
             exact-active-class="text-primary"
+            :title="category.title"
           >
             <q-item-section avatar>
-              <q-img :src="category.image" class="circle-image"/>
+              <q-img :src="category.image" class="border-radius-6"/>
             </q-item-section>
             <q-item-section class="text-dark">{{ category.title }}</q-item-section>
           </q-item>
@@ -82,15 +83,13 @@
           class="border-bottom"
           :to="`/shop/${category.slug}`"
           exact-active-class="text-primary"
+          :title="category.title"
         >
           <q-item-section avatar>
-            <q-img :src="category.image" class="circle-image" img-class="circle-image" contain />
+            <q-img :src="category.image" class="border-radius-6" contain />
           </q-item-section>
           <q-item-section class="text-subtitle2 text-weight-bold text-dark">{{ category.title }}</q-item-section>
-
-
         </q-item>
-
       </div>
       <!--    xxxxx   -->
     </q-list>
@@ -107,6 +106,7 @@
         class="border-bottom text-dark"
         exact-active-class="text-primary"
         to="/"
+        title="Перейти на главную"
       >
         <q-item-section avatar>
           <q-icon name="home"/>
@@ -123,6 +123,7 @@
         class="border-bottom"
         exact-active-class="text-primary"
         to="/about"
+        title="Информация о магазине"
       >
         <q-item-section avatar>
           <q-icon name="store"/>
@@ -139,6 +140,7 @@
         class="border-bottom"
         exact-active-class="text-primary"
         to="/questions"
+        title="Часто задаваемые вопросы и ответы на них"
       >
         <q-item-section avatar>
           <q-icon name="question_answer"/>
@@ -155,6 +157,7 @@
         class="border-bottom"
         exact-active-class="text-primary"
         to="/files"
+        title="Файлы для загрузки"
       >
         <q-item-section avatar>
           <q-icon name="cloud_download"/>
@@ -171,6 +174,7 @@
         class="border-bottom"
         exact-active-class="text-primary"
         to="/contacts"
+        title="Контактная информация"
       >
         <q-item-section avatar>
           <q-icon name="place"/>
@@ -188,6 +192,7 @@
         v-ripple
         class="border-bottom"
         :to="`/info/${page.slug}`"
+        :title="page.title"
       >
         <q-item-section avatar>
           <q-icon name="keyboard_arrow_right"/>

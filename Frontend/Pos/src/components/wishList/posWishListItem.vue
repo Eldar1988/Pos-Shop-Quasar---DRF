@@ -3,23 +3,23 @@
     <article style="padding: 5px">
       <q-card class="border-radius-6 shadow-0 q-pa-sm grey-border">
         <div class="wish-item-wrapper">
-          <div class="cart-item-image">
+          <div class="cart-item-image" style="min-width: 70px;">
             <router-link :to="`/product/${product.slug}`">
-            <img height="70px" width="70px" :src="product.image" style="object-fit: contain" />
+            <img height="70px" width="70px" :src="product.image" style="object-fit: contain; min-width: 70px" />
             </router-link>
           </div>
           <div class="cart-item-title q-ml-sm">
             <router-link :to="`/product/${product.slug}`">
-            <p class="ellipsis text-subtitle1">{{ product.title }}</p>
+            <p class="">{{ product.title }}</p>
             </router-link>
-            <p class="ellipsis text-bold">Цена: {{ product.price|formatPrice }} <q-icon name="mdi-currency-kzt" class="icon-wrapper" /></p>
+            <p class="text-bold q-pt-sm">Цена: {{ product.price|formatPrice }} <q-icon name="mdi-currency-kzt" class="icon-wrapper" /></p>
             <div class="wish-list-item-add-to-cart">
             </div>
             <q-btn
               label="Добавить в корзину"
               size="sm"
               unelevated
-              color="accent"
+              color="positive"
               class="q-mt-sm border-radius-6 text-bold"
               @click="addToCart(product)"
             />

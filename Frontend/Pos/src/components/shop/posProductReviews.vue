@@ -2,7 +2,7 @@
   <div class="q-pa-sm">
     <q-card
       v-if="reviews.length === 0"
-      class="q-px-sm q-py-lg text-weight-regular shadow-0"
+      class="q-px-sm q-py-lg text-weight-regular shadow-0 bg-white"
     >
       Отзывов к данному товару еще нет.
     </q-card>
@@ -26,7 +26,7 @@
     <q-btn
       label="Добавить отзыв"
       icon-right="rate_review"
-      class="text-bold full-width border-radius-6"
+      class="text-bold full-width border-radius-6 q-mt-md"
       unelevated
       color="primary"
       @click="dialog = true"

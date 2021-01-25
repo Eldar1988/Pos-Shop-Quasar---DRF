@@ -37,7 +37,7 @@ class BrandListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Brand
-        exclude = ('description', 'order')
+        exclude = ('description', 'order', 'full_description')
 
 
 class LabelListSerializer(serializers.ModelSerializer):

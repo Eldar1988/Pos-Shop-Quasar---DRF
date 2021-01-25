@@ -95,5 +95,5 @@ export default {
 
 @media screen and (max-width: 800px)
   .scroll-x-products
-    height: 400px
+    height: 420px
 </style>

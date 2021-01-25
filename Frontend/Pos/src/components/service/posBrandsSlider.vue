@@ -1,27 +1,31 @@
 <template>
-  <div class="q-pa-sm" v-if="products">
+  <section class="q-pa-sm section" v-if="brands.length > 5">
     <splide :options="options">
       <splide-slide
-        v-for="product in products"
-        :key="product.id"
+        v-for="brand in brands"
+        :key="brand.id"
       >
-        <pos-product-card :product="product"/>
+        <article>
+          <div class="q-pa-sm border-radius-6">
+            <q-img :src="brand.image" height="50px" contain />
+          </div>
+        </article>
       </splide-slide>
     </splide>
-  </div>
+  </section>
 </template>
 
 <script>
 import {Splide, SplideSlide} from '../../../node_modules/@splidejs/vue-splide';
 import '../../../node_modules/@splidejs/splide/dist/css/themes/splide-sea-green.min.css';
-import PosProductCard from "components/shop/posProductCard";
 
 export default {
-  name: "posHotProductsSlider",
-  components: {
-    PosProductCard,
-    Splide,
-    SplideSlide
+  name: "posBrandsSlider",
+  components: {Splide, SplideSlide},
+  computed: {
+    brands() {
+      return this.$store.getters.getBrands
+    }
   },
   data() {
     return {
@@ -31,13 +35,13 @@ export default {
         gap: '5px',
         type: 'loop',
         arrows: false,
-        perPage: 5,
+        perPage: 6,
         breakpoints: {
           1600: {
-            perPage: 4
+            perPage: 5
           },
           1400: {
-            perPage: 3
+            perPage: 5
           },
           1000: {
             perPage: 3
@@ -49,21 +53,9 @@ export default {
       },
     }
   },
-  computed: {
-    products() {
-      return this.$store.getters.getLatestProducts
-    }
-  }
 }
 </script>
 
-<style lang="sass">
-.splide
-  padding: 0
+<style scoped>
 
-.splide__pagination
-  bottom: -2em
-
-.splide__pagination__page.is-active
-  background: $accent
 </style>

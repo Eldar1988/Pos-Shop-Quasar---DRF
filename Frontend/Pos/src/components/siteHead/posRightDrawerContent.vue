@@ -13,7 +13,7 @@
     <!--    xxxxx   -->
     <!--    Contacts   -->
     <div class="manu-contacts q-py-md q-px-sm full-width">
-      <a :href="`tel:${contacts.phone}`" title="Позвонить">
+      <a :href="`tel:${contacts.phone}`" title="Телефон для консультаций и заказов">
         <q-btn
           :label="contacts.phone"
           class="full-width border-radius-6 text-bold"
@@ -24,7 +24,7 @@
 
         />
       </a>
-      <a :href="`https://wa.me/${contacts.whatsapp}`" title="Позвонить" class="q-mt-sm block">
+      <a :href="`https://wa.me/${contacts.whatsapp}`" title="Номер Whatsapp" class="q-mt-sm block">
         <q-btn
           :label="contacts.whatsapp"
           class="full-width border-radius-6 text-bold"

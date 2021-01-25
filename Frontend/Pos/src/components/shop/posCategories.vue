@@ -13,8 +13,8 @@
         >
           <div class="category-card-wrapper">
             <div>
-              <p class="text-bold q-pt-sm text-left q-pb-sm">{{ category.title }}</p>
-              <p v-if="category.label" class="category-card-label bg-accent text-left border-radius-6 text-bold">{{ category.label }}</p>
+              <p class="text-bold q-pt-sm text-left q-pb-sm text-subtitle1">{{ category.title }}</p>
+              <p v-if="category.label" class="category-card-label bg-accent text-left border-radius-6 ">{{ category.label }}</p>
             </div>
             <div>
           <q-img

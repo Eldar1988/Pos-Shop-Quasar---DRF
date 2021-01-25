@@ -45,7 +45,7 @@
     <div class="product-meta">
       <!--      Product title   -->
       <router-link :to="`/product/${product.slug}/`" title="Подробнее">
-        <p class="product-card-title text-center">
+        <p class="product-card-title text-center ellipsis-2-lines">
           {{ product.title }}
         </p>
       </router-link>
@@ -69,7 +69,7 @@
           class="text-bold full-width border-radius-6"
           unelevated
           @click="addToCart(product, 1, true)"
-        />
+        ><q-tooltip>Покупка в один клик</q-tooltip></q-btn>
         <q-btn
           color="negative"
           size="sm"
@@ -77,7 +77,7 @@
           class="text-bold full-width border-radius-6"
           unelevated outline
           @click="addToCart(product, 1, false)"
-        />
+        ><q-tooltip>Добавить товар в корзину</q-tooltip></q-btn>
       </div>
     </div>
 
@@ -165,7 +165,7 @@ export default {
   padding: 5px 5px 35px
 
 .product-card-title
-  font-size: 18px
+  font-size: 16px
 
 .product-card-price
   font-size: 18px

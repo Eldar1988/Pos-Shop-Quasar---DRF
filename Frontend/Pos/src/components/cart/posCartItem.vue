@@ -1,16 +1,16 @@
 <template>
   <div>
     <article>
-      <q-card class="border-radius-6 shadow-0 q-mt-sm q-pa-sm grey-border">
+      <q-card class="border-radius-6 shadow-0 q-mb-sm q-pa-sm grey-border">
         <div class="cart-item-wrapper">
-          <div class="cart-item-image">
+          <div class="cart-item-image" style="min-width: 70px;">
             <router-link :to="`/product/${product.slug}`">
-              <img height="70px" width="70px" :src="product.image" style="object-fit: contain"/>
+              <img height="70px" width="70px" :src="product.image" style="object-fit: contain; min-width: 70px"/>
             </router-link>
           </div>
           <div class="cart-item-title q-ml-sm">
             <router-link :to="`/product/${product.slug}`">
-              <p class="ellipsis text-subtitle1">{{ product.title }}</p>
+              <p class="">{{ product.title }}</p>
             </router-link>
             <p class="ellipsis text-bold">Цена: {{ product.price|formatPrice }}
               <q-icon name="mdi-currency-kzt" class="icon-wrapper"/>

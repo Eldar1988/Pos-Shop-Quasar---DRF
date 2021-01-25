@@ -8,20 +8,27 @@
       <pos-section-title class="q-mt-lg" title="Ваша корзина"/>
       <section v-if="products.length > 0" class="q-px-sm q-mt-lg">
         <div class="cart-wrapper">
+
+          <!--          Cart items   -->
           <div class="cart-items ">
             <pos-cart-item
               v-for="product in products"
               :key="product.id"
               :product="product"
             />
-            <p class="text-subtitle1 text-bold q-pt-sm">Всего товаров: {{ cartLen }}</p>
-            <p class="text-subtitle1 text-bold">На сумму: {{ cartSum|formatPrice }}
-              <q-icon name="mdi-currency-kzt" class="icon-wrapper"/>
-            </p>
+            <div class="bg-grey-3 q-px-sm border-radius-6 q-py-md">
+              <p class="text-subtitle1 text-bold">Всего товаров: {{ cartLen }}</p>
+              <p class="text-subtitle1 text-bold">На сумму: {{ cartSum|formatPrice }}
+                <q-icon name="mdi-currency-kzt" class="icon-wrapper"/>
+              </p>
+            </div>
           </div>
+          <!--          xxxxx   -->
+          <!--          Cart form   -->
           <div class="cart-form">
             <pos-checkout-form :cartSum="cartSum" :cartLen="cartLen" :products="products"/>
           </div>
+          <!--          xxxxx   -->
         </div>
       </section>
       <!--    Empty cart alert   -->
@@ -80,7 +87,11 @@ export default {
   },
   methods: {
     getCartProducts() {
-      this.products = JSON.parse(localStorage.cart)
+      if (localStorage.getItem('cart') !== null) {
+        this.products = JSON.parse(localStorage.cart)
+      } else {
+        return null
+      }
     },
     getCartSum() {
       let sum = 0

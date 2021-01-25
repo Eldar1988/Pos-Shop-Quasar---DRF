@@ -94,9 +94,9 @@ class ProductAdmin(admin.ModelAdmin):
         ('info',),
         ('characteristic',),
         ('video', 'rating', 'order'),
-        ('pub_date', 'update')
+        ('pub_date', 'update', 'views')
     ]
-    readonly_fields = ('get_image', 'get_full_image', 'pub_date', 'update')
+    readonly_fields = ('get_image', 'get_full_image', 'pub_date', 'update', 'views')
 
     save_as = True
     save_on_top = True

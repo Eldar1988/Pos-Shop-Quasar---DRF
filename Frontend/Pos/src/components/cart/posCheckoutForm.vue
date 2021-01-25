@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-sm">
+  <div class="">
 
     <q-stepper
       ref="stepper"

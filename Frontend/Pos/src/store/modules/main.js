@@ -20,11 +20,13 @@ export default {
       state.companyInfo = data.companyInfo
       state.homeSlider = data.slider
       state.hitProducts = data.hitProducts
+      state.latestProducts = data.latestProducts
       state.reviews = data.reviews
       state.contacts = data.contacts
       state.benefits = data.benefits
       state.socials = data.socials
       state.siteSettings = data.settings
+      state.brands = data.brands
     },
     setMainDataUnloaded(state) {
       state.mainDataUnloaded = true
@@ -37,11 +39,13 @@ export default {
     companyInfo: {},
     homeSlider: [],
     hitProducts: [],
+    latestProducts: [],
     reviews: [],
     contacts: {},
     benefits: [],
     socials: [],
-    siteSettings: {}
+    siteSettings: {},
+    brands: []
   },
   getters: {
     getMainDataStatus: (state) => state.mainDataUnloaded,
@@ -51,10 +55,12 @@ export default {
     getCompanyInfo: (state) => state.companyInfo,
     getHomeSlider: (state) => state.homeSlider,
     getHitProducts: (state) => state.hitProducts,
+    getLatestProducts: (state) => state.latestProducts,
     getShopReviews: (state) => state.reviews,
     getContacts: (state) => state.contacts,
     getBenefits: (state) => state.benefits,
     getSocials: (state) => state.socials,
     getSiteSettings: (state) => state.siteSettings,
+    getBrands: (state) => state.brands
   }
 }

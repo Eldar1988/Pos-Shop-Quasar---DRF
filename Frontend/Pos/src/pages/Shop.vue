@@ -11,7 +11,7 @@
     </q-breadcrumbs>
     <pos-page-header :title="category.title"/>
     <!--    Category description   -->
-    <section class="q-pa-sm">
+    <section class="q-pa-sm" v-if="category.description">
       <q-card
         class="border-radius-6 grey-border shadow-0 q-px-sm q-pt-md q-pb-sm"
       >
@@ -38,7 +38,6 @@
     <!--    Products   -->
     <section class="q-pa-sm q-mt-md">
       <pos-products-wrapper :products="category.products"/>
-
       <pos-products-wrapper
         v-for="child in category.child"
         :key="child.id"
@@ -46,9 +45,20 @@
       />
     </section>
     <!--    xxxxx   -->
+    <!--    Latest Products   -->
+    <section class="section bg-grey-2 q-py-xl">
+      <pos-section-title title="Новинки"/>
+      <pos-hot-products-slider/>
+    </section>
+    <!--    xxxxx   -->
+
+    <!--    Banners   -->
     <section>
       <pos-banners/>
     </section>
+    <!--    xxxxx   -->
+    <pos-section-title title="Смотрите также" class="q-mt-xl" />
+    <pos-categories class="q-mt-md q-pa-sm" :categories="this.$store.getters.getCategories" />
   </q-page>
 </template>
 
@@ -57,10 +67,14 @@ import PosPageHeader from "components/service/posPageHeader";
 import PosProductsWrapper from "components/shop/posProductsWrapper";
 import PosCategories from "components/shop/posCategories";
 import PosBanners from "components/shop/posBanners";
+import PosSectionTitle from "components/service/posSectionTitle";
+import PosHotProductsSlider from "components/homePage/posHotProductsSlider";
 
 export default {
   name: "Shop",
-  components: {PosBanners, PosCategories, PosProductsWrapper, PosPageHeader},
+  components: {
+    PosHotProductsSlider, PosSectionTitle, PosBanners, PosCategories, PosProductsWrapper, PosPageHeader
+  },
   computed: {
     category() {
       return this.$store.getters.getCategoryDetail

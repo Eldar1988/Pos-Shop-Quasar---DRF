@@ -4,6 +4,7 @@
       v-if="!serverUnloadedStatus"
       navigation-position="top"
       animated
+      swipeable
       v-model="slide"
       :navigation="slider.dots"
       infinite

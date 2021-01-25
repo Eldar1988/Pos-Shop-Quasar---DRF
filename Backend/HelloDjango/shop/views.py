@@ -56,9 +56,12 @@ class ProductDetailView(APIView):
         product_serializer = ProductDetailSerializer(product, many=False)
         response_data['product'] = product_serializer.data
         products = Product.objects.filter(
-            category_id=product.category_id, public=True).exclude(id=product.id).order_by('?')[:14]
+            category_id=product.category_id, public=True).exclude(id=product.id).order_by('?')[:20]
         products_serializer = ProductListSerializer(products, many=True)
         response_data['products'] = products_serializer.data
+
+        product.views += 1
+        product.save()
 
         return Response(response_data)
 

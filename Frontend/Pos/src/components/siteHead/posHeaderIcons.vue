@@ -30,10 +30,19 @@ export default {
   },
   methods: {
     getCartLen() {
-      this.cartLen = JSON.parse(localStorage.cart).length
+      if (localStorage.getItem('cart') !== null) {
+        this.cartLen = JSON.parse(localStorage.cart).length
+      } else {
+        return null
+      }
     },
     getWishListLen() {
-      this.wishList = JSON.parse(localStorage.wishList).length
+      if (localStorage.getItem('wishList') !== null) {
+        this.wishList = JSON.parse(localStorage.wishList).length
+      } else {
+        return null
+      }
+
     }
   }
 }
