@@ -20,7 +20,6 @@ export default {
     }
   },
   created() {
-    console.log('hello', this.image, this.description)
   },
   name: "posShare"
 }

@@ -8,6 +8,8 @@
           icon="call"
           flat round
           color="white"
+          size="20px"
+          style="margin-top: -7px"
         />
       </a>
     </div>
@@ -18,6 +20,8 @@
           icon="mdi-whatsapp"
           flat round
           color="white"
+          size="20px"
+          style="margin-top: -8px"
         />
       </a>
     </div>
@@ -49,6 +53,8 @@
         round flat
         color="white"
         to="/search"
+        size="20px"
+        style="margin-top: -8px"
       />
     </div>
 
@@ -89,4 +95,8 @@ export default {
   align-items: start
   z-index: 1000
   padding: 3px 0 0
+
+.q-btn--fab .q-icon, .q-btn--fab-mini .q-icon
+  font-size: 34px !important
+
 </style>

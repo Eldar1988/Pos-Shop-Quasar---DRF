@@ -165,7 +165,9 @@ export default {
   padding: 5px 5px 35px
 
 .product-card-title
-  font-size: 16px
+  font-size: 18px
+  font-weight: 700
+
 
 .product-card-price
   font-size: 18px

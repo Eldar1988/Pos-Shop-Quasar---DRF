@@ -86,7 +86,18 @@ cfg.module.rules.push({
     framework: {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'en-us', // Quasar language pack
-      config: {},
+      config: {
+        capacitor: {
+          // Quasar handles app exit on mobile phone back button.
+          // Requires Quasar v1.9.3+ for true/false, v1.12.6+ for '*' wildcard and array values
+          // backButtonExit: true/false/'*'/['/login', '/home', '/my-page'],
+
+          // On the other hand, the following completely
+          // disables Quasar's back button management.
+          // Requires Quasar v1.14.1+
+          backButton: true
+        }
+      },
 
       // Possible values for "importStrategy":
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
@@ -122,9 +133,9 @@ cfg.module.rules.push({
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `Pos Shop`,
-        short_name: `Pos Shop`,
-        description: `Pos-shop web-app`,
+        name: `JS Shop`,
+        short_name: `JS Shop`,
+        description: `JS Shop web-app`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
