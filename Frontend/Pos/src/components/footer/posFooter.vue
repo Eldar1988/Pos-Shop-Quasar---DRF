@@ -21,20 +21,7 @@
 
         <!--        Benefits   -->
         <div class="q-mt-lg"></div>
-        <splide :options="options">
-          <splide-slide
-            v-for="benefit in benefits"
-            :key="benefit.id"
-          >
-            <q-card
-              class="border-radius-6 shadow-0 bg-info"
-            >
-              <p class="text-subtitle1 text-bold q-pt-md">{{ benefit.title }}</p>
-              <q-icon :name="`mdi-${benefit.icon}`" size="30px" class="q-mt-sm"/>
-              <p class="q-py-sm">{{ benefit.text }}</p>
-            </q-card>
-          </splide-slide>
-        </splide>
+
         <!--        xxxxx   -->
 
         <!--        Links   -->
@@ -72,12 +59,9 @@
 </template>
 
 <script>
-import {Splide, SplideSlide} from '../../../node_modules/@splidejs/vue-splide';
-import '../../../node_modules/@splidejs/splide/dist/css/themes/splide-sea-green.min.css';
 
 export default {
   name: "posFooter",
-  components: {Splide, SplideSlide},
   data() {
     return {
       options: {

@@ -46,7 +46,6 @@
 
     <section class="section bg-grey-2 q-py-xl">
       <pos-section-title title="Новинки"/>
-      <pos-hot-products-slider />
     </section>
   </q-page>
 </template>
@@ -56,11 +55,10 @@ import PosPageHeader from "components/service/posPageHeader";
 import PosWishListItem from "components/wishList/posWishListItem";
 import PosBanners from "components/shop/posBanners";
 import PosSectionTitle from "components/service/posSectionTitle";
-import PosHotProductsSlider from "components/homePage/posHotProductsSlider";
 
 export default {
   name: "WishList",
-  components: {PosHotProductsSlider, PosSectionTitle, PosBanners, PosWishListItem, PosPageHeader},
+  components: {PosSectionTitle, PosBanners, PosWishListItem, PosPageHeader},
   data() {
     return {
       products: []

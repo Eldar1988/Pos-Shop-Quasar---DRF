@@ -7,7 +7,7 @@ import {colors} from 'quasar'
 
 export default {
   name: "posSetSiteColors",
-  created() {
+  mounted() {
     let settings = this.$store.getters.getSiteSettings
     colors.setBrand('primary', settings.colors.primary_color)
     colors.setBrand('accent', settings.colors.accent_color)

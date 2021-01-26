@@ -48,7 +48,7 @@
     <!--    Latest Products   -->
     <section class="section bg-grey-2 q-py-xl">
       <pos-section-title title="Новинки"/>
-      <pos-hot-products-slider/>
+<!--LATEST SLIDER-->
     </section>
     <!--    xxxxx   -->
 
@@ -68,16 +68,18 @@ import PosProductsWrapper from "components/shop/posProductsWrapper";
 import PosCategories from "components/shop/posCategories";
 import PosBanners from "components/shop/posBanners";
 import PosSectionTitle from "components/service/posSectionTitle";
-import PosHotProductsSlider from "components/homePage/posHotProductsSlider";
 
 export default {
   name: "Shop",
   components: {
-    PosHotProductsSlider, PosSectionTitle, PosBanners, PosCategories, PosProductsWrapper, PosPageHeader
+    PosSectionTitle, PosBanners, PosCategories, PosProductsWrapper, PosPageHeader
   },
   computed: {
     category() {
       return this.$store.getters.getCategoryDetail
+    },
+    latestProducts() {
+      return this.$store.getters.getLatestProducts
     }
   },
   preFetch({store, currentRoute}) {

@@ -273,7 +273,7 @@
     <!--    xxxxx   -->
     <section class="section bg-grey-2 q-py-xl">
       <pos-section-title title="Новинки"/>
-      <pos-hot-products-slider/>
+<!--      LATEST SLIDER   -->
     </section>
 
     <!--    Cart dialog  -->
@@ -295,12 +295,10 @@ import PosAddedToCartDialog from "components/cart/posAddedToCartDialog";
 import addToWishListFunc from "src/functions/add_to_wishlist";
 import PosProductReviews from "components/shop/posProductReviews";
 import PosShare from "components/service/posShare";
-import PosHotProductsSlider from "components/homePage/posHotProductsSlider";
 
 export default {
   name: "posProductDetail",
   components: {
-    PosHotProductsSlider,
     PosShare,
     PosProductReviews,
     PosAddedToCartDialog, PosBanners, PosProductsScrollX, PosSectionTitle, PosProductDetailImagesSlider

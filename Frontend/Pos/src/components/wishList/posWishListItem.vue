@@ -42,7 +42,6 @@
 
 <script>
 import formatPrice from "src/filters/format_price"
-import addToCartFunc from "src/functions/add_to_cart";
 import addToCart from "src/functions/add_to_cart";
 
 export default {

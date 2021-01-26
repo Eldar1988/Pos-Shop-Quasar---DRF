@@ -5,7 +5,7 @@
     <pos-slider/>
     <section class="section">
       <pos-section-title title="Новинки" />
-      <pos-hot-products-slider class="q-mt-sm"/>
+<!--SlDER NEWS   -->
     </section>
 
     <pos-banners/>
@@ -14,8 +14,7 @@
       <pos-section-title title="Категории"/>
       <pos-categories :categories="categories" class="q-mt-lg"/>
     </section>
-    <pos-brands-slider />
-    <pos-shop-reviews class="section"/>
+<!--    BRANDS & REVIEWS   -->
   </q-page>
 </template>
 
@@ -26,16 +25,10 @@ import PosProductTabs from "components/homePage/posProductTabs";
 import PosBanners from "components/shop/posBanners";
 import PosCategories from "components/shop/posCategories";
 import PosSectionTitle from "components/service/posSectionTitle";
-import PosHotProductsSlider from "components/homePage/posHotProductsSlider";
-import PosShopReviews from "components/homePage/posShopReviews";
-import PosBrandsSlider from "components/service/posBrandsSlider";
 
 export default {
   name: 'PageIndex',
   components: {
-    PosBrandsSlider,
-    PosShopReviews,
-    PosHotProductsSlider,
     PosSectionTitle, PosCategories, PosBanners, PosProductTabs, PosSlider, PosPageHeader
   },
   computed: {
