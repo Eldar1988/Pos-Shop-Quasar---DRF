@@ -46,7 +46,7 @@ module.exports = function (/* ctx */) {
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
 
-      // transpile: false,
+      transpile: true,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).
@@ -54,13 +54,13 @@ module.exports = function (/* ctx */) {
       // transpileDependencies: [],
 
       // rtl: false, // https://quasar.dev/options/rtl-support
-      // preloadChunks: true,
-      // showProgress: false,
-      // gzip: true,
-      // analyze: true,
+      preloadChunks: true,
+      showProgress: true,
+      gzip: true,
+      analyze: true,
 
       // Options below are automatically set depending on the env, set them if you want to override
-      // extractCSS: false,
+      extractCSS: true,
 
       // https://quasar.dev/quasar-cli/handling-webpack
       extendWebpack (cfg) {
@@ -115,7 +115,8 @@ cfg.module.rules.push({
       plugins: [
         'Notify',
         'Loading',
-        'Meta'
+        'Meta',
+        'LoadingBar'
       ]
     },
 

@@ -32,7 +32,7 @@
     </section>
     <!--    Empty wish list alert   -->
     <section
-      v-if="files.length === 0"
+      v-if="showMessage"
       class="info-page"
     >
       <q-card
@@ -65,7 +65,8 @@ export default {
   data() {
     return {
       files: [],
-      showing: false
+      showing: false,
+      showMessage: false
     }
   },
   meta() {
@@ -81,6 +82,7 @@ export default {
     async loadFiles() {
       this.files = await this.$axios.get(`${this.$store.getters.getServerURL}/files/`)
         .then(({data}) => {
+          if (data.length === 0) this.showMessage = true
           return data
         })
     }
