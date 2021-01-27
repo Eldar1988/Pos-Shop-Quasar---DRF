@@ -114,6 +114,7 @@ class QuestionsView(APIView):
 
 class DriversView(APIView):
     """Файлы"""
+
     def get(self, request):
         files = Driver.objects.all()
         serializer = DriversSerializer(files, many=True)

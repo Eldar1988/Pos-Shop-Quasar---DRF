@@ -1,6 +1,5 @@
 <template>
   <div class="">
-
     <q-stepper
       ref="stepper"
       v-model="step"
@@ -10,7 +9,6 @@
     >
       <p class="text-subtitle1 text-bold q-pl-lg">Оформление заказа</p>
       <p class="q-pl-lg">Для оформления заказа заполните форму ниже</p>
-
       <!--      Personal data   -->
       <q-step
         :done="step > 1"
@@ -124,7 +122,6 @@
           }}, {{ formData.address ? formData.address : 'адрес не указан' }}</span></p>
       </q-step>
       <!--      xxxxx   -->
-
       <!--      Payment   -->
       <q-step
         :name="4"
@@ -133,7 +130,7 @@
       >
         <p class="q-ml-lg text-bold q-pb-md ">Выберите способ оплаты</p>
         <q-card
-          class="grey-border shadow-0 border-radius-6 q-pa-sm cursor-pointer shadow-on-hover"
+          class="grey-border shadow-0 border-radius-6 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"
           v-for="payment in paymentMethods"
           :key="payment.id"
           @click="createNewOrder(payment.title, payment.slug)"
@@ -144,7 +141,6 @@
           </div>
         </q-card>
       </q-step>
-
       <!--      xxxxx   -->
       <template v-slot:navigation>
         <q-stepper-navigation>
@@ -152,7 +148,6 @@
                  @click="$refs.stepper.previous()"/>
           <q-btn :label="step === 4 ? 'Готово' : 'Далее'" color="primary" @click="$refs.stepper.next()"
                  class="q-px-md text-bold border-radius-6 q-ml-sm"/>
-
         </q-stepper-navigation>
       </template>
     </q-stepper>

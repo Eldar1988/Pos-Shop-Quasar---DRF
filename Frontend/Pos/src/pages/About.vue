@@ -12,15 +12,20 @@
     <div class="q-mt-lg" v-html="shop.info"></div>
     <pos-share class="q-mt-lg" :image="this.$store.getters.getCompanyInfo.logo" :description="shop.description"/>
   </section>
+
+  <pos-shop-reviews class="section"/>
+  <pos-clients-slider />
 </q-page>
 </template>
 
 <script>
 import PosPageHeader from "components/service/posPageHeader";
 import PosShare from "components/service/posShare";
+import PosShopReviews from "components/homePage/posShopReviews";
+import PosClientsSlider from "components/sliders/posClientsSlider";
 export default {
   name: "About",
-  components: {PosShare, PosPageHeader},
+  components: {PosClientsSlider, PosShopReviews, PosShare, PosPageHeader},
   computed: {
     shop() {
       return this.$store.getters.getAboutShopInfo

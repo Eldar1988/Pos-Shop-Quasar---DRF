@@ -27,6 +27,7 @@ export default function (/* { ssrContext } */) {
     state: {
       // serverURL: 'http://192.168.0.155:8000'
       // serverURL: 'http://192.168.0.199:8000'
+      // serverURL: 'https://dj.posshop.kz.na4u.ru'
       serverURL: 'https://shop.js-code.ru'
     },
     getters: {

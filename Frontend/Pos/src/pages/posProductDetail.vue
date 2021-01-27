@@ -48,6 +48,13 @@
               </q-badge>
             </p>
           </div>
+          <!--          Shipping detail   -->
+          <div class="product-info-section">
+            <p class="text-bold">
+              <q-icon name="local_shipping" size="22px" class="q-mr-sm"/>
+              {{ productData.product.shipping_detail }}
+            </p>
+          </div>
           <!--          Short description  -->
           <div class="product-info-section">
             <p>{{ productData.product.description }}</p>
@@ -257,9 +264,9 @@
     </section>
     <!--    xxxxx   -->
     <!--    More products   -->
-    <section v-if="productData.products.length > 0" class="q-mt-xl q-py-lg bg-grey-2">
-      <pos-section-title title="Смотрите также:"/>
-      <pos-products-scroll-x :products="productData.products"/>
+    <section v-if="productData.products.length > 0" class="q-mt-xl q-py-xl bg-grey-2 q-pa-sm">
+      <pos-section-title title="Смотрите также:" class="q-mt-md"/>
+      <pos-products-slide-x :products="productData.products" class="q-mt-md"/>
     </section>
     <!--    xxxxx   -->
     <!--    Last sean products   -->
@@ -270,11 +277,14 @@
     <!--    Banners   -->
     <pos-banners/>
     <!--   xxxxx   -->
-    <!--    xxxxx   -->
+    <!--    Latest Products   -->
     <section class="section bg-grey-2 q-py-xl">
       <pos-section-title title="Новинки"/>
-<!--      LATEST SLIDER   -->
+      <pos-products-slide-x :products="this.$store.getters.getLatestProducts" class="q-mt-md"/>
     </section>
+    <!--    xxxxx   -->
+    <!--    Brands   -->
+    <pos-brands-slider/>
 
     <!--    Cart dialog  -->
     <q-dialog v-model="cartDialog" position="top" seamless>
@@ -295,10 +305,14 @@ import PosAddedToCartDialog from "components/cart/posAddedToCartDialog";
 import addToWishListFunc from "src/functions/add_to_wishlist";
 import PosProductReviews from "components/shop/posProductReviews";
 import PosShare from "components/service/posShare";
+import PosProductsSlideX from "components/sliders/posProductsSlideX";
+import PosBrandsSlider from "components/sliders/posBrandsSlider";
 
 export default {
   name: "posProductDetail",
   components: {
+    PosBrandsSlider,
+    PosProductsSlideX,
     PosShare,
     PosProductReviews,
     PosAddedToCartDialog, PosBanners, PosProductsScrollX, PosSectionTitle, PosProductDetailImagesSlider
@@ -351,7 +365,7 @@ export default {
         "mpn": "",
         "brand": {
           "@type": "Brand",
-          "name": this.$store.getters.getProductDetailData.product.brand.title
+          "name": this.$store.getters.getProductDetailData.product.brand ? this.$store.getters.getProductDetailData.product.brand : this.$store.getters.getCompanyInfo.name
         },
         "review": {
           "@type": "Review",

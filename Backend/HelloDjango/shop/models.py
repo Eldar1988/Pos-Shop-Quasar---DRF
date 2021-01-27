@@ -91,6 +91,8 @@ class Product(models.Model):
     latest = models.BooleanField('Новинка', default=False)
     public = models.BooleanField('Опубликовать', default=True)
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
+    shipping_detail = models.CharField('Условия доставки', default='Доставка по всему Казахстану', max_length=255,
+                                       help_text='Если Вы продаете локально в одном городе, необходмо указать город')
     slug = models.SlugField(unique=True, blank=True, null=True)
     views = models.IntegerField('Кол-во просмотров', default=0)
     pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)

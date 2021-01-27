@@ -10,9 +10,10 @@
       <pos-products-wrapper :products="label.products"/>
     </section>
     <!--    xxxxx   -->
-    <section>
+    <section style="margin-top: 100px">
       <pos-banners/>
     </section>
+    <pos-brands-slider />
   </q-page>
 </template>
 
@@ -20,10 +21,11 @@
 import PosPageHeader from "components/service/posPageHeader";
 import PosProductsWrapper from "components/shop/posProductsWrapper";
 import PosBanners from "components/shop/posBanners";
+import PosBrandsSlider from "components/sliders/posBrandsSlider";
 
 export default {
   name: "LabelDetail",
-  components: {PosBanners, PosProductsWrapper, PosPageHeader},
+  components: {PosBrandsSlider, PosBanners, PosProductsWrapper, PosPageHeader},
   computed: {
     label() {
       return this.$store.getters.getLabelDetail

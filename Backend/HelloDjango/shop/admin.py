@@ -90,6 +90,7 @@ class ProductAdmin(admin.ModelAdmin):
         ('image_contain'),
         ('description',),
         ('show_on_home_page','future', 'hit', 'latest', 'public'),
+        ('shipping_detail',),
         ('labels',),
         ('info',),
         ('characteristic',),

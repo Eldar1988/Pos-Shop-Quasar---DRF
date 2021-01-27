@@ -4,8 +4,8 @@
     <pos-page-header :title="companyInfo.title"/>
     <pos-slider/>
     <section class="section">
-      <pos-section-title title="Новинки" />
-<!--SlDER NEWS   -->
+      <pos-section-title title="Новинки"/>
+        <pos-products-slide-x :products="this.$store.getters.getLatestProducts" class="q-mt-md" />
     </section>
 
     <pos-banners/>
@@ -14,7 +14,10 @@
       <pos-section-title title="Категории"/>
       <pos-categories :categories="categories" class="q-mt-lg"/>
     </section>
-<!--    BRANDS & REVIEWS   -->
+    <pos-brands-slider />
+    <pos-shop-reviews class="section"/>
+    <pos-clients-slider />
+    <!--    BRANDS & REVIEWS   -->
   </q-page>
 </template>
 
@@ -25,10 +28,18 @@ import PosProductTabs from "components/homePage/posProductTabs";
 import PosBanners from "components/shop/posBanners";
 import PosCategories from "components/shop/posCategories";
 import PosSectionTitle from "components/service/posSectionTitle";
+import PosProductsSlideX from "components/sliders/posProductsSlideX";
+import PosShopReviews from "components/homePage/posShopReviews";
+import PosBrandsSlider from "components/sliders/posBrandsSlider";
+import PosClientsSlider from "components/sliders/posClientsSlider";
 
 export default {
   name: 'PageIndex',
   components: {
+    PosClientsSlider,
+    PosBrandsSlider,
+    PosShopReviews,
+    PosProductsSlideX,
     PosSectionTitle, PosCategories, PosBanners, PosProductTabs, PosSlider, PosPageHeader
   },
   computed: {

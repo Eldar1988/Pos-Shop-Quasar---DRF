@@ -38,17 +38,20 @@
     <!--    Products   -->
     <section class="q-pa-sm q-mt-md">
       <pos-products-wrapper :products="category.products"/>
-      <pos-products-wrapper
+      <div
         v-for="child in category.child"
         :key="child.id"
-        :products="child.products"
-      />
+      >
+        <pos-section-title :title="child.title" class="bg-grey-3 q-py-sm"/>
+        <pos-products-wrapper :products="child.products" class="q-mb-xl q-mt-lg"/>
+      </div>
+
     </section>
     <!--    xxxxx   -->
     <!--    Latest Products   -->
     <section class="section bg-grey-2 q-py-xl">
       <pos-section-title title="Новинки"/>
-<!--LATEST SLIDER-->
+      <pos-products-slide-x :products="latestProducts" class="q-mt-md" />
     </section>
     <!--    xxxxx   -->
 
@@ -59,6 +62,7 @@
     <!--    xxxxx   -->
     <pos-section-title title="Смотрите также" class="q-mt-xl" />
     <pos-categories class="q-mt-md q-pa-sm" :categories="this.$store.getters.getCategories" />
+    <pos-brands-slider />
   </q-page>
 </template>
 
@@ -68,10 +72,14 @@ import PosProductsWrapper from "components/shop/posProductsWrapper";
 import PosCategories from "components/shop/posCategories";
 import PosBanners from "components/shop/posBanners";
 import PosSectionTitle from "components/service/posSectionTitle";
+import PosProductsSlideX from "components/sliders/posProductsSlideX";
+import PosBrandsSlider from "components/sliders/posBrandsSlider";
 
 export default {
   name: "Shop",
   components: {
+    PosBrandsSlider,
+    PosProductsSlideX,
     PosSectionTitle, PosBanners, PosCategories, PosProductsWrapper, PosPageHeader
   },
   computed: {

@@ -27,7 +27,7 @@ class ShopReviewAdmin(admin.ModelAdmin):
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'url')
+    list_display = ('get_image', 'title')
     save_as = True
     save_on_top = True
 

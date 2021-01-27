@@ -27,6 +27,7 @@ export default {
       state.socials = data.socials
       state.siteSettings = data.settings
       state.brands = data.brands
+      state.clients = data.clients
     },
     setMainDataUnloaded(state) {
       state.mainDataUnloaded = true
@@ -45,7 +46,8 @@ export default {
     benefits: [],
     socials: [],
     siteSettings: {},
-    brands: []
+    brands: [],
+    clients: []
   },
   getters: {
     getMainDataStatus: (state) => state.mainDataUnloaded,
@@ -61,6 +63,7 @@ export default {
     getBenefits: (state) => state.benefits,
     getSocials: (state) => state.socials,
     getSiteSettings: (state) => state.siteSettings,
-    getBrands: (state) => state.brands
+    getBrands: (state) => state.brands,
+    getClients: (state) => state.clients
   }
 }

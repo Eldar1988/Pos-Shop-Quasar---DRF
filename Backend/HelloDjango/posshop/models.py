@@ -105,7 +105,6 @@ class Client(models.Model):
     """Клиенты компании"""
     title = models.CharField('Название компании', max_length=255, db_index=True)
     logo = ThumbnailerImageField('Логотип', upload_to='clients/', resize_source={'size': (200, 200), 'crop': 'scale'})
-    url = models.URLField('Ссылка на сайт')
 
     def __str__(self):
         return self.title
