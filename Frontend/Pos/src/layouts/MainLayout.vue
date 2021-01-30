@@ -1,7 +1,7 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <pos-set-site-colors />
-    <q-header class="text-primary bg-white shadow-5" height-hint="98">
+    <q-header class="text-primary bg-white shadow-lt" height-hint="98">
       <q-toolbar>
         <!--        Shop logo   -->
         <q-toolbar-title>
