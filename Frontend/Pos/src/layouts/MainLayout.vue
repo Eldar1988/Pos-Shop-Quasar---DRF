@@ -67,6 +67,9 @@ export default {
       right: false,
     }
   },
+  created() {
+    this.$store.dispatch('fetchMainData')
+  },
   computed: {
     backendError() {
       return this.$store.getters.getMainDataStatus
@@ -79,9 +82,9 @@ export default {
     }
 
   },
-  preFetch({store}) {
-    return store.dispatch('fetchMainData')
-  }
+  // preFetch({store}) {
+  //   return store.dispatch('fetchMainData')
+  // }
 }
 </script>
 

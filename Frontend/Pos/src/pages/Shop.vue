@@ -90,9 +90,22 @@ export default {
       return this.$store.getters.getLatestProducts
     }
   },
-  preFetch({store, currentRoute}) {
-    return store.dispatch('fetchCategoryData', currentRoute.params.slug)
+  watch: {
+    '$route' () {
+      this.loadCategoryData()
+    }
   },
+  created() {
+    this.loadCategoryData()
+  },
+  methods: {
+    loadCategoryData() {
+      return this.$store.dispatch('fetchCategoryData', this.$route.params.slug)
+    }
+  },
+  // preFetch({store, currentRoute}) {
+  //   return store.dispatch('fetchCategoryData', currentRoute.params.slug)
+  // },
   meta() {
     let category = this.$store.getters.getCategoryDetail
     let siteTitle = this.$store.getters.getCompanyInfo.name

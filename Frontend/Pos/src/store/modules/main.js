@@ -1,15 +1,28 @@
 import axiosInstance from "axios";
+import {colors} from "quasar";
 
 export default {
   actions: {
-    async fetchMainData({ commit }) {
-      try {
-        await axiosInstance.get(`${this.getters.getServerURL}/`).then(({data}) => {
-          commit('setMainData', data)
-        })
-      } catch(e) {
-        commit('setMainDataUnloaded')
+    async fetchMainData({ commit, state }) {
+      if (state.mainDataUnloaded) {
+        try {
+          await axiosInstance.get(`${this.getters.getServerURL}/`).then(({data}) => {
+            commit('setMainData', data)
+            console.log('getColor')
+            colors.setBrand('primary', data.settings.colors.primary_color)
+            colors.setBrand('accent', data.settings.colors.accent_color)
+            colors.setBrand('positive', data.settings.colors.positive_color)
+            colors.setBrand('negative', data.settings.colors.alert_color)
+            colors.setBrand('info', data.settings.colors.footer_color)
+            colors.setBrand('dark', data.settings.colors.body_color)
+          })
+        } catch(e) {
+          commit('setMainDataUnloaded')
         }
+      }
+      else {
+        return null
+      }
     }
   },
   mutations: {
@@ -25,6 +38,7 @@ export default {
       state.contacts = data.contacts
       state.benefits = data.benefits
       state.socials = data.socials
+      console.log('setColor')
       state.siteSettings = data.settings
       state.brands = data.brands
       state.clients = data.clients
@@ -34,7 +48,7 @@ export default {
     }
   },
   state: {
-    mainDataUnloaded: false,
+    mainDataUnloaded: true,
     categories: [],
     pages: [],
     companyInfo: {},
