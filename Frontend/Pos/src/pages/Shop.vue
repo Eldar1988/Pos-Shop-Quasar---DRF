@@ -13,7 +13,7 @@
     <!--    Category description   -->
     <section class="q-pa-sm" v-if="category.description">
       <q-card
-        class="border-radius-6 grey-border shadow-0 q-px-sm q-pt-md q-pb-sm"
+        class="border-radius-6 bg-white shadow-0 q-px-sm q-pt-md q-pb-sm"
       >
         <p class="text-center q-pb-sm">{{ category.description }}</p>
         <q-expansion-item
@@ -49,7 +49,7 @@
     </section>
     <!--    xxxxx   -->
     <!--    Latest Products   -->
-    <section class="section bg-grey-2 q-py-xl">
+    <section class="section q-py-xl">
       <pos-section-title title="Новинки"/>
       <pos-products-slide-x :products="latestProducts" class="q-mt-md" />
     </section>

@@ -4,7 +4,7 @@
       ref="stepper"
       v-model="step"
       animated
-      class="shadow-0 grey-border border-radius-6" color="primary"
+      class="shadow-0 border-radius-6" color="primary"
       vertical
     >
       <p class="text-subtitle1 text-bold q-pl-lg">Оформление заказа</p>

@@ -12,7 +12,7 @@
       <q-btn
         class="q-mt-xl border-radius-6 text-bold"
         color="white"
-        text-color="primary"
+        text-color="dark"
         unelevated
         to="/"
         label="На главную"

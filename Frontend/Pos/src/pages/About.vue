@@ -7,7 +7,7 @@
   <script type="application/ld+json" v-html="schema"></script>
   <script type="application/ld+json" v-html="navigateSchema"></script>
   <pos-page-header title="О магазине" />
-  <section class="info-page border-radius-6 grey-border q-pa-md">
+  <section class="info-page border-radius-6 bg-white q-pa-md">
     <h2 class="text-bold text-center text-subtitle1">{{ shop.title }}</h2>
     <div class="q-mt-lg" v-html="shop.info"></div>
     <pos-share class="q-mt-lg" :image="this.$store.getters.getCompanyInfo.logo" :description="shop.description"/>

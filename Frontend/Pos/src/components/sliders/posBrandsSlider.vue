@@ -1,5 +1,5 @@
 <template>
-  <section class="q-pa-sm section" v-if="brands.length > 5">
+  <section class="q-py-md section bg-white" v-if="brands.length > 5">
     <splide :options="options">
         <splide-slide
           v-for="brand in brands"

@@ -1,13 +1,13 @@
 <template>
-  <div class="mobile-bottom-bar bg-primary"
-       :style="this.$q.platform.is.ios ? `height: 70px` : `height: 52px`"
+  <div class="mobile-bottom-bar bg-grey-1 shadow-lt-2 grey-border border-radius-6"
+       :style="this.$q.platform.is.ios ? `bottom: 20px` : `bottom: 5px`"
   >
     <div class="flex flex-center">
       <a :href="`tel:${contacts.phone}`">
         <q-btn
           icon="call"
           flat round
-          color="white"
+          color="dark"
           size="20px"
           style="margin-top: -7px"
         />
@@ -19,7 +19,7 @@
         <q-btn
           icon="mdi-whatsapp"
           flat round
-          color="white"
+          color="dark"
           size="20px"
           style="margin-top: -8px"
         />
@@ -29,7 +29,7 @@
       <q-btn
         icon="menu"
         outline round
-        color="white"
+        color="dark"
         style="margin-top: 2px"
         @click="$emit('openDraw')"
       />
@@ -38,7 +38,7 @@
       <q-fab
         v-model="fab"
         vertical-actions-align="right"
-        color="white"
+        color="dark"
         flat
         icon="help_outline"
         direction="up" padding="10px"
@@ -51,7 +51,7 @@
       <q-btn
         icon="search"
         round flat
-        color="white"
+        color="dark"
         to="/search"
         size="20px"
         style="margin-top: -8px"
@@ -85,10 +85,10 @@ export default {
 <style lang="sass">
 .mobile-bottom-bar
   position: fixed
-  bottom: 0
-  left: 0
-  right: 0
-  width: 100%
+  bottom: 5px
+  left: 5px
+  right: 5px
+  height: 52px
   color: white
   display: grid
   grid-template-columns: repeat(5, 1fr)

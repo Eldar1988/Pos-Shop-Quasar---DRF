@@ -7,7 +7,7 @@
     <pos-page-header :title="contacts.title"/>
     <section class="info-page">
       <p class="text-center text-bold q-pb-lg">{{ contacts.description }}</p>
-      <div class="border-radius-6 q-px-md q-py-md grey-border">
+      <div class="border-radius-6 q-px-md q-py-md bg-white">
         <p class="text-bold">Телефон: <a :href="`tel:${contacts.phone}`" class="text-weight-regular">{{ contacts.phone }}</a></p>
         <p class="text-bold q-pt-sm">Whatsapp: <a :href="`https://wa.me/${contacts.whatsapp}`" target="_blank" class="text-weight-regular">{{ contacts.whatsapp }}</a></p>
         <p class="text-bold q-pt-sm">Адрес: <span class="text-weight-regular">{{ contacts.address }}</span></p>

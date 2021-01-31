@@ -3,7 +3,6 @@
     <div class="product-wrapper">
       <!--    Products   -->
       <article
-        style="margin-top: 5px"
         v-for="product in products"
         :key="product.id"
       >

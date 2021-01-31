@@ -10,7 +10,7 @@
 
     <pos-banners/>
     <pos-product-tabs/>
-    <section class="q-mt-xl q-px-sm q-py-xl bg-grey-2">
+    <section class="q-mt-xl q-px-sm q-py-xl">
       <pos-section-title title="Категории"/>
       <pos-categories :categories="categories" class="q-mt-lg"/>
     </section>

@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import MainColor, Script, TelegramBot
+from .models import MainColor, Script, TelegramBot, ProductCardSettings
 
 
 admin.site.register(Script)
 admin.site.register(TelegramBot)
+admin.site.register(ProductCardSettings)
 
 
 @admin.register(MainColor)

@@ -1,29 +1,53 @@
 <template>
   <q-card
-    class="grey-border full-width border-radius-6 product-card relative-position"
+    class="full-width border-radius-6 product-card relative-position"
+    style="min-height: 100%"
   >
     <!--    Add to wish button   -->
     <q-btn
       :icon="productInWishList ? 'favorite' : 'favorite_border'"
-      style="position: absolute; top:2px; right:2px;z-index:30"
-      flat round
-      color="accent"
+      style="position: absolute; top:55px; right:8px;z-index:30"
+      round flat
+      color=""
+      unelevated
+      text-color="accent"
       @click="addToWishList(product)"
     >
       <q-tooltip>Добавить в избранное</q-tooltip>
     </q-btn>
+
+    <q-btn
+      color="accent"
+      text-color="white"
+      round
+      icon="add_shopping_cart"
+      unelevated
+      @click="addToCart(product, 1, false)"
+      style="position: absolute; z-index: 55; top:8px; right:8px;"
+    >
+      <q-tooltip>Добавить товар в корзину</q-tooltip>
+    </q-btn>
     <!--    xxxxx   -->
     <router-link :to="`/product/${product.slug}/`">
       <!--      Image   -->
-      <q-img
-        :src="product.image"
-        :contain="!product.image_contain"
-        class="product-card-image"
-        title="Подробнее"
-      >
-        <template v-slot:loading>
-          <q-skeleton class="product-card-image full-width"/>
-        </template>
+      <div class="flex product-card-image" style="align-items: center;position: relative">
+        <q-img
+          :src="product.image"
+          :contain="!product.image_contain"
+          title="Подробнее"
+          :height="`${this.$store.getters.getSiteSettings.productCardSettings.height}px`"
+          style="max-height: 200px"
+        >
+          <template v-slot:loading>
+            <q-skeleton class="product-card-image full-width"/>
+          </template>
+        </q-img>
+
+        <!--      Rating   -->
+        <div class="rating-wrapper">
+          <q-rating v-model="product.rating" color="orange" size="18px" readonly/>
+        </div>
+
         <!--      Sale      -->
         <q-btn
           v-if="product.old_price"
@@ -32,15 +56,12 @@
           :size="this.$q.platform.is.mobile ? 'sm' : 'md'"
           unelevated
           class="q-ma-sm"
+          style="bottom: 0; position: absolute"
         >
           {{ getSalePercent }}
           <q-tooltip>Размер скидки</q-tooltip>
         </q-btn>
-        <!--      Rating   -->
-        <div class="rating-wrapper">
-          <q-rating v-model="product.rating" color="orange" size="18px" readonly/>
-        </div>
-      </q-img>
+      </div>
     </router-link>
     <div class="product-meta">
       <!--      Product title   -->
@@ -59,26 +80,8 @@
         </p>
       </div>
 
-      <!--      Actions   -->
-      <div class="product-card-actions">
-        <q-btn
-          label="В 1 клик"
-          color="negative"
-          icon="done_outline"
-          size="sm"
-          class="text-bold full-width border-radius-6"
-          unelevated
-          @click="addToCart(product, 1, true)"
-        ><q-tooltip>Покупка в один клик</q-tooltip></q-btn>
-        <q-btn
-          color="negative"
-          size="sm"
-          icon="add_shopping_cart"
-          class="text-bold full-width border-radius-6"
-          unelevated outline
-          @click="addToCart(product, 1, false)"
-        ><q-tooltip>Добавить товар в корзину</q-tooltip></q-btn>
-      </div>
+
+
     </div>
 
   </q-card>
@@ -153,16 +156,12 @@ export default {
 
 .product-card
   position: relative
-  min-height: 100%
   transition: .5s all
   box-shadow: none
 
-  &:hover
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px
-
 
 .product-meta
-  padding: 5px 5px 35px
+  padding: 5px 5px 15px
 
 .product-card-title
   font-size: 18px

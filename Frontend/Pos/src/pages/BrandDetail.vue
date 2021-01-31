@@ -7,7 +7,7 @@
     <pos-page-header :title="`Товары от производителя ${brand.title}`"/>
     <!--    Brand description   -->
     <section class="q-pa-sm" v-if="brand.description">
-      <q-card class="border-radius-6 grey-border shadow-0 q-px-sm q-pt-md q-pb-sm">
+      <q-card class="border-radius-6 shadow-0 q-px-sm q-pt-md q-pb-sm">
         <p class="text-center q-pb-sm">{{ brand.description }}</p>
       </q-card>
     </section>

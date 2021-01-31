@@ -12,8 +12,8 @@
     <q-dialog
       v-model="dialog"
     >
-      <q-card style="width: 500px; max-width: 90vw;">
-        <q-toolbar class="bg-primary text-white">
+      <q-card class="text-dark" style="width: 500px; max-width: 90vw;">
+        <q-toolbar class="bg-grey-3 ">
           <q-toolbar-title class="flex justify-between" style="align-items: center">
             <div class="text-h6 text-bold">Обратный звонок</div>
             <q-icon name="close" class="cursor-pointer" v-close-popup/>
@@ -25,11 +25,13 @@
           Пожалуйста, заполните форму<br>Мы свяжемся с вами в ближайшее время
         </q-card-section>
         <q-card-section class="">
-          <q-input v-model="formData.name" label="Ваше имя*" outlined type="text"/>
+          <div class="q-pa-sm">
+            <q-input v-model="formData.name" label="Ваше имя*" type="text"/>
             <small v-if="formData.name === ''" class="text-negative">{{ errorTextName }}</small>
-          <q-input v-model="formData.phone" label="Номер телефона*" outlined type="tel" mask="#-###-###-####"
-                   class="q-mt-md"/>
-          <small v-if="formData.phone === ''" class="text-negative">{{ errorTextPhone }}</small>
+            <q-input v-model="formData.phone" label="Номер телефона*" type="tel" mask="#-###-###-####"
+                     class="q-mt-md"/>
+            <small v-if="formData.phone === ''" class="text-negative">{{ errorTextPhone }}</small>
+          </div>
         </q-card-section>
 
         <q-card-actions align="center" class="bg-white text-teal q-pa-md">
@@ -55,7 +57,7 @@ export default {
   props: {
     color: {
       type: String,
-      default: 'primary'
+      default: 'accent'
     }
   },
   data() {
@@ -88,7 +90,7 @@ export default {
         this.loading = false
         return null
       }
-      await fetch(`${this.$store.getters.getServerURL}/orders/call_back/`,{
+      await fetch(`${this.$store.getters.getServerURL}/orders/call_back/`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(this.formData)

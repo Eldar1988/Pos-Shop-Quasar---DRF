@@ -1,5 +1,5 @@
 <template>
-  <section class="q-pa-sm section" v-if="clients.length > 5">
+  <section class="q-py-md section bg-white" v-if="clients.length > 5">
     <pos-section-title title="Наши клиенты" class="q-mb-md"/>
     <splide :options="options">
       <splide-slide

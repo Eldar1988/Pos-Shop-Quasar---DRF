@@ -22,7 +22,7 @@
         <q-btn size="lg" dense flat round icon="view_list" @click="right = !right"/>
       </q-toolbar>
     </q-header>
-    <q-drawer show-if-above v-model="right" side="right" bordered class="text-dark">
+    <q-drawer show-if-above v-model="right" side="right" class="text-dark">
       <pos-right-drawer-content @closeDrawer="right = false"/>
     </q-drawer>
 

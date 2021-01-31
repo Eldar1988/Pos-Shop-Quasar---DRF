@@ -6,10 +6,10 @@
     </q-breadcrumbs>
     <pos-page-header title="Поиск по магазину"/>
     <q-card
-      class="q-pa-md border-radius-6"
+      class="q-pa-md border-radius-6 shadow-0"
       style="width: 500px; max-width: 90%; margin: auto"
     >
-      <q-input v-model="search" label="Введите запрос" outlined/>
+      <q-input v-model="search" label="Введите запрос"/>
       <small v-if="search.length < 3" class="text-red">{{ errorText }}</small>
       <q-btn
         label="Поиск"

@@ -16,10 +16,9 @@
       <a :href="`tel:${contacts.phone}`" title="Телефон для консультаций и заказов">
         <q-btn
           :label="contacts.phone"
-          class="full-width border-radius-6 text-bold"
-          color="primary"
-          outline
-          unelevated
+          class="full-width border-radius-6 text-bold shadow-lt-2"
+          color="dark"
+          flat
           icon="call"
 
         />
@@ -27,10 +26,9 @@
       <a :href="`https://wa.me/${contacts.whatsapp}`" title="Номер Whatsapp" class="q-mt-sm block">
         <q-btn
           :label="contacts.whatsapp"
-          class="full-width border-radius-6 text-bold"
+          class="full-width border-radius-6 text-bold shadow-lt-2"
           color="green"
-          outline
-          unelevated
+          flat
           icon="mdi-whatsapp"
         />
       </a>
@@ -38,7 +36,7 @@
     <!--    xxxxx   -->
     <!--    Mobile callback button   -->
     <div class="q-pa-sm hide-on-desktop">
-      <pos-call-back color="primary"/>
+      <pos-call-back color="accent"/>
     </div>
     <!--    xxxxx    -->
     <!--    Navigation   -->

@@ -8,7 +8,6 @@ export default {
         try {
           await axiosInstance.get(`${this.getters.getServerURL}/`).then(({data}) => {
             commit('setMainData', data)
-            console.log('getColor')
             colors.setBrand('primary', data.settings.colors.primary_color)
             colors.setBrand('accent', data.settings.colors.accent_color)
             colors.setBrand('positive', data.settings.colors.positive_color)
@@ -38,7 +37,6 @@ export default {
       state.contacts = data.contacts
       state.benefits = data.benefits
       state.socials = data.socials
-      console.log('setColor')
       state.siteSettings = data.settings
       state.brands = data.brands
       state.clients = data.clients

@@ -11,7 +11,7 @@
           v-ripple
           v-for="(i, index) in 10"
           :key="index"
-          class="border-bottom"
+          class="menu-item"
         >
           <q-item-section avatar>
             <q-skeleton type="circle" width="30px" height="30px"/>
@@ -34,7 +34,7 @@
           expand-separator
           icon="perm_identity"
           :label="category.title"
-          class="border-bottom"
+          class="menu-item"
         >
           <template v-slot:header>
             <q-item-section avatar>
@@ -47,13 +47,13 @@
           <q-item
             clickable
             v-ripple
-            class="q-ml-sm border-bottom bg-grey-2"
+            class="q-ml-sm"
             :to="`/shop/${category.slug}`"
             exact-active-class="text-primary"
             :title="category.title"
           >
             <q-item-section class="text-subtitle2 text-weight-bold text-dark">Все {{
-                category.title
+                category.title.toLowerCase()
               }}
             </q-item-section>
           </q-item>
@@ -62,7 +62,7 @@
             :key="category.id"
             clickable
             v-ripple
-            class="q-ml-sm border-bottom"
+            class="q-ml-sm"
             :to="`/shop/${category.slug}`"
             exact-active-class="text-primary"
             :title="category.title"
@@ -80,7 +80,7 @@
           v-if="category.parent === null && category.child.length === 0"
           clickable
           v-ripple
-          class="border-bottom"
+          class="menu-item"
           :to="`/shop/${category.slug}`"
           exact-active-class="text-primary"
           :title="category.title"
@@ -94,7 +94,7 @@
       <!--    xxxxx   -->
     </q-list>
 
-    <q-toolbar class="bg-grey-4">
+    <q-toolbar class="bg-grey-4 q-mt-md">
       <q-toolbar-title class="text-uppercase text-weight-bold text-subtitle1 letter-5">Информация</q-toolbar-title>
     </q-toolbar>
     <!--    Info Pages   -->
@@ -103,7 +103,7 @@
       <q-item
         clickable
         v-ripple
-        class="border-bottom text-dark"
+        class="text-dark menu-item"
         exact-active-class="text-primary"
         to="/"
         title="Перейти на главную"
@@ -120,7 +120,7 @@
       <q-item
         clickable
         v-ripple
-        class="border-bottom"
+        class="menu-item"
         exact-active-class="text-primary"
         to="/about"
         title="Информация о магазине"
@@ -137,7 +137,7 @@
       <q-item
         clickable
         v-ripple
-        class="border-bottom"
+        class="menu-item"
         exact-active-class="text-primary"
         to="/questions"
         title="Часто задаваемые вопросы и ответы на них"
@@ -154,7 +154,7 @@
       <q-item
         clickable
         v-ripple
-        class="border-bottom"
+        class="menu-item"
         exact-active-class="text-primary"
         to="/files"
         title="Файлы для загрузки"
@@ -171,7 +171,7 @@
       <q-item
         clickable
         v-ripple
-        class="border-bottom"
+        class="menu-item"
         exact-active-class="text-primary"
         to="/contacts"
         title="Контактная информация"
@@ -190,7 +190,7 @@
         :key="page.id"
         clickable
         v-ripple
-        class="border-bottom"
+        class="menu-item"
         :to="`/info/${page.slug}`"
         :title="page.title"
       >
@@ -206,7 +206,7 @@
       <q-item
         clickable
         v-ripple
-        class="border-bottom"
+        class="menu-item"
         exact-active-class="text-primary"
         to="/privacy_policy"
       >
@@ -237,6 +237,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="sass">
+.menu-item
+  border-radius: 10px
+  box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 11px 0px
+  width: 95%
+  margin: 10px auto 0
 </style>

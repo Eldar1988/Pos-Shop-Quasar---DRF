@@ -29,7 +29,20 @@ class Script(models.Model):
 
     class Meta:
         verbose_name = 'Скрипт'
-        verbose_name_plural = '4.2 Скрипты'
+        verbose_name_plural = '4.3 Скрипты'
+
+
+class ProductCardSettings(models.Model):
+    """Настройка карточки товаров"""
+    height = models.PositiveIntegerField('Высота картинки товара в карточке (px)', default=200,
+                                         help_text='Ширина примет значение автоматически с сохранением пропорций')
+
+    def __str__(self):
+        return f'Настройки карточки товара #{self.id}'
+
+    class Meta:
+        verbose_name = 'Карточка товара'
+        verbose_name_plural = '4.2 Карточка товаров'
 
 
 class TelegramBot(models.Model):
@@ -43,4 +56,4 @@ class TelegramBot(models.Model):
 
     class Meta:
         verbose_name = 'Telegram bot'
-        verbose_name_plural = '4.3 Telegram bot'
+        verbose_name_plural = '4.4 Telegram bot'

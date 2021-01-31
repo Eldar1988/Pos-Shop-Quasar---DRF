@@ -12,10 +12,10 @@
     <q-expansion-item
       v-for="question in questions"
       :key="question.id"
-      switch-toggle-side
-      expand-separator
+      switch-toggle-side group=""
+
       :label="question.question"
-      class="border-radius-6 grey-border text-bold q-mt-md" dense-toggle
+      class="border-radius-6 bg-white text-bold q-mt-md" dense-toggle
     >
       <q-card>
         <q-card-section class="text-weight-regular">

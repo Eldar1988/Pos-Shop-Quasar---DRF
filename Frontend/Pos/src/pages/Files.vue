@@ -9,7 +9,7 @@
       <div
         v-for="file in files"
         :key="file.id"
-        class="border-radius-6 grey-border q-pa-sm q-mt-sm flex justify-between no-wrap"
+        class="border-radius-6 bg-white q-pa-sm q-mt-md flex justify-between no-wrap"
         style="align-items: center"
       >
         <div>

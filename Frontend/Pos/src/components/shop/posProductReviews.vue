@@ -26,7 +26,7 @@
     <q-btn
       label="Добавить отзыв"
       icon-right="rate_review"
-      class="text-bold full-width border-radius-6 q-mt-md"
+      class="text-bold full-width border-radius-6 q-mt-md q-py-sm"
       unelevated
       color="primary"
       @click="dialog = true"

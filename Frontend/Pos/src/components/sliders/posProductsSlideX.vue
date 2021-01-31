@@ -1,7 +1,7 @@
 <template>
 <div>
   <splide :options="options" :slides="products">
-    <splide-slide v-for="product in products" :key="product.id" style="padding: 2px">
+    <splide-slide v-for="product in products" :key="product.id" style="padding: 5px">
       <pos-product-card :product="product"/>
     </splide-slide>
   </splide>
@@ -30,20 +30,21 @@ export default {
     return {
       options: {
         type   : 'loop',
-        perPage: 6,
+        perPage: 5.6,
         arrows: false,
+        pagination: false,
         breakpoints: {
           1650: {
-            perPage: 5
+            perPage: 4.7
           },
           1400: {
-            perPage: 4
+            perPage: 3.7
           },
           1100: {
-            perPage: 3
+            perPage: 2.7
           },
           650: {
-            perPage: 2
+            perPage: 1.7
           }
         }
       }

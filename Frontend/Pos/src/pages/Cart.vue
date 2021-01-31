@@ -10,13 +10,13 @@
         <div class="cart-wrapper">
 
           <!--          Cart items   -->
-          <div class="cart-items ">
+          <div class="cart-items q-mt-md">
             <pos-cart-item
               v-for="product in products"
               :key="product.id"
               :product="product"
             />
-            <div class="bg-grey-3 q-px-sm border-radius-6 q-py-md">
+            <div class="bg-dark text-white q-px-md border-radius-6 q-py-md q-mt-md">
               <p class="text-subtitle1 text-bold">Всего товаров: {{ cartLen }}</p>
               <p class="text-subtitle1 text-bold">На сумму: {{ cartSum|formatPrice }}
                 <q-icon name="mdi-currency-kzt" class="icon-wrapper"/>
@@ -25,7 +25,7 @@
           </div>
           <!--          xxxxx   -->
           <!--          Cart form   -->
-          <div class="cart-form">
+          <div class="cart-form q-mt-md">
             <pos-checkout-form :cartSum="cartSum" :cartLen="cartLen" :products="products"/>
           </div>
           <!--          xxxxx   -->
@@ -37,7 +37,7 @@
         class="q-px-sm"
       >
         <q-card
-          class="bg-negative red-shadow q-px-sm q-py-xl flex flex-center q-mt-lg"
+          class="bg-negative red-shadow q-px-sm q-py-xl flex flex-center q-mt-lg border-radius-6"
         >
           <div class="text-center">
             <p class="text-subtitle1 text-white">

@@ -7,25 +7,26 @@
         class="category-card"
       >
         <router-link :to="`/shop/${category.slug}`">
-        <q-card
-          class="grey-border shadow-0 q-py-sm q-px-md relative-position shadow-on-hover border-radius-6"
-          style="min-height: 100%"
-        >
-          <div class="category-card-wrapper">
-            <div>
-              <p class="text-bold q-pt-sm text-left q-pb-sm text-subtitle1">{{ category.title }}</p>
-              <p v-if="category.label" class="category-card-label bg-accent text-left border-radius-6 ">{{ category.label }}</p>
-            </div>
-            <div>
-          <q-img
-            :src="category.image"
-            class="category-card-image border-radius-6"
-            contain
-          />
-            </div>
+          <q-card
+            class="shadow-0 q-py-sm q-px-md relative-position shadow-on-hover border-radius-6 bg-white"
+          >
+            <div class="category-card-wrapper text-left">
+              <div>
+                <p class="text-bold q-pt-sm text-subtitle1">{{ category.title }}</p>
+                <p v-if="category.label" class="border-radius-6 text-bold text-accent">
+                  {{ category.label }}</p>
+              </div>
+              <div class="q-py-md ">
+                <q-img
+                  :src="category.image"
+                  class="category-card-image border-radius-6 shadow-lt"
+                  width="110px"
+                  height="110px"
+                />
+              </div>
 
-          </div>
-        </q-card>
+            </div>
+          </q-card>
         </router-link>
       </article>
     </div>
@@ -50,18 +51,10 @@ export default {
   grid-template-columns: 2fr 1fr
   align-items: center
 
-.category-card-label
-  color: white
-  display: flex
-  justify-content: center
-  align-items: center
-  padding: 5px 5px
-  width: 90%
-
 .categories-wrapper
   display: grid
   grid-template-columns: repeat(4, 1fr)
-  grid-gap: 5px
+  grid-gap: 10px
 
 .category-card
   min-height: 100%
@@ -80,6 +73,6 @@ export default {
 @media screen and (max-width: 650px)
   .categories-wrapper
     grid-template-columns: 1fr
-    grid-gap: 3px
+    grid-gap: 10px
 
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <section class="q-pa-sm q-py-xl bg-grey-2" v-if="reviews.length > 2">
+  <section class="q-pa-sm q-py-xl" v-if="reviews.length > 2">
     <pos-section-title
       title="Отзывы наших покупателей"
       class="q-pb-lg"
@@ -11,7 +11,8 @@
       >
         <article>
           <q-card
-            class="border-radius-6 grey-border shadow-0 text-center q-py-md q-px-sm"
+            class="border-radius-6 shadow-0 text-center q-py-md q-px-md"
+            style="min-height: 100%"
           >
             <q-img
               :src="review.avatar"
@@ -64,20 +65,20 @@ export default {
         type: 'loop',
         arrows: false,
         pagination: false,
-        autoplay: true,
-        perPage: 4,
+        autoplay: false,
+        perPage: 3.7,
         breakpoints: {
           1400: {
-            perPage: 4
+            perPage: 3.7
           },
           1280: {
-            perPage: 3
+            perPage: 2.7
           },
           1000: {
-            perPage: 2
+            perPage: 1.7
           },
           650: {
-            perPage: 1
+            perPage: 1.2
           }
         }
       },

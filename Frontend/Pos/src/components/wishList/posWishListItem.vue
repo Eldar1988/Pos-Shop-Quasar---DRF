@@ -1,11 +1,11 @@
 <template>
   <div>
     <article style="padding: 5px">
-      <q-card class="border-radius-6 shadow-0 q-pa-sm grey-border">
+      <q-card class="border-radius-6 shadow-0 q-pa-sm">
         <div class="wish-item-wrapper">
           <div class="cart-item-image" style="min-width: 70px;">
             <router-link :to="`/product/${product.slug}`">
-            <img height="70px" width="70px" :src="product.image" style="object-fit: contain; min-width: 70px" />
+            <img height="70px" width="70px" :src="product.image" style="object-fit: contain; min-width: 70px" class="border-radius-6 shadow-lt"/>
             </router-link>
           </div>
           <div class="cart-item-title q-ml-sm">

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import MainColor, Script
+from .models import MainColor, Script, ProductCardSettings
 
 
 class MainColorSerializer(serializers.ModelSerializer):
@@ -16,3 +16,12 @@ class ScriptSerializer(serializers.ModelSerializer):
     class Meta:
         model = Script
         fields = '__all__'
+
+
+class ProductCardSettingsSerializer(serializers.ModelSerializer):
+    """Настройки карточки товара"""
+
+    class Meta:
+        model = ProductCardSettings
+        fields = '__all__'
+

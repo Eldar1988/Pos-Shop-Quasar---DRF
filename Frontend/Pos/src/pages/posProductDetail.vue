@@ -115,8 +115,8 @@
             <div class="col-12 col-md-6 q-pa-sm q-mt-sm">
               <q-btn
                 label="Купить в 1 клик"
-                color="negative"
-                class="border-radius-6 full-width red-shadow q-py-sm text-bold"
+                color="accent"
+                class="border-radius-6 full-width shadow-lt q-py-sm text-bold"
                 icon-right="forward"
                 @click="selfAddToCart(productData.product, quantity, true)"
               />
@@ -125,18 +125,18 @@
               <div class="buttons-grid">
                 <q-btn
                   label="В корзину"
-                  color="negative"
-                  outline
-                  class="border-radius-6 full-width q-py-sm text-bold"
+                  color="white"
+                  text-color="dark"
+                  class="border-radius-6 full-width q-py-sm text-bold shadow-lt"
                   icon-right="add_shopping_cart"
                   @click="selfAddToCart(productData.product, quantity, false)"
                 />
                 <q-btn
-                  color="accent"
+                  color="white"
                   @click="addToWishList(productData.product)"
-                  flat outline
+                  text-color="accent"
                   :icon="productInWishList ? 'favorite' : 'favorite_border'"
-                  class="border-radius-6"
+                  class="border-radius-6 shadow-lt"
                 />
               </div>
             </div>
@@ -159,7 +159,7 @@
             <div class="product-info-section flex q-ml-md" style="align-items: center">
               <p class="text-bold">Категория: </p>
               <router-link :to="`/shop/${productData.product.category.slug}`">
-                <span class="q-ml-sm underline"> {{ productData.product.category.title }}</span>
+                <span class="q-ml-sm underline text-primary"> {{ productData.product.category.title }}</span>
               </router-link>
             </div>
             <!--          xxxxx   -->
@@ -181,11 +181,11 @@
           <!--          Reviews   -->
           <div class="product-reviews q-mt-lg">
             <q-expansion-item
-              dense-toggle
+              dense-toggle group=""
               expand-separator
               icon="chat_bubble_outline"
               label="Отзывы"
-              class="grey-border border-radius-6 text-center text-bold bg-grey-1"
+              class="border-radius-6 text-center bg-white"
             >
               <pos-product-reviews :reviews="productData.product.reviews" :productId="`${productData.product.id}`"/>
             </q-expansion-item>
@@ -194,11 +194,11 @@
           <!--          Characters   -->
           <div v-if="productData.product.characteristic" class="q-mt-sm">
             <q-expansion-item
-              dense-toggle
+              dense-toggle group=""
               expand-separator
               icon="tune"
               label="Характеристики"
-              class="grey-border border-radius-6 text-center text-bold bg-grey-1"
+              class="border-radius-6 text-center bg-white"
             >
               <q-card>
                 <q-card-section class="text-weight-regular text-left">
@@ -215,11 +215,11 @@
           <!--          Info   -->
           <div v-if="productData.product.info" class="product-info-section">
             <q-expansion-item
-              dense-toggle
+              dense-toggle group=""
               expand-separator
               icon="search"
               label="Подробнее"
-              class="grey-border border-radius-6 text-center text-bold bg-grey-1"
+              class="border-radius-6 text-center bg-white"
             >
               <q-card>
                 <q-card-section class="text-weight-regular text-left">
@@ -278,7 +278,7 @@
     <pos-banners/>
     <!--   xxxxx   -->
     <!--    Latest Products   -->
-    <section class="section bg-grey-2 q-py-xl">
+    <section class="section q-py-xl">
       <pos-section-title title="Новинки"/>
       <pos-products-slide-x :products="this.$store.getters.getLatestProducts" class="q-mt-md"/>
     </section>
