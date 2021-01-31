@@ -5,7 +5,7 @@
       icon-right="phone_callback"
       text-color="white"
       :color="color"
-      class="text-weight-bold full-width border-radius-6 shadow-2"
+      class="text-weight-bold full-width border-radius-6 shadow-lt"
       @click="dialog = true"
     />
 
