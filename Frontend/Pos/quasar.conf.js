@@ -46,7 +46,7 @@ module.exports = function (/* ctx */) {
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
 
-      // transpile: false,
+      transpile: true,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).
@@ -54,13 +54,13 @@ module.exports = function (/* ctx */) {
       // transpileDependencies: [],
 
       // rtl: false, // https://quasar.dev/options/rtl-support
-      // preloadChunks: true,
-      // showProgress: false,
-      // gzip: true,
-      // analyze: true,
+      preloadChunks: true,
+      showProgress: true,
+      gzip: true,
+      analyze: false,
 
       // Options below are automatically set depending on the env, set them if you want to override
-      // extractCSS: false,
+      extractCSS: false,
 
       // https://quasar.dev/quasar-cli/handling-webpack
       extendWebpack (cfg) {
@@ -77,8 +77,8 @@ cfg.module.rules.push({
     devServer: {
       https: false,
       port: 8080,
-      host: '192.168.0.155',
-      // host: '192.168.0.199',
+      // host: '192.168.0.155',
+      host: '192.168.0.199',
       open: true // opens browser window automatically
     },
 
@@ -86,7 +86,18 @@ cfg.module.rules.push({
     framework: {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'en-us', // Quasar language pack
-      config: {},
+      config: {
+        capacitor: {
+          // Quasar handles app exit on mobile phone back button.
+          // Requires Quasar v1.9.3+ for true/false, v1.12.6+ for '*' wildcard and array values
+          // backButtonExit: true/false/'*'/['/login', '/home', '/my-page'],
+
+          // On the other hand, the following completely
+          // disables Quasar's back button management.
+          // Requires Quasar v1.14.1+
+          backButton: true
+        }
+      },
 
       // Possible values for "importStrategy":
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
@@ -102,7 +113,10 @@ cfg.module.rules.push({
 
       // Quasar plugins
       plugins: [
-        'Notify'
+        'Notify',
+        'Loading',
+        'Meta',
+        'LoadingBar'
       ]
     },
 
@@ -120,13 +134,13 @@ cfg.module.rules.push({
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `Pos Shop`,
-        short_name: `Pos Shop`,
-        description: `Pos-shop web-app`,
+        name: `Astana matrasy`,
+        short_name: `Astana matrasy`,
+        description: `Astana matrasy web-app`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
-        theme_color: '#523ee8',
+        theme_color: '#ffffff',
         icons: [
           {
             src: 'icons/icon-128x128.png',

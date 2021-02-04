@@ -9,11 +9,10 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-import cloudinary
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -27,9 +26,9 @@ SECRET_KEY = 'q6cszn^*%gj4c%q)4!!nc+u4n4ot6ly9(h-a+q7p6e5cnn0anj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.155']
-# ALLOWED_HOSTS = ['192.168.0.199']
-
+# ALLOWED_HOSTS = ['192.168.0.155']
+ALLOWED_HOSTS = ['192.168.0.199']
+APP_PATH = 'http://192.168.0.199:8000'
 
 # Application definition
 
@@ -46,9 +45,13 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'cloudinary',
+    'easy_thumbnails',
+    'colorfield',
 
     'shop',
     'posshop',
+    'orders',
+    'shop_settings',
 ]
 
 MIDDLEWARE = [
@@ -131,7 +134,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -169,9 +175,15 @@ CACHES = {
     }
 }
 
-CLOUDINARY_URL = 'https://res.cloudinary.com/space-developers/'
-cloudinary.config(
-  cloud_name="space-developers",
-  api_key="432633785332378",
-  api_secret="HS-iGAgZl1FWxAebV_LfedLMaD8"
-)
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'elfarych@yandex.kz'
+# EMAIL_PASSWORD = 'Eldar198804'
+# EMAIL_USE_TLS = True
+#
+# SERVER_EMAIL = EMAIL_HOST_USER
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+

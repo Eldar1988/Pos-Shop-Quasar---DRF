@@ -5,18 +5,18 @@
         404
       </div>
 
-      <div class="text-h2" style="opacity:.4">
-        Oops. Nothing here...
+      <div class="text-subtitle1" style="opacity:.4">
+        Извините, страница не найдена
       </div>
 
       <q-btn
-        class="q-mt-xl"
+        class="q-mt-xl border-radius-6 text-bold"
         color="white"
-        text-color="blue"
+        text-color="dark"
         unelevated
         to="/"
-        label="Go Home"
-        no-caps
+        label="На главную"
+        icon="home"
       />
     </div>
   </div>

@@ -6,8 +6,8 @@
     </q-breadcrumbs>
     <pos-page-header :title="`Товары от производителя ${brand.title}`"/>
     <!--    Brand description   -->
-    <section class="q-pa-sm">
-      <q-card class="border-radius-6 grey-border shadow-0 q-px-sm q-pt-md q-pb-sm">
+    <section class="q-pa-sm" v-if="brand.description">
+      <q-card class="border-radius-6 shadow-0 q-px-sm q-pt-md q-pb-sm">
         <p class="text-center q-pb-sm">{{ brand.description }}</p>
       </q-card>
     </section>
@@ -17,9 +17,10 @@
       <pos-products-wrapper :products="brand.products"/>
     </section>
     <!--    xxxxx   -->
-    <section>
+    <section style="margin-top: 100px">
       <pos-banners/>
     </section>
+    <pos-brands-slider />
   </q-page>
 </template>
 
@@ -27,17 +28,52 @@
 import PosPageHeader from "components/service/posPageHeader";
 import PosProductsWrapper from "components/shop/posProductsWrapper";
 import PosBanners from "components/shop/posBanners";
+import PosBrandsSlider from "components/sliders/posBrandsSlider";
 
 export default {
   name: "BrandDetail",
-  components: {PosBanners, PosProductsWrapper, PosPageHeader},
+  components: {PosBrandsSlider, PosBanners, PosProductsWrapper, PosPageHeader},
   computed: {
     brand() {
       return this.$store.getters.getBrandDetail
     }
   },
   preFetch({store, currentRoute}) {
+    let price = 2000
     return store.dispatch('fetchBrandData', currentRoute.params.slug)
+  },
+  meta() {
+    let brand = this.$store.getters.getBrandDetail
+    let siteTitle = this.$store.getters.getCompanyInfo.name
+    return {
+      title: `${brand.title} | ${siteTitle}`,
+      meta: {
+        description: {
+          name: "description",
+          content: brand.description,
+        },
+        ogType: {
+          property: "og:type",
+          content: "website",
+        },
+        ogTitle: {
+          property: "og:title",
+          content: `${brand.title} | ${siteTitle}`,
+        },
+        ogUrl: {
+          property: "og:url",
+          content: `${this.$store.getters.getCompanyInfo.site_url}/brand/${brand.slug}`,
+        },
+        ogDescription: {
+          property: "og:description",
+          content: brand.description,
+        },
+        ogImage: {
+          property: "og:image",
+          content: brand.image
+        }
+      }
+    }
   }
 }
 </script>

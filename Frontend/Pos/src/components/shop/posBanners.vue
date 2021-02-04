@@ -17,10 +17,12 @@
         <q-btn
           v-if="banner.btn_text"
           :label="banner.btn_text"
-          color="negative"
-          style="position: absolute; bottom: 10px; right: 10px; z-index: 30"
-          size="sm" unelevated
-          class="text-bold"
+          color="accent"
+          style="position: absolute; bottom: 10px; right: 10px; z-index: 30; border: 2px solid rgba(255,255,255,.8)"
+          size="md"
+          unelevated
+          class="text-bold border-radius-6"
+
         />
         <template v-slot:loading>
           <q-skeleton class="banner-image full-width" />
@@ -53,23 +55,12 @@ export default {
   },
   methods: {
     async loadBanners() {
-      try {
-        this.banners = await this.$axios.get(`${this.$store.getters.getServerURL}/banners/`)
+        this.banners = await this.$axios.get(`${this.$store.getters.getServerURL}/images/`)
           .then(({data}) => {
             this.reloadBannersStatus = false
             return data
           })
       }
-      catch (e) {
-        this.reloadBannersStatus = true
-        this.reloadBanners()
-      }
-    },
-    reloadBanners() {
-      let reload = setInterval(() => {
-        this.reloadBannersStatus ? this.loadBanners() : clearInterval(reload)
-      }, 5000)
-    }
   }
 }
 </script>

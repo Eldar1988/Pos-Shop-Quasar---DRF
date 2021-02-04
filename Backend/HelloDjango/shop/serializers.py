@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Category, Brand, Label, Product, Image, Review
+from .models import Category, Brand, Label, Product, Image, Review, Video
+from django.conf import settings
 
 
 class ChildCategoryListSerializer(serializers.ModelSerializer):
@@ -7,7 +8,7 @@ class ChildCategoryListSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Category
@@ -20,7 +21,7 @@ class CategoryListSerializer(serializers.ModelSerializer):
     child = ChildCategoryListSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Category
@@ -32,11 +33,11 @@ class BrandListSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Brand
-        exclude = ('description', 'order')
+        exclude = ('description', 'order', 'full_description')
 
 
 class LabelListSerializer(serializers.ModelSerializer):
@@ -53,11 +54,11 @@ class ProductListSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Product
-        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'rating', 'slug')
+        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'rating', 'slug', 'image_contain')
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -65,7 +66,7 @@ class ImageSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Image
@@ -77,7 +78,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Review
-        exclude = ('pub_date', 'public')
+        exclude = ('pub_date',)
 
 
 class ChildCategoryDetailSerializer(serializers.ModelSerializer):
@@ -86,7 +87,7 @@ class ChildCategoryDetailSerializer(serializers.ModelSerializer):
     products = ProductListSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Category
@@ -101,7 +102,7 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
     parent = ChildCategoryListSerializer(many=False, read_only=True)
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Category
@@ -114,7 +115,7 @@ class BrandDetailSerializer(serializers.ModelSerializer):
     products = ProductListSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Brand
@@ -130,17 +131,29 @@ class LabelDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class VideoSerializer(serializers.ModelSerializer):
+    """Дополнительное виедо товара"""
+    class Meta:
+        model = Video
+        exclude = ('order', 'product')
+
+
 class ProductDetailSerializer(serializers.ModelSerializer):
     """Товар (детали)"""
+    full_image = serializers.SerializerMethodField('get_full_image_url')
     image = serializers.SerializerMethodField('get_image_url')
     category = CategoryListSerializer(many=False)
     brand = BrandListSerializer(many=False)
     labels = LabelListSerializer(many=True, read_only=True)
     reviews = ReviewSerializer(many=True, read_only=True)
     images = ImageSerializer(many=True, read_only=True)
+    videos = VideoSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
-        return obj.image.url
+        return f'{settings.APP_PATH}{obj.image.url}'
+
+    def get_full_image_url(self, obj):
+        return f'{settings.APP_PATH}{obj.full_image.url}'
 
     class Meta:
         model = Product

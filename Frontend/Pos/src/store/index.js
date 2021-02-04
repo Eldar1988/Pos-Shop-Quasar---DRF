@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import main from './modules/main'
 import shop from './modules/shop'
+import pages from './modules/pages'
 
 // import example from './module-example'
 
@@ -20,11 +21,15 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       main,
-      shop
+      shop,
+      pages
     },
     state: {
-      serverURL: 'http://192.168.0.155:8000'
+      // serverURL: 'http://192.168.0.155:8000'
       // serverURL: 'http://192.168.0.199:8000'
+      // serverURL: 'https://dj.posshop.kz.na4u.ru'
+      // serverURL: 'https://shop.js-code.ru'
+      serverURL: 'https://astamatrasy.kz.na4u.ru'
     },
     getters: {
       getServerURL:(state) => state.serverURL

@@ -14,4 +14,8 @@ urlpatterns = [
     path('category/<slug:slug>/', views.CategoryDetailView.as_view()),
     # Товар детали
     path('product/<slug:slug>/', views.ProductDetailView.as_view()),
+    # + Отзыв
+    path('create_review/', views.CreateReviewView.as_view()),
+    # Поиск товаров
+    path('search/', views.SearchView.as_view()),
 ]

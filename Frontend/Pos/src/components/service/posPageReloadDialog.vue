@@ -28,6 +28,7 @@ export default {
     autoReload() {
       let reload = setInterval(() => {
         this.$store.getters.getServerStatus ? this.$store.dispatch('fetchMainData') : clearInterval(reload)
+        // location.reload()
       }, 5000)
     }
   }

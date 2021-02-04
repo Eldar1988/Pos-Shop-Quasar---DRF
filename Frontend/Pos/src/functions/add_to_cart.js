@@ -10,7 +10,7 @@ export default function addToCart(product= {}, quantity=1) {
   else {
     cart = JSON.parse(localStorage.cart)
     cart.forEach((item) => {
-      if (item.title === product.title) {
+      if (item.id === product.id) {
         item.quantity += quantity
         productInCart = true
       }

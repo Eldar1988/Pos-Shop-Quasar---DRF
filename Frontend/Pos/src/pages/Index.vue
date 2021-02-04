@@ -1,19 +1,23 @@
 <template>
   <q-page class="">
+    <script type="application/ld+json" v-html="schema"></script>
     <pos-page-header :title="companyInfo.title"/>
     <pos-slider/>
     <section class="section">
-      <pos-section-title title="Новинки" />
-      <pos-hot-products-slider class="q-mt-sm"/>
+      <pos-section-title title="Новинки"/>
+        <pos-products-slide-x :products="this.$store.getters.getLatestProducts" class="q-mt-md" />
     </section>
 
     <pos-banners/>
     <pos-product-tabs/>
-    <section class="q-mt-xl q-px-sm q-py-xl bg-grey-2">
+    <section class="q-mt-xl q-px-sm q-py-xl">
       <pos-section-title title="Категории"/>
       <pos-categories :categories="categories" class="q-mt-lg"/>
     </section>
-    <pos-shop-reviews />
+    <pos-brands-slider />
+    <pos-shop-reviews class="section"/>
+    <pos-clients-slider />
+    <!--    BRANDS & REVIEWS   -->
   </q-page>
 </template>
 
@@ -24,14 +28,18 @@ import PosProductTabs from "components/homePage/posProductTabs";
 import PosBanners from "components/shop/posBanners";
 import PosCategories from "components/shop/posCategories";
 import PosSectionTitle from "components/service/posSectionTitle";
-import PosHotProductsSlider from "components/homePage/posHotProductsSlider";
+import PosProductsSlideX from "components/sliders/posProductsSlideX";
 import PosShopReviews from "components/homePage/posShopReviews";
+import PosBrandsSlider from "components/sliders/posBrandsSlider";
+import PosClientsSlider from "components/sliders/posClientsSlider";
 
 export default {
   name: 'PageIndex',
   components: {
+    PosClientsSlider,
+    PosBrandsSlider,
     PosShopReviews,
-    PosHotProductsSlider,
+    PosProductsSlideX,
     PosSectionTitle, PosCategories, PosBanners, PosProductTabs, PosSlider, PosPageHeader
   },
   computed: {
@@ -40,6 +48,48 @@ export default {
     },
     categories() {
       return this.$store.getters.getCategories
+    }
+  },
+  data() {
+    return {
+      schema: {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "url": this.$store.getters.getCompanyInfo.site_url,
+        "logo": this.$store.getters.getCompanyInfo.logo
+      },
+    }
+  },
+  meta() {
+    let data = this.$store.getters.getCompanyInfo
+    return {
+      title: data.title,
+      meta: {
+        description: {
+          name: "description",
+          content: data.description,
+        },
+        ogType: {
+          property: "og:type",
+          content: "website",
+        },
+        ogTitle: {
+          property: "og:title",
+          content: data.title,
+        },
+        ogUrl: {
+          property: "og:url",
+          content: this.$store.getters.getCompanyInfo.site_url,
+        },
+        ogDescription: {
+          property: "og:description",
+          content: data.description,
+        },
+        ogImage: {
+          property: "og:image",
+          content: data.logo
+        }
+      }
     }
   }
 }

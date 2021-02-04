@@ -22,7 +22,7 @@
         :src="image"
         class="product-detail-slider"
         ratio="1:1"
-        contain
+        :contain="!firstImageContain"
         :title="title" :alt="`Фото: ${title}`"
       >
         <template v-slot:loading>
@@ -39,7 +39,7 @@
       <q-img
         :src="image.image"
         class="product-detail-slider"
-        contain
+        :contain="!image.contain"
         :title="title" :alt="`Фото: ${title}`"
       >
         <template v-slot:loading>
@@ -57,6 +57,10 @@ export default {
     image: {
       type: String,
       default: null
+    },
+    firstImageContain: {
+      type: Boolean,
+      default: true
     },
     images: {
       type: Array,

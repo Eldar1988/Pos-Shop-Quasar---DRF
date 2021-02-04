@@ -1,21 +1,21 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Info, Page, Contacts, Driver, Social, Client, Slider, Banner, Slide, ShopReview
-
+from .models import Info, Page, Contacts, Driver, Social, Client, Slider, Banner, Slide, ShopReview, PrivacyPolicy, \
+    Benefit, QuestionAndAnswer
 
 admin.site.register(Info)
 admin.site.register(Page)
 admin.site.register(Contacts)
-admin.site.register(Driver)
 admin.site.register(Social)
 admin.site.register(Slider)
+admin.site.register(PrivacyPolicy)
 
 
 @admin.register(ShopReview)
 class ShopReviewAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'name', 'rating', 'order', )
-    list_editable = ('name', 'rating', 'order', )
+    list_display = ('get_image', 'name', 'rating', 'order',)
+    list_editable = ('name', 'rating', 'order',)
     save_as = True
     save_on_top = True
 
@@ -27,7 +27,7 @@ class ShopReviewAdmin(admin.ModelAdmin):
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'url')
+    list_display = ('get_image', 'title')
     save_as = True
     save_on_top = True
 
@@ -55,11 +55,44 @@ class SliderAdmin(admin.ModelAdmin):
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('get_image', 'title', 'url', 'btn_text', 'contain')
     list_editable = ('title', 'url', 'btn_text', 'contain')
+    readonly_fields = ('get_image',)
 
     save_as = True
     save_on_top = True
 
     def get_image(self, obj):
-        return mark_safe(f"<img src={obj.image.url} height=50px>")
+        # return 'wad'
+        return mark_safe(f"<img src='{obj.image.url}' height=50px>")
 
     get_image.short_description = 'Баннер'
+
+
+@admin.register(Benefit)
+class BenefitAdmin(admin.ModelAdmin):
+    list_display = ('title', 'icon', 'order')
+    list_editable = ('icon', 'order')
+
+    save_as = True
+    save_on_top = True
+
+
+@admin.register(Driver)
+class DriverAdmin(admin.ModelAdmin):
+    list_display = ('title', 'order')
+    list_editable = ('order',)
+
+    save_as = True
+    save_on_top = True
+
+
+@admin.register(QuestionAndAnswer)
+class QuestionAndAnswerAdmin(admin.ModelAdmin):
+    list_display = ('question', 'order')
+    list_editable = ('order',)
+
+    save_as = True
+    save_on_top = True
+
+
+admin.site.site_title = 'JS Shop v0.0.1'
+admin.site.site_header = 'JS Shop v0.0.1 - администрирование'

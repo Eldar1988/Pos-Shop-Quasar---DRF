@@ -4,6 +4,7 @@
       v-if="!serverUnloadedStatus"
       navigation-position="top"
       animated
+      swipeable
       v-model="slide"
       :navigation="slider.dots"
       infinite
@@ -30,7 +31,7 @@
           </template>
           <div class="slider-meta">
             <div class="text-center">
-              <h2 v-if="slide.title">
+              <h2 v-if="slide.title" class="q-mb-md">
               <span class="slider-meta-content border-radius-6">
               {{ slide.title }}
                 </span>
@@ -38,7 +39,7 @@
               <q-btn
                 v-if="slide.btn_text"
                 :label="slide.btn_text"
-                color="negative"
+                color="accent"
                 class="text-weight-bold q-my-sm q-px-md border-radius-6"
                 icon-right="keyboard_arrow_right"
                 :to="slide.url"
