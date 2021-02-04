@@ -42,6 +42,7 @@
         flat
         icon="help_outline"
         direction="up" padding="10px"
+        style="z-index: 100"
       >
         <q-fab-action label-position="right" color="primary" icon="question_answer" label="Вопросы и ответы" to="/questions"/>
         <q-fab-action label-position="right" color="accent" icon="phone_callback" label="Консультация" @click="callBack"/>
@@ -95,8 +96,13 @@ export default {
   align-items: start
   z-index: 1000
   padding: 3px 0 0
+  overflow: visible
 
 .q-btn--fab .q-icon, .q-btn--fab-mini .q-icon
   font-size: 34px !important
+
+.q-fab__icon-holder
+  min-width: 32px !important
+  min-height: 26px !important
 
 </style>

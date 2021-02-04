@@ -19,7 +19,6 @@
         </div>
         <!--        xxxxx   -->
         <q-separator inset="" dark class="q-mt-md"/>
-
         <!--        Benefits   -->
         <div class="q-mt-lg">
           <splide :options="options">
@@ -36,8 +35,6 @@
               </q-card>
             </splide-slide>
           </splide>
-
-
         </div>
 
         <!--        xxxxx   -->
@@ -67,9 +64,8 @@
         <!--        xxxxx   -->
         <q-separator inset="" dark class="q-mt-md"/>
         <small class="text-grey-5 q-mt-sm block">{{ year }}. Все права защищены.</small>
-        <small class="text-grey-5 q-mt-sm block">Разработано студией <a href="https://js-code.ru" target="_blank"
-                                                                        class="text-grey-5 underline text-bold">JS
-          Code</a></small>
+        <small class="text-grey-5 q-mt-sm block">Разработано студией <a href="https://dev-space.ru" target="_blank"
+                                                                        class="text-grey-5 underline text-bold">Space Developers</a></small>
 
       </div>
     </div>
@@ -86,9 +82,9 @@ export default {
   components: {Splide, SplideSlide},
   data() {
     return {
+      benefits: [],
       options: {
-        rewind: true,
-        width: '100%',
+
         type: 'fade',
         arrows: false,
         speed: 1000,
@@ -98,12 +94,12 @@ export default {
       }
     }
   },
+  mounted() {
+    this.getBenefits()
+  },
   computed: {
     socials() {
       return this.$store.getters.getSocials
-    },
-    benefits() {
-      return this.$store.getters.getBenefits
     },
     info() {
       return this.$store.getters.getCompanyInfo
@@ -112,7 +108,13 @@ export default {
       let date = new Date()
       return date.getFullYear()
     }
+  },
+  methods: {
+    getBenefits() {
+      this.benefits = this.$store.getters.getBenefits
+    }
   }
+
 }
 </script>
 
