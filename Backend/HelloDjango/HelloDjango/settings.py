@@ -26,8 +26,8 @@ SECRET_KEY = 'q6cszn^*%gj4c%q)4!!nc+u4n4ot6ly9(h-a+q7p6e5cnn0anj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['192.168.0.155']
-ALLOWED_HOSTS = ['192.168.0.199']
+ALLOWED_HOSTS = ['192.168.0.155']
+# ALLOWED_HOSTS = ['192.168.0.199']
 APP_PATH = 'http://192.168.0.199:8000'
 
 # Application definition
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'posshop',
     'orders',
     'shop_settings',
+    'blog',
 ]
 
 MIDDLEWARE = [

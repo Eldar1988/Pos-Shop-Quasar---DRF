@@ -32,6 +32,8 @@ class Post(models.Model):
                                              help_text='Необходим для сортировки')
     slug = models.SlugField('Slug', unique=True, db_index=True,
                             help_text='Только маленькие латинские буквы, без пробелов и спецсимволов')
+    offer_url = models.SlugField('Slug товара или категории (необязательно)', null=True, blank=True,
+                                 help_text='Добавляйте только в том случае, если пост это обзор товара или категории товаров')
     public = models.BooleanField('Опубликовать', default=False)
     date = models.DateTimeField('Дата публикации', auto_now_add=True)
     update = models.DateTimeField('Обновлено', auto_now=True)
