@@ -134,9 +134,9 @@ cfg.module.rules.push({
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `Astana matrasy`,
-        short_name: `Astana matrasy`,
-        description: `Astana matrasy web-app`,
+        name: `JS Shop`,
+        short_name: `JS Shop app`,
+        description: `JS shop web application`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
