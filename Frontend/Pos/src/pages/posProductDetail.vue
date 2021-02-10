@@ -29,7 +29,8 @@
             <h1 class="product-header-text q-mt-sm">{{ productData.product.title }}</h1>
             <!--          Rating   -->
             <div v-if="productData.product.rating" class="q-mt-sm">
-              <q-rating v-model="productData.product.rating" size="28px" color="orange" readonly/>
+              <q-rating v-model="productData.product.rating" size="28px" color="orange" readonly
+                        style="text-shadow: none !important;"/>
             </div>
           </div>
           <!--          Product price   -->
@@ -59,27 +60,6 @@
           <div class="product-info-section">
             <p>{{ productData.product.description }}</p>
           </div>
-
-          <!--          Share & Brand   -->
-          <div class="flex justify-around">
-            <div class="q-mt-lg">
-              <!--          Brand   -->
-              <div v-if="productData.product.brand" class="product-info-section text-left q-ml-md">
-                <router-link :to="`/brand/${productData.product.brand.slug}`">
-                  <q-img :src="productData.product.brand.image" height="30px" contain width="100px" class="q-ml-sm"
-                         position="left"/>
-                </router-link>
-              </div>
-            </div>
-            <!--            Share   -->
-            <div class="">
-              <pos-share
-                class="q-mt-md" :description="productData.product.description"
-                :image="productData.product.image"
-              />
-            </div>
-          </div>
-          <!--          xxxxx   -->
           <!--          Actions   -->
           <div class="row q-my-lg">
             <q-separator inset=""/>
@@ -146,17 +126,104 @@
             <q-separator inset="" class="q-mt-sm"/>
           </div>
           <!--          xxxxx   -->
+          <!--          Share & Brand   -->
+          <div class="flex justify-between q-pr-sm">
+            <div class="">
+              <!--          Brand   -->
+              <div v-if="productData.product.brand" class="product-info-section text-left">
+                <router-link :to="`/brand/${productData.product.brand.slug}`">
+                  <q-img :src="productData.product.brand.image" height="50px" width="150px" contain class=""
+                         position="left" style="margin-top: -7px"/>
+                </router-link>
+              </div>
+            </div>
+            <!--            Share   -->
+            <div class="">
+              <pos-share
+                class="" :description="productData.product.description"
+                :image="productData.product.image"
+              />
+            </div>
+          </div>
+          <!--          xxxxx   -->
+
+
+        </div>
+
+      </div>
+      <div class="product-detail-wrapper">
+        <!--          Reviews - Characters - More info   -->
+        <div class="q-pa-sm">
+          <!--          Reviews   -->
+          <div class="product-reviews ">
+            <q-expansion-item
+              dense-toggle group=""
+              expand-separator
+              icon="chat_bubble_outline"
+              label="Отзывы"
+              class="border-radius-6 text-center bg-white text-bold"
+            >
+              <pos-product-reviews :reviews="productData.product.reviews" :productId="`${productData.product.id}`"/>
+            </q-expansion-item>
+          </div>
+          <!--          xxxxx   -->
+          <!--          Characters   -->
+          <div v-if="productData.product.characteristic" class="q-mt-sm">
+            <q-expansion-item
+              dense-toggle group=""
+              expand-separator
+              icon="tune"
+              label="Характеристики"
+              class="border-radius-6 text-center bg-white text-bold"
+            >
+              <q-card>
+                <q-card-section class="text-weight-regular text-left">
+                  <div
+                    v-html="productData.product.characteristic"
+                    style="overflow-x:scroll"
+                  >
+                  </div>
+                </q-card-section>
+              </q-card>
+            </q-expansion-item>
+          </div>
+          <!--          xxxxx   -->
+          <!--          Info   -->
+          <div v-if="productData.product.info" class="product-info-section">
+            <q-expansion-item
+              dense-toggle group=""
+              expand-separator
+              icon="search"
+              label="Подробнее"
+              class="border-radius-6 text-center bg-white text-bold"
+            >
+              <q-card>
+                <q-card-section class="text-weight-regular text-left">
+                  <div
+                    v-html="productData.product.info"
+                    style="overflow-x:scroll"
+                  >
+                  </div>
+                </q-card-section>
+              </q-card>
+            </q-expansion-item>
+          </div>
+          <!--          xxxxx   -->
+        </div>
+
+        <!--          Article  Category  Labels   -->
+        <div class="q-pa-sm">
           <!--          Article & Category   -->
-          <div class="flex" style="align-items: center">
+          <div class="">
             <!--          Article  -->
-            <div v-if="productData.product.article" class="product-info-section">
+            <div v-if="productData.product.article" class="">
               <p class="text-bold">
                 Артикул: <span class="text-weight-regular">{{ productData.product.article }}</span>
               </p>
             </div>
             <!--            xxxxx   -->
             <!--          Category   -->
-            <div class="product-info-section flex q-ml-md" style="align-items: center">
+            <div class="product-info-section flex" style="align-items: center">
               <p class="text-bold">Категория: </p>
               <router-link :to="`/shop/${productData.product.category.slug}`">
                 <span class="q-ml-sm underline text-primary"> {{ productData.product.category.title }}</span>
@@ -178,61 +245,6 @@
             />
           </div>
           <!--          xxxxx   -->
-          <!--          Reviews   -->
-          <div class="product-reviews q-mt-lg">
-            <q-expansion-item
-              dense-toggle group=""
-              expand-separator
-              icon="chat_bubble_outline"
-              label="Отзывы"
-              class="border-radius-6 text-center bg-white"
-            >
-              <pos-product-reviews :reviews="productData.product.reviews" :productId="`${productData.product.id}`"/>
-            </q-expansion-item>
-          </div>
-          <!--          xxxxx   -->
-          <!--          Characters   -->
-          <div v-if="productData.product.characteristic" class="q-mt-sm">
-            <q-expansion-item
-              dense-toggle group=""
-              expand-separator
-              icon="tune"
-              label="Характеристики"
-              class="border-radius-6 text-center bg-white"
-            >
-              <q-card>
-                <q-card-section class="text-weight-regular text-left">
-                  <div
-                    v-html="productData.product.characteristic"
-                    style="overflow-x:scroll"
-                  >
-                  </div>
-                </q-card-section>
-              </q-card>
-            </q-expansion-item>
-          </div>
-          <!--          xxxxx   -->
-          <!--          Info   -->
-          <div v-if="productData.product.info" class="product-info-section">
-            <q-expansion-item
-              dense-toggle group=""
-              expand-separator
-              icon="search"
-              label="Подробнее"
-              class="border-radius-6 text-center bg-white"
-            >
-              <q-card>
-                <q-card-section class="text-weight-regular text-left">
-                  <div
-                    v-html="productData.product.info"
-                    style="overflow-x:scroll"
-                  >
-                  </div>
-                </q-card-section>
-              </q-card>
-            </q-expansion-item>
-          </div>
-          <!--          xxxxx   -->
         </div>
       </div>
     </article>
@@ -240,7 +252,7 @@
 
     <!--    Videos   -->
     <section v-if="productData.product.video" class="q-mt-lg section">
-      <div class="bg-grey-2 q-py-sm">
+      <div class="q-py-sm">
         <pos-section-title title="Видео"/>
       </div>
       <div class="q-pa-sm">
@@ -270,7 +282,7 @@
     </section>
     <!--    xxxxx   -->
     <!--    Last sean products   -->
-    <section class="q-mt-xl q-py-lg">
+    <section v-if="lastSeanProducts" class="q-mt-xl q-py-lg">
       <pos-section-title title="Вы недавно смотрели:"/>
       <pos-products-scroll-x :products="lastSeanProducts"/>
     </section>
@@ -397,18 +409,19 @@ export default {
 
   },
 
-  mounted() {
-    this.setLastSeanProducts()
+  created() {
     this.getLastSeanProducts()
     this.checkWishList()
-    this.kaspiButton()
+    if (this.$store.state.kaspiButton) this.kaspiButton()
+  },
+  beforeUpdate() {
+    this.setLastSeanProducts()
   },
   watch: {
     async productData() {
       await this.checkWishList()
-      await this.setLastSeanProducts()
       await this.getLastSeanProducts()
-      await this.kaspiButton()
+      if (this.$store.state.kaspiButton) this.kaspiButton()
     }
   },
   methods: {
@@ -512,7 +525,6 @@ export default {
 .product-detail-wrapper
   display: grid
   grid-template-columns: 1fr 1fr
-  align-items: center
 
 .product-header-text
   font-size: 22px
@@ -541,6 +553,8 @@ export default {
   grid-template-columns: 4fr 1fr
   grid-gap: 5px
 
+.q-rating__icon
+  text-shadow: none !important
 
 @media screen and (max-width: 1210px)
   .product-detail-wrapper
