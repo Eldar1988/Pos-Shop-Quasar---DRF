@@ -56,7 +56,7 @@ class OrderItem(models.Model):
                                 verbose_name='Товар')
     price = models.DecimalField('Цена', max_digits=10, decimal_places=0)
     quantity = models.PositiveSmallIntegerField('Количество', default=1)
-    item_sum = models.PositiveSmallIntegerField('Итого', null=True, blank=True)
+    item_sum = models.IntegerField('Итого', null=True, blank=True)
 
     def __str__(self):
         return f'{self.id}'

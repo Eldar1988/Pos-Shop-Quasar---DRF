@@ -409,7 +409,7 @@ export default {
 
   },
 
-  created() {
+  mounted() {
     this.getLastSeanProducts()
     this.checkWishList()
     if (this.$store.state.kaspiButton) this.kaspiButton()
