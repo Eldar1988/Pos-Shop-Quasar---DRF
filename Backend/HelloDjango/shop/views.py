@@ -1,4 +1,6 @@
+from django.http import HttpResponse
 from rest_framework.views import APIView
+from django.views import View
 from rest_framework import viewsets
 from rest_framework.response import Response
 
@@ -88,4 +90,17 @@ class SearchView(APIView):
         serializer = ProductListSerializer(products, many=True)
         return Response(serializer.data)
 
+
+class SetInStockQuantity(View):
+    """Установка количества в наличии для всех товаров"""
+    def get(self, request, value):
+        products = Product.objects.all()
+        if request.user.is_authenticated and request.user.is_staff:
+            for i in products:
+                i.in_stock_quantity = value
+                i.save()
+
+            return HttpResponse(f'Операция выполнена, изменено {products.count()} товаров.')
+
+        return HttpResponse('У Вас недосаточно прав...')
 

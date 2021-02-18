@@ -18,4 +18,5 @@ urlpatterns = [
     path('create_review/', views.CreateReviewView.as_view()),
     # Поиск товаров
     path('search/', views.SearchView.as_view()),
+    path('set_stock/<int:value>/', views.SetInStockQuantity.as_view())
 ]

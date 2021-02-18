@@ -71,9 +71,9 @@ class ReviewInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'rating', 'show_on_home_page',
+    list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'in_stock_quantity', 'rating', 'show_on_home_page',
                     'future', 'hit', 'latest', 'public', 'order')
-    list_editable = ('title', 'category', 'price', 'old_price', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
+    list_editable = ('title', 'category', 'price', 'old_price', 'in_stock_quantity', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
     list_filter = ('category', 'brand', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date', 'update')
     search_fields = ('title',)
     filter_vertical = ('labels',)
