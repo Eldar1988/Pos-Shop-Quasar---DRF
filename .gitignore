@@ -10,7 +10,7 @@ __pycache__/
 local_settings.py
 db.sqlite3-journal
 media
-static/
+**static
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
 # in your Git repository. Update and uncomment the following line accordingly.
@@ -724,3 +724,6 @@ yarn-error.log
 
 
 # End of https://www.toptal.com/developers/gitignore/api/pycharm,pycharm+all,pycharm+iml,webstorm,webstorm+all,webstorm+iml,django,python,vue,vuejs,node
+Backend/HelloDjango/static/admin/css/rtl.css
+Backend/HelloDjango/static/admin/css/changelists.css
+Backend/HelloDjango/db.sqlite3

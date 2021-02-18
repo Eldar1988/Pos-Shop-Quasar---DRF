@@ -57,3 +57,5 @@ class TelegramBot(models.Model):
     class Meta:
         verbose_name = 'Telegram bot'
         verbose_name_plural = '4.4 Telegram bot'
+
+

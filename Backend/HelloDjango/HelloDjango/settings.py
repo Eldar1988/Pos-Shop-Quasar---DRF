@@ -16,7 +16,6 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -26,13 +25,14 @@ SECRET_KEY = 'q6cszn^*%gj4c%q)4!!nc+u4n4ot6ly9(h-a+q7p6e5cnn0anj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.155']
-# ALLOWED_HOSTS = ['192.168.0.199']
+# ALLOWED_HOSTS = ['192.168.0.155']
+ALLOWED_HOSTS = ['192.168.0.199']
 APP_PATH = 'http://192.168.0.199:8000'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,7 +86,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'HelloDjango.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -96,7 +95,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -116,7 +114,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -129,7 +126,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -175,7 +171,7 @@ CACHES = {
         'LOCATION': 'unique-snowflake'
     }
 }
-
+GRAPPELLI_ADMIN_TITLE = 'JS Shop v 1.1 - администрирование'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #
 # EMAIL_HOST = 'smtp.yandex.ru'
@@ -186,5 +182,3 @@ CACHES = {
 #
 # SERVER_EMAIL = EMAIL_HOST_USER
 # DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
-

@@ -90,6 +90,7 @@ class Product(models.Model):
     hit = models.BooleanField('Хит продаж', default=False)
     latest = models.BooleanField('Новинка', default=False)
     public = models.BooleanField('Опубликовать', default=True)
+    in_stock_quantity = models.IntegerField('Количество в наличии', default=0)
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
     shipping_detail = models.CharField('Условия доставки', default='Доставка по всему Казахстану', max_length=255,
                                        help_text='Если Вы продаете локально в одном городе, необходмо указать город')

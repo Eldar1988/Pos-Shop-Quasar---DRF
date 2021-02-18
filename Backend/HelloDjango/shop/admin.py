@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-
 from .models import Category, Brand, Label, Product, Image, Review, Video
 
 
@@ -74,20 +73,19 @@ class ReviewInline(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'rating', 'show_on_home_page',
                     'future', 'hit', 'latest', 'public', 'order')
-    list_editable = ('title', 'price', 'category', 'old_price', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
+    list_editable = ('title', 'category', 'price', 'old_price', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
     list_filter = ('category', 'brand', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date', 'update')
     search_fields = ('title',)
-    filter_horizontal = ('labels',)
     filter_vertical = ('labels',)
     list_per_page = 10
     inlines = [VideoInline, ImageInline, ReviewInline]
     fields = [
         ('title', 'article', 'slug'),
         ('category', 'brand'),
-        ('price', 'old_price'),
+        ('price', 'old_price', 'in_stock_quantity'),
         ('image', 'get_image'),
         ('full_image', 'get_full_image'),
-        ('image_contain'),
+        ('image_contain',),
         ('description',),
         ('show_on_home_page','future', 'hit', 'latest', 'public'),
         ('shipping_detail',),
