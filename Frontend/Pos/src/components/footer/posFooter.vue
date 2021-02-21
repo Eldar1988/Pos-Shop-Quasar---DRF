@@ -61,6 +61,9 @@
         <router-link to="/privacy_policy" class="text-grey-5 q-mt-md block">
           <span class="">Политика конфиденциальности</span>
         </router-link>
+        <router-link to="/info/publichnaya_oferta" class="text-grey-5 q-mt-md block">
+          <span class="">Публичная оферта</span>
+        </router-link>
         <!--        xxxxx   -->
         <q-separator inset="" dark class="q-mt-md"/>
         <small class="text-grey-5 q-mt-sm block">{{ year }}. Все права защищены.</small>

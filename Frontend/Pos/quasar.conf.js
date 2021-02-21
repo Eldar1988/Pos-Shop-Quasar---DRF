@@ -134,9 +134,9 @@ cfg.module.rules.push({
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `JS Shop`,
-        short_name: `JS Shop app`,
-        description: `JS shop web application`,
+        name: `Pos shop`,
+        short_name: `Pos shop app`,
+        description: `Pos shop web application`,
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',

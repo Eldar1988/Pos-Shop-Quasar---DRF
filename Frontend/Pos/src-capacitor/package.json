@@ -1,7 +1,7 @@
 {
-  "name": "js-shop",
+  "name": "pos-shop",
   "version": "0.0.1",
-  "description": "JS-Shop web-app",
+  "description": "Pos shop web-app",
   "author": "JS Code",
   "private": true,
   "dependencies": {

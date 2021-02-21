@@ -4,7 +4,7 @@
       <q-breadcrumbs-el icon="home" to="/"/>
       <q-breadcrumbs-el label="Файлы"/>
     </q-breadcrumbs>
-    <pos-page-header title="Файлы"/>
+    <pos-page-header title="Драйверы"/>
     <section class="info-page">
       <div
         v-for="file in files"

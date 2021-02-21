@@ -1,6 +1,6 @@
 {
-  "appId": "org.capacitor.quasar.app",
-  "appName": "JS Shop",
+  "appId": "posshop.kz.app",
+  "appName": "Pos shop",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www"

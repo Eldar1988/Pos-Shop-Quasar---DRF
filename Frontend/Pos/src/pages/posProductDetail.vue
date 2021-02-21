@@ -61,7 +61,7 @@
             <p>{{ productData.product.description }}</p>
           </div>
           <!--          Actions   -->
-          <div class="row q-my-lg">
+          <div v-if="productData.product.in_stock_quantity > 0" class="row q-my-lg">
             <q-separator inset=""/>
             <!--        Quantity   -->
             <div class="full-width flex justify-center">
@@ -124,6 +124,14 @@
             <div class="q-mt-sm q-ml-sm" id="dynamic"></div>
             <!--            xxxxx   -->
             <q-separator inset="" class="q-mt-sm"/>
+          </div>
+          <div v-else>
+            <q-card
+              class="bg-accent shadow-0 q-px-md q-py-lg q-mt-lg q-mb-md text-center"
+              dark
+            >
+              Данного товара нет в наличии.<br>Ожидаем поступление.
+            </q-card>
           </div>
           <!--          xxxxx   -->
           <!--          Share & Brand   -->
