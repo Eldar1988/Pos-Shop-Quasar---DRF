@@ -1,25 +1,42 @@
 from django.http import HttpResponse
 from rest_framework.views import APIView
+from rest_framework import generics
 from django.views import View
 from rest_framework import viewsets
 from rest_framework.response import Response
 
 from .models import Product, Category, Label, Brand
 from .serializers import ProductListSerializer, CategoryDetailSerializer, ProductDetailSerializer, \
-    LabelDetailSerializer, BrandDetailSerializer, ReviewSerializer
+    LabelDetailSerializer, BrandDetailSerializer, ReviewSerializer, CategoryListSerializer
 from .service import ProductsPagination
+
+
+class CategoriesListView(generics.ListAPIView):
+    """All categories"""
+    queryset = Category.objects.all()
+    serializer_class = CategoryListSerializer
+
+
+class HomeHitProductsView(generics.ListAPIView):
+    """Hit products for home page"""
+    queryset = Product.objects.filter(public=True, hit=True, show_on_home_page=True)[:30]
+    serializer_class = ProductListSerializer
 
 
 class HomeSaleProductView(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.filter(public=True, old_price__gte=1, show_on_home_page=True)[:30]
     serializer_class = ProductListSerializer
-    pagination_class = ProductsPagination
+
+
+class LatestProductsView(generics.ListAPIView):
+    """Latest products. Limit 20"""
+    queryset = Product.objects.filter(public=True, latest=True, show_on_home_page=True)[:20]
+    serializer_class = ProductListSerializer
 
 
 class HomeFutureProducts(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.filter(public=True, future=True, show_on_home_page=True)[:30]
     serializer_class = ProductListSerializer
-    pagination_class = ProductsPagination
 
 
 class CategoryDetailView(APIView):
@@ -52,9 +69,9 @@ class BrandDetailView(APIView):
 class ProductDetailView(APIView):
     """Детали товара"""
 
-    def get(self, request, slug):
+    def get(self, request, pk):
         response_data = {}
-        product = Product.objects.get(slug=slug)
+        product = Product.objects.get(id=pk)
         product_serializer = ProductDetailSerializer(product, many=False)
         response_data['product'] = product_serializer.data
         products = Product.objects.filter(

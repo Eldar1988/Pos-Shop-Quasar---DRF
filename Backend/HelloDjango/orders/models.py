@@ -9,7 +9,6 @@ class PaymentMethod(models.Model):
     """Способо оплаты"""
     title = models.CharField('Заголовок способа оплаты', max_length=255)
     image = ThumbnailerImageField('Картинка', upload_to='payments/', resize_source={'size': (200, 200), 'crop': 'scale'})
-    slug = models.SlugField('SLug', unique=True, help_text='Латиницей без заглавных букв, пробелов и спецсимволов')
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
 
     def __str__(self):

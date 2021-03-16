@@ -32,7 +32,6 @@ APP_PATH = 'http://192.168.0.199:8000'
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,6 +46,8 @@ INSTALLED_APPS = [
     'cloudinary',
     'easy_thumbnails',
     'colorfield',
+    'tabbed_admin',
+    'drf_yasg',
 
     'shop',
     'posshop',
@@ -161,7 +162,7 @@ CKEDITOR_CONFIGS = {
              ]
         ],
         'width': '100%',
-        'height': '550px'
+        'height': '300px'
     },
 }
 
@@ -171,7 +172,7 @@ CACHES = {
         'LOCATION': 'unique-snowflake'
     }
 }
-GRAPPELLI_ADMIN_TITLE = 'JS Shop v 1.1 - администрирование'
+TABBED_ADMIN_USE_JQUERY_UI = True
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #
 # EMAIL_HOST = 'smtp.yandex.ru'

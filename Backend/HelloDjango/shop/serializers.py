@@ -12,7 +12,7 @@ class ChildCategoryListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        exclude = ('description', 'order')
+        exclude = ('description', 'order', 'full_description')
 
 
 class CategoryListSerializer(serializers.ModelSerializer):
@@ -25,7 +25,7 @@ class CategoryListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        exclude = ('description', 'order')
+        exclude = ('description', 'order', 'full_description')
 
 
 class BrandListSerializer(serializers.ModelSerializer):
@@ -50,7 +50,6 @@ class LabelListSerializer(serializers.ModelSerializer):
 
 class ProductListSerializer(serializers.ModelSerializer):
     """Товары (список)"""
-    category = CategoryListSerializer(many=False, read_only=True)
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
@@ -58,7 +57,7 @@ class ProductListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'rating', 'slug', 'image_contain')
+        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'rating', 'image_contain')
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -157,6 +156,6 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        exclude = ('future', 'hit', 'latest', 'public', 'order', 'pub_date', 'update')
+        exclude = ('future', 'hit', 'latest', 'public', 'order', 'pub_date', 'update', 'purchase_price')
 
 
