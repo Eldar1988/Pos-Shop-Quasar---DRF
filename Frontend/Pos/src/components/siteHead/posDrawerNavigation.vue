@@ -214,7 +214,7 @@
           <q-icon name="assignment"/>
         </q-item-section>
         <q-item-section class="text-subtitle2 text-weight-bold">
-          Политика конфиденицальности
+          Политика конфиденциальности
         </q-item-section>
       </q-item>
       <!--      xxxxx   -->
