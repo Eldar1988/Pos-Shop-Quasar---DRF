@@ -45,24 +45,11 @@
           </template>
           <!--          Childs    -->
           <q-item
-            clickable
-            v-ripple
-            class="q-ml-sm"
-            :to="`/shop/${category.slug}`"
-            exact-active-class="text-primary"
-            :title="category.title"
-          >
-            <q-item-section class="text-subtitle2 text-weight-bold text-dark">Все {{
-                category.title.toLowerCase()
-              }}
-            </q-item-section>
-          </q-item>
-          <q-item
             v-for="category in category.child"
             :key="category.id"
             clickable
             v-ripple
-            class="q-ml-sm"
+            class="border-radius-6"
             :to="`/shop/${category.slug}`"
             exact-active-class="text-primary"
             :title="category.title"
@@ -71,6 +58,24 @@
               <q-img :src="category.image" class="border-radius-6"/>
             </q-item-section>
             <q-item-section class="text-dark">{{ category.title }}</q-item-section>
+          </q-item>
+          <q-separator inset=""/>
+          <q-item
+            clickable
+            v-ripple
+            class="border-radius-6"
+            :to="`/shop/${category.slug}`"
+            exact-active-class="text-primary"
+            :title="category.title"
+          >
+            <q-item-section avatar>
+              <q-img :src="category.image" class="border-radius-6"/>
+            </q-item-section>
+            <q-item-section class="text-subtitle2 text-weight-bold text-dark">
+              Все {{
+                category.title.toLowerCase()
+              }}
+            </q-item-section>
           </q-item>
 
         </q-expansion-item>
@@ -86,7 +91,7 @@
           :title="category.title"
         >
           <q-item-section avatar>
-            <q-img :src="category.image" class="border-radius-6" contain />
+            <q-img :src="category.image" class="border-radius-6" contain/>
           </q-item-section>
           <q-item-section class="text-subtitle2 text-weight-bold text-dark">{{ category.title }}</q-item-section>
         </q-item>
@@ -227,20 +232,23 @@
 export default {
   name: "posDrawerNavigation",
   computed: {
-    categories() {
-      return this.$store.getters.getCategories
-    },
     pages() {
       return this.$store.getters.getPages
+    },
+    categories() {
+      return this.$store.getters.getCategories
     }
-  }
+  },
+  created() {
+    this.$store.dispatch('fetchCategories')
+  },
 }
 </script>
 
 <style lang="sass">
 .menu-item
   border-radius: 10px
-  box-shadow: rgba(99, 99, 99, 0.05) 0px 2px 11px 0px
+  box-shadow: rgba(99, 99, 99, 0.15) 0px 0px 5px 0px
   width: 95%
   margin: 10px auto 0
 </style>

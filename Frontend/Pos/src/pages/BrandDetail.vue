@@ -20,6 +20,12 @@
     <section style="margin-top: 100px">
       <pos-banners/>
     </section>
+    <!--    Latest Products   -->
+    <section class="section q-py-xl">
+      <pos-section-title title="Новинки"/>
+      <pos-products-slide-x-v2 :products="this.$store.getters.getLatestProducts" class="q-mt-md"/>
+    </section>
+    <!--    xxxxx   -->
     <pos-brands-slider />
   </q-page>
 </template>
@@ -29,10 +35,12 @@ import PosPageHeader from "components/service/posPageHeader";
 import PosProductsWrapper from "components/shop/posProductsWrapper";
 import PosBanners from "components/shop/posBanners";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
+import PosSectionTitle from "components/service/posSectionTitle";
+import PosProductsSlideXV2 from "components/sliders/posProductsSlideX-v2";
 
 export default {
   name: "BrandDetail",
-  components: {PosBrandsSlider, PosBanners, PosProductsWrapper, PosPageHeader},
+  components: {PosProductsSlideXV2, PosSectionTitle, PosBrandsSlider, PosBanners, PosProductsWrapper, PosPageHeader},
   computed: {
     brand() {
       return this.$store.getters.getBrandDetail

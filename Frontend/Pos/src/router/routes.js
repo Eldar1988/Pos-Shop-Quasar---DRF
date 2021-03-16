@@ -46,8 +46,8 @@ const routes = [
     ]
   },
   {
-    path: '/product/:slug',
-    params: 'slug',
+    path: '/product/:id',
+    params: 'id',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/posProductDetail.vue') }

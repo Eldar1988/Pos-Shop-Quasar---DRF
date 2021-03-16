@@ -56,7 +56,6 @@ import PosHeaderIcons from "components/siteHead/posHeaderIcons";
 import PosMobileBottomBar from "components/service/posMobileBottomBar";
 import PosFooter from "components/footer/posFooter";
 import PosSetSiteColors from "components/service/posSetSiteColors";
-// import PosPageReloadDialog from "components/service/posPageReloadDialog";
 
 export default {
   components: {
@@ -67,8 +66,14 @@ export default {
       right: false,
     }
   },
-  created() {
-    this.$store.dispatch('fetchMainData')
+  // created() {
+  //   this.$store.dispatch('fetchMainData')
+  // },
+  async mounted() {
+    setTimeout(() => {
+      this.$store.dispatch('fetchCategories')
+      this.$store.dispatch('fetchLatestProducts')
+    },1500)
   },
   computed: {
     backendError() {
@@ -82,9 +87,9 @@ export default {
     }
 
   },
-  // preFetch({store}) {
-  //   return store.dispatch('fetchMainData')
-  // }
+  preFetch({store}) {
+    return store.dispatch('fetchMainData')
+  }
 }
 </script>
 

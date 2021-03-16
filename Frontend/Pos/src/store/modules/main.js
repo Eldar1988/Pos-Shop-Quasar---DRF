@@ -27,12 +27,9 @@ export default {
   mutations: {
     setMainData(state, data) {
       state.mainDataUnloaded = false
-      state.categories = data.categories
       state.pages = data.pages
       state.companyInfo = data.companyInfo
       state.homeSlider = data.slider
-      state.hitProducts = data.hitProducts
-      state.latestProducts = data.latestProducts
       state.reviews = data.reviews
       state.contacts = data.contacts
       state.benefits = data.benefits
@@ -47,12 +44,9 @@ export default {
   },
   state: {
     mainDataUnloaded: true,
-    categories: [],
     pages: [],
     companyInfo: {},
     homeSlider: [],
-    hitProducts: [],
-    latestProducts: [],
     reviews: [],
     contacts: {},
     benefits: [],
@@ -63,13 +57,10 @@ export default {
   },
   getters: {
     getMainDataStatus: (state) => state.mainDataUnloaded,
-    getCategories: (state) => state.categories,
     getPages: (state) => state.pages,
     getServerStatus: (state) => state.mainDataUnloaded,
     getCompanyInfo: (state) => state.companyInfo,
     getHomeSlider: (state) => state.homeSlider,
-    getHitProducts: (state) => state.hitProducts,
-    getLatestProducts: (state) => state.latestProducts,
     getShopReviews: (state) => state.reviews,
     getContacts: (state) => state.contacts,
     getBenefits: (state) => state.benefits,

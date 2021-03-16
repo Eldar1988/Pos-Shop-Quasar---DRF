@@ -24,16 +24,15 @@
         class="bg-grey-1"
       >
         <q-tab-panel name="hits">
-          <pos-products-wrapper v-if="serverStatus" :products="hitProducts" />
-          <pos-skeleton-products v-else />
+          <pos-products-wrapper :products="hitProducts" />
         </q-tab-panel>
 
         <q-tab-panel name="sales">
-          <pos-sale-products />
+          <pos-products-wrapper :products="saleProducts" />
         </q-tab-panel>
 
         <q-tab-panel name="future">
-          <pos-future-products />
+          <pos-products-wrapper :products="futureProducts" />
         </q-tab-panel>
       </q-tab-panels>
 
@@ -43,14 +42,11 @@
 
 <script>
 import PosProductsWrapper from "components/shop/posProductsWrapper";
-import PosSkeletonProducts from "components/service/posSkeletonProducts";
-import PosSaleProducts from "components/shop/posSaleProducts";
 import scrollTo from "src/functions/scroll_to";
-import PosFutureProducts from "components/shop/posFutureProducts";
 
 export default {
   name: "posProductTabs",
-  components: {PosFutureProducts, PosSaleProducts, PosSkeletonProducts, PosProductsWrapper},
+  components: {PosProductsWrapper},
   data() {
     return {
       tab: 'hits'
@@ -60,12 +56,19 @@ export default {
     hitProducts() {
       return this.$store.getters.getHitProducts
     },
-    serverStatus() {
-      return !this.$store.getters.getServerStatus
+    saleProducts() {
+      return this.$store.getters.getSaleProducts
+    },
+    futureProducts() {
+      return this.$store.getters.getFutureProducts
     }
   },
-  mounted() {
-
+  async mounted() {
+    setTimeout(() => {
+      this.$store.dispatch('fetchHitProducts')
+      this.$store.dispatch('fetchSaleProducts')
+      this.$store.dispatch('fetchFutureProducts')
+    },3000)
   },
   methods: {
     scrollTo

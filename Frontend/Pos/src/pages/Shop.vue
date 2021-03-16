@@ -51,7 +51,7 @@
     <!--    Latest Products   -->
     <section class="section q-py-xl">
       <pos-section-title title="Новинки"/>
-      <pos-products-slide-x :products="latestProducts" class="q-mt-md" />
+      <pos-products-slide-x-v2 :products="latestProducts" class="q-mt-md"/>
     </section>
     <!--    xxxxx   -->
 
@@ -72,14 +72,14 @@ import PosProductsWrapper from "components/shop/posProductsWrapper";
 import PosCategories from "components/shop/posCategories";
 import PosBanners from "components/shop/posBanners";
 import PosSectionTitle from "components/service/posSectionTitle";
-import PosProductsSlideX from "components/sliders/posProductsSlideX";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
+import PosProductsSlideXV2 from "components/sliders/posProductsSlideX-v2";
 
 export default {
   name: "Shop",
   components: {
+    PosProductsSlideXV2,
     PosBrandsSlider,
-    PosProductsSlideX,
     PosSectionTitle, PosBanners, PosCategories, PosProductsWrapper, PosPageHeader
   },
   computed: {

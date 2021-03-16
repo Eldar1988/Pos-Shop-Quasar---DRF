@@ -1,11 +1,11 @@
 <template>
   <div>
     <q-btn
-      label="Консультация"
+      label="Хочу такой магазин"
       icon-right="phone_callback"
       text-color="white"
       :color="color"
-      class="text-weight-bold full-width border-radius-6 shadow-lt"
+      class="text-weight-bold full-width border-radius-5 shadow-lt"
       @click="dialog = true"
     />
 

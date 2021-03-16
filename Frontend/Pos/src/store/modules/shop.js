@@ -39,9 +39,9 @@ export default {
       }
     },
     async loadSaleProducts({commit, state}) {
-      if(!state.saleProducts.length) {
+      if(!state.saleProducts) {
         try {
-          this.products = await axiosInstance.get(`${this.getters.getServerURL}/shop/home_sale_products/`)
+          await axiosInstance.get(`${this.getters.getServerURL}/shop/home_sale_products/`)
             .then(({data}) => {
               commit('setSaleProducts', data.results)
             })
@@ -50,6 +50,64 @@ export default {
         }
       }
     },
+    async  fetchLatestProducts({commit, state}) {
+      if(!state.latestProducts) {
+        try {
+          await axiosInstance.get(`${this.getters.getServerURL}/shop/latest_products/`)
+            .then(({data}) => {
+              commit('setLatestProducts', data)
+            })
+        }catch (e) {
+          throw e
+        }
+      }
+    },
+    async fetchCategories({commit}) {
+        try {
+          await axiosInstance.get(`${this.getters.getServerURL}/shop/categories/`)
+            .then(({data}) => {
+              commit('setCategories', data)
+            })
+        }catch (e) {
+          throw e
+        }
+    },
+    async fetchHitProducts({commit, state}) {
+      if(!state.hitProducts) {
+        try {
+          await axiosInstance.get(`${this.getters.getServerURL}/shop/home_hit_products/`)
+            .then(({data}) => {
+              commit('setHitProducts', data)
+            })
+        }catch (e) {
+          throw e
+        }
+      }
+    },
+    async fetchSaleProducts({commit, state}) {
+      if (!state.saleProducts) {
+        try {
+          await axiosInstance.get(`${this.getters.getServerURL}/shop/home_sale_products/`)
+            .then(({data}) => {
+              commit('setSaleProducts', data)
+            })
+        }catch (e) {
+          throw e
+        }
+      }
+    },
+    async fetchFutureProducts({commit, state}) {
+      if (!state.futureProducts) {
+        try {
+          await axiosInstance.get(`${this.getters.getServerURL}/shop/home_future_products/`)
+            .then(({data}) => {
+              commit('setFutureProducts', data)
+            })
+        }catch (e) {
+          throw e
+        }
+      }
+    }
   },
   mutations: {
     setCategoryData(state, data) {
@@ -66,6 +124,18 @@ export default {
     },
     setSaleProducts(state, data) {
       state.saleProducts = data
+    },
+    setCategories(state, data) {
+      state.categories = data
+    },
+    setLatestProducts(state, data) {
+      state.latestProducts = data
+    },
+    setHitProducts(state, data) {
+      state.hitProducts = data
+    },
+    setFutureProducts(state, data) {
+      state.futureProducts = data
     }
 
   },
@@ -74,13 +144,21 @@ export default {
     label: {},
     brand: {},
     productDetailData: {},
-    saleProducts: []
+    saleProducts: null,
+    categories: [],
+    latestProducts: null,
+    hitProducts: null,
+    futureProducts: null
   },
   getters: {
     getCategoryDetail: (state) => state.category,
     getLabelDetail: (state) => state.label,
     getBrandDetail: (state) => state.brand,
     getProductDetailData: (state) => state.productDetailData,
-    getSaleProducts: (state) => state.saleProducts
+    getSaleProducts: (state) => state.saleProducts,
+    getCategories: state => state.categories,
+    getLatestProducts: state => state.latestProducts,
+    getHitProducts: state => state.hitProducts,
+    getFutureProducts: state => state.futureProducts,
   }
 }

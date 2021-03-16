@@ -32,7 +32,7 @@
           <div class="slider-meta">
             <div class="text-center">
               <h2 v-if="slide.title" class="q-mb-md">
-              <span class="slider-meta-content border-radius-6">
+              <span class="slider-meta-content">
               {{ slide.title }}
                 </span>
               </h2>
@@ -40,10 +40,10 @@
                 v-if="slide.btn_text"
                 :label="slide.btn_text"
                 color="accent"
-                class="text-weight-bold q-my-sm q-px-md border-radius-6"
-                icon-right="keyboard_arrow_right"
+                class="text-weight-bold q-my-sm q-px-lg q-py-sm border-radius-5"
                 :to="slide.url"
                 unelevated
+                no-caps
               />
             </div>
           </div>

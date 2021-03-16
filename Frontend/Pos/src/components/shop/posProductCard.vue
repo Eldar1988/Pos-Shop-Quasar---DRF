@@ -28,14 +28,14 @@
       <q-tooltip>Добавить товар в корзину</q-tooltip>
     </q-btn>
     <!--    xxxxx   -->
-    <router-link :to="`/product/${product.slug}/`">
+    <router-link :to="`/product/${product.id}/`">
       <!--      Image   -->
       <div class="flex product-card-image" style="align-items: center;position: relative">
         <q-img
           :src="product.image"
           :contain="!product.image_contain"
           title="Подробнее"
-          :height="`${this.$store.getters.getSiteSettings.productCardSettings.height}px`"
+          :height="`${this.$store.getters.getSiteSettings.productCardSettings.height}px` || `180`"
           style="max-height: 200px"
         >
           <template v-slot:loading>
@@ -65,7 +65,7 @@
     </router-link>
     <div class="product-meta">
       <!--      Product title   -->
-      <router-link :to="`/product/${product.slug}/`" title="Подробнее">
+      <router-link :to="`/product/${product.id}/`" title="Подробнее">
         <p class="product-card-title text-center ellipsis-2-lines">
           {{ product.title }}
         </p>
@@ -79,11 +79,7 @@
           <span class="old-price text-grey"> {{ product.old_price|formatPrice }} </span>
         </p>
       </div>
-
-
-
     </div>
-
   </q-card>
 </template>
 
@@ -152,7 +148,7 @@ export default {
 
 <style lang="sass">
 .product-card-image
-  height: 300px
+  height: 250px
 
 .product-card
   position: relative
@@ -164,7 +160,7 @@ export default {
   padding: 5px 5px 15px
 
 .product-card-title
-  font-size: 18px
+  font-size: 16px
   font-weight: 700
 
 
@@ -195,7 +191,7 @@ export default {
 
 @media screen and (max-width: 800px)
   .product-card-image
-    height: 200px
+    height: 220px
 
   .scroll-x-products .product-card-image
     height: 300px !important

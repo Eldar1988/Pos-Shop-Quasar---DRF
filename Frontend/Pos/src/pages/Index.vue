@@ -1,18 +1,18 @@
 <template>
   <q-page class="">
     <script type="application/ld+json" v-html="schema"></script>
-    <pos-page-header :title="companyInfo.title"/>
+    <pos-page-header :title="companyInfo.title" style="margin-top: -60px"/>
     <pos-slider/>
     <section class="section">
       <pos-section-title title="Новинки"/>
-        <pos-products-slide-x :products="this.$store.getters.getLatestProducts" class="q-mt-md" />
+        <pos-products-slide-x-v2 :products="this.$store.getters.getLatestProducts" class="q-mt-lg"/>
     </section>
 
     <pos-banners/>
     <pos-product-tabs/>
     <section class="q-mt-xl q-px-sm q-py-xl">
       <pos-section-title title="Категории"/>
-      <pos-categories :categories="categories" class="q-mt-lg"/>
+      <pos-categories :categories="categories" class="q-mt-xl"/>
     </section>
     <pos-brands-slider />
     <pos-shop-reviews class="section"/>
@@ -28,18 +28,18 @@ import PosProductTabs from "components/homePage/posProductTabs";
 import PosBanners from "components/shop/posBanners";
 import PosCategories from "components/shop/posCategories";
 import PosSectionTitle from "components/service/posSectionTitle";
-import PosProductsSlideX from "components/sliders/posProductsSlideX";
 import PosShopReviews from "components/homePage/posShopReviews";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
 import PosClientsSlider from "components/sliders/posClientsSlider";
+import PosProductsSlideXV2 from "components/sliders/posProductsSlideX-v2";
 
 export default {
   name: 'PageIndex',
   components: {
+    PosProductsSlideXV2,
     PosClientsSlider,
     PosBrandsSlider,
     PosShopReviews,
-    PosProductsSlideX,
     PosSectionTitle, PosCategories, PosBanners, PosProductTabs, PosSlider, PosPageHeader
   },
   computed: {

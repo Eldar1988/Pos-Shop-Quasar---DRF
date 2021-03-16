@@ -16,7 +16,7 @@
       <a :href="`tel:${contacts.phone}`" title="Телефон для консультаций и заказов">
         <q-btn
           :label="contacts.phone"
-          class="full-width border-radius-6 text-bold shadow-lt-2"
+          class="full-width border-radius-6 text-bold shadow-menu"
           color="dark"
           flat
           icon="call"
@@ -26,7 +26,7 @@
       <a :href="`https://wa.me/${contacts.whatsapp}`" title="Номер Whatsapp" class="q-mt-sm block">
         <q-btn
           :label="contacts.whatsapp"
-          class="full-width border-radius-6 text-bold shadow-lt-2"
+          class="full-width border-radius-6 text-bold shadow-menu"
           color="green"
           flat
           icon="mdi-whatsapp"
@@ -61,6 +61,8 @@ export default {
 </script>
 
 <style lang="sass">
+.shadow-menu
+  box-shadow: rgba(99, 99, 99, 0.15) 0px 0px 5px 0px
 @media screen and (max-width: 992px)
   .mobile-menu-toolbar
     display: flex !important

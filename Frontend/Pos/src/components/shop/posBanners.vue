@@ -21,8 +21,8 @@
           style="position: absolute; bottom: 10px; right: 10px; z-index: 30; border: 2px solid rgba(255,255,255,.8)"
           size="md"
           unelevated
-          class="text-bold border-radius-6"
-
+          class="text-bold border-radius-5"
+          no-caps
         />
         <template v-slot:loading>
           <q-skeleton class="banner-image full-width" />
