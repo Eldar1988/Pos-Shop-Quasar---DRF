@@ -163,7 +163,7 @@
           <q-icon name="cloud_download"/>
         </q-item-section>
         <q-item-section class="text-subtitle2 text-weight-bold">
-          Драйверы
+          Файлы
         </q-item-section>
       </q-item>
       <!--      xxxxx   -->

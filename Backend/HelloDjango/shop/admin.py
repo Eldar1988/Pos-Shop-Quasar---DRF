@@ -1,4 +1,5 @@
 from django.contrib import admin
+from tabbed_admin import TabbedModelAdmin
 from django.utils.safestring import mark_safe
 from .models import Category, Brand, Label, Product, Image, Review, Video
 
@@ -15,7 +16,8 @@ class CategoryAdmin(admin.ModelAdmin):
     save_on_top = True
 
     def get_image(self, obj):
-        return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: contain;">')
+        return mark_safe(
+            f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: cover; border-radius: 5px;">')
 
     get_image.short_description = 'Миниатюра'
 
@@ -32,7 +34,8 @@ class BrandAdmin(admin.ModelAdmin):
     save_on_top = True
 
     def get_image(self, obj):
-        return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: contain;">')
+        return mark_safe(
+            f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: cover; border-radius: 5px;">')
 
     get_image.short_description = 'Лого'
 
@@ -54,7 +57,8 @@ class ImageInline(admin.TabularInline):
     readonly_fields = ['get_image']
 
     def get_image(self, obj):
-        return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: cover;">')
+        return mark_safe(
+            f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: cover; border-radius: 5px;">')
 
     get_image.short_description = 'Миниатюра'
 
@@ -69,45 +73,36 @@ class ReviewInline(admin.TabularInline):
     extra = 0
 
 
-@admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'in_stock_quantity', 'rating', 'show_on_home_page',
-                    'future', 'hit', 'latest', 'public', 'order')
-    list_editable = ('title', 'category', 'price', 'old_price', 'in_stock_quantity', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
-    list_filter = ('category', 'brand', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date', 'update')
-    search_fields = ('title',)
-    filter_vertical = ('labels',)
-    list_per_page = 10
-    inlines = [VideoInline, ImageInline, ReviewInline]
-    fields = [
-        ('title', 'article', 'slug'),
-        ('category', 'brand'),
-        ('price', 'old_price', 'in_stock_quantity'),
-        ('image', 'get_image'),
-        ('full_image', 'get_full_image'),
-        ('image_contain',),
-        ('description',),
-        ('show_on_home_page','future', 'hit', 'latest', 'public'),
-        ('shipping_detail',),
-        ('labels',),
-        ('info',),
-        ('characteristic',),
-        ('video', 'rating', 'order'),
-        ('pub_date', 'update', 'views')
-    ]
-    readonly_fields = ('get_image', 'get_full_image', 'pub_date', 'update', 'views')
-
-    save_as = True
-    save_on_top = True
-
-    def get_image(self, obj):
-        return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: contain;">')
-
-    def get_full_image(self, obj):
-        return mark_safe(f'<img src={obj.full_image.url} style="height: 50px; width: 50px; object-fit: contain;">')
-
-    get_image.short_description = 'Миниатюра'
-    get_full_image.short_description = 'Фото'
+# @admin.register(Product)
+# class ProductAdmin(admin.ModelAdmin):
+#     # prepopulated_fields = {'slug': ('title',)}
+#     list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'purchase_price', 'in_stock_quantity', 'rating', 'show_on_home_page',
+#                     'future', 'hit', 'latest', 'public', 'order')
+#     list_editable = ('title', 'category', 'price', 'old_price', 'purchase_price', 'in_stock_quantity', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
+#     list_filter = ('category', 'brand', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date', 'update')
+#     search_fields = ('title',)
+#     filter_horizontal = ('labels',)
+#     list_per_page = 10
+#     inlines = [, ReviewInline]
+#     fields = [
+#         (),
+#         (),
+#         (),
+#         ()
+#     ]
+#     readonly_fields = ('get_image', 'get_full_image', 'pub_date', 'update', 'views')
+#
+#     save_as = True
+#     save_on_top = True
+#
+#     def get_image(self, obj):
+#         return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: contain;">')
+#
+#     def get_full_image(self, obj):
+#         return mark_safe(f'<img src={obj.full_image.url} style="height: 50px; width: 50px; object-fit: contain;">')
+#
+#     get_image.short_description = 'Миниатюра'
+#     get_full_image.short_description = 'Фото'
 
 
 @admin.register(Review)
@@ -121,3 +116,78 @@ class ReviewAdmin(admin.ModelAdmin):
 
     save_as = True
     save_on_top = True
+
+
+@admin.register(Product)
+class ProductAdmin(TabbedModelAdmin):
+    model = Product
+    readonly_fields = ('get_image', 'get_full_image', 'pub_date', 'update')
+    filter_horizontal = ('labels',)
+    list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'purchase_price',
+                    'in_stock_quantity', 'rating', 'show_on_home_page', 'future', 'hit', 'latest', 'public', 'order')
+    list_editable = ('title', 'category', 'price', 'old_price', 'purchase_price', 'in_stock_quantity', 'rating',
+                     'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
+    list_filter = ('category', 'brand', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date',
+                   'update', 'rating')
+    search_fields = ('title', 'category__title', 'brand__title')
+
+    list_per_page = 10
+    save_as = True
+    save_on_top = True
+
+    tab_main_info = (
+        (None, {
+            'fields':
+                ('category', 'brand', 'title', 'article', 'labels')
+        }),
+
+    )
+    tab_description = (
+        (None, {
+            'fields': ('description', 'characteristic', 'info')
+        }),
+    )
+    tab_price = (
+        (None, {
+            'fields': ('price', 'old_price', 'purchase_price', 'in_stock_quantity')
+        }),
+    )
+    tab_media = (
+        (None, {
+            'fields': ('image', 'full_image', 'image_contain', 'video', 'get_image', 'get_full_image')
+        }),
+        VideoInline,
+        ImageInline
+    )
+    tab_shipping = (
+        (None, {
+            'fields': ('shipping_detail',)
+        }),
+    )
+    tab_more_details = (
+        (None, {
+            'fields': ('show_on_home_page', 'future', 'hit', 'latest', 'public', 'rating', 'order', 'pub_date',
+                       'update', 'views')
+        }),
+        ReviewInline
+    )
+
+    tabs = [
+        ('Главное', tab_main_info),
+        ('Описание', tab_description),
+        ('Цена', tab_price),
+        ('Медиа', tab_media),
+        ('Доставка', tab_shipping),
+        ('Дополнительно', tab_more_details),
+    ]
+
+    def get_image(self, obj):
+        return mark_safe(
+            f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: cover; border-radius: 5px;">')
+
+    def get_full_image(self, obj):
+        return mark_safe(
+            f'<img src={obj.full_image.url} style="height: 150px; width: 150px; object-fit: cover; border-radius: 5px;">')
+
+    get_image.short_description = 'Миниатюра'
+    get_full_image.short_description = 'Полное изображение'

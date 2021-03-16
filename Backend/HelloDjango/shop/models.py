@@ -76,6 +76,8 @@ class Product(models.Model):
                              help_text='Скопировать код в url после знака =')
     price = models.IntegerField('Цена товара')
     old_price = models.IntegerField('Старая цена', null=True, blank=True, help_text='Необязательно')
+    purchase_price = models.IntegerField('Закуп', null=True, blank=True,
+                                         help_text='Закупочная стоимость товара (необязательно)', default=0)
     image = ThumbnailerImageField('Миниатюра', upload_to='products/',
                                   resize_source={'size': (300, 300), 'crop': 'scale'},
                                   help_text='Пропорции 1:1 (квадрат). Будет использоваться в каталоге товаров')
@@ -83,18 +85,23 @@ class Product(models.Model):
                                        resize_source={'size': (1200, 1200), 'crop': 'scale'},
                                        help_text='Пропорции 1:1 (квадрат). Будет использоваться на странице товара')
     image_contain = models.BooleanField('Растянуть фото товара', default=False,
-                                        help_text='Фото растянется на всю высоту и ширину карточки, с сохранением пропорций')
+                                        help_text='Фото растянется на всю высоту и ширину карточки, '
+                                                  'с сохранением пропорций')
     rating = models.PositiveSmallIntegerField('Рейтинг товара', default=5, null=True, blank=True)
-    show_on_home_page = models.BooleanField('На главной', default=False, help_text='Отобразить товар на главной странице')
+    show_on_home_page = models.BooleanField('На главной', default=False,
+                                            help_text='Отобразить товар на главной странице')
     future = models.BooleanField('Рекомендуем?', default=False)
     hit = models.BooleanField('Хит продаж', default=False)
     latest = models.BooleanField('Новинка', default=False)
     public = models.BooleanField('Опубликовать', default=True)
     in_stock_quantity = models.IntegerField('В наличии', default=0)
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
-    shipping_detail = models.CharField('Условия доставки', default='Доставка по всему Казахстану', max_length=255,
-                                       help_text='Если Вы продаете локально в одном городе, необходмо указать город')
-    slug = models.SlugField(unique=True, blank=True, null=True)
+    shipping_detail = models.TextField('Условия доставки',
+                                       default='Доставка по всему Казахстану<br>'
+                                               'Стоимость доставки расчитывается отдельно от заказа<br>'
+                                               'При заказе на сумму свыше 50 000 тг доставка бесплатная',
+                                       max_length=255,
+                                       help_text='Используйте br для переноса строки, если нужен перенос строки')
     views = models.IntegerField('Кол-во просмотров', default=0)
     pub_date = models.DateTimeField('Дата публикации', auto_now_add=True)
     update = models.DateTimeField('Обновлено', auto_now=True)

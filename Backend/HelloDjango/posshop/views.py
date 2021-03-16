@@ -20,9 +20,9 @@ class MainInfoView(APIView):
     def get(self, request):
         response_data = {'settings': get_settings()}
 
-        categories = Category.objects.all()
-        categories_serializer = CategoryListSerializer(categories, many=True)
-        response_data['categories'] = categories_serializer.data
+        # categories = Category.objects.all()
+        # categories_serializer = CategoryListSerializer(categories, many=True)
+        # response_data['categories'] = categories_serializer.data
 
         info = Info.objects.last()
         info_serializer = ShortInfoSerializer(info, many=False)
@@ -52,13 +52,13 @@ class MainInfoView(APIView):
         brands_serializer = BrandListSerializer(brands, many=True)
         response_data['brands'] = brands_serializer.data
 
-        hit_products = Product.objects.filter(public=True, hit=True, show_on_home_page=True)[:30]
-        products_serializer = ProductListSerializer(hit_products, many=True)
-        response_data['hitProducts'] = products_serializer.data
+        # hit_products = Product.objects.filter(public=True, hit=True, show_on_home_page=True)[:30]
+        # products_serializer = ProductListSerializer(hit_products, many=True)
+        # response_data['hitProducts'] = products_serializer.data
 
-        latest_products = Product.objects.filter(public=True, latest=True, show_on_home_page=True)[:20]
-        products_serializer = ProductListSerializer(latest_products, many=True)
-        response_data['latestProducts'] = products_serializer.data
+        # latest_products = Product.objects.filter(public=True, latest=True, show_on_home_page=True)[:20]
+        # products_serializer = ProductListSerializer(latest_products, many=True)
+        # response_data['latestProducts'] = products_serializer.data
 
         reviews = ShopReview.objects.all()
         reviews_serializer = ShopReviewSerializer(reviews, many=True)

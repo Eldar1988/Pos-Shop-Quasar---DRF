@@ -49,17 +49,18 @@
               </q-badge>
             </p>
           </div>
-          <!--          Shipping detail   -->
-          <div class="product-info-section">
-            <p class="text-bold">
-              <q-icon name="local_shipping" size="22px" class="q-mr-sm"/>
-              {{ productData.product.shipping_detail }}
-            </p>
-          </div>
           <!--          Short description  -->
           <div class="product-info-section">
             <p>{{ productData.product.description }}</p>
           </div>
+          <!--          Shipping detail   -->
+          <div class="product-info-section">
+<!--            <q-icon name="local_shipping" size="22px" class="q-mr-sm"/>-->
+            <div class="text-bold" v-html="productData.product.shipping_detail">
+
+            </div>
+          </div>
+
           <!--          Actions   -->
           <div v-if="productData.product.in_stock_quantity > 0" class="row q-my-lg">
             <q-separator inset=""/>
