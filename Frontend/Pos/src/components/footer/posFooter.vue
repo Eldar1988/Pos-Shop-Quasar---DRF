@@ -19,25 +19,6 @@
         </div>
         <!--        xxxxx   -->
         <q-separator inset="" dark class="q-mt-md"/>
-        <!--        Benefits   -->
-        <div class="q-mt-lg">
-          <splide :options="options">
-            <splide-slide
-              v-for="benefit in benefits"
-              :key="benefit.id"
-            >
-              <q-card
-                class="border-radius-6 shadow-0 bg-info"
-              >
-                <p class="text-subtitle1 text-bold q-pt-md">{{ benefit.title }}</p>
-                <q-icon :name="`mdi-${benefit.icon}`" size="30px" class="q-mt-sm"/>
-                <p class="q-py-sm">{{ benefit.text }}</p>
-              </q-card>
-            </splide-slide>
-          </splide>
-        </div>
-
-        <!--        xxxxx   -->
 
         <!--        Links   -->
         <ul class="q-mt-lg flex justify-center q-mt-xl">
@@ -67,8 +48,8 @@
         <!--        xxxxx   -->
         <q-separator inset="" dark class="q-mt-md"/>
         <small class="text-grey-5 q-mt-sm block">{{ year }}. Все права защищены.</small>
-        <small class="text-grey-5 q-mt-sm block">Разработано студией <a href="https://dev-space.ru" target="_blank"
-                                                                        class="text-grey-5 underline text-bold">Space Developers</a></small>
+        <small class="text-grey-5 q-mt-sm block">Разработано студией <a href="https://js-code.ru" target="_blank"
+                                                                        class="text-grey-5 underline text-bold">JS Code</a></small>
 
       </div>
     </div>
@@ -77,24 +58,11 @@
 
 <script>
 
-import {Splide, SplideSlide} from '../../../node_modules/@splidejs/vue-splide';
-import '../../../node_modules/@splidejs/splide/dist/css/themes/splide-sea-green.min.css';
-
 export default {
   name: "posFooter",
-  components: {Splide, SplideSlide},
   data() {
     return {
       benefits: [],
-      options: {
-
-        type: 'fade',
-        arrows: false,
-        speed: 1000,
-        perPage: 1,
-        pagination: false,
-        autoplay: true
-      }
     }
   },
   mounted() {

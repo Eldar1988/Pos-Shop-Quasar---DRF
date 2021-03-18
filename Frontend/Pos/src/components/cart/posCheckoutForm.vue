@@ -129,6 +129,7 @@
         title="Оплата"
       >
         <p class="q-ml-lg text-bold q-pb-md ">Выберите способ оплаты</p>
+
         <q-card
           class="grey-border shadow-0 border-radius-6 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"
           v-for="payment in paymentMethods"
@@ -147,10 +148,11 @@
           <q-btn v-if="step > 1" class="border-radius-6" color="primary" flat icon="west"
                  @click="$refs.stepper.previous()"/>
           <q-btn :label="step === 4 ? 'Готово' : 'Далее'" color="primary" @click="$refs.stepper.next()"
-                 class="q-px-md text-bold border-radius-6 q-ml-sm"/>
+                 class="q-px-md text-bold border-radius-5 q-ml-sm" no-caps/>
         </q-stepper-navigation>
       </template>
     </q-stepper>
+
   </div>
 </template>
 

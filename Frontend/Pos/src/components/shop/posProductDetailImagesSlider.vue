@@ -13,7 +13,7 @@
     transition-next="slide-left"
     @mouseenter="autoplay = false"
     @mouseleave="autoplay = true"
-    class="product-detail-slider border-radius-6 shadow-lt"
+    class="product-detail-slider border-radius-6 shadow-0"
   >
     <q-carousel-slide
       :name="0"

@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="text-bold q-pb-sm">Поделиться с друзьями:</p>
-    <yandex-share :services="['whatsapp', 'telegram', 'vkontakte','facebook','twitter', 'odnoklassniki', 'pinterest']" :description="description" :image="image" />
+    <yandex-share :services="['whatsapp', 'telegram', 'vkontakte','facebook','twitter', 'odnoklassniki']" :description="description" :image="image" />
   </div>
 </template>
 

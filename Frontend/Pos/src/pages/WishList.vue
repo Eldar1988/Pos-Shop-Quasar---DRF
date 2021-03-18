@@ -46,7 +46,7 @@
 
     <section class="section q-py-xl">
       <pos-section-title title="Новинки" class="q-mb-md"/>
-      <pos-products-slide-x :products="this.$store.getters.getLatestProducts" />
+      <pos-products-slide-x-v2  :products="this.$store.getters.getLatestProducts"/>
     </section>
   </q-page>
 </template>
@@ -56,11 +56,11 @@ import PosPageHeader from "components/service/posPageHeader";
 import PosWishListItem from "components/wishList/posWishListItem";
 import PosBanners from "components/shop/posBanners";
 import PosSectionTitle from "components/service/posSectionTitle";
-import PosProductsSlideX from "components/sliders/posProductsSlideX";
+import PosProductsSlideXV2 from "components/sliders/posProductsSlideX-v2";
 
 export default {
   name: "WishList",
-  components: {PosProductsSlideX, PosSectionTitle, PosBanners, PosWishListItem, PosPageHeader},
+  components: {PosProductsSlideXV2, PosSectionTitle, PosBanners, PosWishListItem, PosPageHeader},
   data() {
     return {
       products: []

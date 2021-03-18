@@ -116,7 +116,7 @@ cfg.module.rules.push({
         'Notify',
         'Loading',
         'Meta',
-        'LoadingBar'
+        // 'LoadingBar'
       ]
     },
 

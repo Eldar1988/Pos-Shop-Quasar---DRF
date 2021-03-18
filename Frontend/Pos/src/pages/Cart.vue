@@ -54,8 +54,12 @@
         </q-card>
       </section>
       <!--    xxxxx   -->
+      <div class="q-pt-xl">
+        <pos-banners class=""/>
+      </div>
+
     </q-page>
-    <pos-banners/>
+
   </div>
 </template>
 

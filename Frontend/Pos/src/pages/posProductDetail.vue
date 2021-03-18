@@ -163,7 +163,7 @@
           </div>
           <div v-else>
             <q-card
-              class="bg-accent shadow-0 q-px-md q-py-lg q-mt-lg q-mb-md text-center"
+              class="bg-accent shadow-0 q-px-md q-py-lg q-mt-lg q-mb-md text-center border-radius-6"
               dark
             >
               Данного товара нет в наличии.<br>Ожидаем поступление.
@@ -266,9 +266,9 @@
       </div>
       <div class="q-pa-sm">
         <q-video
-          :ratio="this.$q.platform.is.mobile ? 16/9 : 16/6"
+          :ratio="this.$q.platform.is.mobile ? 16/10 : 16/6"
           :src="`https://www.youtube.com/embed/${productData.product.video}`"
-          class="border-radius-6 q-mt-lg"
+          class="border-radius-6 q-mt-lg shadow-5"
         />
         <div
           v-for="video in productData.product.videos"
@@ -285,15 +285,17 @@
     </section>
     <!--    xxxxx   -->
     <!--    More products   -->
-    <section v-if="productData.products.length > 0" class="q-mt-xl q-py-xl bg-grey-2 q-pa-sm">
+    <section v-if="productData.products.length > 0" class="q-mt-xl q-py-xl bg-grey-2">
       <pos-section-title title="Смотрите также:" class="q-mt-md"/>
-      <pos-products-slide-x :products="productData.products" class="q-mt-md"/>
+<!--      <pos-products-slide-x :products="productData.products" class="q-mt-md"/>-->
+      <pos-products-slide-x-v2 :products="productData.products" class="q-mt-md" />
     </section>
     <!--    xxxxx   -->
     <!--    Last sean products   -->
     <section v-if="lastSeanProducts" class="q-mt-xl q-py-lg">
       <pos-section-title title="Вы недавно смотрели:"/>
-      <pos-products-scroll-x :products="lastSeanProducts"/>
+<!--      <pos-products-scroll-x :products="lastSeanProducts"/>-->
+      <pos-products-slide-x-v2 :products="lastSeanProducts" class="q-mt-md" />
     </section>
     <!--    Banners   -->
     <pos-banners/>
@@ -301,7 +303,8 @@
     <!--    Latest Products   -->
     <section class="section q-py-xl">
       <pos-section-title title="Новинки"/>
-      <pos-products-slide-x :products="this.$store.getters.getLatestProducts" class="q-mt-md"/>
+      <pos-products-slide-x-v2 :products="this.$store.getters.getLatestProducts" class="q-mt-md" />
+
     </section>
     <!--    xxxxx   -->
     <!--    Brands   -->
@@ -319,24 +322,23 @@
 import PosProductDetailImagesSlider from "components/shop/posProductDetailImagesSlider"
 import formatPrice from "src/filters/format_price";
 import PosSectionTitle from "components/service/posSectionTitle";
-import PosProductsScrollX from "components/shop/posProductsScrollX";
 import PosBanners from "components/shop/posBanners";
 import addToCart from "src/functions/add_to_cart";
 import PosAddedToCartDialog from "components/cart/posAddedToCartDialog";
 import addToWishListFunc from "src/functions/add_to_wishlist";
 import PosProductReviews from "components/shop/posProductReviews";
 import PosShare from "components/service/posShare";
-import PosProductsSlideX from "components/sliders/posProductsSlideX";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
+import PosProductsSlideXV2 from "components/sliders/posProductsSlideX-v2";
 
 export default {
   name: "posProductDetail",
   components: {
+    PosProductsSlideXV2,
     PosBrandsSlider,
-    PosProductsSlideX,
     PosShare,
     PosProductReviews,
-    PosAddedToCartDialog, PosBanners, PosProductsScrollX, PosSectionTitle, PosProductDetailImagesSlider
+    PosAddedToCartDialog, PosBanners, PosSectionTitle, PosProductDetailImagesSlider
   },
   filters: {formatPrice},
   data() {

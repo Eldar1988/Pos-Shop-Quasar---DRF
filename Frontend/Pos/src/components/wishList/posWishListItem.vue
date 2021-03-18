@@ -20,14 +20,14 @@
               size="sm"
               unelevated
               color="positive"
-              class="q-mt-sm border-radius-6 text-bold"
+              class="q-mt-sm border-radius-5 text-bold"
               @click="addToCart(product)"
             />
           </div>
           <q-btn
             icon="delete_forever"
             color="negative"
-            class="border-radius-6"
+            class="border-radius-5"
             outline unelevated no-caps
             size="sm"
             label="удалить"

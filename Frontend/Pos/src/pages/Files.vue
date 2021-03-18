@@ -4,7 +4,7 @@
       <q-breadcrumbs-el icon="home" to="/"/>
       <q-breadcrumbs-el label="Файлы"/>
     </q-breadcrumbs>
-    <pos-page-header title="Драйверы"/>
+    <pos-page-header title="Файлы"/>
     <section class="info-page">
       <div
         v-for="file in files"
@@ -20,7 +20,7 @@
           <a :href="file.file">
             <q-btn
               label="Скачать"
-              class="border-radius-6 text-bold"
+              class="border-radius-5 text-bold"
               color="accent"
               unelevated
               size="sm"

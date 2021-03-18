@@ -1,5 +1,5 @@
 <template>
-  <div class="mobile-bottom-bar bg-grey-1 shadow-lt-2 grey-border border-radius-6"
+  <div class="mobile-bottom-bar bg-white shadow-15 border-radius-6"
        :style="this.$q.platform.is.ios ? `bottom: 20px` : `bottom: 5px`"
   >
     <div class="flex flex-center">

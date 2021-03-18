@@ -2,6 +2,8 @@ import telebot
 from .models import OrderItem
 from shop_settings.models import TelegramBot
 
+from django.conf import settings
+
 try:
     bot_settings = TelegramBot.objects.last()
 except:
@@ -54,7 +56,7 @@ def tg_send_order(order):
                      f"Цена: {i.price} тг \n" \
                      f"Количество: {i.quantity} \n" \
                      f"Итого: {i.item_sum} тг \n" \
-                     f"Фото: {i.product.image.url} \n" \
+                     f"Фото: {settings.APP_PATH + i.product.image.url} \n" \
                      "================= \n"
 
         text += text_order

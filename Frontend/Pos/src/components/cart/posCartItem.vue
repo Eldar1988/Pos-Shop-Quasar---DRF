@@ -21,7 +21,7 @@
                   <div class="quantity-wrapper q-mt-sm">
                     <q-btn
                       icon="remove"
-                      class="border-radius-6"
+                      class="border-radius-5"
                       outline
                       color="dark"
                       size="sm"
@@ -30,7 +30,7 @@
                     <p class="text-center text-bold">{{ product.quantity }}</p>
                     <q-btn
                       icon="add"
-                      class="border-radius-6"
+                      class="border-radius-5"
                       outline
                       color="dark"
                       size="sm"
@@ -44,7 +44,7 @@
           <q-btn
             icon="delete_forever"
             color="negative"
-            class="border-radius-6"
+            class="border-radius-5"
             outline unelevated no-caps
             size="sm"
             label="удалить"
