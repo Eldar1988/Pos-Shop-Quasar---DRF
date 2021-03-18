@@ -42,14 +42,24 @@
         <router-link to="/privacy_policy" class="text-grey-5 q-mt-md block">
           <span class="">Политика конфиденциальности</span>
         </router-link>
-        <router-link to="/info/publichnaya_oferta" class="text-grey-5 q-mt-md block">
-          <span class="">Публичная оферта</span>
-        </router-link>
+        <div
+          v-for="page in pages"
+          :key="page.id"
+        >
+          <router-link
+            v-if="page.show_in_footer"
+            :to="`/info/${page.slug}`"
+            class="text-grey-5 q-mt-md block"
+          >
+            <span class="">{{ page.title }}</span>
+          </router-link>
+        </div>
         <!--        xxxxx   -->
         <q-separator inset="" dark class="q-mt-md"/>
         <small class="text-grey-5 q-mt-sm block">{{ year }}. Все права защищены.</small>
         <small class="text-grey-5 q-mt-sm block">Разработано студией <a href="https://js-code.ru" target="_blank"
-                                                                        class="text-grey-5 underline text-bold">JS Code</a></small>
+                                                                        class="text-grey-5 underline text-bold">JS
+          Code</a></small>
 
       </div>
     </div>
@@ -78,7 +88,10 @@ export default {
     year() {
       let date = new Date()
       return date.getFullYear()
-    }
+    },
+    pages() {
+      return this.$store.getters.getPages
+    },
   },
   methods: {
     getBenefits() {
