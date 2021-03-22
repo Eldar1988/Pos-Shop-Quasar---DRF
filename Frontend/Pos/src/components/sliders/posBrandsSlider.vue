@@ -1,11 +1,11 @@
 <template>
   <section class="q-py-md section bg-white" v-if="brands.length > 5">
-    <div class="brands-slide-grid">
-      <div
-        v-for="brand in brands"
-        :key="brand.id"
-      >
-        <div class="brand-wrapper">
+      <swiper class="swiper" :options="swiperOptions">
+        <swiper-slide
+          v-for="brand in brands"
+          :key="brand.id"
+        >
+          <div>
           <router-link :to="`/brand/${brand.slug}`">
             <article>
               <div class="q-pa-sm border-radius-6">
@@ -17,21 +17,60 @@
               </div>
             </article>
           </router-link>
-        </div>
-      </div>
-    </div>
+          </div>
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
   </section>
 </template>
 
 <script>
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
 
 export default {
   name: "posBrandsSlider",
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  directives: {
+    swiper: directive
+  },
   computed: {
     brands() {
       return this.$store.getters.getBrands
     }
-  }
+  },
+  data() {
+    return {
+      swiperOptions: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+        // freeMode: true,
+        breakpoints: {
+          1600: {
+            slidesPerView: 6.5,
+          },
+          1400: {
+            slidesPerView: 4.5,
+          },
+          1279: {
+            slidesPerView: 3.6,
+          },
+          1000: {
+            slidesPerView: 3.3,
+          },
+          750: {
+            slidesPerView: 3.3,
+          },
+          330: {
+            slidesPerView: 1.8,
+          }
+        }
+      }
+    }
+  },
 }
 </script>
 

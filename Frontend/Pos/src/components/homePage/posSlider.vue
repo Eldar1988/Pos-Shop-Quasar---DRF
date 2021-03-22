@@ -40,7 +40,7 @@
                 v-if="slide.btn_text"
                 :label="slide.btn_text"
                 color="accent"
-                class="text-weight-bold q-my-sm q-px-lg q-py-sm border-radius-5"
+                class="text-weight-bold q-my-sm q-px-lg border-radius-5"
                 :to="slide.url"
                 unelevated
                 no-caps

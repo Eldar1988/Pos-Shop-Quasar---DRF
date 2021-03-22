@@ -85,7 +85,6 @@ export default {
     scripts() {
       return this.$store.getters.getSiteSettings.scripts
     }
-
   },
   preFetch({store}) {
     return store.dispatch('fetchMainData')

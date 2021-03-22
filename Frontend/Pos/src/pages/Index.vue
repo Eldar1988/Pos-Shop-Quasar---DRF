@@ -5,14 +5,14 @@
     <pos-slider/>
     <section class="section">
       <pos-section-title title="Новинки"/>
-        <pos-products-slide-x-v2 :products="this.$store.getters.getLatestProducts" class="q-mt-lg"/>
+        <pos-products-slide-x :products="this.$store.getters.getLatestProducts" class="q-mt-md"/>
     </section>
 
     <pos-banners/>
     <pos-product-tabs/>
     <section class="q-mt-xl q-px-sm q-py-xl">
       <pos-section-title title="Категории"/>
-      <pos-categories :categories="categories" class="q-mt-xl"/>
+      <pos-categories :categories="categories" class="q-mt-lg"/>
     </section>
     <pos-brands-slider />
     <pos-shop-reviews class="section"/>
@@ -31,12 +31,12 @@ import PosSectionTitle from "components/service/posSectionTitle";
 import PosShopReviews from "components/homePage/posShopReviews";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
 import PosClientsSlider from "components/sliders/posClientsSlider";
-import PosProductsSlideXV2 from "components/sliders/posProductsSlideX-v2";
+import PosProductsSlideX from "components/sliders/posProductsSlideX";
 
 export default {
   name: 'PageIndex',
   components: {
-    PosProductsSlideXV2,
+    PosProductsSlideX,
     PosClientsSlider,
     PosBrandsSlider,
     PosShopReviews,

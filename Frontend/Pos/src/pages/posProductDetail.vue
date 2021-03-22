@@ -92,7 +92,6 @@
           <div class="product-info-section">
 <!--            <q-icon name="local_shipping" size="22px" class="q-mr-sm"/>-->
             <div class="text-bold" v-html="productData.product.shipping_detail">
-
             </div>
           </div>
 
@@ -157,9 +156,8 @@
               </div>
             </div>
             <!--            Kaspi button   -->
-            <div class="q-mt-sm q-ml-sm" id="dynamic"></div>
+            <div v-if="this.$store.state.kaspiButton" class="q-mt-sm q-ml-sm" id="dynamic"></div>
             <!--            xxxxx   -->
-            <q-separator inset="" class="q-mt-sm"/>
           </div>
           <div v-else>
             <q-card
@@ -229,7 +227,7 @@
             <!--          xxxxx   -->
           </div>
 
-          <!--          Share & Brand   -->
+          <!--          Share  -->
           <div class="flex justify-between q-pr-sm q-mt-lg">
             <div class="">
               <!--          Brand   -->
@@ -285,26 +283,23 @@
     </section>
     <!--    xxxxx   -->
     <!--    More products   -->
-    <section v-if="productData.products.length > 0" class="q-mt-xl q-py-xl bg-grey-2">
+    <section v-if="productData.products.length > 0" class="q-py-xl bg-grey-2">
       <pos-section-title title="Смотрите также:" class="q-mt-md"/>
-<!--      <pos-products-slide-x :products="productData.products" class="q-mt-md"/>-->
-      <pos-products-slide-x-v2 :products="productData.products" class="q-mt-md" />
+      <pos-products-slide-x :products="productData.products" class="q-mt-md" />
     </section>
     <!--    xxxxx   -->
     <!--    Last sean products   -->
-    <section v-if="lastSeanProducts" class="q-mt-xl q-py-lg">
+    <section v-if="lastSeanProducts" class="q-py-lg">
       <pos-section-title title="Вы недавно смотрели:"/>
-<!--      <pos-products-scroll-x :products="lastSeanProducts"/>-->
-      <pos-products-slide-x-v2 :products="lastSeanProducts" class="q-mt-md" />
+      <pos-products-slide-x :products="lastSeanProducts" class="q-mt-md" />
     </section>
     <!--    Banners   -->
     <pos-banners/>
     <!--   xxxxx   -->
     <!--    Latest Products   -->
-    <section class="section q-py-xl">
+    <section class="section ">
       <pos-section-title title="Новинки"/>
-      <pos-products-slide-x-v2 :products="this.$store.getters.getLatestProducts" class="q-mt-md" />
-
+      <pos-products-slide-x :products="this.$store.getters.getLatestProducts" class="q-mt-md" />
     </section>
     <!--    xxxxx   -->
     <!--    Brands   -->
@@ -329,12 +324,12 @@ import addToWishListFunc from "src/functions/add_to_wishlist";
 import PosProductReviews from "components/shop/posProductReviews";
 import PosShare from "components/service/posShare";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
-import PosProductsSlideXV2 from "components/sliders/posProductsSlideX-v2";
+import PosProductsSlideX from "components/sliders/posProductsSlideX";
 
 export default {
   name: "posProductDetail",
   components: {
-    PosProductsSlideXV2,
+    PosProductsSlideX,
     PosBrandsSlider,
     PosShare,
     PosProductReviews,

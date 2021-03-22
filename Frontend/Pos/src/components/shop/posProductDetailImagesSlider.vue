@@ -83,7 +83,7 @@ export default {
 
 <style lang="sass">
 .product-detail-slider
-  height: 500px
+  height: 650px
 
 @media screen and (max-width: 1410px)
   .product-detail-slider

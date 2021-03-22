@@ -1,8 +1,8 @@
 <template>
   <section class="q-py-md section bg-white" v-if="clients.length > 5">
     <pos-section-title title="Наши клиенты" class="q-mb-md"/>
-    <div class="brands-slide-grid">
-      <div
+    <swiper class="swiper" :options="swiperOptions">
+      <swiper-slide
         v-for="client in clients"
         :key="client.id"
       >
@@ -15,22 +15,61 @@
             </div>
           </article>
         </div>
-      </div>
-    </div>
+      </swiper-slide>
+      <div class="swiper-pagination" slot="pagination"></div>
+    </swiper>
   </section>
 </template>
 
 <script>
 import PosSectionTitle from "components/service/posSectionTitle";
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
 
 export default {
   name: "posClientsSlider",
-  components: {PosSectionTitle},
+  components: {
+    PosSectionTitle,
+    Swiper,
+    SwiperSlide
+  },
+  directives: {
+    swiper: directive
+  },
   computed: {
     clients() {
       return this.$store.getters.getClients
     }
-  }
+  },
+  data() {
+    return {
+      swiperOptions: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+        // freeMode: true,
+        breakpoints: {
+          1600: {
+            slidesPerView: 7.5,
+          },
+          1400: {
+            slidesPerView: 5.5,
+          },
+          1279: {
+            slidesPerView: 4.6,
+          },
+          1000: {
+            slidesPerView: 4.3,
+          },
+          750: {
+            slidesPerView: 3.7,
+          },
+          330: {
+            slidesPerView: 2.8,
+          }
+        }
+      }
+    }
+  },
 }
 </script>
 

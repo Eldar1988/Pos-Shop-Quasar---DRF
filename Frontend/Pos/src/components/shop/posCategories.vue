@@ -8,20 +8,20 @@
       >
         <router-link :to="`/shop/${category.slug}`">
           <q-card
-            class="shadow-0 q-py-sm q-px-md relative-position shadow-on-hover border-radius-6 bg-white"
+            class="shadow-0 q-px-md relative-position shadow-on-hover border-radius-6 bg-white"
           >
             <div class="category-card-wrapper text-left">
               <div>
-                <p class="text-bold q-pt-sm text-subtitle1">{{ category.title }}</p>
+                <p class="text-bold text-subtitle1">{{ category.title }}</p>
                 <p v-if="category.label" class="border-radius-6 text-bold text-accent">
                   {{ category.label }}</p>
               </div>
-              <div class="q-py-md ">
+              <div class="q-py-md text-right">
                 <q-img
                   :src="category.image"
                   class="category-card-image border-radius-6 shadow-lt"
-                  width="110px"
-                  height="110px"
+                  width="70px"
+                  height="70px"
                 />
               </div>
 

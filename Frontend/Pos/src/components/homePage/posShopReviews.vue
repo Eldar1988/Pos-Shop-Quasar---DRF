@@ -4,8 +4,8 @@
       title="Отзывы наших покупателей"
       class="q-pb-lg"
     />
-    <div class="reviews-slide-grid">
-      <div
+    <swiper class="swiper" :options="swiperOptions">
+      <swiper-slide
         v-for="review in reviews"
         :key="review.id"
       >
@@ -33,29 +33,69 @@
               <p class="review-name text-bold">
                 {{ review.name }}
               </p>
-              <p class="review-text q-pt-sm" style="overflow-y: scroll">
+              <p class="review-text q-pt-sm">
                 {{ review.text }}
               </p>
             </q-card>
           </article>
         </div>
-      </div>
-    </div>
+
+      </swiper-slide>
+      <div class="swiper-pagination" slot="pagination"></div>
+    </swiper>
   </section>
 </template>
 
 <script>
 
 import PosSectionTitle from "components/service/posSectionTitle";
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import 'swiper/swiper-bundle.css'
 
 export default {
   name: "posShopReviews",
-  components: {PosSectionTitle},
+  components: {
+    PosSectionTitle,
+    Swiper,
+    SwiperSlide
+  },
+  directives: {
+    swiper: directive
+  },
   computed: {
     reviews() {
       return this.$store.getters.getShopReviews
     }
-  }
+  },
+  data() {
+    return {
+      swiperOptions: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+        // freeMode: true,
+        breakpoints: {
+          1600: {
+            slidesPerView: 4.5,
+          },
+          1400: {
+            slidesPerView: 3.7,
+          },
+          1279: {
+            slidesPerView: 3.6,
+          },
+          1000: {
+            slidesPerView: 3.3,
+          },
+          750: {
+            slidesPerView: 2.7,
+          },
+          330: {
+            slidesPerView: 1.3,
+          }
+        }
+      }
+    }
+  },
 }
 </script>
 

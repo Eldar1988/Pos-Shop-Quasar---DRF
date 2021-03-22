@@ -23,7 +23,7 @@
     <!--    Latest Products   -->
     <section class="section q-py-xl">
       <pos-section-title title="Новинки"/>
-      <pos-products-slide-x-v2 :products="this.$store.getters.getLatestProducts" class="q-mt-md"/>
+      <pos-products-slide-x :products="this.$store.getters.getLatestProducts" class="q-mt-md"/>
     </section>
     <!--    xxxxx   -->
     <pos-brands-slider />
@@ -36,11 +36,13 @@ import PosProductsWrapper from "components/shop/posProductsWrapper";
 import PosBanners from "components/shop/posBanners";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
 import PosSectionTitle from "components/service/posSectionTitle";
-import PosProductsSlideXV2 from "components/sliders/posProductsSlideX-v2";
+import PosProductsSlideX from "components/sliders/posProductsSlideX";
 
 export default {
   name: "BrandDetail",
-  components: {PosProductsSlideXV2, PosSectionTitle, PosBrandsSlider, PosBanners, PosProductsWrapper, PosPageHeader},
+  components: {
+    PosProductsSlideX,
+    PosSectionTitle, PosBrandsSlider, PosBanners, PosProductsWrapper, PosPageHeader},
   computed: {
     brand() {
       return this.$store.getters.getBrandDetail

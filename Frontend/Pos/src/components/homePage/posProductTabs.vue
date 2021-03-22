@@ -4,10 +4,10 @@
       v-model="tab"
       align="justify"
       narrow-indicator
-      class="q-mb-lg bg-grey-4 border-radius-6 home-tabs"
-      active-bg-color="dark"
-      active-color="white"
-      indicator-color="dark"
+      class="q-mb-lg border-radius-6 home-tabs"
+      active-bg-color=""
+      active-color="accent"
+      indicator-color="accent"
     >
       <q-tab class="text-dark border-radius-6" name="hits" label="Хиты продаж" icon="mdi-alert-decagram" />
       <q-tab class="text-dark border-radius-6" name="sales" label="Скидки" icon="mdi-sale" />
@@ -21,7 +21,7 @@
         animated
         transition-prev="scale"
         transition-next="scale"
-        class="bg-grey-1"
+        class="bg-grey-2"
       >
         <q-tab-panel name="hits">
           <pos-products-wrapper :products="hitProducts" />

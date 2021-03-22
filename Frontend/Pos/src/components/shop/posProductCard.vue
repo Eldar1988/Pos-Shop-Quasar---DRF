@@ -51,12 +51,12 @@
         <!--      Sale      -->
         <q-btn
           v-if="product.old_price"
-          color="primary"
+          color="positive"
           round
           :size="this.$q.platform.is.mobile ? 'sm' : 'md'"
           unelevated
           class="q-ma-sm"
-          style="bottom: 0; position: absolute"
+          style="top: 0; position: absolute"
         >
           {{ getSalePercent }}
           <q-tooltip>Размер скидки</q-tooltip>
