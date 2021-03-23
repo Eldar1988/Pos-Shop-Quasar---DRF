@@ -1,12 +1,13 @@
 <template>
   <q-card
-    class="full-width border-radius-6 product-card relative-position"
+    class="full-width product-card relative-position"
     style="min-height: 100%"
+    square
   >
     <!--    Add to wish button   -->
     <q-btn
       :icon="productInWishList ? 'favorite' : 'favorite_border'"
-      style="position: absolute; top:55px; right:8px;z-index:30"
+      style="position: absolute; top:0; right:0;z-index:30"
       round flat
       color=""
       unelevated
@@ -16,17 +17,17 @@
       <q-tooltip>Добавить в избранное</q-tooltip>
     </q-btn>
 
-    <q-btn
-      color="accent"
-      text-color="white"
-      round
-      icon="add_shopping_cart"
-      unelevated
-      @click="addToCart(product, 1, false)"
-      style="position: absolute; z-index: 55; top:8px; right:8px;"
-    >
-      <q-tooltip>Добавить товар в корзину</q-tooltip>
-    </q-btn>
+<!--    <q-btn-->
+<!--      color="accent"-->
+<!--      text-color="white"-->
+<!--      round-->
+<!--      icon="add_shopping_cart"-->
+<!--      unelevated-->
+<!--      @click="addToCart(product, 1, false)"-->
+<!--      style="position: absolute; z-index: 55; top:8px; right:8px;"-->
+<!--    >-->
+<!--      <q-tooltip>Добавить товар в корзину</q-tooltip>-->
+<!--    </q-btn>-->
     <!--    xxxxx   -->
     <router-link :to="`/product/${product.id}/`">
       <!--      Image   -->
@@ -35,35 +36,35 @@
           :src="product.image"
           :contain="!product.image_contain"
           title="Подробнее"
-          :height="`${this.$store.getters.getSiteSettings.productCardSettings.height}px` || `180`"
-          style="max-height: 200px"
+          :height="`${this.$store.getters.getSiteSettings.productCardSettings.height}px` || `170`"
+          style="max-height: 170px"
         >
           <template v-slot:loading>
-            <q-skeleton class="product-card-image full-width"/>
+            <q-skeleton class="full-width" height="170px" square/>
           </template>
         </q-img>
 
         <!--      Rating   -->
         <div class="rating-wrapper">
-          <q-rating v-model="product.rating" color="orange" size="18px" readonly/>
+          <q-rating v-model="product.rating" color="orange" size="14px" readonly/>
         </div>
 
-        <!--      Sale      -->
-        <q-btn
-          v-if="product.old_price"
-          color="positive"
-          round
-          :size="this.$q.platform.is.mobile ? 'sm' : 'md'"
-          unelevated
-          class="q-ma-sm"
-          style="top: 0; position: absolute"
-        >
-          {{ getSalePercent }}
-          <q-tooltip>Размер скидки</q-tooltip>
-        </q-btn>
+
       </div>
     </router-link>
     <div class="product-meta">
+      <!--      Sale      -->
+      <q-btn
+        v-if="product.old_price"
+        color="accent"
+        flat dense
+        unelevated disable padding="0"
+        class="q-ma-sm"
+        style="bottom: -4px; left: 0; position: absolute"
+      >
+        {{ getSalePercent }}
+        <q-tooltip>Размер скидки</q-tooltip>
+      </q-btn>
       <!--      Product title   -->
       <router-link :to="`/product/${product.id}/`" title="Подробнее">
         <p class="product-card-title text-center ellipsis-2-lines">
@@ -72,7 +73,7 @@
       </router-link>
 
       <!--      Product price   -->
-      <div class="product-card-price-wrapper text-center text-positive">
+      <div class="product-card-price-wrapper text-right text-positive">
         <p class="text-weight-bold product-card-price">
           {{ product.price|formatPrice }}
           <q-icon name="mdi-currency-kzt" class="icon-wrapper"/>
@@ -147,28 +148,31 @@ export default {
 </script>
 
 <style lang="sass">
-.product-card-image
-  height: 250px
 
 .product-card
   position: relative
-  transition: .5s all
+  transition: .3s all
   box-shadow: none
+  &:hover
+    z-index: 150
+    box-shadow: 0px 0px 10px 0 rgba(0,0,0,.03)
+
 
 
 .product-meta
-  padding: 5px 5px 15px
+  padding: 5px 5px 5px
 
 .product-card-title
-  font-size: 16px
+  font-size: 15px
   font-weight: 700
 
 
 .product-card-price
-  font-size: 18px
+  font-size: 16px
+  padding-top: 5px
 
 .old-price
-  font-size: 15px
+  font-size: 13px
   text-decoration: line-through
 
 .rating-wrapper
@@ -190,13 +194,17 @@ export default {
 
 
 @media screen and (max-width: 800px)
-  .product-card-image
-    height: 220px
 
-  .scroll-x-products .product-card-image
-    height: 300px !important
   .product-card-title
-    font-size: 14px
+    font-size: 13px
+
+  .product-card-price
+    font-size: 15px
+    padding-top: 5px
+
+  .old-price
+    font-size: 11px
+    text-decoration: line-through
 
 
 </style>

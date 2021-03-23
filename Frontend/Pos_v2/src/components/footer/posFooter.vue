@@ -1,6 +1,6 @@
 <template>
   <footer class="q-mb-sm q-px-sm">
-    <div class="grey-border border-radius-6 text-center text-white q-pb-md q-px-sm bg-info">
+    <div class="grey-border text-center text-white q-pb-md q-px-sm bg-info">
       <div class="q-pt-lg" style="max-width: 700px; margin: auto;">
         <p class="text-subtitle1 text-bold q-pt-lg">{{ info.title }}</p>
         <p class="q-pt-md">{{ info.description }}</p>

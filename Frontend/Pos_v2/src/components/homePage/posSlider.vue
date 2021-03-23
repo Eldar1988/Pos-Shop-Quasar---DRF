@@ -14,7 +14,7 @@
       transition-next="slide-left"
       @mouseenter="autoplay = false"
       @mouseleave="autoplay = true"
-      class="home-slider border-radius-6 shadow-lt"
+      class="home-slider shadow-lt"
     >
       <q-carousel-slide
         v-for="(slide, index) in slider.slides"
@@ -27,7 +27,7 @@
           class="home-slider"
         >
           <template v-slot:loading>
-            <q-skeleton class="full-width home-slider" />
+            <q-skeleton class="full-width home-slider" square/>
           </template>
           <div class="slider-meta">
             <div class="text-center">
@@ -40,9 +40,10 @@
                 v-if="slide.btn_text"
                 :label="slide.btn_text"
                 color="accent"
-                class="text-weight-bold q-my-sm q-px-lg border-radius-5"
+                class="q-my-sm q-px-lg"
                 :to="slide.url"
-                unelevated
+                unelevated stretch
+                :size="$q.platform.is.mobile ? 'md' : 'lg'"
                 no-caps
               />
             </div>

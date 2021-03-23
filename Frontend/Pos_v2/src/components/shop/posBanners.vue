@@ -1,10 +1,10 @@
 <template>
-<section class="section q-pa-sm">
+<section class="q-mt-xl q-pa-sm">
   <div v-if="!reloadBannersStatus" class="banners-wrapper">
     <article
       v-for="banner in banners"
       :key="banner.id"
-      class="shadow-on-hover border-radius-6"
+      class="shadow-on-hover"
     >
       <router-link
         :to="banner.url ? banner.url : ''"
@@ -20,12 +20,12 @@
           color="accent"
           style="position: absolute; bottom: 10px; right: 10px; z-index: 30; border: 2px solid rgba(255,255,255,.8)"
           size="md"
-          unelevated
-          class="text-bold border-radius-5"
+          unelevated stretch
+          class=""
           no-caps
         />
         <template v-slot:loading>
-          <q-skeleton class="banner-image full-width" />
+          <q-skeleton class="banner-image full-width" square/>
         </template>
       </q-img>
       </router-link>
@@ -50,8 +50,10 @@ export default {
       reloadBannersStatus: true
     }
   },
-  mounted() {
-    this.loadBanners()
+  async mounted() {
+    setTimeout(() => {
+      this.loadBanners()
+    }, 1000)
   },
   methods: {
     async loadBanners() {

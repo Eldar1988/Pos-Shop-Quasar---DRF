@@ -12,7 +12,8 @@
         <div class="review-card-wrapper">
           <article>
             <q-card
-              class="border-radius-6 shadow-0 text-center q-py-md q-px-md"
+              square
+              class="shadow-0 text-center q-py-md q-px-md"
               style="height: 300px; overflow-y: scroll"
             >
               <q-img

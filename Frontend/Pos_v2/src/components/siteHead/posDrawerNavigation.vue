@@ -1,9 +1,9 @@
 <template>
-  <nav>
-    <q-toolbar class="bg-grey-4">
+  <nav class="bg-grey-2">
+    <q-toolbar class="bg-grey-2">
       <q-toolbar-title class="text-uppercase text-weight-bold text-subtitle1 letter-5">Магазин</q-toolbar-title>
     </q-toolbar>
-    <q-list>
+    <q-list class="bg-grey-2">
       <!--    Category skeletons-->
       <div v-if="categories.length < 1">
         <q-item
@@ -18,7 +18,7 @@
           </q-item-section>
 
           <q-item-section>
-            <q-skeleton height="20px"/>
+            <q-skeleton height="20px" square/>
           </q-item-section>
         </q-item>
       </div>
@@ -37,10 +37,10 @@
           class="menu-item"
         >
           <template v-slot:header>
-            <q-item-section avatar>
-              <q-img :src="category.image" class="border-radius-6"/>
+            <q-item-section avatar >
+              <q-img :src="category.image" class="br-0"/>
             </q-item-section>
-            <q-item-section><span class="text-subtitle2 text-weight-bold text-dark">{{ category.title }}</span>
+            <q-item-section><span class="text-subtitle1 text-dark">{{ category.title }}</span>
             </q-item-section>
           </template>
           <!--          Childs    -->
@@ -49,13 +49,13 @@
             :key="category.id"
             clickable
             v-ripple
-            class="border-radius-6"
+            class=""
             :to="`/shop/${category.slug}`"
             exact-active-class="text-primary"
             :title="category.title"
           >
             <q-item-section avatar>
-              <q-img :src="category.image" class="border-radius-6"/>
+              <q-img :src="category.image" class="br-0"/>
             </q-item-section>
             <q-item-section class="text-dark">{{ category.title }}</q-item-section>
           </q-item>
@@ -63,15 +63,15 @@
           <q-item
             clickable
             v-ripple
-            class="border-radius-6"
+            class=""
             :to="`/shop/${category.slug}`"
             exact-active-class="text-primary"
             :title="category.title"
           >
             <q-item-section avatar>
-              <q-img :src="category.image" class="border-radius-6"/>
+              <q-img :src="category.image" class="br-0"/>
             </q-item-section>
-            <q-item-section class="text-subtitle2 text-weight-bold text-dark">
+            <q-item-section class="text-subtitle1 text-dark">
               Все {{
                 category.title.toLowerCase()
               }}
@@ -91,19 +91,19 @@
           :title="category.title"
         >
           <q-item-section avatar>
-            <q-img :src="category.image" class="border-radius-6" contain/>
+            <q-img :src="category.image" class="br-0" contain/>
           </q-item-section>
-          <q-item-section class="text-subtitle2 text-weight-bold text-dark">{{ category.title }}</q-item-section>
+          <q-item-section class="text-subtitle1 text-dark">{{ category.title }}</q-item-section>
         </q-item>
       </div>
       <!--    xxxxx   -->
     </q-list>
 
-    <q-toolbar class="bg-grey-4 q-mt-md">
+    <q-toolbar class="bg-grey-2 q-pt-md">
       <q-toolbar-title class="text-uppercase text-weight-bold text-subtitle1 letter-5">Информация</q-toolbar-title>
     </q-toolbar>
     <!--    Info Pages   -->
-    <q-list>
+    <q-list class="bg-grey-2 q-mt-md">
       <!--      Home   -->
       <q-item
         clickable
@@ -116,7 +116,7 @@
         <q-item-section avatar>
           <q-icon name="home"/>
         </q-item-section>
-        <q-item-section class="text-subtitle2 text-weight-bold">
+        <q-item-section class="text-subtitle1">
           Главная
         </q-item-section>
       </q-item>
@@ -133,7 +133,7 @@
         <q-item-section avatar>
           <q-icon name="store"/>
         </q-item-section>
-        <q-item-section class="text-subtitle2 text-weight-bold">
+        <q-item-section class="text-subtitle1">
           О магазине
         </q-item-section>
       </q-item>
@@ -150,7 +150,7 @@
         <q-item-section avatar>
           <q-icon name="question_answer"/>
         </q-item-section>
-        <q-item-section class="text-subtitle2 text-weight-bold">
+        <q-item-section class="text-subtitle1">
           Вопросы и ответы
         </q-item-section>
       </q-item>
@@ -167,7 +167,7 @@
         <q-item-section avatar>
           <q-icon name="cloud_download"/>
         </q-item-section>
-        <q-item-section class="text-subtitle2 text-weight-bold">
+        <q-item-section class="text-subtitle1">
           Файлы
         </q-item-section>
       </q-item>
@@ -184,7 +184,7 @@
         <q-item-section avatar>
           <q-icon name="place"/>
         </q-item-section>
-        <q-item-section class="text-subtitle2 text-weight-bold">
+        <q-item-section class="text-subtitle1">
           Контакты
         </q-item-section>
       </q-item>
@@ -202,7 +202,7 @@
         <q-item-section avatar>
           <q-icon name="keyboard_arrow_right"/>
         </q-item-section>
-        <q-item-section class="text-subtitle2 text-weight-bold">
+        <q-item-section class="text-subtitle1">
           {{ page.title }}
         </q-item-section>
       </q-item>
@@ -218,7 +218,7 @@
         <q-item-section avatar>
           <q-icon name="assignment"/>
         </q-item-section>
-        <q-item-section class="text-subtitle2 text-weight-bold">
+        <q-item-section class="text-subtitle1">
           Политика конфиденциальности
         </q-item-section>
       </q-item>
@@ -247,8 +247,8 @@ export default {
 
 <style lang="sass">
 .menu-item
-  border-radius: 10px
-  box-shadow: rgba(99, 99, 99, 0.15) 0px 0px 5px 0px
+  border-radius: 0
   width: 95%
-  margin: 10px auto 0
+  margin: 0 auto 5px
+  background: #ffffff
 </style>

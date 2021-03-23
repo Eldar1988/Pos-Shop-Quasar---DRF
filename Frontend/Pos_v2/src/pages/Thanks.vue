@@ -3,13 +3,20 @@
     <div class="text-center">
       <pos-page-header title="Спасибо!"/>
       <q-card
-        class="border-radius-6 q-px-sm q-py-lg text-center bg-positive text-white green-shadow"
-        style="width: 300px; max-width: 300px; margin: auto"
+        class="q-px-sm q-py-lg text-center bg-positive text-white green-shadow"
+        style="width: 400px; max-width: 90%; margin: auto" square
       >
-        <div v-html="thanksText"></div>
+        <div v-html="thanksText" style="font-size: 16px"></div>
 
       </q-card>
-      <q-btn label="На главную" icon="home" color="accent" class="q-mt-xl q-px-md border-radius-6 text-bold" unelevated to="/"/>
+      <q-btn
+        label="На главную"
+        icon="home"
+        color="accent"
+        class="q-mt-xl q-px-md text-bold"
+        unelevated stretch outline no-caps
+        to="/"
+      />
     </div>
   </q-page>
 </template>
@@ -27,9 +34,9 @@ export default {
   },
   created() {
     if (this.$route.params.slug === 'callback') {
-      this.thanksText = '<p>Ваша заявка принята<br>Мы свяжемся с Вами в ближайшее время</p>'
+      this.thanksText = '<p>Ваша заявка принята.<br>Мы свяжемся с Вами в ближайшее время.</p>'
     } else {
-      this.thanksText = '<p>Ваш заказ принят в обработку<br>Мы свяжемся с Вами в ближайшее время</p>'
+      this.thanksText = '<p>Ваш заказ принят в обработку.<br>Мы свяжемся с Вами в ближайшее время.</p>'
     }
   },
   mounted() {

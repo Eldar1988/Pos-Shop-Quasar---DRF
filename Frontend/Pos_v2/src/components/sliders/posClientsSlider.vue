@@ -1,5 +1,5 @@
 <template>
-  <section class="q-py-md section bg-white" v-if="clients.length > 5">
+  <section class="q-py-md bg-white" v-if="clients.length > 5">
     <pos-section-title title="Наши клиенты" class="q-mb-md"/>
     <swiper class="swiper" :options="swiperOptions">
       <swiper-slide

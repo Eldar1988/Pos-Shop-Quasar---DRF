@@ -7,7 +7,6 @@
     >
       <pos-product-card :product="product"/>
     </swiper-slide>
-    <div class="swiper-pagination" slot="pagination"></div>
   </swiper>
 </div>
 </template>
@@ -36,27 +35,31 @@ export default {
   data() {
     return {
       swiperOptions: {
-        slidesPerView: 3,
-        spaceBetween: 10,
+        spaceBetween: 7,
+        autoplay: {
+          delay: 3000,
+          stopOnLastSlide: false,
+          disableOnInteraction: true,
+        },
         // freeMode: true,
         breakpoints: {
           1600: {
-            slidesPerView: 6.5,
+            slidesPerView: 7.5,
           },
           1400: {
-            slidesPerView: 4.5,
+            slidesPerView: 6.5,
           },
           1279: {
-            slidesPerView: 3.6,
+            slidesPerView: 5.6,
           },
           1000: {
-            slidesPerView: 3.3,
+            slidesPerView: 4.3,
           },
           750: {
-            slidesPerView: 3.3,
+            slidesPerView: 4.3,
           },
           330: {
-            slidesPerView: 1.8,
+            slidesPerView: 2.3,
           }
         }
       }
@@ -67,5 +70,5 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="sass">
 </style>

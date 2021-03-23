@@ -14,7 +14,7 @@ body
   margin-top: 50px
 
 .hide-on-desktop
-  display: none
+  display: none !important
 
 .circle-image
   border-radius: 50%
@@ -65,7 +65,7 @@ body
       margin-left: 17px
 
 .q-dialog__inner > div
-  border-radius: 15px !important
+  border-radius: 0 !important
 
 .white-grey-gradient-bg
   background: rgb(255,255,255)
@@ -75,21 +75,18 @@ img
   max-width: 100%
   border-radius: 6px
 
-.splide
-  padding: 0 !important
+.br-0
+  border-radius: 0 !important
 
-.splide__pagination
-  bottom: -1.8em !important
-
-.splide__pagination__page.is-active
-  background: $accent !important
+.q-rating__icon
+  text-shadow: none !important
 
 @media screen and (max-width: 992px)
   .hide-on-desktop
-    display: block
+    display: block !important
 
   .hide-on-mobile
-    display: none
+    display: none !important
 
   .section
     margin-top: 30px

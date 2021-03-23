@@ -12,30 +12,10 @@
     </q-toolbar>
     <!--    xxxxx   -->
     <!--    Contacts   -->
-    <div class="manu-contacts q-py-md q-px-sm full-width">
-      <a :href="`tel:${contacts.phone}`" title="Телефон для консультаций и заказов">
-        <q-btn
-          :label="contacts.phone"
-          class="full-width border-radius-6 text-bold shadow-menu"
-          color="dark"
-          flat
-          icon="call"
-
-        />
-      </a>
-      <a :href="`https://wa.me/${contacts.whatsapp}`" title="Номер Whatsapp" class="q-mt-sm block">
-        <q-btn
-          :label="contacts.whatsapp"
-          class="full-width border-radius-6 text-bold shadow-menu"
-          color="green"
-          flat
-          icon="mdi-whatsapp"
-        />
-      </a>
-    </div>
+    <pos-contacts-buttons class="bg-grey-2 hide-on-desktop"/>
     <!--    xxxxx   -->
     <!--    Mobile callback button   -->
-    <div class="q-pa-sm hide-on-desktop">
+    <div class="q-pa-sm bg-grey-2 hide-on-desktop">
       <pos-call-back color="accent"/>
     </div>
     <!--    xxxxx    -->
@@ -48,15 +28,12 @@
 <script>
 import PosCallBack from "components/siteHead/posCallBack";
 import PosDrawerNavigation from "components/siteHead/posDrawerNavigation";
+import PosContactsButtons from "components/siteHead/posContactsButtons";
 
 export default {
   name: "posRightDrawerContent",
-  components: {PosDrawerNavigation, PosCallBack},
-  computed: {
-    contacts() {
-      return this.$store.getters.getContacts
-    }
-  }
+  components: {PosContactsButtons, PosDrawerNavigation, PosCallBack},
+
 }
 </script>
 

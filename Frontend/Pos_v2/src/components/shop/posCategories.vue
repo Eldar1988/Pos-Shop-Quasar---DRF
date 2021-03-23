@@ -8,20 +8,22 @@
       >
         <router-link :to="`/shop/${category.slug}`">
           <q-card
-            class="shadow-0 q-px-md relative-position shadow-on-hover border-radius-6 bg-white"
+            square
+            class="shadow-0 q-px-sm relative-position shadow-on-hover bg-white"
           >
             <div class="category-card-wrapper text-left">
               <div>
-                <p class="text-bold text-subtitle1">{{ category.title }}</p>
-                <p v-if="category.label" class="border-radius-6 text-bold text-accent">
+                <p class="text-bold category-card-title">{{ category.title }}</p>
+                <p v-if="category.label" class="text-accent category-card-label">
                   {{ category.label }}</p>
               </div>
               <div class="q-py-md text-right">
                 <q-img
                   :src="category.image"
-                  class="category-card-image border-radius-6 shadow-lt"
-                  width="70px"
+                  class="category-card-image"
+                  width="100%"
                   height="70px"
+                  contain
                 />
               </div>
 
@@ -46,6 +48,14 @@ export default {
 </script>
 
 <style lang="sass">
+.category-card-title
+  font-size: 16px
+
+.category-card-label
+  padding-top: 7px
+  font-size: 14px !important
+  line-height: 1.2 !important
+
 .category-card-wrapper
   display: grid
   grid-template-columns: 2fr 1fr
@@ -53,7 +63,7 @@ export default {
 
 .categories-wrapper
   display: grid
-  grid-template-columns: repeat(4, 1fr)
+  grid-template-columns: repeat(5, 1fr)
   grid-gap: 10px
 
 .category-card
@@ -64,15 +74,26 @@ export default {
 
 @media screen and (max-width: 1500px)
   .categories-wrapper
-    grid-template-columns: 1fr 1fr 1fr
+    grid-template-columns: 1fr 1fr 1fr 1fr
 
 @media screen and (max-width: 1280px)
   .categories-wrapper
-    grid-template-columns: 1fr 1fr
+    grid-template-columns: 1fr 1fr 1fr
 
 @media screen and (max-width: 650px)
   .categories-wrapper
-    grid-template-columns: 1fr
-    grid-gap: 10px
+    grid-template-columns: 1fr 1fr
+    grid-gap: 5px
+
+  .category-card-title
+    font-size: 14px
+
+  .category-card-label
+    padding-top: 7px
+    font-size: 12px !important
+    line-height: 1.2 !important
+
+  .category-card-wrapper
+    grid-template-columns: 3fr 1fr
 
 </style>

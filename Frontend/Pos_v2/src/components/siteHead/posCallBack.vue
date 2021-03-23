@@ -3,10 +3,10 @@
     <q-btn
       label="Хочу такой магазин"
       icon-right="phone_callback"
-      text-color="white"
       :color="color"
-      class="text-weight-bold full-width border-radius-5 shadow-lt"
+      class="full-width shadow-lt"
       @click="dialog = true"
+      stretch unelevated
     />
 
     <q-dialog
@@ -38,9 +38,9 @@
           <q-btn
             color="accent"
             label="Отправить"
-            class="q-py-sm full-width text-bold red-shadow border-radius-6"
+            class="q-py-sm full-width text-bold"
             icon-right="forward_to_inbox"
-            unelevated
+            unelevated stretch
             :loading="loading"
             @click="callBack"
           />

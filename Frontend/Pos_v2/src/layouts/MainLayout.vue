@@ -1,17 +1,22 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <pos-set-site-colors />
+    <pos-set-site-colors/>
     <q-header class="text-primary bg-white shadow-lt" height-hint="98">
       <q-toolbar>
         <!--        Shop logo   -->
         <q-toolbar-title>
           <router-link to="/">
             <q-img :src="info.logo" height="40px" contain style="width: 190px; max-width: 90%;" position="left">
-              <template v-slot:loading><q-skeleton height="40px"  style="width: 190px; max-width: 90%"/></template>
+              <template v-slot:loading>
+                <q-skeleton height="40px" style="width: 190px; max-width: 90%" square/>
+              </template>
             </q-img>
-<!--            <span class="text-uppercase text-primary text-weight-bold logo-title">{{ info.name }}</span>-->
+            <!--            <span class="text-uppercase text-primary text-weight-bold logo-title">{{ info.name }}</span>-->
           </router-link>
         </q-toolbar-title>
+        <!--        xxxxx   -->
+        <!--        Contact button   -->
+        <pos-contacts-buttons class="hide-on-mobile" v-if="!$q.platform.is.mobile"/>
         <!--        xxxxx   -->
         <!--        Call back   -->
         <pos-call-back class="hide-on-mobile q-mr-lg"/>
@@ -19,7 +24,7 @@
         <!--        Header tabs   -->
         <pos-header-icons/>
         <!--        xxxxx   -->
-        <q-btn size="lg" dense flat round icon="view_list" @click="right = !right"/>
+        <q-btn size="lg" dense flat round icon="view_list" color="dark" @click="right = !right"/>
       </q-toolbar>
     </q-header>
     <q-drawer show-if-above v-model="right" side="right" class="text-dark">
@@ -42,9 +47,9 @@
       <pos-mobile-bottom-bar @openDraw="right = true"/>
     </div>
     <!--    xxxxx   -->
-<!--    Scripts   -->
+    <!--    Scripts   -->
     <div v-for="script in scripts" :key="script.id" v-html="script.script"></div>
-<!--    xxxxx   -->
+    <!--    xxxxx   -->
   </q-layout>
 </template>
 
@@ -56,11 +61,14 @@ import PosHeaderIcons from "components/siteHead/posHeaderIcons";
 import PosMobileBottomBar from "components/service/posMobileBottomBar";
 import PosFooter from "components/footer/posFooter";
 import PosSetSiteColors from "components/service/posSetSiteColors";
+import PosContactsButtons from "components/siteHead/posContactsButtons";
 
 export default {
   components: {
+    PosContactsButtons,
     PosSetSiteColors,
-    PosFooter, PosMobileBottomBar, PosHeaderIcons, PosPageReloadDialog, PosRightDrawerContent, PosCallBack},
+    PosFooter, PosMobileBottomBar, PosHeaderIcons, PosPageReloadDialog, PosRightDrawerContent, PosCallBack
+  },
   data() {
     return {
       right: false,
@@ -73,7 +81,7 @@ export default {
     setTimeout(() => {
       this.$store.dispatch('fetchCategories')
       this.$store.dispatch('fetchLatestProducts')
-    },1500)
+    }, 500)
   },
   computed: {
     backendError() {

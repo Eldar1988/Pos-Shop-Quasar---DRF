@@ -1,17 +1,17 @@
 <template>
-  <section class="section q-pa-sm q-mt-lg">
+  <section class="q-pa-sm q-mt-lg">
     <q-tabs
       v-model="tab"
       align="justify"
       narrow-indicator
-      class="q-mb-lg border-radius-6 home-tabs"
+      class="q-mb-lg home-tabs bg-white"
       active-bg-color=""
       active-color="accent"
       indicator-color="accent"
     >
-      <q-tab class="text-dark border-radius-6" name="hits" label="Хиты продаж" icon="mdi-alert-decagram" />
-      <q-tab class="text-dark border-radius-6" name="sales" label="Скидки" icon="mdi-sale" />
-      <q-tab class="text-dark border-radius-6" name="future" label="Рекомендуем" icon="loyalty" />
+      <q-tab class="text-dark" name="hits" label="Хиты продаж" icon="mdi-alert-decagram" />
+      <q-tab class="text-dark" name="sales" label="Скидки" icon="mdi-sale" />
+      <q-tab class="text-dark" name="future" label="Рекомендуем" icon="loyalty" />
     </q-tabs>
 
     <div class="q-mt-lg">
