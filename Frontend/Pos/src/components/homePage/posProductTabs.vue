@@ -4,7 +4,7 @@
       v-model="tab"
       align="justify"
       narrow-indicator
-      class="q-mb-lg border-radius-6 home-tabs"
+      class="q-mb-lg border-radius-6 home-tabs bg-white"
       active-bg-color=""
       active-color="accent"
       indicator-color="accent"
