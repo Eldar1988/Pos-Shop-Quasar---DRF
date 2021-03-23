@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /cart
+Disallow: /wishlist
+Disallow: /wishlist
+Disallow: /shop
+Disallow: /label
+Disallow: /brand
+Disallow: /thanks
+Disallow: /privacy_policy
+Disallow: /contacts
+Disallow: /search
+Disallow: /files

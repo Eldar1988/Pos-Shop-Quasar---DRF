@@ -1,0 +1,97 @@
+@import "fonts"
+@import "scrollbar"
+@import "shadows"
+
+*
+  padding: 0
+  margin: 0
+  box-sizing: border-box
+
+body
+  background: $grey-2
+
+.section
+  margin-top: 50px
+
+.hide-on-desktop
+  display: none
+
+.circle-image
+  border-radius: 50%
+
+.border-bottom
+  border-bottom: 1px solid $grey-4
+
+.border-radius-6
+  border-radius: 10px !important
+  overflow: hidden
+
+.border-radius-5
+  border-radius: 5px !important
+  overflow: hidden
+
+.border-radius-15
+  border-radius: 15px !important
+.q-tab-panel
+  padding: 0 !important
+
+.grey-border
+  border: 1px solid $grey-3
+
+.icon-wrapper
+  margin-top: -3px
+  margin-left: -5px
+
+.q-img__content > div
+  background: rgba(0, 0, 0, 0)
+  padding: 0 !important
+
+.q-carousel__slide, .q-carousel .q-carousel--padding
+  padding: 0 !important
+
+.info-page
+  width: 900px
+  max-width: 95%
+  margin: auto
+
+  ul
+    list-style-type: circle
+
+    li
+      margin-left: 17px
+
+  ol
+    li
+      margin-left: 17px
+
+.q-dialog__inner > div
+  border-radius: 15px !important
+
+.white-grey-gradient-bg
+  background: rgb(255,255,255)
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(244,244,244,1) 100%)
+
+img
+  max-width: 100%
+  border-radius: 6px
+
+.splide
+  padding: 0 !important
+
+.splide__pagination
+  bottom: -1.8em !important
+
+.splide__pagination__page.is-active
+  background: $accent !important
+
+@media screen and (max-width: 992px)
+  .hide-on-desktop
+    display: block
+
+  .hide-on-mobile
+    display: none
+
+  .section
+    margin-top: 30px
+
+
