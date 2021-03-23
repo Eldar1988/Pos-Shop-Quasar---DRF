@@ -1,6 +1,6 @@
 <template>
 <div class="section-title text-center">
-  <h2 class="text-h5 text-weight-bold">
+  <h2 :class="$q.platform.is.mobile ? `text-h6 text-weight-bold` : `text-h5 text-weight-bold`">
     {{ title }}
   </h2>
 </div>

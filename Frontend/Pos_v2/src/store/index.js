@@ -25,7 +25,7 @@ export default function (/* { ssrContext } */) {
       pages
     },
     state: {
-      kaspiButton: true,
+      kaspiButton: false,
       // serverURL: 'http://192.168.0.155:8000'
       // serverURL: 'http://192.168.0.199:8000'
       // serverURL: 'https://dj.posshop.kz.na4u.ru'

@@ -1,6 +1,7 @@
 <template>
   <div class="q-pa-sm">
     <q-card
+      square
       v-if="reviews.length === 0"
       class="q-px-sm q-py-lg text-weight-regular shadow-0 bg-white"
     >
@@ -15,7 +16,7 @@
         v-if="i.public"
         text-sanitize
         :name="i.name"
-        bg-color="grey-2"
+        bg-color="white"
         class="q-px-md text-left text-weight-regular"
       >
         {{ i.text }} <br><br>
@@ -25,9 +26,9 @@
     </div>
     <q-btn
       label="Добавить отзыв"
-      icon-right="rate_review"
-      class="text-bold full-width border-radius-6 q-mt-md q-py-sm"
-      unelevated
+      icon-right="create"
+      class="text-bold q-mt-md q-py-sm"
+      unelevated stretch no-caps
       color="primary"
       @click="dialog = true"
     />
@@ -36,7 +37,7 @@
       v-model="dialog"
     >
       <q-card style="width: 500px; max-width: 90vw;">
-        <q-toolbar class="bg-primary text-white">
+        <q-toolbar class="bg-grey-6 text-white">
           <q-toolbar-title class="flex justify-between" style="align-items: center">
             <div class="text-h6 text-bold">Новый отзыв</div>
             <q-icon name="close" class="cursor-pointer" v-close-popup/>
@@ -46,13 +47,13 @@
 
 
         <q-card-section class="text-center">
-          <p class="text-bold text-h6">Ваша оценка: {{ review.rating }}</p>
+          <p class="text-bold text-subtitle1">Ваша оценка: {{ review.rating }}</p>
           <q-rating v-model="review.rating" color="orange" size="28px" />
           <small v-if="!review.rating" class="text-negative"><br>{{ errorReviewRating }}</small>
-          <q-input v-model="review.name" label="Ваше имя*" outlined type="text" class="q-mt-md"/>
+          <q-input v-model="review.name" label="Ваше имя*" outlined square type="text" class="q-mt-md"/>
           <small v-if="!review.name" class="text-negative block">{{ errorReviewName }}</small>
 
-          <q-input v-model="review.text" label="Ваш отзыв*" outlined type="textarea" clearable clear-icon="backspace"
+          <q-input v-model="review.text" label="Ваш отзыв*" square outlined type="textarea" clearable clear-icon="backspace"
                    class="q-mt-md"/>
           <small v-if="!review.text" class="text-negative">{{ errorReviewText }}</small>
         </q-card-section>
@@ -61,9 +62,9 @@
           <q-btn
             color="accent"
             label="Отправить отзыв"
-            class="q-py-sm full-width text-bold red-shadow border-radius-6"
+            class="q-py-sm full-width text-bold"
             icon-right="mark_chat_read"
-            unelevated
+            unelevated stretch
             :loading="loading"
             @click="createReview"
           />

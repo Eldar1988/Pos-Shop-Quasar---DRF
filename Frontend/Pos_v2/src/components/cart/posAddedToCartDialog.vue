@@ -1,6 +1,8 @@
 <template>
 <div>
-    <q-card style="width: 100%;" class="shadow-20 q-pa-sm" >
+    <q-card
+      square
+      style="width: 100%;" class="shadow-20 q-pa-sm" >
       <div class="flex justify-end">
         <q-btn icon="close" flat color="dark" dense v-close-popup/>
       </div>
@@ -10,8 +12,8 @@
           contain
           height="50px"
         />
-        <p class="text-center">{{ product.title }} добавлен в корзину</p>
-        <q-btn to="/cart" label="Перейти в корзину" class="full-width border-radius-6 q-mt-sm text-bold" color="primary" unelevated />
+        <p class="text-center q-py-md">{{ product.title }} добавлен в корзину</p>
+        <q-btn to="/cart" label="Перейти в корзину" stretch class="full-width q-mt-sm text-bold" color="dark" unelevated />
       </div>
     </q-card>
 </div>

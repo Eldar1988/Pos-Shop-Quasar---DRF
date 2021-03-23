@@ -26,7 +26,7 @@
         :title="title" :alt="`Фото: ${title}`"
       >
         <template v-slot:loading>
-          <q-skeleton class="full-width product-detail-slider" />
+          <q-skeleton class="full-width product-detail-slider" square />
         </template>
       </q-img>
 
@@ -43,7 +43,7 @@
         :title="title" :alt="`Фото: ${title}`"
       >
         <template v-slot:loading>
-          <q-skeleton class="full-width product-detail-slider" />
+          <q-skeleton class="full-width product-detail-slider" square />
         </template>
       </q-img>
     </q-carousel-slide>
