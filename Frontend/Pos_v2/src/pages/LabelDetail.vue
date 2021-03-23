@@ -13,7 +13,13 @@
     <section style="margin-top: 100px">
       <pos-banners/>
     </section>
-    <pos-brands-slider />
+    <!--    Latest Products   -->
+    <section class="q-py-xl">
+      <pos-section-title title="Новинки"/>
+      <pos-products-slide-x :products="latestProducts" class="q-mt-md"/>
+    </section>
+    <!--    xxxxx   -->
+    <pos-brands-slider class="q-mt-lg"/>
   </q-page>
 </template>
 
@@ -22,13 +28,18 @@ import PosPageHeader from "components/service/posPageHeader";
 import PosProductsWrapper from "components/shop/posProductsWrapper";
 import PosBanners from "components/shop/posBanners";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
+import PosSectionTitle from "components/service/posSectionTitle";
+import PosProductsSlideX from "components/sliders/posProductsSlideX";
 
 export default {
   name: "LabelDetail",
-  components: {PosBrandsSlider, PosBanners, PosProductsWrapper, PosPageHeader},
+  components: {PosProductsSlideX, PosSectionTitle, PosBrandsSlider, PosBanners, PosProductsWrapper, PosPageHeader},
   computed: {
     label() {
       return this.$store.getters.getLabelDetail
+    },
+    latestProducts() {
+      return this.$store.getters.getLatestProducts
     }
   },
   preFetch({store, currentRoute}) {

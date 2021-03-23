@@ -14,7 +14,7 @@
     <pos-banners/>
 
     <pos-product-tabs class="q-mt-xl"/>
-    <pos-brands-slider />
+    <pos-brands-slider class="q-mt-xl"/>
     <pos-shop-reviews class="q-mt-lg"/>
     <pos-clients-slider />
     <!--    BRANDS & REVIEWS   -->

@@ -13,13 +13,14 @@
     <!--    Category description   -->
     <section class="q-pa-sm" v-if="category.description">
       <q-card
-        class="border-radius-6 bg-white shadow-0 q-px-sm q-pt-md q-pb-sm"
+        square
+        class="bg-white shadow-0 q-px-sm q-pt-md q-pb-sm"
       >
         <p class="text-center q-pb-sm">{{ category.description }}</p>
         <q-expansion-item
           v-if="category.full_description"
           label="Подробнее"
-          class="text-center text-bold text-uppercase border-radius-6"
+          class="text-center text-bold text-uppercase"
         >
           <q-card>
             <div
@@ -48,21 +49,21 @@
 
     </section>
     <!--    xxxxx   -->
-    <!--    Latest Products   -->
-    <section class="section q-py-xl">
-      <pos-section-title title="Новинки"/>
-      <pos-products-slide-x :products="latestProducts" class="q-mt-md"/>
-    </section>
-    <!--    xxxxx   -->
-
     <!--    Banners   -->
     <section>
       <pos-banners/>
     </section>
     <!--    xxxxx   -->
-    <pos-section-title title="Смотрите также" class="q-mt-xl" />
+    <!--    Latest Products   -->
+    <section class="q-py-xl">
+      <pos-section-title title="Новинки"/>
+      <pos-products-slide-x :products="latestProducts" class="q-mt-md"/>
+    </section>
+    <!--    xxxxx   -->
+
+    <pos-section-title title="Смотрите также" class="q-mt-lg" />
     <pos-categories class="q-mt-md q-pa-sm" :categories="this.$store.getters.getCategories" />
-    <pos-brands-slider />
+    <pos-brands-slider class="q-mt-xl"/>
   </q-page>
 </template>
 

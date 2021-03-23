@@ -24,7 +24,8 @@
       class="q-px-sm"
     >
       <q-card
-        class="bg-negative red-shadow q-px-sm q-py-xl flex flex-center q-mt-md border-radius-6"
+        square
+        class="bg-negative red-shadow q-px-sm q-py-xl flex flex-center q-mt-md"
       >
         <div class="text-center">
           <p class="text-subtitle1 text-white">
@@ -33,8 +34,8 @@
           <q-btn
             label="вернуться в магазин"
             outline
-            color="white"
-            class="border-radius-6 q-mt-md text-bold"
+            color="white" stretch
+            class="q-mt-md text-bold"
             to="/"
           />
         </div>
@@ -44,9 +45,9 @@
 
     <pos-banners class="section"/>
 
-    <section class="section q-py-xl">
+    <section class="q-py-xl">
       <pos-section-title title="Новинки" class="q-mb-md"/>
-      <pos-products-slide-x-v2  :products="this.$store.getters.getLatestProducts"/>
+      <pos-products-slide-x :products="this.$store.getters.getLatestProducts"/>
     </section>
   </q-page>
 </template>
@@ -56,11 +57,11 @@ import PosPageHeader from "components/service/posPageHeader";
 import PosWishListItem from "components/wishList/posWishListItem";
 import PosBanners from "components/shop/posBanners";
 import PosSectionTitle from "components/service/posSectionTitle";
-import PosProductsSlideXV2 from "components/sliders/posProductsSlideX-v2";
+import PosProductsSlideX from "components/sliders/posProductsSlideX";
 
 export default {
   name: "WishList",
-  components: {PosProductsSlideXV2, PosSectionTitle, PosBanners, PosWishListItem, PosPageHeader},
+  components: {PosProductsSlideX, PosSectionTitle, PosBanners, PosWishListItem, PosPageHeader},
   data() {
     return {
       products: []

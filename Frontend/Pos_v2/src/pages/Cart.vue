@@ -16,7 +16,7 @@
               :key="product.id"
               :product="product"
             />
-            <div class="bg-dark text-white q-px-md border-radius-6 q-py-md q-mt-md">
+            <div class="bg-dark text-white q-px-md q-py-md q-mt-md">
               <p class="text-subtitle1 text-bold">Всего товаров: {{ cartLen }}</p>
               <p class="text-subtitle1 text-bold">На сумму: {{ cartSum|formatPrice }}
                 <q-icon name="mdi-currency-kzt" class="icon-wrapper"/>
@@ -37,7 +37,8 @@
         class="q-px-sm"
       >
         <q-card
-          class="bg-negative red-shadow q-px-sm q-py-xl flex flex-center q-mt-lg border-radius-6"
+          square
+          class="bg-negative red-shadow q-px-sm q-py-xl flex flex-center q-mt-lg"
         >
           <div class="text-center">
             <p class="text-subtitle1 text-white">
@@ -45,9 +46,9 @@
             </p>
             <q-btn
               label="вернуться в магазин"
-              outline
+              outline stretch
               color="white"
-              class="border-radius-6 q-mt-md text-bold"
+              class="q-mt-md text-bold"
               to="/"
             />
           </div>

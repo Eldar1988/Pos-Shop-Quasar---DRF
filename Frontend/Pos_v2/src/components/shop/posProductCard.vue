@@ -31,7 +31,10 @@
     <!--    xxxxx   -->
     <router-link :to="`/product/${product.id}/`">
       <!--      Image   -->
-      <div class="flex product-card-image" style="align-items: center;position: relative">
+      <div
+        :class="!product.image_contain ? `flex product-card-image q-pa-sm` : `flex product-card-image`"
+        style="align-items: center;position: relative"
+      >
         <q-img
           :src="product.image"
           :contain="!product.image_contain"
@@ -43,13 +46,10 @@
             <q-skeleton class="full-width" height="170px" square/>
           </template>
         </q-img>
-
         <!--      Rating   -->
         <div class="rating-wrapper">
           <q-rating v-model="product.rating" color="orange" size="14px" readonly/>
         </div>
-
-
       </div>
     </router-link>
     <div class="product-meta">
@@ -157,14 +157,13 @@ export default {
     z-index: 150
     box-shadow: 0px 0px 10px 0 rgba(0,0,0,.03)
 
-
-
 .product-meta
   padding: 5px 5px 5px
 
 .product-card-title
   font-size: 15px
   font-weight: 700
+  height: 40px
 
 
 .product-card-price

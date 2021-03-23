@@ -7,7 +7,7 @@
     <pos-page-header :title="`Товары от производителя ${brand.title}`"/>
     <!--    Brand description   -->
     <section class="q-pa-sm" v-if="brand.description">
-      <q-card class="border-radius-6 shadow-0 q-px-sm q-pt-md q-pb-sm">
+      <q-card class="shadow-0 q-px-sm q-pt-md q-pb-sm" square>
         <p class="text-center q-pb-sm">{{ brand.description }}</p>
       </q-card>
     </section>
@@ -17,16 +17,16 @@
       <pos-products-wrapper :products="brand.products"/>
     </section>
     <!--    xxxxx   -->
-    <section style="margin-top: 100px">
+    <section class="q-mt-xl">
       <pos-banners/>
     </section>
     <!--    Latest Products   -->
-    <section class="section q-py-xl">
+    <section class="q-py-xl">
       <pos-section-title title="Новинки"/>
       <pos-products-slide-x :products="this.$store.getters.getLatestProducts" class="q-mt-md"/>
     </section>
     <!--    xxxxx   -->
-    <pos-brands-slider />
+    <pos-brands-slider class="q-mt-lg"/>
   </q-page>
 </template>
 

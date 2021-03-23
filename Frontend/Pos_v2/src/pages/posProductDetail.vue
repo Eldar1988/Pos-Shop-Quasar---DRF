@@ -22,41 +22,7 @@
             :first-image-contain="productData.product.image_contain"
           />
           <!--          xxxxx   -->
-          <!--          Article  Category  Labels   -->
-          <div class="q-pa-sm">
-            <!--          Article & Category   -->
-            <div class="">
-              <!--          Article  -->
-              <div v-if="productData.product.article" class="">
-                <p class="text-bold">
-                  Артикул: <span class="text-weight-regular">{{ productData.product.article }}</span>
-                </p>
-              </div>
-              <!--            xxxxx   -->
-              <!--          Category   -->
-              <div class="product-info-section flex" style="align-items: center">
-                <p class="text-bold">Категория: </p>
-                <router-link :to="`/shop/${productData.product.category.slug}`">
-                  <span class="q-ml-sm underline text-primary"> {{ productData.product.category.title }}</span>
-                </router-link>
-              </div>
-              <!--          xxxxx   -->
-            </div>
-            <!--          xxxxx   -->
-            <!--          Labels   -->
-            <div v-if="productData.product.labels.length > 0" class="product-info-section flex">
-              <p class="text-bold">Метки: </p>
-              <q-btn
-                v-for="label in productData.product.labels"
-                :key="label.id"
-                :label="label.title"
-                size="sm" outline
-                class="border-radius-6 q-ml-sm text-bold q-mb-sm"
-                :to="`/label/${label.slug}`"
-              />
-            </div>
-            <!--          xxxxx   -->
-          </div>
+
         </div>
         <div class="q-pa-sm">
           <div class="flex justify-between" style="align-items: center">
@@ -90,35 +56,32 @@
           </div>
           <!--          Shipping detail   -->
           <div class="product-info-section">
-<!--            <q-icon name="local_shipping" size="22px" class="q-mr-sm"/>-->
+            <!--            <q-icon name="local_shipping" size="22px" class="q-mr-sm"/>-->
             <div class="text-bold" v-html="productData.product.shipping_detail">
             </div>
           </div>
 
           <!--          Actions   -->
-          <div v-if="productData.product.in_stock_quantity > 0" class="row q-my-lg">
-            <q-separator inset=""/>
+          <div v-if="productData.product.in_stock_quantity > 0" class="row q-mt-md">
             <!--        Quantity   -->
-            <div class="full-width flex justify-center">
-              <div class="q-mt-md">
-                <p class="text-bold text-center">Количество:</p>
+            <div class="full-width flex justify-center q-mb-md">
+              <div class="q-mt-sm">
                 <div class="quantity-wrapper q-mt-sm">
                   <q-btn
                     icon="remove"
-                    class="border-radius-6"
-                    outline
+                    class=""
+                    outline stretch dense
                     color="dark"
                     size="sm"
                     @click="quantity > 1 ? quantity -- : null"
                   />
                   <div style="height: 30px; overflow: hidden;">
-                    <q-input v-model="quantity" type="tel" class="border-radius-6"
+                    <q-input v-model="quantity" type="tel" class=""
                              input-class="text-center text-bold text-dark " input-style="max-height: 30px;"/>
                   </div>
                   <q-btn
                     icon="add"
-                    class="border-radius-6"
-                    outline
+                    outline stretch dense
                     color="dark"
                     size="sm"
                     @click="quantity ++"
@@ -127,31 +90,32 @@
               </div>
             </div>
             <!--        xxxxx   -->
-            <div class="col-12 col-md-6 q-pa-sm q-mt-sm">
+            <div class="col-12 col-md-6 q-pa-sm">
               <q-btn
                 label="Купить в 1 клик"
                 color="accent"
-                class="border-radius-6 full-width shadow-lt q-py-sm text-bold"
+                unelevated stretch
+                class="full-width q-py-sm text-bold"
                 icon-right="forward"
                 @click="selfAddToCart(productData.product, quantity, true)"
               />
             </div>
-            <div class="col-12 col-md-6 q-pa-sm q-mt-sm">
+            <div class="col-12 col-md-6 q-pa-sm">
               <div class="buttons-grid">
                 <q-btn
                   label="В корзину"
-                  color="white"
-                  text-color="dark"
-                  class="border-radius-6 full-width q-py-sm text-bold shadow-lt"
+                  color="positive"
+                  class="full-width q-py-sm text-bold"
                   icon-right="add_shopping_cart"
+                  stretch unelevated outline
                   @click="selfAddToCart(productData.product, quantity, false)"
                 />
                 <q-btn
-                  color="white"
+                  color="accent"
                   @click="addToWishList(productData.product)"
                   text-color="accent"
+                  stretch unelevated flat
                   :icon="productInWishList ? 'favorite' : 'favorite_border'"
-                  class="border-radius-6 shadow-lt"
                 />
               </div>
             </div>
@@ -161,13 +125,52 @@
           </div>
           <div v-else>
             <q-card
-              class="bg-accent shadow-0 q-px-md q-py-lg q-mt-lg q-mb-md text-center border-radius-6"
+              square
+              class="bg-accent shadow-0 q-px-md q-py-lg q-mt-lg q-mb-md text-center"
               dark
             >
               Данного товара нет в наличии.<br>Ожидаем поступление.
             </q-card>
           </div>
           <!--          xxxxx   -->
+          <!--          Article  Category  Labels   -->
+          <div class="q-pa-sm q-mt-md">
+            <!--          Article & Category   -->
+            <div class="">
+              <!--          Article  -->
+              <div v-if="productData.product.article" class="">
+                <p class="text-bold">
+                  Артикул: <span class="text-weight-regular">{{ productData.product.article }}</span>
+                </p>
+              </div>
+              <!--            xxxxx   -->
+              <!--          Category   -->
+              <div class="flex justify-between">
+                <div class="flex product-info-section" style="align-items: center">
+                  <p class="text-bold">Категория: </p>
+                  <router-link :to="`/shop/${productData.product.category.slug}`">
+                    <span class="q-ml-sm underline text-primary"> {{ productData.product.category.title }}</span>
+                  </router-link>
+                </div>
+                <!--          Labels   -->
+                <div v-if="productData.product.labels.length > 0" class="flex product-info-section" style="align-items: center">
+                  <p class="text-bold">Метки: </p>
+                  <q-btn
+                    v-for="label in productData.product.labels"
+                    :key="label.id"
+                    :label="label.title"
+                    size="sm" outline stretch no-caps
+                    class="q-ml-sm text-bold"
+                    :to="`/label/${label.slug}`"
+                  />
+                </div>
+              </div>
+              <!--          xxxxx   -->
+              <!--          xxxxx   -->
+            </div>
+            <!--          xxxxx   -->
+
+          </div>
           <!--          Reviews - Characters - More info   -->
           <div class="q-mt-md">
             <!--          Reviews   -->
@@ -227,6 +230,21 @@
             <!--          xxxxx   -->
           </div>
 
+          <q-tabs
+            v-model="tab"
+            align="justify"
+            narrow-indicator
+            class="q-mb-lg home-tabs bg-white"
+            active-bg-color=""
+            active-color="accent"
+            indicator-color="accent" inline-label
+          >
+            <q-tab class="text-dark" name="reviews" label="Отзывы" icon="chat_bubble_outline" />
+            <q-tab class="text-dark" name="characters" label="" icon="mdi-sale" />
+            <q-tab class="text-dark" name="future" label="Рекомендуем" icon="loyalty" />
+          </q-tabs>
+<!--          xxxxx   -->
+
           <!--          Share  -->
           <div class="flex justify-between q-pr-sm q-mt-lg">
             <div class="">
@@ -285,13 +303,13 @@
     <!--    More products   -->
     <section v-if="productData.products.length > 0" class="q-py-xl bg-grey-2">
       <pos-section-title title="Смотрите также:" class="q-mt-md"/>
-      <pos-products-slide-x :products="productData.products" class="q-mt-md" />
+      <pos-products-slide-x :products="productData.products" class="q-mt-md"/>
     </section>
     <!--    xxxxx   -->
     <!--    Last sean products   -->
     <section v-if="lastSeanProducts" class="q-py-lg">
       <pos-section-title title="Вы недавно смотрели:"/>
-      <pos-products-slide-x :products="lastSeanProducts" class="q-mt-md" />
+      <pos-products-slide-x :products="lastSeanProducts" class="q-mt-md"/>
     </section>
     <!--    Banners   -->
     <pos-banners/>
@@ -299,7 +317,7 @@
     <!--    Latest Products   -->
     <section class="section ">
       <pos-section-title title="Новинки"/>
-      <pos-products-slide-x :products="this.$store.getters.getLatestProducts" class="q-mt-md" />
+      <pos-products-slide-x :products="this.$store.getters.getLatestProducts" class="q-mt-md"/>
     </section>
     <!--    xxxxx   -->
     <!--    Brands   -->
@@ -342,6 +360,7 @@ export default {
       quantity: 1,
       cartDialog: false,
       productInWishList: false,
+      tab: ''
     }
   },
   computed: {
@@ -538,7 +557,7 @@ export default {
   text-align: left
 
 .product-info-section
-  margin-top: 10px
+  margin-top: 7px
 
 .product-detail-price
   font-size: 30px

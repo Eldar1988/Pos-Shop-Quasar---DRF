@@ -1,5 +1,5 @@
 <template>
-  <div class="mobile-bottom-bar bg-white shadow-15 border-radius-6"
+  <div class="mobile-bottom-bar bg-white shadow-10"
        :style="this.$q.platform.is.ios ? `bottom: 20px` : `bottom: 5px`"
   >
     <div class="flex flex-center">
@@ -87,8 +87,8 @@ export default {
 .mobile-bottom-bar
   position: fixed
   bottom: 5px
-  left: 5px
-  right: 5px
+  left: 8px
+  right: 8px
   height: 52px
   color: white
   display: grid

@@ -9,20 +9,20 @@
       <div
         v-for="file in files"
         :key="file.id"
-        class="border-radius-6 bg-white q-pa-sm q-mt-md flex justify-between no-wrap"
+        class="bg-white q-pa-md q-mt-md flex justify-between no-wrap"
         style="align-items: center"
       >
         <div>
         <p class="text-bold">{{ file.title }}</p>
-          <small>{{ file.description }}</small>
+          <p class="q-pt-sm">{{ file.description }}</p>
         </div>
         <div class="flex no-wrap">
           <a :href="file.file">
             <q-btn
               label="Скачать"
-              class="border-radius-5 text-bold"
+              class="text-bold"
               color="accent"
-              unelevated
+              unelevated stretch
               size="sm"
               icon-right="cloud_download"
             />

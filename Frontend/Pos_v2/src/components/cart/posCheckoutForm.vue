@@ -4,10 +4,10 @@
       ref="stepper"
       v-model="step"
       animated
-      class="shadow-0 border-radius-6" color="primary"
+      class="shadow-0 br-0" color="primary"
       vertical
     >
-      <p class="text-subtitle1 text-bold q-pl-lg">Оформление заказа</p>
+      <p class="text-subtitle1 text-bold q-pl-lg q-pt-sm">Оформление заказа</p>
       <p class="q-pl-lg">Для оформления заказа заполните форму ниже</p>
       <!--      Personal data   -->
       <q-step
@@ -18,6 +18,7 @@
         title="Персональные данные"
         done-color="positive"
         error-color="negative"
+        class="q-mt-md"
       >
         <div class="row">
           <div class="col-12" style="padding: 2px">
@@ -25,7 +26,7 @@
               v-model="formData.name"
               :rules="[val => !!val || 'Это обязательное поле*']"
               label="ФИО"
-              outlined
+              outlined square
               type="text"
               maxlength="100" counter
             />
@@ -36,7 +37,7 @@
               :rules="[val => !!val || 'Это обязательное поле*']"
               label="Номер телефона*"
               mask="#-###-###-####"
-              outlined
+              outlined square
               type="tel"
             />
           </div>
@@ -44,7 +45,7 @@
             <q-input
               v-model="formData.email"
               label="Email (необязательно)"
-              outlined
+              outlined square
               type="email"
               onautocomplete
             />
@@ -68,7 +69,7 @@
               v-model="formData.region"
               :rules="[val => !!val || 'Это обязательное поле*']"
               label="Область*"
-              outlined
+              outlined square
               type="text"
               maxlength="200" counter
             />
@@ -78,7 +79,7 @@
               v-model="formData.city"
               :rules="[val => !!val || 'Это обязательное поле*']"
               label="Город*"
-              outlined
+              outlined square
               type="text"
               maxlength="200" counter
             />
@@ -88,7 +89,7 @@
               v-model="formData.address"
               :rules="[val => !!val || 'Это обязательное поле*']"
               label="Адрес*"
-              outlined
+              outlined square
               type="text"
               onautocomplete
               maxlength="200" counter
@@ -131,7 +132,8 @@
         <p class="q-ml-lg text-bold q-pb-md ">Выберите способ оплаты</p>
 
         <q-card
-          class="grey-border shadow-0 border-radius-6 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"
+          square
+          class="grey-border shadow-0 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"
           v-for="payment in paymentMethods"
           :key="payment.id"
           @click="createNewOrder(payment.title, payment.slug)"
@@ -145,10 +147,21 @@
       <!--      xxxxx   -->
       <template v-slot:navigation>
         <q-stepper-navigation>
-          <q-btn v-if="step > 1" class="border-radius-6" color="primary" flat icon="west"
-                 @click="$refs.stepper.previous()"/>
-          <q-btn :label="step === 4 ? 'Готово' : 'Далее'" color="primary" @click="$refs.stepper.next()"
-                 class="q-px-md text-bold border-radius-5 q-ml-sm" no-caps/>
+          <q-btn
+            v-if="step > 1"
+            color="primary"
+            flat stretch
+            icon="west"
+            @click="$refs.stepper.previous()"
+            class="q-py-sm"
+          />
+          <q-btn
+            :label="step === 4 ? 'Готово' : 'Далее'"
+            color="primary"
+            @click="$refs.stepper.next()"
+            class="q-px-xl q-ml-sm text-bold q-py-sm"
+            no-caps unelevated stretch
+          />
         </q-stepper-navigation>
       </template>
     </q-stepper>

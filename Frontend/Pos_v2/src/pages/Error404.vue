@@ -1,5 +1,5 @@
 <template>
-  <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
+  <div class="fullscreen bg-primary text-white text-center q-pa-md flex flex-center">
     <div>
       <div style="font-size: 30vh">
         404
@@ -10,9 +10,9 @@
       </div>
 
       <q-btn
-        class="q-mt-xl border-radius-6 text-bold"
+        class="q-mt-xl text-bold"
         color="white"
-        text-color="dark"
+        outline stretch
         unelevated
         to="/"
         label="На главную"

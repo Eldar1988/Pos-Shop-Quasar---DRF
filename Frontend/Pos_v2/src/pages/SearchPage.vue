@@ -6,25 +6,26 @@
     </q-breadcrumbs>
     <pos-page-header title="Поиск по магазину"/>
     <q-card
-      class="q-pa-md border-radius-6 shadow-0"
+      square
+      class="q-pa-md shadow-0"
       style="width: 500px; max-width: 90%; margin: auto"
     >
-      <q-input v-model="search" label="Введите запрос"/>
+      <q-input v-model="search" label="Введите запрос" class="q-mt-md" />
       <small v-if="search.length < 3" class="text-red">{{ errorText }}</small>
       <q-btn
         label="Поиск"
-        class="q-mt-md full-width q-py-sm border-radius-6 text-bold"
+        class="q-mt-lg full-width q-py-sm text-bold"
         icon-right="search"
         color="accent"
-        unelevated
+        unelevated stretch
         @click="startSearch"
       />
     </q-card>
 
     <section class="q-pa-sm q-mt-xl">
 
-      <p v-if="products > 0">{{ `Результаты по запросу '${search}'` }}</p>
-      <p class="text-bold text-center">{{ searchText }}</p>
+      <p class="text-subtitle1" v-if="products > 0">{{ `Результаты по запросу '${search}'` }}</p>
+      <p class="text-bold text-center text-subtitle1">{{ searchText }}</p>
       <pos-products-wrapper class="q-mt-md" :products="products"/>
     </section>
   </q-page>

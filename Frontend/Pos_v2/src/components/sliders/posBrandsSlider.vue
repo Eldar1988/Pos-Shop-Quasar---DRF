@@ -1,5 +1,5 @@
 <template>
-  <section class="q-py-md section bg-white" v-if="brands.length > 5">
+  <section class="q-py-md bg-white" v-if="brands.length > 5">
       <swiper class="swiper" :options="swiperOptions">
         <swiper-slide
           v-for="brand in brands"

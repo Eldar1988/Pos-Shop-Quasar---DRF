@@ -1,14 +1,14 @@
 <template>
   <div>
     <article>
-      <q-card class="border-radius-6 shadow-0 q-mb-sm q-pa-sm">
+      <q-card class="shadow-0 q-mb-sm q-pa-sm" square>
         <div class="cart-item-wrapper">
           <div class="cart-item-image" style="min-width: 70px;">
             <router-link :to="`/product/${product.id}`">
-              <img height="70px" width="70px" :src="product.image" style="object-fit: contain; min-width: 70px" class="border-radius-6 shadow-lt"/>
+              <img height="70px" width="70px" :src="product.image" style="object-fit: contain; min-width: 70px"/>
             </router-link>
           </div>
-          <div class="cart-item-title q-ml-sm">
+          <div class="cart-item-title q-ml-md">
             <router-link :to="`/product/${product.id}`">
               <p class="">{{ product.title }}</p>
             </router-link>
@@ -21,18 +21,16 @@
                   <div class="quantity-wrapper q-mt-sm">
                     <q-btn
                       icon="remove"
-                      class="border-radius-5"
-                      outline
-                      color="dark"
+                      dense unelevated stretch outline
+                      color="negative"
                       size="sm"
                       @click="quantityMinus(product.id)"
                     />
-                    <p class="text-center text-bold">{{ product.quantity }}</p>
+                    <p class="text-center text-bold" style="padding: 2px 5px 0">{{ product.quantity }}</p>
                     <q-btn
                       icon="add"
-                      class="border-radius-5"
-                      outline
-                      color="dark"
+                      dense unelevated stretch outline
+                      color="positive"
                       size="sm"
                       @click="quantityPlus(product.id)"
                     />
@@ -44,11 +42,10 @@
           <q-btn
             icon="delete_forever"
             color="negative"
-            class="border-radius-5"
-            outline unelevated no-caps
+            outline unelevated no-caps flat stretch
             size="sm"
             label="удалить"
-            style="position: absolute; bottom: 0; right: 0"
+            style="position: absolute; bottom: -5px; right: -5px"
             @click="delCartItem(product.id)"
           />
         </div>

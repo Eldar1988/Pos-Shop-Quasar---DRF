@@ -32,6 +32,7 @@ export default {
   display: grid
   grid-template-columns: repeat(7, 1fr)
   grid-gap: 10px
+  overflow-y: hidden
 
 @media screen and (max-width: 1455px)
   .product-wrapper

@@ -6,17 +6,21 @@
     </q-breadcrumbs>
     <pos-page-header :title="pageData.title"/>
     <section class="info-page">
-      <div v-html="pageData.body" class="border-radius-6 q-px-md q-py-md bg-white"></div>
+      <div class="q-px-md q-py-xl bg-white">
+      <div v-html="pageData.body"></div>
+      <pos-share class="q-mt-xl"/>
+      </div>
     </section>
   </q-page>
 </template>
 
 <script>
 import PosPageHeader from "components/service/posPageHeader";
+import PosShare from "components/service/posShare";
 
 export default {
   name: "InfoPage",
-  components: {PosPageHeader},
+  components: {PosShare, PosPageHeader},
   computed: {
     pageData() {
       return this.$store.getters.getPageData

@@ -13,9 +13,8 @@
       v-for="question in questions"
       :key="question.id"
       switch-toggle-side group=""
-
       :label="question.question"
-      class="border-radius-6 bg-white text-bold q-mt-md" dense-toggle
+      class="bg-white text-bold q-mt-md" dense-toggle
     >
       <q-card>
         <q-card-section class="text-weight-regular">

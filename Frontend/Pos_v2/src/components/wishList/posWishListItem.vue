@@ -1,11 +1,11 @@
 <template>
   <div>
     <article style="padding: 5px">
-      <q-card class="border-radius-6 shadow-0 q-pa-sm">
+      <q-card class="shadow-0 q-pa-sm" square>
         <div class="wish-item-wrapper">
           <div class="cart-item-image" style="min-width: 70px;">
             <router-link :to="`/product/${product.id}`">
-            <img height="70px" width="70px" :src="product.image" style="object-fit: contain; min-width: 70px" class="border-radius-6 shadow-lt"/>
+            <img height="70px" width="70px" :src="product.image" style="object-fit: contain; min-width: 70px" />
             </router-link>
           </div>
           <div class="cart-item-title q-ml-sm">
@@ -18,17 +18,17 @@
             <q-btn
               label="Добавить в корзину"
               size="sm"
-              unelevated
+              icon="add_shopping_cart"
+              unelevated stretch
               color="positive"
-              class="q-mt-sm border-radius-5 text-bold"
+              class="q-mt-sm text-bold"
               @click="addToCart(product)"
             />
           </div>
           <q-btn
             icon="delete_forever"
             color="negative"
-            class="border-radius-5"
-            outline unelevated no-caps
+            unelevated no-caps stretch flat dense
             size="sm"
             label="удалить"
             style="position: absolute; bottom: 0; right: 0"
