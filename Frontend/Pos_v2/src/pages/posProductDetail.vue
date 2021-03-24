@@ -149,7 +149,7 @@
                   <q-btn
                     color="accent"
                     :label="productData.product.category.title"
-                    size="sm" outline stretch no-caps
+                    size="sm" outline no-caps
                     class="text-bold"
                     :to="`/shop/${productData.product.category.slug}`"
                   />
@@ -161,7 +161,7 @@
                     v-for="label in productData.product.labels"
                     :key="label.id"
                     :label="label.title"
-                    size="sm" outline stretch no-caps
+                    size="sm" outline no-caps
                     class="q-ml-sm text-bold"
                     :to="`/label/${label.slug}`"
                   />

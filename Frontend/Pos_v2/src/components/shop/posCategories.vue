@@ -2,7 +2,7 @@
   <section>
     <div class="categories-wrapper text-center justify-center">
       <article
-        v-for="category in categories"
+        v-for="category in categories || defaultCategories"
         :key="category.id"
         class="category-card"
       >
@@ -26,7 +26,6 @@
                   contain
                 />
               </div>
-
             </div>
           </q-card>
         </router-link>
@@ -42,6 +41,11 @@ export default {
     categories: {
       type: Array,
       default: null
+    }
+  },
+  computed: {
+    defaultCategories() {
+      return this.$store.getters.getCategories
     }
   }
 }

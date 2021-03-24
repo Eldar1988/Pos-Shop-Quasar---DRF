@@ -10,7 +10,7 @@
       class="q-pa-md shadow-0"
       style="width: 500px; max-width: 90%; margin: auto"
     >
-      <q-input v-model="search" label="Введите запрос" class="q-mt-md" />
+      <q-input v-model="search" label="Введите запрос" class="q-mt-md"/>
       <small v-if="search.length < 3" class="text-red">{{ errorText }}</small>
       <q-btn
         label="Поиск"
@@ -28,16 +28,22 @@
       <p class="text-bold text-center text-subtitle1">{{ searchText }}</p>
       <pos-products-wrapper class="q-mt-md" :products="products"/>
     </section>
+    <div class="q-pa-sm">
+      <pos-categories/>
+    </div>
+    <pos-brands-slider class="q-mt-xl"/>
   </q-page>
 </template>
 
 <script>
 import PosPageHeader from "components/service/posPageHeader";
 import PosProductsWrapper from "components/shop/posProductsWrapper";
+import PosCategories from "components/shop/posCategories";
+import PosBrandsSlider from "components/sliders/posBrandsSlider";
 
 export default {
   name: "SearchPage",
-  components: {PosProductsWrapper, PosPageHeader},
+  components: {PosBrandsSlider, PosCategories, PosProductsWrapper, PosPageHeader},
   data() {
     return {
       search: '',

@@ -9,7 +9,7 @@
     </section>
     <section class="q-px-sm q-mt-xl">
       <!--      <pos-section-title title="Категории"/>-->
-      <pos-categories :categories="categories" class=""/>
+      <pos-categories />
     </section>
     <pos-banners/>
 
