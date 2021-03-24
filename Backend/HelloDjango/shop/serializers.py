@@ -60,6 +60,19 @@ class ProductListSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'rating', 'image_contain')
 
 
+class ProductWithLabelsListSerializer(serializers.ModelSerializer):
+    """Товары (список)"""
+    image = serializers.SerializerMethodField('get_image_url')
+    labels = LabelListSerializer(many=True)
+
+    def get_image_url(self, obj):
+        return f'{settings.APP_PATH}{obj.image.url}'
+
+    class Meta:
+        model = Product
+        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'rating', 'image_contain', 'labels')
+
+
 class ImageSerializer(serializers.ModelSerializer):
     """Дополнительные изображения товаров"""
     image = serializers.SerializerMethodField('get_image_url')
@@ -83,7 +96,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 class ChildCategoryDetailSerializer(serializers.ModelSerializer):
     """Категория (детали)"""
     image = serializers.SerializerMethodField('get_image_url')
-    products = ProductListSerializer(many=True, read_only=True)
+    products = ProductWithLabelsListSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
         return f'{settings.APP_PATH}{obj.image.url}'
@@ -96,7 +109,7 @@ class ChildCategoryDetailSerializer(serializers.ModelSerializer):
 class CategoryDetailSerializer(serializers.ModelSerializer):
     """Категория (детали)"""
     image = serializers.SerializerMethodField('get_image_url')
-    products = ProductListSerializer(many=True, read_only=True)
+    products = ProductWithLabelsListSerializer(many=True, read_only=True)
     child = ChildCategoryDetailSerializer(many=True, read_only=True)
     parent = ChildCategoryListSerializer(many=False, read_only=True)
 

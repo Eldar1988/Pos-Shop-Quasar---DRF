@@ -13,7 +13,7 @@ class Category(models.Model):
                                    null=True, blank=True)
     full_description = RichTextUploadingField('Полное описание', null=True, blank=True)
     image = ThumbnailerImageField('Изображение', upload_to='categories/',
-                                  resize_source={'size': (300, 300), 'crop': 'scale'},
+                                  resize_source={'size': (200, 200), 'crop': 'scale'},
                                   help_text='Пропорции 1:1 (квадрат)')
     slug = models.SlugField('Slug', unique=True, help_text='Маленькие буквы на латинице без пробелов и спецсимволов')
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)

@@ -38,6 +38,7 @@
     <!--    xxxxx   -->
     <!--    Products   -->
     <section class="q-pa-sm q-mt-md">
+      <pos-labels-filter :products="category.products"/>
       <pos-products-wrapper :products="category.products"/>
       <div
         v-for="child in category.child"
@@ -75,10 +76,12 @@ import PosBanners from "components/shop/posBanners";
 import PosSectionTitle from "components/service/posSectionTitle";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
 import PosProductsSlideX from "components/sliders/posProductsSlideX";
+import PosLabelsFilter from "components/service/posLabelsFilter";
 
 export default {
   name: "Shop",
   components: {
+    PosLabelsFilter,
     PosProductsSlideX,
     PosBrandsSlider,
     PosSectionTitle, PosBanners, PosCategories, PosProductsWrapper, PosPageHeader
