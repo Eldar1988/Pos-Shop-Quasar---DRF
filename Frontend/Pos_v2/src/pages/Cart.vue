@@ -46,7 +46,7 @@
             </p>
             <q-btn
               label="вернуться в магазин"
-              outline stretch
+              outline
               color="white"
               class="q-mt-md text-bold"
               to="/"

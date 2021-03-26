@@ -22,7 +22,7 @@
               label="Скачать"
               class="text-bold"
               color="accent"
-              unelevated stretch
+              unelevated
               size="sm"
               icon-right="cloud_download"
             />

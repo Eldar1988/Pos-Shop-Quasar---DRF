@@ -28,7 +28,7 @@
       label="Добавить отзыв"
       icon-right="create"
       class="text-bold q-mt-md q-py-sm"
-      unelevated stretch no-caps
+      unelevated  no-caps
       color="primary"
       @click="dialog = true"
     />
@@ -64,7 +64,7 @@
             label="Отправить отзыв"
             class="q-py-sm full-width text-bold"
             icon-right="mark_chat_read"
-            unelevated stretch
+            unelevated
             :loading="loading"
             @click="createReview"
           />

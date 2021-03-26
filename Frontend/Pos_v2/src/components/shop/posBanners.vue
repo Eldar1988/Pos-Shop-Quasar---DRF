@@ -20,7 +20,7 @@
           color="accent"
           style="position: absolute; bottom: 10px; right: 10px; z-index: 30; border: 2px solid rgba(255,255,255,.8)"
           size="md"
-          unelevated stretch
+          unelevated
           class=""
           no-caps
         />

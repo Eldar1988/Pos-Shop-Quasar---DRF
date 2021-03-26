@@ -6,7 +6,7 @@
       :color="color"
       class="full-width shadow-lt"
       @click="dialog = true"
-      stretch unelevated
+       unelevated
     />
 
     <q-dialog
@@ -40,7 +40,7 @@
             label="Отправить"
             class="q-py-sm full-width text-bold"
             icon-right="forward_to_inbox"
-            unelevated stretch
+            unelevated
             :loading="loading"
             @click="callBack"
           />

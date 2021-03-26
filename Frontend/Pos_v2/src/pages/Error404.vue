@@ -12,7 +12,7 @@
       <q-btn
         class="q-mt-xl text-bold"
         color="white"
-        outline stretch
+        outline
         unelevated
         to="/"
         label="На главную"

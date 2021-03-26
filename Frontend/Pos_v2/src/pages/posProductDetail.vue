@@ -76,7 +76,7 @@
                   <q-btn
                     icon="remove"
                     class=""
-                    outline stretch dense
+                    outline  dense
                     color="dark"
                     size="sm"
                     @click="quantity > 1 ? quantity -- : null"
@@ -87,7 +87,7 @@
                   </div>
                   <q-btn
                     icon="add"
-                    outline stretch dense
+                    outline  dense
                     color="dark"
                     size="sm"
                     @click="quantity ++"
@@ -100,7 +100,7 @@
               <q-btn
                 label="Купить в 1 клик"
                 color="accent"
-                unelevated stretch
+                unelevated
                 class="full-width q-py-sm text-bold"
                 icon-right="forward"
                 @click="selfAddToCart(productData.product, quantity, true)"
@@ -113,14 +113,14 @@
                   color="positive"
                   class="full-width q-py-sm text-bold"
                   icon-right="add_shopping_cart"
-                  stretch unelevated
+                   unelevated
                   @click="selfAddToCart(productData.product, quantity, false)"
                 />
                 <q-btn
                   color="accent"
                   @click="addToWishList(productData.product)"
                   text-color="accent"
-                  stretch unelevated flat
+                   unelevated flat
                   :icon="productInWishList ? 'favorite' : 'favorite_border'"
                 />
               </div>

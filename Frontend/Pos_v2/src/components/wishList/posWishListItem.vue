@@ -19,7 +19,7 @@
               label="Добавить в корзину"
               size="sm"
               icon="add_shopping_cart"
-              unelevated stretch
+              unelevated
               color="positive"
               class="q-mt-sm text-bold"
               @click="addToCart(product)"
@@ -28,7 +28,7 @@
           <q-btn
             icon="delete_forever"
             color="negative"
-            unelevated no-caps stretch flat dense
+            unelevated no-caps  flat dense
             size="sm"
             label="удалить"
             style="position: absolute; bottom: 0; right: 0"

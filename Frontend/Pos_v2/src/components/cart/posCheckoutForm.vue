@@ -150,7 +150,7 @@
           <q-btn
             v-if="step > 1"
             color="primary"
-            flat stretch
+            flat
             icon="west"
             @click="$refs.stepper.previous()"
             class="q-py-sm"
@@ -160,7 +160,7 @@
             color="primary"
             @click="$refs.stepper.next()"
             class="q-px-xl q-ml-sm text-bold q-py-sm"
-            no-caps unelevated stretch
+            no-caps unelevated
           />
         </q-stepper-navigation>
       </template>
@@ -227,14 +227,6 @@ export default {
     // New order
     async createNewOrder(paymentMethod, slug) {
 
-      this.$q.loading.show({
-        spinner: QSpinnerFacebook,
-        spinnerColor: 'white',
-        spinnerSize: 80,
-        backgroundColor: 'primary',
-        message: 'Секунду...',
-        messageColor: 'white'
-      })
       if (
         !this.checkData(this.formData.name, 'Необходимо указать имя*', 1) ||
         !this.checkData(this.formData.phone, 'Необходимо указать номер телефона*', 1) ||
@@ -244,6 +236,16 @@ export default {
       ) {
         return null
       }
+
+      this.$q.loading.show({
+        spinner: QSpinnerFacebook,
+        spinnerColor: 'white',
+        spinnerSize: 80,
+        backgroundColor: 'primary',
+        message: 'Секунду...',
+        messageColor: 'white'
+      })
+
       let data = this.formData
       data.products = this.products
       data.order_sum = this.cartSum
@@ -254,16 +256,14 @@ export default {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(data)
       }).then(response => {
-        if (response.status === 200) {
 
+        if (response.status === 201) {
           let cart = []
           localStorage.setItem('cart', JSON.stringify(cart))
           this.$root.$emit('updateCart')
-          setTimeout(() => {
-            this.$q.loading.hide()
+          this.$q.loading.hide()
+          this.$router.push(`/thanks/${slug}`)
 
-            this.$router.push(`/thanks/${slug}`)
-          }, 1500)
         } else {
           this.$q.loading.hide()
           this.$q.notify({

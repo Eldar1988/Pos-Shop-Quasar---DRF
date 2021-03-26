@@ -14,7 +14,7 @@
         icon="home"
         color="accent"
         class="q-mt-xl q-px-md text-bold"
-        unelevated stretch outline no-caps
+        unelevated  outline no-caps
         to="/"
       />
     </div>

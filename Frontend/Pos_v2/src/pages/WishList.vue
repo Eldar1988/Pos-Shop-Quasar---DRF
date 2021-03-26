@@ -34,7 +34,7 @@
           <q-btn
             label="вернуться в магазин"
             outline
-            color="white" stretch
+            color="white"
             class="q-mt-md text-bold"
             to="/"
           />

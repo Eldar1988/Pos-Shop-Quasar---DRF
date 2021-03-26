@@ -50,6 +50,5 @@ class CreateOrderView(APIView):
             )
 
         tg_send_order(order)
-        serializer = ProductDetailSerializer(many=False)
 
-        return Response(serializer.data)
+        return Response(status=201)

@@ -21,7 +21,7 @@
                   <div class="quantity-wrapper q-mt-sm">
                     <q-btn
                       icon="remove"
-                      dense unelevated stretch outline
+                      dense unelevated  outline
                       color="negative"
                       size="sm"
                       @click="quantityMinus(product.id)"
@@ -29,7 +29,7 @@
                     <p class="text-center text-bold" style="padding: 2px 5px 0">{{ product.quantity }}</p>
                     <q-btn
                       icon="add"
-                      dense unelevated stretch outline
+                      dense unelevated  outline
                       color="positive"
                       size="sm"
                       @click="quantityPlus(product.id)"
@@ -42,7 +42,7 @@
           <q-btn
             icon="delete_forever"
             color="negative"
-            outline unelevated no-caps flat stretch
+            outline unelevated no-caps flat
             size="sm"
             label="удалить"
             style="position: absolute; bottom: -5px; right: -5px"

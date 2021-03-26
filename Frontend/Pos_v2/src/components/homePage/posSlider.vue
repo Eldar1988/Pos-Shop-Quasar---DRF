@@ -42,7 +42,7 @@
                 color="accent"
                 class="q-my-sm q-px-lg"
                 :to="slide.url"
-                unelevated stretch
+                unelevated
                 :size="$q.platform.is.mobile ? 'md' : 'lg'"
                 no-caps
               />

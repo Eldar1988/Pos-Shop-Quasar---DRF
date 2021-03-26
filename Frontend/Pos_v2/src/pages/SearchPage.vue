@@ -17,7 +17,7 @@
         class="q-mt-lg full-width q-py-sm text-bold"
         icon-right="search"
         color="accent"
-        unelevated stretch
+        unelevated
         @click="startSearch"
       />
     </q-card>
