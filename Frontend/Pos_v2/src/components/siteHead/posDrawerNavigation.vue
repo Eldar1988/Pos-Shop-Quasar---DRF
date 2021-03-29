@@ -101,6 +101,45 @@
       <!--    xxxxx   -->
     </q-list>
 
+    <!--    Services   -->
+    <div v-if="servicesCategories">
+      <q-toolbar class="bg-grey-2 q-pt-md">
+        <q-toolbar-title class="text-uppercase text-weight-bold text-subtitle1 letter-5">Услуги</q-toolbar-title>
+      </q-toolbar>
+      <q-list class="bg-grey-2 q-mt-md">
+        <q-item
+          clickable
+          v-ripple
+          class="menu-item"
+          to="/services"
+          exact-active-class="text-primary"
+          title="Наши услуги"
+        >
+          <q-item-section avatar>
+            <q-icon name="navigate_next"/>
+          </q-item-section>
+          <q-item-section class="text-subtitle1 text-dark flex"> Все услуги</q-item-section>
+        </q-item>
+        <q-item
+          clickable
+          v-for="serviceCategory in servicesCategories"
+          :key="serviceCategory.id"
+          v-ripple
+          class="menu-item"
+          :to="`/service_category/${serviceCategory.slug}`"
+          exact-active-class="text-primary"
+          :title="serviceCategory.title"
+        >
+          <q-item-section avatar>
+            <q-img :src="serviceCategory.image" class="br-0" style="height: 30px; width: 30px; object-fit: contain"/>
+          </q-item-section>
+          <q-item-section class="text-subtitle1 text-dark">{{ serviceCategory.title }}</q-item-section>
+        </q-item>
+      </q-list>
+    </div>
+    <!--    xxxxx   -->
+
+
     <q-toolbar class="bg-grey-2 q-pt-md">
       <q-toolbar-title class="text-uppercase text-weight-bold text-subtitle1 letter-5">Информация</q-toolbar-title>
     </q-toolbar>
@@ -239,6 +278,9 @@ export default {
     },
     categories() {
       return this.$store.getters.getCategories
+    },
+    servicesCategories() {
+      return this.$store.getters.getServiceCategories
     }
   }
 }

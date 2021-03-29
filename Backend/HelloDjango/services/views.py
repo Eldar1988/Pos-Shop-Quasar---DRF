@@ -13,6 +13,12 @@ class CategoriesListView(generics.ListAPIView):
     serializer_class = ServiceCategoryListSerializer
 
 
+class AllServicesView(generics.ListAPIView):
+    """Список всех категорий и услуг"""
+    queryset = Category.objects.all()
+    serializer_class = ServiceCategoryDetailSerializer
+
+
 class CategoryDetailView(APIView):
     """Детали категории по slug"""
     def get(self, request, slug):

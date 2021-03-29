@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Category, Image, Service, ServiceRequest
+from .models import Category, Image, Service, ServiceRequest, ServiceBenefit
 
 
 @admin.register(ServiceRequest)
@@ -41,13 +41,18 @@ class ImagesInline(admin.TabularInline):
     get_image.short_description = 'Миниатюра'
 
 
+class ServiceBenefitsInline(admin.TabularInline):
+    model = ServiceBenefit
+    extra = 0
+
+
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ('get_image', 'title', 'category', 'show_on_home_page', 'public', 'order', 'pub_date')
     list_editable = ('category', 'show_on_home_page', 'public', 'order')
     list_filter = ('category', 'show_on_home_page', 'public', 'pub_date', 'update')
     search_fields = ('title', 'category__title')
-    inlines = [ImagesInline]
+    inlines = [ServiceBenefitsInline, ImagesInline]
     save_as = True
     save_on_top = True
     list_per_page = 10

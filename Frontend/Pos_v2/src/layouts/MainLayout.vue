@@ -81,6 +81,7 @@ export default {
     setTimeout(() => {
       this.$store.dispatch('fetchCategories')
       this.$store.dispatch('fetchLatestProducts')
+      this.$store.dispatch('fetchServiceCategories')
     }, 500)
   },
   computed: {

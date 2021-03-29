@@ -79,7 +79,7 @@ class Product(models.Model):
     purchase_price = models.IntegerField('Закуп', null=True, blank=True,
                                          help_text='Закупочная стоимость товара (необязательно)', default=0)
     image = ThumbnailerImageField('Миниатюра', upload_to='products/',
-                                  resize_source={'size': (200, 200), 'crop': 'scale'},
+                                  resize_source={'size': (300, 300), 'crop': 'scale'},
                                   help_text='Пропорции 1:1 (квадрат). Будет использоваться в каталоге товаров')
     full_image = ThumbnailerImageField('Фото товара', upload_to='products/', null=True, blank=True,
                                        resize_source={'size': (1200, 1200), 'crop': 'scale'},

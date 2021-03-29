@@ -111,6 +111,29 @@ const routes = [
       { path: '', component: () => import('pages/Files.vue') }
     ]
   },
+  {
+    path: '/services',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Services/AllServices') }
+    ]
+  },
+  {
+    path: '/service_category/:slug',
+    params: 'slug',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Services/ServiceCategoryDetail') }
+    ]
+  },
+  {
+    path: '/service/:id',
+    params: 'id',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Services/ServiceDetail') }
+    ]
+  },
 
 
   // Always leave this as last one,

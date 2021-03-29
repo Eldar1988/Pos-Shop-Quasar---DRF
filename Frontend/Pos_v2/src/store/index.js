@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import main from './modules/main'
 import shop from './modules/shop'
 import pages from './modules/pages'
+import services from './modules/services'
 
 // import example from './module-example'
 
@@ -22,7 +23,8 @@ export default function (/* { ssrContext } */) {
     modules: {
       main,
       shop,
-      pages
+      pages,
+      services
     },
     state: {
       kaspiButton: false,
