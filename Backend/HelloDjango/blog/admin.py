@@ -23,16 +23,17 @@ class PostAdmin(admin.ModelAdmin):
     list_editable = ['category', 'order', 'slug', 'public']
     list_display_links = ['get_image', 'title']
     list_filter = ['category', 'public', 'date', 'update']
-    inlines = [CommentInline]
+    # inlines = [CommentInline]
+    filter_horizontal = ('services', 'products')
 
     def get_image(self, obj):
         return mark_safe(f'<img src={obj.image.url} height=50px style="object-fit: cover">')
 
 
-@admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
-    list_display = ['name', 'post', 'public', 'date', 'update']
-    list_editable = ['public']
-    list_filter = ['public', 'date', 'update']
-    search_fields = ['name', 'comment']
+# @admin.register(Comment)
+# class CommentAdmin(admin.ModelAdmin):
+#     list_display = ['name', 'post', 'public', 'date', 'update']
+#     list_editable = ['public']
+#     list_filter = ['public', 'date', 'update']
+#     search_fields = ['name', 'comment']
 

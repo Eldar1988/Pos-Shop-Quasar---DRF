@@ -4,9 +4,9 @@
       label="Хочу такой магазин"
       icon-right="phone_callback"
       :color="color"
-      class="full-width shadow-lt"
+      class="full-width text-bold"
       @click="dialog = true"
-       unelevated
+      unelevated
     />
 
     <q-dialog

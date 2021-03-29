@@ -3,7 +3,7 @@
     <div class="menu-contacts">
       <q-btn
         :label="contacts.phone"
-        class="full-width bg-white"
+        class="full-width bg-white text-bold"
         color="dark"
         outline
         icon="call"
@@ -13,7 +13,7 @@
       />
       <q-btn
         :label="contacts.whatsapp"
-        class="full-width bg-white"
+        class="full-width bg-white text-bold"
         color="dark"
         outline
         icon="mdi-whatsapp"

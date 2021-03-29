@@ -1,5 +1,5 @@
 <template>
-<div class="q-pa-sm">
+<div class="q-pa-sm" v-if="products">
   <swiper class="swiper" :options="swiperOptions">
     <swiper-slide
       v-for="product in products"

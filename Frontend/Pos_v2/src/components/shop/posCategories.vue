@@ -9,22 +9,27 @@
         <router-link :to="`/shop/${category.slug}`">
           <q-card
             square
-            class="shadow-0 q-px-sm relative-position shadow-on-hover bg-white"
+            style="min-height: 100%"
+            class="shadow-0 relative-position shadow-on-hover bg-white"
           >
             <div class="category-card-wrapper text-left">
               <div>
-                <p class="text-bold category-card-title">{{ category.title }}</p>
-                <p v-if="category.label" class="text-accent category-card-label">
+                <p class="text-bold category-card-title q-px-sm">{{ category.title }}</p>
+                <p v-if="category.label" class="text-accent category-card-label q-px-sm">
                   {{ category.label }}</p>
               </div>
-              <div class="q-py-md text-right">
+              <div class="q-pa-sm text-right">
                 <q-img
                   :src="category.image"
                   class="category-card-image"
-                  width="100%"
-                  height="70px"
-                  contain
-                />
+                  cover
+                  height="50px"
+                  width="50px"
+                >
+                  <template v-slot:loading>
+                    <q-skeleton class="full-width category-card-image" square/>
+                  </template>
+                </q-img>
               </div>
             </div>
           </q-card>
@@ -56,7 +61,6 @@ export default {
   font-size: 16px
 
 .category-card-label
-  padding-top: 7px
   font-size: 14px !important
   line-height: 1.2 !important
 
@@ -74,7 +78,7 @@ export default {
   min-height: 100%
 
 .category-card-image
-  height: 150px
+
 
 @media screen and (max-width: 1500px)
   .categories-wrapper

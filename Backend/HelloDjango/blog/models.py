@@ -2,6 +2,9 @@ from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
 from ckeditor_uploader.fields import RichTextUploadingField
 
+from shop.models import Product
+from services.models import Service
+
 
 class Category(models.Model):
     """Категория"""
@@ -16,7 +19,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name_plural = '6.1 Категории'
         ordering = ['order']
 
 
@@ -26,15 +29,19 @@ class Post(models.Model):
                                  verbose_name='Категория', related_name='posts')
     title = models.CharField('Заголовок поста', max_length=255, db_index=True)
     description = models.TextField('Краткое описание', max_length=200, help_text='Необходимо для СЕО')
-    image = ThumbnailerImageField('Изображение', upload_to='blog/', resize_source={'size': (700, 700), 'crop': 'scale'})
+    miniature = ThumbnailerImageField('Миниатюра поста', upload_to='blog/',
+                                      resize_source={'size': (300, 300), 'crop': 'scale'}, null=True, blank=True)
+    image = ThumbnailerImageField('Изображение', upload_to='blog/', resize_source={'size': (1000, 1000), 'crop': 'scale'})
     body = RichTextUploadingField('Контент поста')
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True,
                                              help_text='Необходим для сортировки')
     slug = models.SlugField('Slug', unique=True, db_index=True,
                             help_text='Только маленькие латинские буквы, без пробелов и спецсимволов')
-    offer_url = models.SlugField('Slug товара или категории (необязательно)', null=True, blank=True,
-                                 help_text='Добавляйте только в том случае, если пост это обзор товара или категории товаров')
-    public = models.BooleanField('Опубликовать', default=False)
+    products = models.ManyToManyField(Product, blank=True, verbose_name='Добавить товары', related_name='products',
+                                      help_text='Товары будут добавлены в виде слайдера после статьи')
+    services = models.ManyToManyField(Service, blank=True, verbose_name='Добавить услуги', related_name='services',
+                                      help_text='Услуги будут добавлены в виде слайдера после статьи')
+    public = models.BooleanField('Опубликовать', default=True)
     date = models.DateTimeField('Дата публикации', auto_now_add=True)
     update = models.DateTimeField('Обновлено', auto_now=True)
 
@@ -43,7 +50,7 @@ class Post(models.Model):
 
     class Meta:
         verbose_name = 'Пост'
-        verbose_name_plural = 'Посты'
+        verbose_name_plural = '6.2 Посты'
         ordering = ['-date', 'order']
 
 

@@ -7,7 +7,8 @@
     <pos-page-header :title="pageData.title"/>
     <section class="info-page">
       <div class="q-px-md q-py-xl bg-white">
-      <div v-html="pageData.body"></div>
+        <p class="text-bold">{{ pageData.description }}</p>
+      <div v-html="pageData.body" class="q-mt-lg"></div>
       <pos-share class="q-mt-xl"/>
       </div>
     </section>

@@ -28,7 +28,7 @@
       <p class="text-bold text-center text-subtitle1">{{ searchText }}</p>
       <pos-products-wrapper class="q-mt-md" :products="products"/>
     </section>
-    <div class="q-pa-sm">
+    <div class="q-pa-sm q-mt-xl">
       <pos-categories/>
     </div>
     <pos-brands-slider class="q-mt-xl"/>

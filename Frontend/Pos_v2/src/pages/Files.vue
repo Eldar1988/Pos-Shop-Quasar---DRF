@@ -36,6 +36,7 @@
       class="info-page"
     >
       <q-card
+        square
         class="bg-negative red-shadow q-px-sm q-py-xl flex flex-center q-mt-md"
       >
         <div class="text-center">
@@ -44,9 +45,9 @@
           </p>
           <q-btn
             label="вернуться в магазин"
-            outline
+            outline unelevated
             color="white"
-            class="border-radius-6 q-mt-md text-bold"
+            class="q-mt-md text-bold"
             to="/"
           />
         </div>

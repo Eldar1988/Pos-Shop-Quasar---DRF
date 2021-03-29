@@ -80,7 +80,7 @@ export default {
 
 <style lang="sass">
 .home-slider
-  height: 50vh
+  height: 70vh
 .q-carousel .q-carousel__thumbnail
   height: 30px !important
 .slider-meta
@@ -98,7 +98,7 @@ export default {
 
 @media screen and (max-width: 1280px)
   .home-slider
-    height: 400px
+    height: 60vh
 
 @media screen and (max-width: 650px)
   .home-slider

@@ -39,8 +39,7 @@
           :src="product.image"
           :contain="!product.image_contain"
           title="Подробнее"
-          :height="`${this.$store.getters.getSiteSettings.productCardSettings.height}px` || `170`"
-          style="max-height: 170px"
+          :height="`${this.$store.getters.getSiteSettings.productCardSettings.height}px` || `200`"
         >
           <template v-slot:loading>
             <q-skeleton class="full-width" height="170px" square/>

@@ -21,7 +21,7 @@
           style="position: absolute; bottom: 10px; right: 10px; z-index: 30; border: 2px solid rgba(255,255,255,.8)"
           size="md"
           unelevated
-          class=""
+          class="text-bold"
           no-caps
         />
         <template v-slot:loading>

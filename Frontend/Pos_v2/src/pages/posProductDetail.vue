@@ -52,7 +52,7 @@
           </div>
           <!--          Short description  -->
           <div class="product-info-section">
-            <p>{{ productData.product.description }}</p>
+            <p class="q-py-lg">{{ productData.product.description }}</p>
           </div>
           <!--          Shipping detail   -->
           <div class="product-info-section">

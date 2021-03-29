@@ -5,7 +5,7 @@
     </q-toolbar>
     <q-list class="bg-grey-2">
       <!--    Category skeletons-->
-      <div v-if="categories.length < 1">
+      <div v-if="categories && categories.length < 1">
         <q-item
           clickable
           v-ripple
@@ -24,77 +24,79 @@
       </div>
       <!--    xxxxx   -->
       <!--    Categories   -->
-      <div
-        v-for="category in categories"
-        :key="category.id"
-      >
-        <!--        Parent category   -->
-        <q-expansion-item
-          v-if="category.child.length > 0"
-          expand-separator
-          icon="perm_identity"
-          :label="category.title"
-          class="menu-item"
+      <div v-if="categories && categories.length > 0">
+        <div
+          v-for="category in categories"
+          :key="category.id"
         >
-          <template v-slot:header>
-            <q-item-section avatar >
-              <q-img :src="category.image" class="br-0"/>
-            </q-item-section>
-            <q-item-section><span class="text-subtitle1 text-dark">{{ category.title }}</span>
-            </q-item-section>
-          </template>
-          <!--          Childs    -->
+          <!--        Parent category   -->
+          <q-expansion-item
+            v-if="category && category.child.length > 0"
+            expand-separator
+            icon="perm_identity"
+            :label="category.title"
+            class="menu-item"
+          >
+            <template v-slot:header>
+              <q-item-section avatar>
+                <q-img :src="category.image" class="br-0" style="height: 30px; width: 30px; object-fit: contain"/>
+              </q-item-section>
+              <q-item-section><span class="text-subtitle1 text-dark">{{ category.title }}</span>
+              </q-item-section>
+            </template>
+            <!--          Childs    -->
+            <q-item
+              v-for="category in category.child"
+              :key="category.id"
+              clickable
+              v-ripple
+              class=""
+              :to="`/shop/${category.slug}`"
+              exact-active-class="text-primary"
+              :title="category.title"
+            >
+              <q-item-section avatar>
+                <q-img :src="category.image" class="br-0" style="height: 30px; width: 30px; object-fit: contain"/>
+              </q-item-section>
+              <q-item-section class="text-dark">{{ category.title }}</q-item-section>
+            </q-item>
+            <q-separator inset=""/>
+            <q-item
+              clickable
+              v-ripple
+              class=""
+              :to="`/shop/${category.slug}`"
+              exact-active-class="text-primary"
+              :title="category.title"
+            >
+              <q-item-section avatar>
+                <q-img :src="category.image" class="br-0" style="height: 30px; width: 30px; object-fit: contain"/>
+              </q-item-section>
+              <q-item-section class="text-subtitle1 text-dark">
+                Все {{
+                  category.title.toLowerCase()
+                }}
+              </q-item-section>
+            </q-item>
+
+          </q-expansion-item>
+          <!--        xxxxx   -->
+
           <q-item
-            v-for="category in category.child"
-            :key="category.id"
+            v-if="category.parent === null && category.child.length === 0"
             clickable
             v-ripple
-            class=""
+            class="menu-item"
             :to="`/shop/${category.slug}`"
             exact-active-class="text-primary"
             :title="category.title"
           >
             <q-item-section avatar>
-              <q-img :src="category.image" class="br-0"/>
+              <q-img :src="category.image" class="br-0" style="height: 30px; width: 30px; object-fit: contain"/>
             </q-item-section>
-            <q-item-section class="text-dark">{{ category.title }}</q-item-section>
+            <q-item-section class="text-subtitle1 text-dark">{{ category.title }}</q-item-section>
           </q-item>
-          <q-separator inset=""/>
-          <q-item
-            clickable
-            v-ripple
-            class=""
-            :to="`/shop/${category.slug}`"
-            exact-active-class="text-primary"
-            :title="category.title"
-          >
-            <q-item-section avatar>
-              <q-img :src="category.image" class="br-0"/>
-            </q-item-section>
-            <q-item-section class="text-subtitle1 text-dark">
-              Все {{
-                category.title.toLowerCase()
-              }}
-            </q-item-section>
-          </q-item>
-
-        </q-expansion-item>
-        <!--        xxxxx   -->
-
-        <q-item
-          v-if="category.parent === null && category.child.length === 0"
-          clickable
-          v-ripple
-          class="menu-item"
-          :to="`/shop/${category.slug}`"
-          exact-active-class="text-primary"
-          :title="category.title"
-        >
-          <q-item-section avatar>
-            <q-img :src="category.image" class="br-0" contain/>
-          </q-item-section>
-          <q-item-section class="text-subtitle1 text-dark">{{ category.title }}</q-item-section>
-        </q-item>
+        </div>
       </div>
       <!--    xxxxx   -->
     </q-list>
@@ -238,10 +240,7 @@ export default {
     categories() {
       return this.$store.getters.getCategories
     }
-  },
-  created() {
-    this.$store.dispatch('fetchCategories')
-  },
+  }
 }
 </script>
 
