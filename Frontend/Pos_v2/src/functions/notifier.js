@@ -5,6 +5,5 @@ export default function(message, color='dark', position='top') {
     message: message,
     color: color,
     position: position,
-    actions: [{icon: 'close', color: 'white'}]
   })
 }

@@ -6,6 +6,8 @@ from .models import Service, ServiceRequest, Category
 from .serializers import ServiceCategoryListSerializer, ServiceCategoryDetailSerializer, \
     ServiceDetailSerializer, ServiceRequestSerializer
 
+from .service import tg_send_service_request
+
 
 class CategoriesListView(generics.ListAPIView):
     """Список категорий услуг"""
@@ -17,6 +19,10 @@ class AllServicesView(generics.ListAPIView):
     """Список всех категорий и услуг"""
     queryset = Category.objects.all()
     serializer_class = ServiceCategoryDetailSerializer
+
+
+# class HomeServicesView(generics.ListAPIView):
+#     """Список услуг для главной страницы"""
 
 
 class CategoryDetailView(APIView):
@@ -39,6 +45,10 @@ class CreateServiceRequestView(APIView):
     """Создание заявки на услугу"""
     def post(self, request):
         serializer = ServiceRequestSerializer(data=request.data)
+        print(request.data)
         if serializer.is_valid():
             serializer.save()
+            tg_send_service_request(serializer)
             return Response(status=201)
+
+        print(serializer.errors)
