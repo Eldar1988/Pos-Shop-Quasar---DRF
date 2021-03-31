@@ -102,7 +102,7 @@
     </q-list>
 
     <!--    Services   -->
-    <div v-if="servicesCategories">
+    <div v-if="servicesCategories && servicesCategories.length > 0">
       <q-toolbar class="bg-grey-2 q-pt-md">
         <q-toolbar-title class="text-uppercase text-weight-bold text-subtitle1 letter-5">Услуги</q-toolbar-title>
       </q-toolbar>

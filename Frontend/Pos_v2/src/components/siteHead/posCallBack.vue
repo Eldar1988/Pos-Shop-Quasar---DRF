@@ -1,7 +1,7 @@
 <template>
   <div>
     <q-btn
-      label="Хочу такой магазин"
+      label="Обратный звонок"
       icon-right="phone_callback"
       :color="color"
       class="full-width text-bold"

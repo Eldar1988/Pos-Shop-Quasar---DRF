@@ -209,7 +209,7 @@
         indicator-color="accent"
       >
         <q-tab class="text-dark" name="reviews"
-               :label="`Отзывы (${productData.product.reviews.length})`"
+               :label="`Отзывы (${reviews.length})`"
                icon="chat_bubble_outline"
         />
         <q-tab
@@ -354,6 +354,9 @@ export default {
     }
   },
   computed: {
+    reviews() {
+      return this.$store.getters.getProductDetailData.product.reviews.filter(item => item.public)
+    },
     productData() {
       return this.$store.getters.getProductDetailData
     },

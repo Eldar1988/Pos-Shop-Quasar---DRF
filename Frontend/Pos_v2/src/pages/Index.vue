@@ -9,7 +9,7 @@
     </section>
     <section class="q-px-sm q-mt-xl">
       <!--      <pos-section-title title="Категории"/>-->
-      <pos-categories />
+      <pos-categories :categories="parentCategories"/>
     </section>
     <pos-banners/>
 
@@ -48,6 +48,9 @@ export default {
     },
     categories() {
       return this.$store.getters.getCategories
+    },
+    parentCategories() {
+      return this.$store.getters.getParentCategories
     }
   },
   data() {

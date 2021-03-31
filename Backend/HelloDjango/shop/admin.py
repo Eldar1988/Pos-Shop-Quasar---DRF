@@ -108,7 +108,7 @@ class ReviewInline(admin.TabularInline):
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('name', 'product', 'rating', 'pub_date', 'public')
-    list_editable = ('rating', 'public', 'product')
+    list_editable = ('rating', 'public')
     readonly_fields = ('name', 'text')
     search_fields = ('name', 'text')
     list_filter = ('public', 'pub_date', 'rating')
@@ -129,7 +129,7 @@ class ProductAdmin(TabbedModelAdmin):
                      'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
     list_filter = ('category', 'brand', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date',
                    'update', 'rating')
-    search_fields = ('title', 'category__title', 'brand__title')
+    search_fields = ('title', 'category__title', 'brand__title', 'article')
 
     list_per_page = 10
     save_as = True

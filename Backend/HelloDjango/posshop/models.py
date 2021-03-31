@@ -27,7 +27,7 @@ class Page(models.Model):
     description = models.TextField('Карткое описание', max_length=200,
                                    help_text='Для тега description не более 200 символов')
     body = RichTextUploadingField('Контент')
-    show_in_footer = models.BooleanField('Отобразить в фуетере сайта', default=False)
+    show_in_footer = models.BooleanField('Отобразить в футере сайта', default=False)
     slug = models.SlugField('Slug', help_text='Маленькими буквами на латинице, без пробелов и спецсимволов', null=True,
                             blank=True)
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)

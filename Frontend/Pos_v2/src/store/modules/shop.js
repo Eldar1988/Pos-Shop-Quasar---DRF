@@ -127,6 +127,7 @@ export default {
     },
     setCategories(state, data) {
       state.categories = data
+      state.parentCategories = data.filter(item => !item.parent)
     },
     setLatestProducts(state, data) {
       state.latestProducts = data
@@ -143,6 +144,7 @@ export default {
     category: {},
     label: {},
     brand: {},
+    parentCategories: [],
     productDetailData: {},
     saleProducts: null,
     categories: [],
@@ -157,6 +159,7 @@ export default {
     getProductDetailData: (state) => state.productDetailData,
     getSaleProducts: (state) => state.saleProducts,
     getCategories: state => state.categories,
+    getParentCategories: state => state.parentCategories,
     getLatestProducts: state => state.latestProducts,
     getHitProducts: state => state.hitProducts,
     getFutureProducts: state => state.futureProducts,

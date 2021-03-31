@@ -30,11 +30,11 @@
           </q-card>
         </q-expansion-item>
       </q-card>
-      <pos-categories
-        :categories="category.child"
-        class="q-mt-lg"
-      />
     </section>
+    <pos-categories
+      :categories="category.child"
+      class="q-mt-lg"
+    />
     <!--    xxxxx   -->
     <!--    Products   -->
     <section class="q-pa-sm q-mt-md">
