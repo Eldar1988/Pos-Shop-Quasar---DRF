@@ -32,11 +32,8 @@ export default function (/* { ssrContext } */) {
       // serverURL: 'http://192.168.0.199:8000'
       // serverURL: 'https://dj.posshop.kz.na4u.ru'
       // serverURL: 'https://dj.posshop.kz.na4u.ru'
-      serverURL: 'https://shop.js-code.ru'
-<<<<<<< HEAD
-      // serverURL: 'https://vip1.kz.na4u.ru'
-=======
->>>>>>> 75e55d165d4bc5b9c5cad9d2289adfd6a59b18a6
+      // serverURL: 'https://shop.js-code.ru'
+      serverURL: 'https://vitahim.kz.na4u.ru'
       // serverURL: 'https://astamatrasy.kz.na4u.ru'
       // serverURL: 'https://max-shop.kz.na4u.ru'
     },
