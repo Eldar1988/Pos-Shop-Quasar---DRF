@@ -1,6 +1,6 @@
 <template>
   <q-card
-    class="full-width product-card relative-position"
+    class="full-width product-card relative-position bg-white"
     style="min-height: 100%"
     square
   >
@@ -17,18 +17,6 @@
       <q-tooltip>Добавить в избранное</q-tooltip>
     </q-btn>
 
-<!--    <q-btn-->
-<!--      color="accent"-->
-<!--      text-color="white"-->
-<!--      round-->
-<!--      icon="add_shopping_cart"-->
-<!--      unelevated-->
-<!--      @click="addToCart(product, 1, false)"-->
-<!--      style="position: absolute; z-index: 55; top:8px; right:8px;"-->
-<!--    >-->
-<!--      <q-tooltip>Добавить товар в корзину</q-tooltip>-->
-<!--    </q-btn>-->
-    <!--    xxxxx   -->
     <router-link :to="`/product/${product.id}/`">
       <!--      Image   -->
       <div
@@ -52,6 +40,7 @@
       </div>
     </router-link>
     <div class="product-meta">
+
       <!--      Sale      -->
       <q-btn
         v-if="product.old_price"
@@ -64,6 +53,7 @@
         {{ getSalePercent }}
         <q-tooltip>Размер скидки</q-tooltip>
       </q-btn>
+
       <!--      Product title   -->
       <router-link :to="`/product/${product.id}/`" title="Подробнее">
         <p class="product-card-title text-center ellipsis-2-lines">
@@ -85,9 +75,7 @@
 
 <script>
 import formatPrice from "src/filters/format_price"
-import addToCart from "src/functions/add_to_cart"
 import addToWishListFunc from "src/functions/add_to_wishlist"
-import addToWishList from "src/functions/add_to_wishlist";
 
 export default {
   name: "posProductCard",
@@ -119,14 +107,6 @@ export default {
     this.checkWishList()
   },
   methods: {
-    addToCart(product, quantity, redirect) {
-      addToCart(product, quantity)
-      this.$root.$emit('updateCart')
-      if (redirect) this.$router.push('/cart')
-      else {
-        this.$q.notify({message: `Товар ${product.title.toLowerCase()} добавлен в корзину`, color: 'positive'})
-      }
-    },
     addToWishList(product) {
       addToWishListFunc(product)
       this.$root.$emit('updateWishList')

@@ -79,7 +79,7 @@ class Product(models.Model):
     purchase_price = models.IntegerField('Закуп', null=True, blank=True,
                                          help_text='Закупочная стоимость товара (необязательно)', default=0)
     price_comment = models.CharField('Комментарий к цене', null=True, blank=True, max_length=255,
-                                     help_text='Например: цена по запросу')
+                                     help_text='Например: цена по запросу. Будет показан только в случае, если не указана цена товара')
     image = ThumbnailerImageField('Миниатюра', upload_to='products/',
                                   resize_source={'size': (300, 300), 'crop': 'scale'},
                                   help_text='Пропорции 1:1 (квадрат). Будет использоваться в каталоге товаров')

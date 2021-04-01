@@ -8,6 +8,7 @@ from .tg_bot import tg_send_order, tg_send_call_back
 from .models import PaymentMethod, Order, OrderItem
 from .serializers import PaymentMethodSerializer, CallBackCreateSerializer
 from shop.serializers import ProductDetailSerializer
+from shop.models import Product
 
 
 class PaymentMethodsView(viewsets.ReadOnlyModelViewSet):
@@ -53,5 +54,10 @@ class CreateOrderView(APIView):
             )
 
         tg_send_order(order)
+
+        for i in data['products']:
+            product = Product.objects.get(id=i['id'])
+            product.in_stock_quantity -= i['quantity']
+            product.save()
 
         return Response(status=201)

@@ -9,8 +9,8 @@
         <router-link :to="`/shop/${category.slug}`">
           <q-card
             square
-            style="min-height: 100%"
-            class="shadow-0 relative-position shadow-on-hover bg-white flex"
+            style="min-height: 100%; display: grid; align-items: center"
+            class="shadow-0 relative-position shadow-on-hover bg-white"
 
           >
             <div class="category-card-wrapper text-left">
