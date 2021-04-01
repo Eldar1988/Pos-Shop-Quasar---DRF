@@ -10,8 +10,8 @@ admin.site.register(PaymentMethod)
 class OrderItemInline(admin.TabularInline):
     model = OrderItem
     raw_id_fields = ['product']
-    readonly_fields = ('price', 'quantity', 'item_sum')
-    fields = ('product', 'price', 'quantity', 'item_sum')
+    readonly_fields = ('price', 'quantity', 'item_sum', 'variations')
+    fields = ('product', 'price', 'quantity', 'item_sum', 'variations')
     show_change_link = ['product']
     extra = 0
 

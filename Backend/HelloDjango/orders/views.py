@@ -41,11 +41,14 @@ class CreateOrderView(APIView):
             payment_method=(data['payment_method'])
         )
         for i in data['products']:
+            if i['price'] is None:
+                i['price'] = 0
             OrderItem.objects.create(
                 order=order,
                 product_id=i['id'],
                 price=i['price'],
                 quantity=i['quantity'],
+                variations=i['variations'],
                 item_sum=i['price']*i['quantity']
             )
 

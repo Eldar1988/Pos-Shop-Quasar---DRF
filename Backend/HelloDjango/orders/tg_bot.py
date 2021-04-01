@@ -37,7 +37,7 @@ def tg_send_call_back(callback):
 def tg_send_order(order):
     """Новый заказ"""
     order_items = OrderItem.objects.filter(order_id=order.id)
-    text = f"=== Новый заказ # 100{order} === \n\n" \
+    text = f"=== Новый заказ #{order} === \n\n" \
            "Заказчик: \n" \
            f"Имя: {order.name}\n" \
            f"Телефон: {order.phone} \n" \
@@ -56,6 +56,7 @@ def tg_send_order(order):
                      f"Цена: {i.price} тг \n" \
                      f"Количество: {i.quantity} \n" \
                      f"Итого: {i.item_sum} тг \n" \
+                     f"Вариации: {i.variations} \n" \
                      f"Фото: {settings.APP_PATH + i.product.image.url} \n" \
                      "================= \n"
 

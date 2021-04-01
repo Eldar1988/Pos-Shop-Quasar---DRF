@@ -245,9 +245,18 @@ export default {
         message: 'Секунду...',
         messageColor: 'white'
       })
+      // Преобразование вариаций в строку
+      let productsForOrder = this.products.map(item => {
+        let variations = ''
+        item.variations.forEach(variation => {
+          variations += `${variation.type}: ${variation.value}. `
+        })
+        item.variations = variations
+        return item
+      })
 
       let data = this.formData
-      data.products = this.products
+      data.products = productsForOrder
       data.order_sum = this.cartSum
       data.payment_method = paymentMethod
 
