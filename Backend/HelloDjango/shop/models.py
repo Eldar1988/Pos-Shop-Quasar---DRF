@@ -74,10 +74,12 @@ class Product(models.Model):
     characteristic = RichTextUploadingField('Характеристики', null=True, blank=True, help_text='Необязательно')
     video = models.CharField('Видео с Youtube', max_length=255, null=True, blank=True,
                              help_text='Скопировать код в url после знака =')
-    price = models.IntegerField('Цена товара')
+    price = models.IntegerField('Цена товара', null=True, blank=True)
     old_price = models.IntegerField('Старая цена', null=True, blank=True, help_text='Необязательно')
     purchase_price = models.IntegerField('Закуп', null=True, blank=True,
                                          help_text='Закупочная стоимость товара (необязательно)', default=0)
+    price_comment = models.CharField('Комментарий к цене', null=True, blank=True, max_length=255,
+                                     help_text='Например: цена по запросу')
     image = ThumbnailerImageField('Миниатюра', upload_to='products/',
                                   resize_source={'size': (300, 300), 'crop': 'scale'},
                                   help_text='Пропорции 1:1 (квадрат). Будет использоваться в каталоге товаров')
@@ -113,6 +115,40 @@ class Product(models.Model):
         verbose_name = 'Товар'
         verbose_name_plural = '2.4 Товары'
         ordering = ('order', 'price')
+
+
+class VariationType(models.Model):
+    """Типы вариаций для товаров"""
+    title = models.CharField('Заголовок', max_length=255)
+    order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True,
+                                             help_text='Необходимо для сортировки (необязательно)')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ('order',)
+        verbose_name = 'Тип вариации'
+        verbose_name_plural = '2.6 Типы вариаций'
+
+
+class Variation(models.Model):
+    """Вариации товаров"""
+    type = models.ForeignKey(VariationType, on_delete=models.SET_NULL, verbose_name='Тип вариации',
+                             related_name='variations', null=True, blank=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True,
+                                verbose_name='Товар', related_name='variations')
+    value = models.CharField('Значение', max_length=255)
+    price = models.IntegerField('Цена', null=True, blank=True)
+    order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
+
+    def __str__(self):
+        return self.value
+
+    class Meta:
+        ordering = ('order',)
+        verbose_name = 'Вариация'
+        verbose_name_plural = 'Вариации'
 
 
 class Image(models.Model):

@@ -22,7 +22,6 @@
             :first-image-contain="productData.product.image_contain"
           />
           <!--          xxxxx   -->
-
         </div>
         <div class="q-pa-sm">
           <div class="flex justify-between" style="align-items: center">
@@ -33,22 +32,6 @@
               <q-rating v-model="productData.product.rating" size="28px" color="orange" readonly
                         style="text-shadow: none !important;"/>
             </div>
-          </div>
-          <!--          Product price   -->
-          <div v-if="productData.product.price" class="product-info-section">
-            <p class="product-detail-price text-positive text-bold">
-              {{ productData.product.price|formatPrice }}
-              <q-icon name="mdi-currency-kzt" class="icon-wrapper" size="24px"/>
-              <span v-if="productData.product.old_price" class="product-detail-old-price text-grey-5 q-ml-sm">
-                {{ productData.product.old_price|formatPrice }}
-              </span>
-              <q-badge
-                v-if="productData.product.old_price"
-                color="positive"
-                class="q-ml-sm"
-                style="padding-bottom: 3px">{{ getSaleSum }}
-              </q-badge>
-            </p>
           </div>
           <!--          Short description  -->
           <div class="product-info-section">
@@ -67,77 +50,43 @@
             </p>
           </div>
           <!--            xxxxx   -->
+          <!--          Variations   -->
+          <pos-product-variarions
+            :variations="productData.product.variations"
+            @setVariationPrice="setVariationPrice"
+            @setSelectedVariations="setSelectedVariations"
+          />
+          <!--          xxxxx   -->
           <!--          Actions   -->
-          <div v-if="productData.product.in_stock_quantity > 0" class="row q-mt-md">
-            <!--        Quantity   -->
-            <div class="full-width flex justify-center q-mb-md">
-              <div class="q-mt-sm">
-                <div class="quantity-wrapper q-mt-sm">
-                  <q-btn
-                    icon="remove"
-                    class=""
-                    outline  dense
-                    color="dark"
-                    size="sm"
-                    @click="quantity > 1 ? quantity -- : null"
-                  />
-                  <div style="height: 30px; overflow: hidden;">
-                    <q-input v-model="quantity" type="tel" class=""
-                             input-class="text-center text-bold text-dark " input-style="max-height: 30px;"/>
-                  </div>
-                  <q-btn
-                    icon="add"
-                    outline  dense
-                    color="dark"
-                    size="sm"
-                    @click="quantity ++"
-                  />
-                </div>
-              </div>
-            </div>
-            <!--        xxxxx   -->
-            <div class="col-12 col-md-6 q-pa-sm">
-              <q-btn
-                label="Купить в 1 клик"
-                color="accent"
-                unelevated
-                class="full-width q-py-sm text-bold"
-                icon-right="forward"
-                @click="selfAddToCart(productData.product, quantity, true)"
-              />
-            </div>
-            <div class="col-12 col-md-6 q-pa-sm">
-              <div class="buttons-grid">
-                <q-btn
-                  label="В корзину"
-                  color="positive"
-                  class="full-width q-py-sm text-bold"
-                  icon-right="add_shopping_cart"
-                   unelevated
-                  @click="selfAddToCart(productData.product, quantity, false)"
-                />
-                <q-btn
-                  color="accent"
-                  @click="addToWishList(productData.product)"
-                  text-color="accent"
-                   unelevated flat
-                  :icon="productInWishList ? 'favorite' : 'favorite_border'"
-                />
-              </div>
-            </div>
-            <!--            Kaspi button   -->
-            <div v-if="this.$store.state.kaspiButton" class="q-mt-sm q-ml-sm" id="dynamic"></div>
-            <!--            xxxxx   -->
+          <!--          Product price   -->
+          <div
+            v-if="productData.product.price"
+            class="product-info-section text-center"
+          >
+            <p class="product-detail-price text-positive text-bold">
+              {{ productData.product.price|formatPrice }}
+              <q-icon name="mdi-currency-kzt" class="icon-wrapper" size="24px"/>
+              <span v-if="productData.product.old_price" class="product-detail-old-price text-grey-5 q-ml-sm">
+                {{ productData.product.old_price|formatPrice }}
+              </span>
+              <span
+                v-if="productData.product.old_price"
+                class="q-ml-sm text-positive"
+                style="display: block; font-size: 13px; margin-top: -7px"
+              >{{ getSaleSum }}
+              </span>
+            </p>
           </div>
-          <div v-else>
-            <q-card
-              square
-              class="bg-accent shadow-0 q-px-md q-py-lg q-mt-lg q-mb-md text-center"
-              dark
-            >
-              Данного товара нет в наличии.<br>Ожидаем поступление.
-            </q-card>
+          <div
+            v-if="!productData.product.price && productData.product.price_comment"
+          >
+            <p class="text-center q-pt-md text-bold text-accent">{{ productData.product.price_comment }}</p>
           </div>
+          <pos-product-actions
+            :product="productData.product"
+            :all-variations-selected="allVariationsSelected"
+            :selectedVariations="selectedVariations"
+          />
           <!--          xxxxx   -->
           <!--           Category  Labels   -->
           <div class="">
@@ -198,72 +147,7 @@
     </article>
     <!--    xxxxx   -->
     <!--          Reviews - Characters - More info   -->
-    <div class="q-pa-sm">
-      <q-tabs
-        v-model="tab"
-        align="justify"
-        narrow-indicator
-        class="q-mb-md home-tabs bg-white q-mt-sm"
-        active-bg-color=""
-        active-color="accent"
-        indicator-color="accent"
-      >
-        <q-tab class="text-dark" name="reviews"
-               :label="`Отзывы (${reviews.length})`"
-               icon="chat_bubble_outline"
-        />
-        <q-tab
-          v-if="productData.product.characteristic"
-          class="text-dark"
-          name="characters"
-          label="Характеристики"
-          icon="tune"
-        />
-        <q-tab
-          v-if="productData.product.info"
-          class="text-dark"
-          name="more"
-          label="Подробнее"
-          icon="search"
-        />
-      </q-tabs>
-      <q-tab-panels
-        swipeable
-        v-model="tab"
-        animated
-        transition-prev="scale"
-        transition-next="scale"
-        class="bg-grey-2"
-      >
-        <q-tab-panel name="reviews">
-          <pos-product-reviews :reviews="productData.product.reviews" :productId="`${productData.product.id}`"/>
-        </q-tab-panel>
-
-        <q-tab-panel name="characters">
-          <q-card square>
-            <q-card-section class="text-weight-regular text-left">
-              <div
-                v-html="productData.product.characteristic"
-                style="overflow-x:scroll"
-              >
-              </div>
-            </q-card-section>
-          </q-card>
-        </q-tab-panel>
-
-        <q-tab-panel name="more">
-          <q-card square>
-            <q-card-section class="text-weight-regular text-left">
-              <div
-                v-html="productData.product.info"
-                style="overflow-x:scroll"
-              >
-              </div>
-            </q-card-section>
-          </q-card>
-        </q-tab-panel>
-      </q-tab-panels>
-    </div>
+    <pos-product-detail-tabs :product="productData.product"/>
     <!--          xxxxx   -->
     <!--    Videos   -->
     <section v-if="productData.product.video" class="q-mt-lg">
@@ -326,22 +210,27 @@ import PosProductDetailImagesSlider from "components/shop/posProductDetailImages
 import formatPrice from "src/filters/format_price";
 import PosSectionTitle from "components/service/posSectionTitle";
 import PosBanners from "components/shop/posBanners";
-import addToCart from "src/functions/add_to_cart";
 import PosAddedToCartDialog from "components/cart/posAddedToCartDialog";
-import addToWishListFunc from "src/functions/add_to_wishlist";
-import PosProductReviews from "components/shop/posProductReviews";
 import PosShare from "components/service/posShare";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
 import PosProductsSlideX from "components/sliders/posProductsSlideX";
+import PosProductActions from "components/shop/poductDetail/posProductActions";
+import PosProductDetailTabs from "components/shop/poductDetail/posProductDetailTabs";
+import PosProductVariarions from "components/shop/poductDetail/posProductVariarions";
 
 export default {
   name: "posProductDetail",
   components: {
+    PosProductVariarions,
+    PosProductDetailTabs,
+    PosProductActions,
     PosProductsSlideX,
     PosBrandsSlider,
     PosShare,
-    PosProductReviews,
-    PosAddedToCartDialog, PosBanners, PosSectionTitle, PosProductDetailImagesSlider
+    PosAddedToCartDialog,
+    PosBanners,
+    PosSectionTitle,
+    PosProductDetailImagesSlider
   },
   filters: {formatPrice},
   data() {
@@ -350,13 +239,11 @@ export default {
       quantity: 1,
       cartDialog: false,
       productInWishList: false,
-      tab: ''
+      allVariationsSelected: false,
+      selectedVariations: []
     }
   },
   computed: {
-    reviews() {
-      return this.$store.getters.getProductDetailData.product.reviews.filter(item => item.public)
-    },
     productData() {
       return this.$store.getters.getProductDetailData
     },
@@ -428,20 +315,23 @@ export default {
 
   mounted() {
     this.getLastSeanProducts()
-    this.checkWishList()
-    if (this.$store.state.kaspiButton) this.kaspiButton()
   },
+
   beforeUpdate() {
     this.setLastSeanProducts()
   },
+
   watch: {
     async productData() {
-      await this.checkWishList()
       await this.getLastSeanProducts()
-      if (this.$store.state.kaspiButton) this.kaspiButton()
     }
   },
+
   methods: {
+    setSelectedVariations(variations) {
+      this.allVariationsSelected = true
+      this.selectedVariations = variations
+    },
     setLastSeanProducts() {
       // Push self product to last sean products
       let productInLasts = false
@@ -465,38 +355,10 @@ export default {
     getLastSeanProducts() {
       this.lastSeanProducts = JSON.parse(localStorage.getItem('lastProducts'))
     },
-    selfAddToCart(product, quantity, redirect) {
-      addToCart(product, quantity)
-      this.$root.$emit('updateCart')
-      if (redirect) this.$router.push('/cart')
-      else {
-        this.cartDialog = true
-        setTimeout(() => {
-          this.cartDialog = false
-        }, 4000)
-      }
-    },
-    kaspiButton() {
-      document.getElementById('dynamic').innerHTML = `<div class="ks-widget" data-template="button" data-merchant-sku="${this.productData.product.article}" data-merchant-code="Posshopkz" data-city="750000000" ></div>`
-      // you should run this method to recheck buttons in DOM:
-      ksWidgetInitializer.reinit()
-    },
-    addToWishList(product) {
-      addToWishListFunc(product)
-      this.checkWishList()
-      this.$root.$emit('updateWishList')
-    },
-    checkWishList() {
-      this.productInWishList = false
-      if (localStorage.getItem('wishList') !== null) {
-        let wishList = JSON.parse(localStorage.wishList)
-        wishList.forEach((item) => {
-          if (item.id === this.productData.product.id) {
-            this.productInWishList = true
-          }
-        })
-      }
-    },
+
+    setVariationPrice(price) {
+      this.productData.product.price = price
+    }
   },
   preFetch({store, currentRoute}) {
     return store.dispatch('fetchProductDetailData', currentRoute.params.id)

@@ -5,7 +5,7 @@
         <div class="wish-item-wrapper">
           <div class="cart-item-image" style="min-width: 70px;">
             <router-link :to="`/product/${product.id}`">
-            <img height="70px" width="70px" :src="product.image" style="object-fit: contain; min-width: 70px" />
+            <img :src="product.image" style="object-fit: cover; width: 70px; height: 70px" />
             </router-link>
           </div>
           <div class="cart-item-title q-ml-sm">
@@ -16,13 +16,13 @@
             <div class="wish-list-item-add-to-cart">
             </div>
             <q-btn
-              label="Добавить в корзину"
+              label="Перейти к товару"
               size="sm"
-              icon="add_shopping_cart"
-              unelevated
-              color="positive"
+              icon-right="arrow_right_alt"
+              unelevated no-caps
+              color="primary"
               class="q-mt-sm text-bold"
-              @click="addToCart(product)"
+              :to="`/product/${product.id}`"
             />
           </div>
           <q-btn
@@ -56,12 +56,6 @@ export default {
     }
   },
   methods: {
-    addToCart(product) {
-      addToCart(product, 1)
-      this.$root.$emit('updateCart')
-      this.$q.notify({message: `Товар ${product.title.toLowerCase()} добавлен в корзину`, color: 'positive'})
-      this.delWishItem(product.id)
-    },
     delWishItem(id) {
       let items = JSON.parse(localStorage.wishList)
       items.forEach((item) => {

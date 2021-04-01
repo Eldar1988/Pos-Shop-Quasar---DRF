@@ -10,12 +10,13 @@
           <q-card
             square
             style="min-height: 100%"
-            class="shadow-0 relative-position shadow-on-hover bg-white"
+            class="shadow-0 relative-position shadow-on-hover bg-white flex"
+
           >
             <div class="category-card-wrapper text-left">
               <div>
-                <p class="text-bold category-card-title q-px-sm">{{ category.title }}</p>
-                <p v-if="category.label" class="text-accent category-card-label q-px-sm">
+                <p class="text-bold category-card-title q-px-sm q-pt-sm" style="line-height: 1.2">{{ category.title }}</p>
+                <p v-if="category.label" class="text-accent category-card-label q-px-sm q-pb-sm">
                   {{ category.label }}</p>
               </div>
               <div class="q-pa-sm text-right">

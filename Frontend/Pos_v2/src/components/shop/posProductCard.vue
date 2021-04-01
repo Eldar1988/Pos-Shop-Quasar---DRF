@@ -72,7 +72,7 @@
       </router-link>
 
       <!--      Product price   -->
-      <div class="product-card-price-wrapper text-right text-positive">
+      <div v-if="product.price" class="product-card-price-wrapper text-right text-positive">
         <p class="text-weight-bold product-card-price">
           {{ product.price|formatPrice }}
           <q-icon name="mdi-currency-kzt" class="icon-wrapper"/>

@@ -13,7 +13,7 @@
           <div class="cart-items q-mt-md">
             <pos-cart-item
               v-for="product in products"
-              :key="product.id"
+              :key="product.timeID"
               :product="product"
             />
             <div class="bg-dark text-white q-px-md q-py-md q-mt-md">

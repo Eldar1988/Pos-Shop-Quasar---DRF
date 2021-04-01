@@ -12,8 +12,8 @@
           contain
           height="50px"
         />
-        <p class="text-center q-py-md">{{ product.title }} добавлен в корзину</p>
-        <q-btn to="/cart" label="Перейти в корзину"  class="full-width q-mt-sm text-bold" color="dark" unelevated />
+        <p class="text-center q-py-md">Товар '{{ product.title }}' добавлен в корзину</p>
+        <q-btn to="/cart" label="Перейти в корзину"  class="full-width q-mt-sm text-bold" color="accent" unelevated />
       </div>
     </q-card>
 </div>

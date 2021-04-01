@@ -5,14 +5,21 @@
         <div class="cart-item-wrapper">
           <div class="cart-item-image" style="min-width: 70px;">
             <router-link :to="`/product/${product.id}`">
-              <img height="70px" width="70px" :src="product.image" style="object-fit: contain; min-width: 70px"/>
+              <img height="70px" width="70px" :src="product.image" style="object-fit: cover; min-width: 70px"/>
             </router-link>
           </div>
           <div class="cart-item-title q-ml-md">
             <router-link :to="`/product/${product.id}`">
-              <p class="">{{ product.title }}</p>
+              <p class="text-primary">{{ product.title }}</p>
             </router-link>
-            <p class="ellipsis text-bold">Цена: {{ product.price|formatPrice }}
+            <span
+              v-for="variation in product.variations"
+              :key="variation.id"
+              class="q-mr-md"
+            >
+              {{ variation.type }}: {{ variation.value }}
+            </span>
+            <p class="text-bold q-pt-sm">Цена: {{ product.price|formatPrice }}
               <q-icon name="mdi-currency-kzt" class="icon-wrapper"/>
             </p>
             <div class="cart-item-quantity">
@@ -24,7 +31,7 @@
                       dense unelevated  outline
                       color="negative"
                       size="sm"
-                      @click="quantityMinus(product.id)"
+                      @click="quantityMinus(product.timeID)"
                     />
                     <p class="text-center text-bold" style="padding: 2px 5px 0">{{ product.quantity }}</p>
                     <q-btn
@@ -32,7 +39,7 @@
                       dense unelevated  outline
                       color="positive"
                       size="sm"
-                      @click="quantityPlus(product.id)"
+                      @click="quantityPlus(product.timeID)"
                     />
                   </div>
                 </div>
@@ -46,7 +53,7 @@
             size="sm"
             label="удалить"
             style="position: absolute; bottom: -5px; right: -5px"
-            @click="delCartItem(product.id)"
+            @click="delCartItem(product.timeID)"
           />
         </div>
       </q-card>
@@ -70,7 +77,7 @@ export default {
     quantityMinus(id) {
       let items = JSON.parse(localStorage.cart)
       items.forEach((item) => {
-        if (item.id === id) {
+        if (item.timeID === id) {
           if (item.quantity > 1) {
             item.quantity--
           }
@@ -82,7 +89,7 @@ export default {
     quantityPlus(id) {
       let items = JSON.parse(localStorage.cart)
       items.forEach((item) => {
-        if (item.id === id) {
+        if (item.timeID === id) {
           item.quantity++
         }
       })
@@ -93,7 +100,7 @@ export default {
     delCartItem(id) {
       let items = JSON.parse(localStorage.cart)
       items.forEach((item) => {
-        if (item.id === id) {
+        if (item.timeID === id) {
           items.splice(items.indexOf(item), 1)
         }
       })

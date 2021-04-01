@@ -1,7 +1,10 @@
 from django.contrib import admin
 from tabbed_admin import TabbedModelAdmin
 from django.utils.safestring import mark_safe
-from .models import Category, Brand, Label, Product, Image, Review, Video
+from .models import Category, Brand, Label, Product, Image, Review, Video, VariationType, Variation
+
+
+admin.site.register(VariationType)
 
 
 @admin.register(Category)
@@ -73,38 +76,6 @@ class ReviewInline(admin.TabularInline):
     extra = 0
 
 
-# @admin.register(Product)
-# class ProductAdmin(admin.ModelAdmin):
-#     # prepopulated_fields = {'slug': ('title',)}
-#     list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'purchase_price', 'in_stock_quantity', 'rating', 'show_on_home_page',
-#                     'future', 'hit', 'latest', 'public', 'order')
-#     list_editable = ('title', 'category', 'price', 'old_price', 'purchase_price', 'in_stock_quantity', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
-#     list_filter = ('category', 'brand', 'rating', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date', 'update')
-#     search_fields = ('title',)
-#     filter_horizontal = ('labels',)
-#     list_per_page = 10
-#     inlines = [, ReviewInline]
-#     fields = [
-#         (),
-#         (),
-#         (),
-#         ()
-#     ]
-#     readonly_fields = ('get_image', 'get_full_image', 'pub_date', 'update', 'views')
-#
-#     save_as = True
-#     save_on_top = True
-#
-#     def get_image(self, obj):
-#         return mark_safe(f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: contain;">')
-#
-#     def get_full_image(self, obj):
-#         return mark_safe(f'<img src={obj.full_image.url} style="height: 50px; width: 50px; object-fit: contain;">')
-#
-#     get_image.short_description = 'Миниатюра'
-#     get_full_image.short_description = 'Фото'
-
-
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('name', 'product', 'rating', 'pub_date', 'public')
@@ -116,6 +87,11 @@ class ReviewAdmin(admin.ModelAdmin):
 
     save_as = True
     save_on_top = True
+
+
+class VariationInline(admin.TabularInline):
+    model = Variation
+    extra = 0
 
 
 @admin.register(Product)
@@ -140,7 +116,6 @@ class ProductAdmin(TabbedModelAdmin):
             'fields':
                 ('category', 'brand', 'title', 'article', 'labels')
         }),
-
     )
     tab_description = (
         (None, {
@@ -149,7 +124,7 @@ class ProductAdmin(TabbedModelAdmin):
     )
     tab_price = (
         (None, {
-            'fields': ('price', 'old_price', 'purchase_price', 'in_stock_quantity')
+            'fields': ('price', 'old_price', 'purchase_price', 'price_comment', 'in_stock_quantity')
         }),
     )
     tab_media = (
@@ -171,6 +146,9 @@ class ProductAdmin(TabbedModelAdmin):
         }),
         ReviewInline
     )
+    tab_variations = (
+        VariationInline,
+    )
 
     tabs = [
         ('Главное', tab_main_info),
@@ -179,6 +157,7 @@ class ProductAdmin(TabbedModelAdmin):
         ('Медиа', tab_media),
         ('Доставка', tab_shipping),
         ('Дополнительно', tab_more_details),
+        ('Вариации', tab_variations),
     ]
 
     def get_image(self, obj):

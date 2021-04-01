@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <!--    Mobile menu toolbar   -->
     <q-toolbar class="hide-on-desktop bg-primary mobile-menu-toolbar">
       <q-toolbar-title class="text-uppercase text-white text-h6 text-weight-bold">Меню</q-toolbar-title>
@@ -20,7 +20,7 @@
     </div>
     <!--    xxxxx    -->
     <!--    Navigation   -->
-    <pos-drawer-navigation/>
+    <pos-drawer-navigation class="bg-grey-2"/>
     <!--    xxxxx   -->
   </div>
 </template>

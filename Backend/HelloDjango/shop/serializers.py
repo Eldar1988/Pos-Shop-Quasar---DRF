@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Brand, Label, Product, Image, Review, Video
+from .models import Category, Brand, Label, Product, Image, Review, Video, VariationType, Variation
 from django.conf import settings
 
 
@@ -144,10 +144,19 @@ class LabelDetailSerializer(serializers.ModelSerializer):
 
 
 class VideoSerializer(serializers.ModelSerializer):
-    """Дополнительное виедо товара"""
+    """Дополнительное видео товара"""
     class Meta:
         model = Video
         exclude = ('order', 'product')
+
+
+class VariationsSerializer(serializers.ModelSerializer):
+    """Вариации товара"""
+    type = serializers.SlugRelatedField(slug_field='title', read_only=True, many=False)
+
+    class Meta:
+        model = Variation
+        exclude = ('order',)
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):
@@ -160,6 +169,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     reviews = ReviewSerializer(many=True, read_only=True)
     images = ImageSerializer(many=True, read_only=True)
     videos = VideoSerializer(many=True, read_only=True)
+    variations = VariationsSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
         return f'{settings.APP_PATH}{obj.image.url}'
