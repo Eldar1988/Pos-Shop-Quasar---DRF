@@ -24,7 +24,7 @@
         style="align-items: center;position: relative"
       >
         <q-img
-          :src="product.image"
+          :src="product.image || product.miniature_url"
           :contain="!product.image_contain"
           title="Подробнее"
           :height="`${this.$store.getters.getSiteSettings.productCardSettings.height}px` || `200`"

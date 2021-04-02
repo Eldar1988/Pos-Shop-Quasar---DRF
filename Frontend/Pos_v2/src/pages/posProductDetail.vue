@@ -17,7 +17,7 @@
           <!--          Slider   -->
           <pos-product-detail-images-slider
             :images="productData.product.images"
-            :image="productData.product.full_image"
+            :image="productData.product.full_image || productData.product.image_url"
             :title="productData.product.title"
             :first-image-contain="productData.product.image_contain"
           />

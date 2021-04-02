@@ -5,7 +5,7 @@
         <div class="cart-item-wrapper">
           <div class="cart-item-image" style="min-width: 70px;">
             <router-link :to="`/product/${product.id}`">
-              <img height="70px" width="70px" :src="product.image" style="object-fit: cover; min-width: 70px"/>
+              <img height="70px" width="70px" :src="product.image || product.miniature_url" style="object-fit: cover; min-width: 70px"/>
             </router-link>
           </div>
           <div class="cart-item-title q-ml-md">
