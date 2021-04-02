@@ -5,6 +5,7 @@ from easy_thumbnails.fields import ThumbnailerImageField
 
 
 class Category(models.Model):
+    main_category = models.BooleanField('Родительская категория', default=False)
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True,
                                verbose_name='Родительская категория', related_name='child')
     title = models.CharField('Название категории', max_length=255)
@@ -80,12 +81,16 @@ class Product(models.Model):
                                          help_text='Закупочная стоимость товара (необязательно)', default=0)
     price_comment = models.CharField('Комментарий к цене', null=True, blank=True, max_length=255,
                                      help_text='Например: цена по запросу. Будет показан только в случае, если не указана цена товара')
-    image = ThumbnailerImageField('Миниатюра', upload_to='products/',
+    image = ThumbnailerImageField('Миниатюра', upload_to='products/', null=True, blank=True,
                                   resize_source={'size': (300, 300), 'crop': 'scale'},
                                   help_text='Пропорции 1:1 (квадрат). Будет использоваться в каталоге товаров')
+    miniature_url = models.URLField('URL миниатюры', null=True, blank=True,
+                                    help_text='Добавлять в том случае, если ваши изображения хранятся в другом месте, и их можно получить по ссылке')
     full_image = ThumbnailerImageField('Фото товара', upload_to='products/', null=True, blank=True,
                                        resize_source={'size': (1200, 1200), 'crop': 'scale'},
                                        help_text='Пропорции 1:1 (квадрат). Будет использоваться на странице товара')
+    image_url = models.URLField('URL фото', null=True, blank=True,
+                                help_text='Добавлять в том случае, если ваши изображения хранятся в другом месте, и их можно получить по ссылке')
     image_contain = models.BooleanField('Растянуть фото товара', default=False,
                                         help_text='Фото растянется на всю высоту и ширину карточки, '
                                                   'с сохранением пропорций')

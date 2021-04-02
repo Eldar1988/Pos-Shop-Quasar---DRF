@@ -9,12 +9,12 @@ admin.site.register(VariationType)
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'parent', 'slug', 'order')
-    list_editable = ('title', 'slug', 'order', 'parent')
+    list_display = ('get_image', 'title', 'parent', 'order')
+    list_editable = ('order', 'parent')
+    list_display_links = ('get_image', 'title')
     search_fields = ('title',)
-    list_filter = ('parent',)
+    list_filter = ('main_category',)
     readonly_fields = ('get_image',)
-
     save_as = True
     save_on_top = True
 
@@ -101,11 +101,12 @@ class ProductAdmin(TabbedModelAdmin):
     filter_horizontal = ('labels',)
     list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'purchase_price',
                     'in_stock_quantity', 'rating', 'show_on_home_page', 'future', 'hit', 'latest', 'public', 'order')
-    list_editable = ('title', 'category', 'price', 'old_price', 'purchase_price', 'in_stock_quantity', 'rating',
+    list_editable = ('category', 'price', 'old_price', 'purchase_price', 'in_stock_quantity', 'rating',
                      'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
     list_filter = ('category', 'brand', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date',
                    'update', 'rating')
     search_fields = ('title', 'category__title', 'brand__title', 'article')
+    list_display_links = ('get_image', 'title')
 
     list_per_page = 10
     save_as = True
@@ -129,7 +130,7 @@ class ProductAdmin(TabbedModelAdmin):
     )
     tab_media = (
         (None, {
-            'fields': ('image', 'full_image', 'image_contain', 'video', 'get_image', 'get_full_image')
+            'fields': ('image', 'miniature_url', 'full_image', 'image_url', 'image_contain', 'video', 'get_image', 'get_full_image')
         }),
         VideoInline,
         ImageInline
@@ -161,12 +162,20 @@ class ProductAdmin(TabbedModelAdmin):
     ]
 
     def get_image(self, obj):
-        return mark_safe(
-            f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: cover; border-radius: 5px;">')
+        if obj.image:
+            return mark_safe(
+                f'<img src={obj.image.url} style="height: 50px; width: 50px; object-fit: cover; border-radius: 5px;">')
+        elif obj.miniature_url:
+            return mark_safe(
+                f'<img src={obj.miniature_url} style="height: 50px; width: 50px; object-fit: cover; border-radius: 5px;">')
 
     def get_full_image(self, obj):
-        return mark_safe(
-            f'<img src={obj.full_image.url} style="height: 150px; width: 150px; object-fit: cover; border-radius: 5px;">')
+        if obj.full_image:
+            return mark_safe(
+                f'<img src={obj.full_image.url} style="height: 150px; width: 150px; object-fit: cover; border-radius: 5px;">')
+        elif obj.image_url:
+            return mark_safe(
+                f'<img src={obj.image_url} style="height: 150px; width: 150px; object-fit: cover; border-radius: 5px;">')
 
     get_image.short_description = 'Миниатюра'
     get_full_image.short_description = 'Полное изображение'
