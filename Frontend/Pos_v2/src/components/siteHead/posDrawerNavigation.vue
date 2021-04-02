@@ -60,25 +60,6 @@
               </q-item-section>
               <q-item-section class="text-dark">{{ category.title }}</q-item-section>
             </q-item>
-            <q-separator inset=""/>
-            <q-item
-              clickable
-              v-ripple
-              class=""
-              :to="`/shop/${category.slug}`"
-              exact-active-class="text-primary"
-              :title="category.title"
-            >
-              <q-item-section avatar>
-                <q-img :src="category.image" class="br-0" style="height: 30px; width: 30px; object-fit: contain"/>
-              </q-item-section>
-              <q-item-section class="text-subtitle1 text-dark">
-                Все {{
-                  category.title.toLowerCase()
-                }}
-              </q-item-section>
-            </q-item>
-
           </q-expansion-item>
           <!--        xxxxx   -->
 
@@ -292,4 +273,7 @@ export default {
   width: 95%
   margin: 0 auto 5px
   background: #ffffff
+
+  .text-subtitle1
+    line-height: 1.1 !important
 </style>

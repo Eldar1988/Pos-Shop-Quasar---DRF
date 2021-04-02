@@ -8,7 +8,7 @@
       </div>
       <div class="flex justify-center">
         <q-img
-          :src="product.image"
+          :src="product.image || product.image_url"
           contain
           height="50px"
         />

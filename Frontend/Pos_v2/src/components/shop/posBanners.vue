@@ -4,7 +4,7 @@
     <article
       v-for="banner in banners"
       :key="banner.id"
-      class="shadow-on-hover"
+      class="shadow-on-hover bg-white"
     >
       <router-link
         :to="banner.url ? banner.url : ''"

@@ -31,10 +31,6 @@
         </q-expansion-item>
       </q-card>
     </section>
-    <pos-categories
-      :categories="category.child"
-      class="q-mt-lg"
-    />
     <!--    xxxxx   -->
     <!--    Products   -->
     <section class="q-pa-sm q-mt-md">

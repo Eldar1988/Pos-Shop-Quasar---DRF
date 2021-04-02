@@ -1,14 +1,16 @@
 from django.db import models
+from django.conf import settings
 from ckeditor_uploader.fields import RichTextUploadingField
 from cloudinary.models import CloudinaryField
 from easy_thumbnails.fields import ThumbnailerImageField
 
 
 class Category(models.Model):
-    main_category = models.BooleanField('Родительская категория', default=False)
+    main_category = models.BooleanField('Главная', default=False)
     parent = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True,
                                verbose_name='Родительская категория', related_name='child')
     title = models.CharField('Название категории', max_length=255)
+    slug = models.SlugField('Slug', unique=True, help_text='Маленькие буквы на латинице без пробелов и спецсимволов')
     label = models.CharField('Ярлык', max_length=50, help_text='Например: "Скидки до 50%"', null=True, blank=True)
     description = models.TextField('Описание категории', max_length=300, help_text='Не более 300 символов',
                                    null=True, blank=True)
@@ -16,7 +18,6 @@ class Category(models.Model):
     image = ThumbnailerImageField('Изображение', upload_to='categories/',
                                   resize_source={'size': (170, 170), 'crop': 'scale'},
                                   help_text='Пропорции 1:1 (квадрат)')
-    slug = models.SlugField('Slug', unique=True, help_text='Маленькие буквы на латинице без пробелов и спецсимволов')
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
 
     def __str__(self):
@@ -30,13 +31,13 @@ class Category(models.Model):
 
 class Brand(models.Model):
     title = models.CharField('Название бренда', max_length=255)
+    slug = models.SlugField('Slug', unique=True, help_text='Маленькие буквы на латинице без пробелов и спецсимволов')
     description = models.TextField('Описание бренда', max_length=200, help_text='Не болле 200 символов',
                                    null=True, blank=True)
     full_description = RichTextUploadingField('Полное описание', null=True, blank=True)
     image = ThumbnailerImageField('Логотип', upload_to='brands/',
                                   resize_source={'size': (200, 200), 'crop': 'scale'},
                                   help_text='Пропорции 1:1 (квадрат)')
-    slug = models.SlugField('Slug', unique=True, help_text='Маленькие буквы на латинице без пробелов и спецсимволов')
     order = models.PositiveSmallIntegerField('Порядковый номер', null=True, blank=True)
 
     def __str__(self):
@@ -115,6 +116,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return f'{settings.SITE_URL}/#/product/{self.id}'
 
     class Meta:
         verbose_name = 'Товар'

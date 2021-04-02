@@ -130,7 +130,16 @@
         title="Оплата"
       >
         <p class="q-ml-lg text-bold q-pb-md ">Выберите способ оплаты</p>
-
+        <q-card
+          square
+          class="grey-border shadow-0 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"
+          @click="payBoxPayment()"
+        >
+          <div class="flex justify-center">
+            <q-img src="../../assets/paybox.svg" height="50px" contain/>
+            <p class="q-pt-sm text-bold">Оплата онлайн</p>
+          </div>
+        </q-card>
         <q-card
           square
           class="grey-border shadow-0 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"
@@ -280,6 +289,13 @@ export default {
             position: 'top'
           })
         }
+      })
+    },
+
+    async payBoxPayment() {
+      await this.$axios.post(`${this.$store.getters.getServerURL}/orders/pay_box_order/`)
+      .then(response => {
+        console.log(response)
       })
     }
   }

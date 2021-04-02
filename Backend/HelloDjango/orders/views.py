@@ -1,3 +1,6 @@
+import random
+import string
+import hashlib
 from django.http import HttpResponse, JsonResponse
 from django.views.generic.base import View
 from rest_framework import viewsets
@@ -61,3 +64,5 @@ class CreateOrderView(APIView):
             product.save()
 
         return Response(status=201)
+
+

@@ -9,12 +9,13 @@ admin.site.register(VariationType)
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'parent', 'order')
+    list_display = ('get_image', 'title', 'main_category', 'parent', 'order')
     list_editable = ('order', 'parent')
     list_display_links = ('get_image', 'title')
     search_fields = ('title',)
-    list_filter = ('main_category',)
+    list_filter = (('parent', admin.RelatedOnlyFieldListFilter), 'main_category')
     readonly_fields = ('get_image',)
+    prepopulated_fields = {"slug": ("title",)}
     save_as = True
     save_on_top = True
 
@@ -31,6 +32,7 @@ class BrandAdmin(admin.ModelAdmin):
     list_editable = ('title', 'slug', 'order')
     search_fields = ('title',)
     readonly_fields = ('get_image',)
+    prepopulated_fields = {"slug": ("title",)}
     list_per_page = 10
 
     save_as = True
@@ -49,6 +51,7 @@ class LabelAdmin(admin.ModelAdmin):
     list_editable = ('slug', 'order')
     search_fields = ('title',)
     list_per_page = 10
+    prepopulated_fields = {"slug": ("title",)}
 
     save_as = True
     save_on_top = True
@@ -97,6 +100,9 @@ class VariationInline(admin.TabularInline):
 @admin.register(Product)
 class ProductAdmin(TabbedModelAdmin):
     model = Product
+    ordering = ('-update',)
+    date_hierarchy = 'pub_date'
+
     readonly_fields = ('get_image', 'get_full_image', 'pub_date', 'update')
     filter_horizontal = ('labels',)
     list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'purchase_price',

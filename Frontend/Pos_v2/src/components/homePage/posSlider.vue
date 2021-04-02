@@ -29,10 +29,10 @@
           <template v-slot:loading>
             <q-skeleton class="full-width home-slider" square/>
           </template>
-          <div class="slider-meta">
-            <div class="text-center">
-              <h2 v-if="slide.title" class="q-mb-md">
-              <span class="slider-meta-content">
+          <div v-if="slide.title || slide.btn_text" class="slider-meta">
+            <div class="text-center slider-meta-content">
+              <h2 v-if="slide.title" class="q-mb-md" style="line-height: .5">
+              <span class="slider-meta-content-text">
               {{ slide.title }}
                 </span>
               </h2>
@@ -40,10 +40,9 @@
                 v-if="slide.btn_text"
                 :label="slide.btn_text"
                 color="accent"
-                class="q-my-sm q-px-lg"
+                class="q-px-lg text-bold"
                 :to="slide.url"
                 unelevated
-                :size="$q.platform.is.mobile ? 'md' : 'lg'"
                 no-caps
               />
             </div>
@@ -85,16 +84,20 @@ export default {
   height: 30px !important
 .slider-meta
   position: absolute
-  bottom: 10px
-  left: 10px
-  right: 10px
+  bottom: 0
+  left: 0
+  right: 0
 
 .slider-meta-content
   background: rgba(0,0,0,.7)
+  padding: 15px 5px
+
+.slider-meta-content-text
   color: white
   font-size: 22px
   font-weight: 700
-  padding: 7px 25px
+  line-height: 1.1 !important
+
 
 @media screen and (max-width: 1280px)
   .home-slider
@@ -106,8 +109,8 @@ export default {
 
   .slider-meta-content
     background: rgba(0,0,0,.7)
-    color: white
+
+  .slider-meta-content-text
     font-size: 14px
     font-weight: 700
-    padding: 7px 25px
 </style>

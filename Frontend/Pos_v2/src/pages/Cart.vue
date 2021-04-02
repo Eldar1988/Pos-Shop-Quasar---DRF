@@ -89,7 +89,6 @@ export default {
       this.getCartProducts()
       this.getCartSum()
     })
-    console.log(this.products)
   },
   methods: {
     getCartProducts() {

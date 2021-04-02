@@ -1,7 +1,7 @@
 <template>
   <q-page class="">
     <script type="application/ld+json" v-html="schema"></script>
-    <pos-page-header :title="companyInfo.title" style="margin-top: -60px"/>
+    <pos-page-header :title="companyInfo.title" style="margin-top: -60px" class="ellipsis"/>
     <pos-slider/>
     <section class="q-mt-xl">
       <pos-section-title title="Новинки"/>
