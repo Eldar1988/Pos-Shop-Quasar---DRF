@@ -53,11 +53,12 @@ class ProductListSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField('get_image_url')
 
     def get_image_url(self, obj):
-        return f'{settings.APP_PATH}{obj.image.url}'
+        if obj.image:
+            return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Product
-        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'rating', 'image_contain')
+        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'miniature_url', 'rating', 'image_contain')
 
 
 class ProductWithLabelsListSerializer(serializers.ModelSerializer):
@@ -172,10 +173,12 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     variations = VariationsSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
-        return f'{settings.APP_PATH}{obj.image.url}'
+        if obj.image:
+            return f'{settings.APP_PATH}{obj.image.url}'
 
     def get_full_image_url(self, obj):
-        return f'{settings.APP_PATH}{obj.full_image.url}'
+        if obj.full_image:
+            return f'{settings.APP_PATH}{obj.full_image.url}'
 
     class Meta:
         model = Product
