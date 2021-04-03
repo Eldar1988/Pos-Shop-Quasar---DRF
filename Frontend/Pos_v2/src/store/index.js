@@ -4,6 +4,7 @@ import main from './modules/main'
 import shop from './modules/shop'
 import pages from './modules/pages'
 import services from './modules/services'
+import products from './modules/products'
 
 // import example from './module-example'
 
@@ -24,7 +25,8 @@ export default function (/* { ssrContext } */) {
       main,
       shop,
       pages,
-      services
+      services,
+      products
     },
     state: {
       kaspiButton: false,

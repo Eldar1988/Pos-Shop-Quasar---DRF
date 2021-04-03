@@ -9,20 +9,22 @@ from .serializers import ServiceCategoryListSerializer, ServiceCategoryDetailSer
 from .service import tg_send_service_request
 
 
-class CategoriesListView(generics.ListAPIView):
+class CategoriesListView(APIView):
     """Список категорий услуг"""
-    queryset = Category.objects.all()
-    serializer_class = ServiceCategoryListSerializer
+
+    def get(self, request):
+        categories = Category.objects.all()
+        serializer = ServiceCategoryListSerializer(categories, many=True)
+        return Response(serializer.data)
 
 
-class AllServicesView(generics.ListAPIView):
+class AllServicesView(APIView):
     """Список всех категорий и услуг"""
-    queryset = Category.objects.all()
-    serializer_class = ServiceCategoryDetailSerializer
 
-
-# class HomeServicesView(generics.ListAPIView):
-#     """Список услуг для главной страницы"""
+    def get(self, request):
+        categories = Category.objects.all()
+        serializer = ServiceCategoryDetailSerializer(categories, many=True)
+        return Response(serializer.data)
 
 
 class CategoryDetailView(APIView):

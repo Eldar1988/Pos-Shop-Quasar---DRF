@@ -99,8 +99,12 @@ class AboutShopDetailView(APIView):
 
 
 class BannersView(viewsets.ReadOnlyModelViewSet):
-    queryset = Banner.objects.all().order_by('?')[:3]
-    serializer_class = BannerSerializer
+    """Баннеры (3 баннера рандомным выбором)"""
+
+    def get(self, request):
+        banners = Banner.objects.all().order_by('?')[:3]
+        serializer = BannerSerializer(banners, many=True)
+        return Response(serializer.data)
 
 
 class QuestionsView(APIView):

@@ -1,44 +1,63 @@
 from django.http import HttpResponse
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.views import APIView
 from rest_framework import generics
 from django.views import View
 from rest_framework import viewsets
 from rest_framework.response import Response
+import django_filters.rest_framework
 
 import random
 
 from .models import Product, Category, Label, Brand
 from .serializers import ProductListSerializer, CategoryDetailSerializer, ProductDetailSerializer, \
     LabelDetailSerializer, BrandDetailSerializer, ReviewSerializer, CategoryListSerializer
-from .service import ProductsPagination
+from .service import ProductsPagination, ProductsFilter
 
 
-class CategoriesListView(generics.ListAPIView):
-    """All categories"""
-    queryset = Category.objects.all()
-    serializer_class = CategoryListSerializer
+class CategoriesListView(APIView):
+    """Список всех категорий"""
+
+    def get(self, request):
+        categories = Category.objects.all()
+        serializer = CategoryListSerializer(categories, many=True)
+        return Response(serializer.data)
 
 
-class HomeHitProductsView(generics.ListAPIView):
-    """Hit products for home page"""
-    queryset = Product.objects.filter(public=True, hit=True, show_on_home_page=True)[:30]
-    serializer_class = ProductListSerializer
+class HomeHitProductsView(APIView):
+    """Хиты продаж для главной страницы (до 30 единиц)"""
+
+    def get(self, request):
+        products = Product.objects.filter(public=True, hit=True, show_on_home_page=True)[:30]
+        serializer = ProductListSerializer(products, many=True)
+        return Response(serializer.data)
 
 
-class HomeSaleProductView(viewsets.ReadOnlyModelViewSet):
-    queryset = Product.objects.filter(public=True, old_price__gte=1, show_on_home_page=True)[:30]
-    serializer_class = ProductListSerializer
+class HomeSaleProductView(APIView):
+    """Товары со скидкой для главной страницы (до 30 единиц)"""
+
+    def get(self, request):
+        products = Product.objects.filter(public=True, old_price__gte=1, show_on_home_page=True)[:30]
+        serializer = ProductListSerializer(products, many=True)
+        return Response(serializer.data)
 
 
-class LatestProductsView(generics.ListAPIView):
-    """Latest products. Limit 20"""
-    queryset = Product.objects.filter(public=True, latest=True, show_on_home_page=True)[:20]
-    serializer_class = ProductListSerializer
+class LatestProductsView(APIView):
+    """Новинки для главной страницы (до 20 единиц)"""
+
+    def get(self, request):
+        products = Product.objects.filter(public=True, latest=True, show_on_home_page=True)[:20]
+        serializer = ProductListSerializer(products, many=True)
+        return Response(serializer.data)
 
 
-class HomeFutureProducts(viewsets.ReadOnlyModelViewSet):
-    queryset = Product.objects.filter(public=True, future=True, show_on_home_page=True)[:30]
-    serializer_class = ProductListSerializer
+class HomeFutureProducts(APIView):
+    """Рекомендуемый товар для главной страницы (до 20 единиц)"""
+
+    def get(self, request):
+        products = Product.objects.filter(public=True, future=True, show_on_home_page=True)[:30]
+        serializer = ProductListSerializer(products, many=True)
+        return Response(serializer.data)
 
 
 class CategoryDetailView(APIView):
@@ -55,6 +74,8 @@ class ProductListView(generics.ListAPIView):
     queryset = Product.objects.filter(public=True)
     serializer_class = ProductListSerializer
     pagination_class = ProductsPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ProductsFilter
 
 
 class LabelDetailView(APIView):

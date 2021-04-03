@@ -9,7 +9,7 @@ admin.site.register(VariationType)
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'main_category', 'parent', 'order')
+    list_display = ('get_image', 'title', 'main_category', 'parent', 'order', 'get_products_count')
     list_editable = ('order', 'parent')
     list_display_links = ('get_image', 'title')
     search_fields = ('title',)
@@ -25,15 +25,22 @@ class CategoryAdmin(admin.ModelAdmin):
 
     get_image.short_description = 'Миниатюра'
 
+    def get_products_count(self, obj):
+        products = Product.objects.filter(category=obj).count()
+        return products
+
+    get_products_count.short_description = 'Товары'
+
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
-    list_display = ('get_image', 'title', 'slug', 'order')
-    list_editable = ('title', 'slug', 'order')
+    list_display = ('get_image', 'title', 'order', 'get_products_count')
+    list_editable = ('order',)
     search_fields = ('title',)
     readonly_fields = ('get_image',)
     prepopulated_fields = {"slug": ("title",)}
-    list_per_page = 10
+    list_per_page = 20
+    list_display_links = ('get_image', 'title')
 
     save_as = True
     save_on_top = True
@@ -44,17 +51,29 @@ class BrandAdmin(admin.ModelAdmin):
 
     get_image.short_description = 'Лого'
 
+    def get_products_count(self, obj):
+        products = Product.objects.filter(brand=obj).count()
+        return products
+
+    get_products_count.short_description = 'Товары'
+
 
 @admin.register(Label)
 class LabelAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'order')
-    list_editable = ('slug', 'order')
+    list_display = ('title', 'order', 'get_products_count')
+    list_editable = ('order',)
     search_fields = ('title',)
-    list_per_page = 10
+    list_per_page = 20
     prepopulated_fields = {"slug": ("title",)}
 
     save_as = True
     save_on_top = True
+
+    def get_products_count(self, obj):
+        products = Product.objects.filter(labels=obj).count()
+        return products
+
+    get_products_count.short_description = 'Товары'
 
 
 class ImageInline(admin.TabularInline):
@@ -105,11 +124,11 @@ class ProductAdmin(TabbedModelAdmin):
 
     readonly_fields = ('get_image', 'get_full_image', 'pub_date', 'update')
     filter_horizontal = ('labels',)
-    list_display = ('get_image', 'title', 'category', 'brand', 'price', 'old_price', 'purchase_price',
-                    'in_stock_quantity', 'rating', 'show_on_home_page', 'future', 'hit', 'latest', 'public', 'order')
-    list_editable = ('category', 'price', 'old_price', 'purchase_price', 'in_stock_quantity', 'rating',
+    list_display = ('get_image', 'title', 'category', 'price', 'old_price', 'purchase_price',
+                    'in_stock_quantity', 'show_on_home_page', 'future', 'hit', 'latest', 'public', 'order')
+    list_editable = ('category', 'price', 'old_price', 'purchase_price', 'in_stock_quantity',
                      'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
-    list_filter = ('category', 'brand', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date',
+    list_filter = (('category', admin.RelatedOnlyFieldListFilter), 'brand', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date',
                    'update', 'rating')
     search_fields = ('title', 'category__title', 'brand__title', 'article')
     list_display_links = ('get_image', 'title')

@@ -49,8 +49,7 @@ INSTALLED_APPS = [
     'colorfield',
     'tabbed_admin',
     'drf_yasg',
-
-    'django-filters',
+    'django_filters',
 
     'shop',
     'posshop',
@@ -147,7 +146,8 @@ REST_FRAMEWORK = {
     'DATE_FORMAT': "%d.%m.%Y",
     'TIME_FORMAT': "%H:%M",
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 3
+    'PAGE_SIZE': 100,
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 CKEDITOR_UPLOAD_PATH = "uploads/"

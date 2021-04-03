@@ -8,9 +8,9 @@ urlpatterns = [
     # Бренд детали
     path('brand/<slug:slug>/', views.BrandDetailView.as_view()),
     # Товары со скидкой
-    path('home_sale_products/', views.HomeSaleProductView.as_view({'get': 'list'})),
+    path('home_sale_products/', views.HomeSaleProductView.as_view()),
     # Рекомендуемые товары
-    path('home_future_products/', views.HomeFutureProducts.as_view({'get': 'list'})),
+    path('home_future_products/', views.HomeFutureProducts.as_view()),
     # Хиты продаж
     path('home_hit_products/', views.HomeHitProductsView.as_view()),
     # Новинки

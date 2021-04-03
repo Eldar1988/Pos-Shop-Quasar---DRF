@@ -111,7 +111,6 @@ class ChildCategoryDetailSerializer(serializers.ModelSerializer):
 class CategoryDetailSerializer(serializers.ModelSerializer):
     """Категория (детали)"""
     image = serializers.SerializerMethodField('get_image_url')
-    products = ProductWithLabelsListSerializer(many=True, read_only=True)
     child = ChildCategoryDetailSerializer(many=True, read_only=True)
     parent = ChildCategoryListSerializer(many=False, read_only=True)
 
@@ -120,7 +119,7 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = '__all__'
+        exclude = ('products',)
 
 
 class BrandDetailSerializer(serializers.ModelSerializer):
