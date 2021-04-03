@@ -5,6 +5,8 @@ from django.views import View
 from rest_framework import viewsets
 from rest_framework.response import Response
 
+import random
+
 from .models import Product, Category, Label, Brand
 from .serializers import ProductListSerializer, CategoryDetailSerializer, ProductDetailSerializer, \
     LabelDetailSerializer, BrandDetailSerializer, ReviewSerializer, CategoryListSerializer
@@ -46,6 +48,13 @@ class CategoryDetailView(APIView):
         category = Category.objects.get(slug=slug)
         category_serializer = CategoryDetailSerializer(category, many=False)
         return Response(category_serializer.data)
+
+
+class ProductListView(generics.ListAPIView):
+    """Список товаров"""
+    queryset = Product.objects.filter(public=True)
+    serializer_class = ProductListSerializer
+    pagination_class = ProductsPagination
 
 
 class LabelDetailView(APIView):
@@ -121,3 +130,40 @@ class SetInStockQuantity(View):
 
         return HttpResponse('У Вас недосаточно прав...')
 
+
+class CreateProducts(APIView):
+    def get(self, request, quantity):
+
+        categories = ['Мужские кофты', 'Платья']
+        count = 1
+        images = [
+            'https://cvetogis.kz/wp-content/uploads/2021/03/belo-roz-300x400.jpg',
+            'https://cvetogis.kz/wp-content/uploads/2021/03/kremovye-300x400.jpg',
+            'https://cvetogis.kz/wp-content/uploads/2021/03/belaya-300x400.jpg',
+            'https://cvetogis.kz/wp-content/uploads/2021/03/krasnaya-300x400.jpg',
+            'https://cvetogis.kz/wp-content/uploads/2021/02/3-.jpg',
+            'https://cvetogis.kz/wp-content/uploads/2021/02/3-bel.jpg',
+            'https://cvetogis.kz/wp-content/uploads/2021/02/3-.jpg'
+        ]
+        brands = ['fashion_5', 'Fashion 4', 'Fashion 3', 'Fashion 2']
+
+        for i in range(quantity):
+            category = Category.objects.get(title=random.choice(categories))
+            brand = Brand.objects.get(title=random.choice(brands))
+
+            Product.objects.create(
+                category=category,
+                brand=brand,
+                title=f'Test product {count}',
+                description='Краткое описание товара',
+                info='Дополнительная информация',
+                characteristic='Характеристики',
+                price=random.uniform(3000, 1000000),
+                miniature_url=random.choice(images),
+                image_url=random.choice(images),
+                rating=random.uniform(2, 5),
+                in_stock_quantity=20
+            )
+            count += 1
+
+        return Response(status=201)

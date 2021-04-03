@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('products/', views.ProductListView.as_view()),
     # Метка детали
     path('label/<slug:slug>/', views.LabelDetailView.as_view()),
     # Бренд детали
@@ -16,6 +17,7 @@ urlpatterns = [
     path('latest_products/', views.LatestProductsView.as_view()),
     # Категория детали
     path('category/<slug:slug>/', views.CategoryDetailView.as_view()),
+
     # Товар детали
     path('product/<int:pk>/', views.ProductDetailView.as_view()),
     # + Отзыв
@@ -23,5 +25,6 @@ urlpatterns = [
     # Поиск товаров
     path('search/', views.SearchView.as_view()),
     path('set_stock/<int:value>/', views.SetInStockQuantity.as_view()),
-    path('categories/', views.CategoriesListView.as_view())
+    path('categories/', views.CategoriesListView.as_view()),
+    path('create_random_product/<int:quantity>/', views.CreateProducts.as_view())
 ]

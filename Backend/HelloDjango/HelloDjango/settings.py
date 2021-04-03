@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'tabbed_admin',
     'drf_yasg',
 
+    'django-filters',
+
     'shop',
     'posshop',
     'orders',
@@ -144,6 +146,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 REST_FRAMEWORK = {
     'DATE_FORMAT': "%d.%m.%Y",
     'TIME_FORMAT': "%H:%M",
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 3
 }
 
 CKEDITOR_UPLOAD_PATH = "uploads/"

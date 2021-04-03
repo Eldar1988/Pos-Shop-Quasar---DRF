@@ -67,7 +67,8 @@ class ProductWithLabelsListSerializer(serializers.ModelSerializer):
     labels = LabelListSerializer(many=True)
 
     def get_image_url(self, obj):
-        return f'{settings.APP_PATH}{obj.image.url}'
+        if obj.image:
+            return f'{settings.APP_PATH}{obj.image.url}'
 
     class Meta:
         model = Product
@@ -185,3 +186,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         exclude = ('future', 'hit', 'latest', 'public', 'order', 'pub_date', 'update', 'purchase_price')
 
 
+class CreateProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product,
+        fields = '__all__'

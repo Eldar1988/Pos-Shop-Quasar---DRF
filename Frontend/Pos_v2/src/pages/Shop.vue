@@ -2,11 +2,6 @@
   <q-page>
     <q-breadcrumbs class="q-pa-sm q-mt-md">
       <q-breadcrumbs-el icon="home" to="/"/>
-      <q-breadcrumbs-el
-        v-if="category.parent"
-        :label="category.parent.title"
-        :to="`/shop/${category.parent.slug}`"
-      />
       <q-breadcrumbs-el :label="category.title"/>
     </q-breadcrumbs>
     <pos-page-header :title="category.title"/>
