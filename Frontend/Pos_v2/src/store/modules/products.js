@@ -3,14 +3,16 @@ import notifier from "src/functions/notifier"
 
 export default {
   state: {
-    products: null
+    productsData: null,
+    productsLoading: false
   },
 
   actions: {
-    async fetchProducts({commit}, params) {
+    async fetchShopProducts({commit, state}, params) {
+      commit('changeProductsLoading', true)
       try {
         await axiosInstance.get(`${this.getters.getServerURL}/shop/products/?${params}`)
-          .then(({data}) => commit('setProducts'), data)
+          .then(({data}) => commit('setProductsData', data))
       } catch (e) {
         notifier(`Не удалось загрузить товары. Ошибка сервера: ${e.message}`)
       }
@@ -18,12 +20,17 @@ export default {
   },
 
   mutations: {
-    setProducts(state, data) {
-      state.products = data
+    setProductsData(state, data) {
+      state.productsData = data
+      this.commit('changeProductsLoading', false)
+    },
+    changeProductsLoading(state, status) {
+      state.productsLoading = status
     }
   },
 
   getters: {
-    getShopProducts: state => state.products
+    getShopProductsData: state => state.productsData,
+    getProductsLoading: state => state.productsLoading
   }
 }

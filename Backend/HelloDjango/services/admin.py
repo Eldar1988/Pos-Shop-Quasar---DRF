@@ -19,6 +19,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_editable = ('title', 'order')
     list_filter = ('pub_date', 'update')
     search_fields = ('title',)
+    prepopulated_fields = {"slug": ("title",)}
     save_as = True
     save_on_top = True
     list_per_page = 10

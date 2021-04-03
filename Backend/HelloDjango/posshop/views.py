@@ -98,7 +98,7 @@ class AboutShopDetailView(APIView):
         return Response(serializer.data)
 
 
-class BannersView(viewsets.ReadOnlyModelViewSet):
+class BannersView(APIView):
     """Баннеры (3 баннера рандомным выбором)"""
 
     def get(self, request):

@@ -90,19 +90,6 @@
       <q-list class="bg-grey-2 q-mt-md">
         <q-item
           clickable
-          v-ripple
-          class="menu-item"
-          to="/services"
-          exact-active-class="text-primary"
-          title="Наши услуги"
-        >
-          <q-item-section avatar>
-            <q-icon name="navigate_next"/>
-          </q-item-section>
-          <q-item-section class="text-subtitle1 text-dark flex"> Все услуги</q-item-section>
-        </q-item>
-        <q-item
-          clickable
           v-for="serviceCategory in servicesCategories"
           :key="serviceCategory.id"
           v-ripple

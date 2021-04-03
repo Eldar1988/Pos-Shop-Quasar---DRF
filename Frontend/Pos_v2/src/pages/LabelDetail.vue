@@ -6,8 +6,21 @@
     </q-breadcrumbs>
     <pos-page-header :title="`Товары с меткой '${label.title}'`"/>
     <!--    Products   -->
+    <pos-current-page :current-page="currentPage" :products-count="productsData ? productsData.count : 0"/>
     <section class="q-pa-sm q-mt-md">
-      <pos-products-wrapper :products="label.products"/>
+      <pos-products-wrapper :products="productsData ? productsData.results: []"/>
+      <div class="pagination q-px-sm q-mt-md flex flex-center">
+        <div class="">
+          <q-pagination
+            v-model="currentPage"
+            :max="productsData ? +(Math.ceil(productsData.count/30)) : 0"
+            direction-links
+            :max-pages="7"
+            @click="scrollToTop"
+            unelevated
+          />
+        </div>
+      </div>
     </section>
     <!--    xxxxx   -->
     <section style="margin-top: 100px">
@@ -30,16 +43,45 @@ import PosBanners from "components/shop/posBanners";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
 import PosSectionTitle from "components/service/posSectionTitle";
 import PosProductsSlideX from "components/sliders/posProductsSlideX";
+import PosCurrentPage from "components/shop/utils/posCurrentPage";
 
 export default {
   name: "LabelDetail",
-  components: {PosProductsSlideX, PosSectionTitle, PosBrandsSlider, PosBanners, PosProductsWrapper, PosPageHeader},
+  components: {
+    PosCurrentPage,
+    PosProductsSlideX, PosSectionTitle, PosBrandsSlider, PosBanners, PosProductsWrapper, PosPageHeader},
   computed: {
     label() {
       return this.$store.getters.getLabelDetail
     },
     latestProducts() {
       return this.$store.getters.getLatestProducts
+    },
+    productsData() {
+      return this.$store.getters.getShopProductsData
+    }
+  },
+  data() {
+    return {
+      currentPage: 1
+    }
+  },
+  watch: {
+    currentPage() {
+      this.$store.dispatch('fetchShopProducts', `label=${this.$route.params.slug}&page=${this.currentPage}`)
+    },
+  },
+  created() {
+    this.$store.dispatch('fetchShopProducts', `label=${this.$route.params.slug}&page=${this.currentPage}`)
+  },
+  methods: {
+    scrollToTop() {
+      setTimeout(() => {
+        document.querySelector('#q-app').scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+      }, 200)
     }
   },
   preFetch({store, currentRoute}) {

@@ -58,7 +58,8 @@ class ProductListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'miniature_url', 'rating', 'image_contain')
+        fields = ('id', 'title', 'category', 'price', 'old_price', 'image', 'miniature_url', 'rating', 'image_contain',
+                  'price_comment')
 
 
 class ProductWithLabelsListSerializer(serializers.ModelSerializer):
@@ -119,13 +120,12 @@ class CategoryDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        exclude = ('products',)
+        fields = '__all__'
 
 
 class BrandDetailSerializer(serializers.ModelSerializer):
     """Бренд (детали)"""
     image = serializers.SerializerMethodField('get_image_url')
-    products = ProductListSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
         return f'{settings.APP_PATH}{obj.image.url}'
@@ -137,7 +137,6 @@ class BrandDetailSerializer(serializers.ModelSerializer):
 
 class LabelDetailSerializer(serializers.ModelSerializer):
     """Метка (детали)"""
-    products = ProductListSerializer(many=True, read_only=True)
 
     class Meta:
         model = Label
@@ -146,6 +145,7 @@ class LabelDetailSerializer(serializers.ModelSerializer):
 
 class VideoSerializer(serializers.ModelSerializer):
     """Дополнительное видео товара"""
+
     class Meta:
         model = Video
         exclude = ('order', 'product')

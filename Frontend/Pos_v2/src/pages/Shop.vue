@@ -1,10 +1,11 @@
 <template>
   <q-page>
+    <div id="page-header"></div>
     <q-breadcrumbs class="q-pa-sm q-mt-md">
       <q-breadcrumbs-el icon="home" to="/"/>
-      <q-breadcrumbs-el :label="category.title"/>
+      <q-breadcrumbs-el label="Магазин"/>
     </q-breadcrumbs>
-    <pos-page-header :title="category.title"/>
+    <pos-page-header :title="category.title" />
     <!--    Category description   -->
     <section class="q-pa-sm" v-if="category.description">
       <q-card
@@ -27,25 +28,60 @@
       </q-card>
     </section>
     <!--    xxxxx   -->
-    <!--    Products   -->
-    <section class="q-pa-sm q-mt-md">
-      <pos-labels-filter :products="category.products"/>
-      <pos-products-wrapper :products="category.products"/>
-      <div
-        v-for="child in category.child"
-        :key="child.id"
-      >
-        <pos-section-title :title="child.title" class="bg-grey-3 q-py-sm"/>
-        <pos-products-wrapper :products="child.products" class="q-mb-xl q-mt-lg"/>
+
+    <div v-if="productsData && productsData.results.length > 0" class="products-section">
+<!--      &lt;!&ndash;    Products filters &ndash;&gt;-->
+<!--      <div  class="products-filters flex justify-between q-px-sm q-mt-md">-->
+<!--        <div>-->
+<!--          <q-btn-->
+<!--            label="Фильтры"-->
+<!--            color="dark"-->
+<!--            class="q-px-md text-bold"-->
+<!--            unelevated-->
+<!--          />-->
+<!--        </div>-->
+
+
+<!--      </div>-->
+
+      <!--    Products   -->
+      <div class="q-px-sm text-right">
+        <pos-current-page :current-page="currentPage" :products-count="productsData ? productsData.count : 0"/>
       </div>
 
-    </section>
-    <!--    xxxxx   -->
+      <section class="q-pa-sm q-mt-md" id="shop-products">
+        <pos-products-wrapper :products="productsData ? productsData.results : []"/>
+      </section>
+      <div class="pagination q-px-sm q-mt-md flex flex-center">
+        <div class="">
+          <q-pagination
+            v-model="currentPage"
+            :max="productsData ? +(Math.ceil(productsData.count/30)) : 0"
+            direction-links
+            :max-pages="7"
+            @click="scrollToTop"
+            unelevated
+          />
+        </div>
+      </div>
+      <!--    xxxxx   -->
+    </div>
+
+    <div v-else class="q-pa-sm">
+      <q-card
+        square
+        class="shadow-0 full-width bg-white q-py-xl q-px-md text-center"
+      >
+        <p>Извините, товаров не найдено.</p>
+      </q-card>
+    </div>
+
     <!--    Banners   -->
-    <section>
+    <section class="q-pt-xl">
       <pos-banners/>
     </section>
     <!--    xxxxx   -->
+
     <!--    Latest Products   -->
     <section class="q-py-xl">
       <pos-section-title title="Новинки"/>
@@ -53,8 +89,8 @@
     </section>
     <!--    xxxxx   -->
 
-    <pos-section-title title="Смотрите также" class="q-mt-lg" />
-    <pos-categories class="q-mt-md q-pa-sm" :categories="this.$store.getters.getCategories" />
+    <pos-section-title title="Смотрите также" class="q-mt-lg"/>
+    <pos-categories class="q-mt-md q-pa-sm" :categories="this.$store.getters.getCategories"/>
     <pos-brands-slider class="q-mt-xl"/>
   </q-page>
 </template>
@@ -67,15 +103,20 @@ import PosBanners from "components/shop/posBanners";
 import PosSectionTitle from "components/service/posSectionTitle";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
 import PosProductsSlideX from "components/sliders/posProductsSlideX";
-import PosLabelsFilter from "components/service/posLabelsFilter";
+import PosCurrentPage from "components/shop/utils/posCurrentPage";
 
 export default {
   name: "Shop",
   components: {
-    PosLabelsFilter,
+    PosCurrentPage,
     PosProductsSlideX,
     PosBrandsSlider,
     PosSectionTitle, PosBanners, PosCategories, PosProductsWrapper, PosPageHeader
+  },
+  data() {
+    return {
+      currentPage: 1
+    }
   },
   computed: {
     category() {
@@ -83,24 +124,40 @@ export default {
     },
     latestProducts() {
       return this.$store.getters.getLatestProducts
-    }
-  },
-  watch: {
-    '$route' () {
-      this.loadCategoryData()
+    },
+    productsData() {
+      return this.$store.getters.getShopProductsData
     }
   },
   created() {
-    this.loadCategoryData()
+    this.loadProductData()
   },
-  methods: {
-    loadCategoryData() {
-      return this.$store.dispatch('fetchCategoryData', this.$route.params.slug)
+  watch: {
+    '$route'() {
+      this.loadProductData()
+    },
+    currentPage() {
+      this.$store.dispatch('fetchShopProducts', `category_slug=${this.$route.params.slug}&page=${this.currentPage}`)
     }
   },
-  // preFetch({store, currentRoute}) {
-  //   return store.dispatch('fetchCategoryData', currentRoute.params.slug)
-  // },
+  methods: {
+    loadProductData() {
+      this.$store.dispatch('fetchShopProducts', `category_slug=${this.$route.params.slug}`)
+    },
+    scrollToTop() {
+      setTimeout(() => {
+        document.querySelector('#q-app').scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+      },200)
+    }
+  },
+  preFetch({store, currentRoute}) {
+    return store.dispatch('fetchCategoryData', currentRoute.params.slug)
+  },
+
+
   meta() {
     let category = this.$store.getters.getCategoryDetail
     let siteTitle = this.$store.getters.getCompanyInfo.name

@@ -26,7 +26,7 @@ SECRET_KEY = 'q6cszn^*%gj4c%q)4!!nc+u4n4ot6ly9(h-a+q7p6e5cnn0anj'
 DEBUG = True
 
 # ALLOWED_HOSTS = ['192.168.0.155']
-SITE_URL = 'https://test-shop.js-code.ru'
+SITE_URL = 'http://192.168.0.199:8080'
 ALLOWED_HOSTS = ['192.168.0.199']
 APP_PATH = 'http://192.168.0.199:8000'
 
@@ -146,7 +146,7 @@ REST_FRAMEWORK = {
     'DATE_FORMAT': "%d.%m.%Y",
     'TIME_FORMAT': "%H:%M",
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 100,
+    'PAGE_SIZE': 30,
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 

@@ -119,7 +119,7 @@ class VariationInline(admin.TabularInline):
 @admin.register(Product)
 class ProductAdmin(TabbedModelAdmin):
     model = Product
-    ordering = ('-update',)
+    ordering = ('-pub_date',)
     date_hierarchy = 'pub_date'
 
     readonly_fields = ('get_image', 'get_full_image', 'pub_date', 'update')
