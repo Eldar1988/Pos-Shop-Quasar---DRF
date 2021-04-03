@@ -52,12 +52,18 @@ def tg_send_order(order):
            "===== Товары в заказе ===== \n"
 
     for i in order_items:
+        if i.product.image:
+            image = settings.APP_PATH + i.product.image.url
+        elif i.product.image_url:
+            image = i.product.image_url
+        else:
+            image = ''
         text_order = f"{i.product} \n" \
                      f"Цена: {i.price} тг \n" \
                      f"Количество: {i.quantity} \n" \
                      f"Итого: {i.item_sum} тг \n" \
                      f"Вариации: {i.variations} \n" \
-                     f"Фото: {settings.APP_PATH + i.product.image.url} \n" \
+                     f"Фото: {image} \n" \
                      "================= \n"
 
         text += text_order

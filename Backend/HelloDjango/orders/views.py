@@ -14,10 +14,13 @@ from shop.serializers import ProductDetailSerializer
 from shop.models import Product
 
 
-class PaymentMethodsView(viewsets.ReadOnlyModelViewSet):
+class PaymentMethodsView(APIView):
     """Способы оплаты"""
-    queryset = PaymentMethod.objects.all()
-    serializer_class = PaymentMethodSerializer
+
+    def get(self, request):
+        payments = PaymentMethod.objects.all()
+        serializer = PaymentMethodSerializer(payments, many=True)
+        return Response(serializer.data)
 
 
 class CallBackCreateView(APIView):

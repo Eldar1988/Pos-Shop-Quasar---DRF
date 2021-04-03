@@ -257,9 +257,11 @@ export default {
       // Преобразование вариаций в строку
       let productsForOrder = this.products.map(item => {
         let variations = ''
-        item.variations.forEach(variation => {
-          variations += `${variation.type}: ${variation.value}. `
-        })
+        if (item.variations) {
+          item.variations.forEach(variation => {
+            variations += `${variation.type}: ${variation.value}. `
+          })
+        }
         item.variations = variations
         return item
       })
@@ -292,12 +294,6 @@ export default {
       })
     },
 
-    async payBoxPayment() {
-      await this.$axios.post(`${this.$store.getters.getServerURL}/orders/pay_box_order/`)
-      .then(response => {
-        console.log(response)
-      })
-    }
   }
 }
 </script>
