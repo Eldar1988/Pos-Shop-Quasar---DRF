@@ -20,6 +20,7 @@ class ProductsFilter(filters.FilterSet):
     category_slug = ChaFilterInFilter(field_name='category__slug')
     title = ChaFilterInFilter(field_name='title', lookup_expr='in')
     label = ChaFilterInFilter(field_name='labels__slug')
+    # characteristics = ChaFilterInFilter(field_name='characteristics__value', lookup_expr='in')
 
     class Meta:
         model = Product
