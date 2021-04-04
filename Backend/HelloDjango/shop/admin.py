@@ -1,10 +1,32 @@
 from django.contrib import admin
 from tabbed_admin import TabbedModelAdmin
 from django.utils.safestring import mark_safe
-from .models import Category, Brand, Label, Product, Image, Review, Video, VariationType, Variation
+from .models import Category, Brand, Label, Product, Image, Review, Video, VariationType, Variation, CharacteristicType, Characteristic
 
 
 admin.site.register(VariationType)
+
+
+@admin.register(CharacteristicType)
+class CharacteristicTypeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'get_products_count', 'order')
+    list_editable = ('order',)
+    list_filter = (('category', admin.RelatedOnlyFieldListFilter),)
+    search_fields = ('title',)
+    filter_horizontal = ('category',)
+
+    def get_products_count(self, obj):
+        characteristics = Characteristic.objects.filter(type=obj).count()
+        return characteristics
+
+    get_products_count.short_description = 'Значения'
+
+
+@admin.register(Characteristic)
+class CharacteristicsAdmin(admin.ModelAdmin):
+    list_display = ('value',)
+    list_filter = ('type',)
+    search_fields = ('type__title', 'value')
 
 
 @admin.register(Category)
@@ -123,14 +145,15 @@ class ProductAdmin(TabbedModelAdmin):
     date_hierarchy = 'pub_date'
 
     readonly_fields = ('get_image', 'get_full_image', 'pub_date', 'update')
-    filter_horizontal = ('labels',)
+    filter_horizontal = ('labels', 'characteristics')
     list_display = ('get_image', 'title', 'category', 'price', 'old_price', 'purchase_price',
                     'in_stock_quantity', 'show_on_home_page', 'future', 'hit', 'latest', 'public', 'order')
     list_editable = ('category', 'price', 'old_price', 'purchase_price', 'in_stock_quantity',
                      'future', 'hit', 'latest', 'public', 'order', 'show_on_home_page')
     list_filter = (('category', admin.RelatedOnlyFieldListFilter), 'brand', 'future', 'hit', 'latest', 'public', 'order', 'labels', 'pub_date',
-                   'update', 'rating')
-    search_fields = ('title', 'category__title', 'brand__title', 'article')
+                   'update', 'rating', ('characteristics', admin.RelatedOnlyFieldListFilter))
+    search_fields = ('title', 'category__title', 'brand__title', 'article', 'characteristics__value',
+                     'characteristics__type__title')
     list_display_links = ('get_image', 'title')
 
     list_per_page = 10
@@ -165,6 +188,11 @@ class ProductAdmin(TabbedModelAdmin):
             'fields': ('shipping_detail',)
         }),
     )
+    tab_characteristics = (
+        (None, {
+            'fields': ('characteristics',)
+        }),
+    )
     tab_more_details = (
         (None, {
             'fields': ('show_on_home_page', 'future', 'hit', 'latest', 'public', 'rating', 'order', 'pub_date',
@@ -183,7 +211,8 @@ class ProductAdmin(TabbedModelAdmin):
         ('Медиа', tab_media),
         ('Доставка', tab_shipping),
         ('Дополнительно', tab_more_details),
-        ('Вариации', tab_variations),
+        ('Харакетристики', tab_characteristics),
+        ('Вариации', tab_variations)
     ]
 
     def get_image(self, obj):

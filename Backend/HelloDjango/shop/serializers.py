@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Category, Brand, Label, Product, Image, Review, Video, VariationType, Variation
+from .models import Category, Brand, Label, Product, Image, Review, Video, VariationType, Variation, Characteristic, \
+    CharacteristicType
 from django.conf import settings
 
 
@@ -109,11 +110,30 @@ class ChildCategoryDetailSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class CharacteristicSerializer(serializers.ModelSerializer):
+    """Харакетристики товара"""
+    type = serializers.SlugRelatedField(slug_field='title', read_only=True, many=False)
+
+    class Meta:
+        model = Characteristic
+        fields = '__all__'
+
+
+class CharacteristicTypeSerializer(serializers.ModelSerializer):
+    """Типы харакетристик"""
+    characteristics = CharacteristicSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = CharacteristicType
+        exclude = ('category', 'order')
+
+
 class CategoryDetailSerializer(serializers.ModelSerializer):
     """Категория (детали)"""
     image = serializers.SerializerMethodField('get_image_url')
     child = ChildCategoryDetailSerializer(many=True, read_only=True)
     parent = ChildCategoryListSerializer(many=False, read_only=True)
+    characteristic_types = CharacteristicTypeSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
         return f'{settings.APP_PATH}{obj.image.url}'
@@ -171,6 +191,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True, read_only=True)
     videos = VideoSerializer(many=True, read_only=True)
     variations = VariationsSerializer(many=True, read_only=True)
+    characteristics = CharacteristicSerializer(many=True, read_only=True)
 
     def get_image_url(self, obj):
         if obj.image:

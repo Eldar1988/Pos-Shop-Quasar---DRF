@@ -30,23 +30,12 @@
     <!--    xxxxx   -->
 
     <div v-if="productsData && productsData.results.length > 0" class="products-section">
-<!--      &lt;!&ndash;    Products filters &ndash;&gt;-->
-<!--      <div  class="products-filters flex justify-between q-px-sm q-mt-md">-->
-<!--        <div>-->
-<!--          <q-btn-->
-<!--            label="Фильтры"-->
-<!--            color="dark"-->
-<!--            class="q-px-md text-bold"-->
-<!--            unelevated-->
-<!--          />-->
-<!--        </div>-->
-
-
-<!--      </div>-->
-
       <!--    Products   -->
+      <div class="flex justify-between" style="align-items: center">
+      <pos-filters :filters="category.characteristic_types"/>
       <div class="q-px-sm text-right">
         <pos-current-page :current-page="currentPage" :products-count="productsData ? productsData.count : 0"/>
+      </div>
       </div>
 
       <section class="q-pa-sm q-mt-md" id="shop-products">
@@ -104,10 +93,12 @@ import PosSectionTitle from "components/service/posSectionTitle";
 import PosBrandsSlider from "components/sliders/posBrandsSlider";
 import PosProductsSlideX from "components/sliders/posProductsSlideX";
 import PosCurrentPage from "components/shop/utils/posCurrentPage";
+import PosFilters from "components/shop/utils/posFilters";
 
 export default {
   name: "Shop",
   components: {
+    PosFilters,
     PosCurrentPage,
     PosProductsSlideX,
     PosBrandsSlider,
