@@ -133,11 +133,12 @@
         <q-card
           square
           class="grey-border shadow-0 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"
-          @click="payBoxPayment()"
         >
-          <div class="flex justify-center">
-            <q-img src="../../assets/paybox.svg" height="50px" contain/>
+          <div class=" text-center">
             <p class="q-pt-sm text-bold">Оплата онлайн</p>
+            <div class="q-mt-sm">
+              <pos-google-pay :amount="cartSum"/>
+            </div>
           </div>
         </q-card>
         <q-card
@@ -181,9 +182,11 @@
 <script>
 import formatPrice from "src/filters/format_price";
 import {QSpinnerFacebook} from "quasar";
+import PosGooglePay from "components/cart/posGooglePay";
 
 export default {
   name: "posCheckoutForm",
+  components: {PosGooglePay},
   filters: {formatPrice},
   props: {
     cartLen: {

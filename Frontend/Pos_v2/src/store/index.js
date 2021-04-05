@@ -29,7 +29,7 @@ export default function (/* { ssrContext } */) {
       products
     },
     state: {
-      kaspiButton: false,
+      kaspiButton: true,
       // serverURL: 'http://192.168.0.155:8000'
       // serverURL: 'https://max-shop.kz.na4u.ru'
       // serverURL: 'https://dj.posshop.kz.na4u.ru'
