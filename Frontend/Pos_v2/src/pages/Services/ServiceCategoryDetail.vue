@@ -2,7 +2,6 @@
   <q-page>
     <q-breadcrumbs class="q-pa-sm q-mt-md">
       <q-breadcrumbs-el icon="home" to="/"/>
-      <q-breadcrumbs-el to="/services" label="Услуги"/>
       <q-breadcrumbs-el
         :label="serviceCategory.title"
       />

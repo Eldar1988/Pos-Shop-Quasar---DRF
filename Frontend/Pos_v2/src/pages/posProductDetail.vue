@@ -357,7 +357,7 @@ export default {
     },
 
     setVariationPrice(price) {
-      this.productData.product.price = price
+      this.$store.dispatch('changeProductPrice', price)
     }
   },
   preFetch({store, currentRoute}) {

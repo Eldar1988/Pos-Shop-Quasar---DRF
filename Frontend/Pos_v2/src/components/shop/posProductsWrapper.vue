@@ -3,8 +3,8 @@
     <div class="product-wrapper">
       <!--    Products   -->
       <article
-        v-for="product in products"
-        :key="product.id"
+        v-for="(product, index) in products"
+        :key="index"
       >
         <pos-product-card :product="product"/>
       </article>

@@ -42,14 +42,14 @@ def tg_send_order(order):
            f"Имя: {order.name}\n" \
            f"Телефон: {order.phone} \n" \
            f"Email: {order.email} \n" \
-           "====================== \n" \
+           "====================== \n\n" \
            f"Область: {order.region} \n" \
            f"Город: {order.city} \n" \
            f"Адрес: {order.address} \n" \
-           "====================== \n" \
+           "====================== \n\n" \
            f"Общая сумма заказа: {order.order_sum} тг \n" \
            f"Способ оплаты: {order.payment_method} \n\n" \
-           "===== Товары в заказе ===== \n"
+           "===== Товары в заказе ===== \n\n"
 
     for i in order_items:
         if i.product.image:
@@ -62,9 +62,9 @@ def tg_send_order(order):
                      f"Цена: {i.price} тг \n" \
                      f"Количество: {i.quantity} \n" \
                      f"Итого: {i.item_sum} тг \n" \
-                     f"Вариации: {i.variations} \n" \
+                     f"{i.variations} \n" \
                      f"Фото: {image} \n" \
-                     "================= \n"
+                     "================= \n\n"
 
         text += text_order
 

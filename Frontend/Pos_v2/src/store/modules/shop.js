@@ -107,9 +107,15 @@ export default {
           throw e
         }
       }
+    },
+    changeProductPrice({commit}, price) {
+      commit('setProductPrice', price)
     }
   },
   mutations: {
+    setProductPrice(state, price) {
+      state.productDetailData.product.price = price
+    },
     setCategoryData(state, data) {
       state.category = data
     },

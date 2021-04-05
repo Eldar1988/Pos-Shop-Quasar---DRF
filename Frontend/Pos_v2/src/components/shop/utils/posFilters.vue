@@ -6,9 +6,19 @@
           label="Фильтры"
           color="dark"
           class="q-px-md text-bold"
-          unelevated outline no-caps
+          unelevated outline no-caps stretch
           icon="tune"
           @click="filtersCard = !filtersCard"
+        />
+        <q-btn
+          v-if="resetFiltersBtn"
+          label="Сбросить фильтры"
+          flat stretch dense no-caps
+          class="q-ml-sm"
+          icon="close"
+          color="accent"
+          size="sm"
+          @click="resetFilters(true)"
         />
       </div>
     </div>
@@ -23,7 +33,7 @@
       >
         <q-toolbar class="bg-dark text-white">
           <q-toolbar-title>Фильры</q-toolbar-title>
-          <q-icon name="close" size="20px"/>
+          <q-btn icon="close" flat dense v-close-popup/>
         </q-toolbar>
         <q-card-section>
         <div class="row">
@@ -64,6 +74,7 @@
             class="q-mt-lg q-pa-sm"
             icon-right="tune"
             unelevated no-caps
+            @click="filtration"
           />
           </div>
         </q-card-section>
@@ -86,9 +97,29 @@ export default {
       filtersCard: false,
       SelectedCharacteristics: [],
       minPrice: null,
-      maxPrice: null
+      maxPrice: null,
+      resetFiltersBtn: false
     }
   },
+  watch: {
+    '$route'() {
+      this.resetFilters(false)
+    }
+  },
+  methods: {
+    filtration() {
+      this.$emit('filtration', this.SelectedCharacteristics.join(','), this.minPrice ? this.minPrice : '', this.maxPrice ? this.maxPrice : '')
+      this.resetFiltersBtn = true
+      this.filtersCard = false
+    },
+    resetFilters(reloadProducts) {
+      this.resetFiltersBtn = false
+      this.SelectedCharacteristics = []
+      this.minPrice = null
+      this.maxPrice = null
+      if (reloadProducts) this.$emit('resetFilters')
+    }
+  }
 }
 </script>
 

@@ -133,7 +133,6 @@ export default {
     },
     selfAddToCart(product, quantity, redirect) {
       if (product.variations && product.variations.length > 0 && this.allVariationsSelected) {
-        console.log(this.selectedVariations)
         this.addProduct(this.selectedVariations, product, quantity, redirect)
       }
       else if (product.variations.length === 0){

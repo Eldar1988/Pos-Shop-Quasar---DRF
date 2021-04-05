@@ -29,15 +29,20 @@
     </section>
     <!--    xxxxx   -->
 
-    <div v-if="productsData && productsData.results.length > 0" class="products-section">
-      <!--    Products   -->
-      <div class="flex justify-between" style="align-items: center">
-      <pos-filters :filters="category.characteristic_types"/>
+<!--    filters   -->
+    <div class="flex justify-between" style="align-items: center">
+      <pos-filters
+        :filters="category.characteristic_types"
+        @filtration="filtration"
+        @resetFilters="resetFilters"
+      />
       <div class="q-px-sm text-right">
         <pos-current-page :current-page="currentPage" :products-count="productsData ? productsData.count : 0"/>
       </div>
-      </div>
-
+    </div>
+<!--    xxxxx   -->
+    <div v-if="productsData && productsData.results.length > 0" class="products-section">
+      <!--    Products   -->
       <section class="q-pa-sm q-mt-md" id="shop-products">
         <pos-products-wrapper :products="productsData ? productsData.results : []"/>
       </section>
@@ -142,6 +147,13 @@ export default {
           block: 'start'
         })
       },200)
+    },
+    filtration(characteristics, minPrice, maxPrice) {
+      this.$store.dispatch('fetchShopProducts',
+        `category_slug=${this.$route.params.slug}&characteristics=${characteristics}&price_min=${minPrice}&price_max=${maxPrice}`)
+    },
+    resetFilters() {
+      this.$store.dispatch('fetchShopProducts', `category_slug=${this.$route.params.slug}`)
     }
   },
   preFetch({store, currentRoute}) {
