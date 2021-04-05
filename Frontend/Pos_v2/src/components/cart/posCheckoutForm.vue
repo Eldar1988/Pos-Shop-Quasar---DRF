@@ -130,17 +130,17 @@
         title="Оплата"
       >
         <p class="q-ml-lg text-bold q-pb-md ">Выберите способ оплаты</p>
-        <q-card
-          square
-          class="grey-border shadow-0 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"
-        >
-          <div class=" text-center">
-            <p class="q-pt-sm text-bold">Оплата онлайн</p>
-            <div class="q-mt-sm">
-              <pos-google-pay :amount="cartSum"/>
-            </div>
-          </div>
-        </q-card>
+<!--        <q-card-->
+<!--          square-->
+<!--          class="grey-border shadow-0 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"-->
+<!--        >-->
+<!--          <div class=" text-center">-->
+<!--            <p class="q-pt-sm text-bold">Оплата онлайн</p>-->
+<!--            <div class="q-mt-sm">-->
+<!--              <pos-google-pay :amount="cartSum"/>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </q-card>-->
         <q-card
           square
           class="grey-border shadow-0 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"
@@ -186,7 +186,7 @@ import PosGooglePay from "components/cart/posGooglePay";
 
 export default {
   name: "posCheckoutForm",
-  components: {PosGooglePay},
+  components: {},
   filters: {formatPrice},
   props: {
     cartLen: {
