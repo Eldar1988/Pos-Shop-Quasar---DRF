@@ -5,7 +5,7 @@
         v-for="parentCategory in categoriesWithChild"
         :key="parentCategory.id"
       >
-        <p class="text-bold q-pt-md category-card-title text-uppercase">{{ parentCategory.title }}</p>
+        <p class="text-bold q-pt-md category-card-title">{{ parentCategory.title }}</p>
       <article
         v-for="category in parentCategory.child"
         :key="category.id"
@@ -19,7 +19,7 @@
           >
             <div class="category-card-wrapper text-left">
               <div>
-                <p class="text-bold category-card-title q-px-sm q-pt-sm" style="line-height: 1.2">{{ category.title }}</p>
+                <p class="category-card-title q-px-sm q-pt-sm" style="line-height: 1.2">{{ category.title }}</p>
                 <p v-if="category.label" class="text-accent category-card-label q-px-sm q-pb-sm">
                   {{ category.label }}</p>
               </div>
@@ -97,7 +97,11 @@ export default {
       return this.$store.getters.getCategories
     },
     categoriesWithChild() {
-      return this.$store.getters.getCategories.filter(item => item.child.length > 0)
+      let categories =  this.$store.getters.getCategories.filter(item => item.child.length > 0)
+      categories.sort((a, b) => {
+        return  b.child.length - a.child.length
+      })
+      return categories
     },
     categoriesWithoutChild() {
       return this.$store.getters.getCategories.filter(item => !item.parent && item.child.length === 0)
