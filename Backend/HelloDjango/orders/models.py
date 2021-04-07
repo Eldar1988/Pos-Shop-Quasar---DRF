@@ -20,6 +20,17 @@ class PaymentMethod(models.Model):
         ordering = ('order',)
 
 
+class GooglePay(models.Model):
+    merchantId = models.CharField('merchant Id', max_length=255)
+
+    def __str__(self):
+        return self.merchantId
+
+    class Meta:
+        verbose_name = 'Google pay'
+        verbose_name_plural = '3.4 Google pay'
+
+
 class Order(models.Model):
     """Заказ"""
     name = models.CharField('ФИО покупателя', max_length=100, db_index=True)

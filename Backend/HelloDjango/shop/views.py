@@ -155,18 +155,19 @@ class SetInStockQuantity(View):
 class CreateProducts(APIView):
     def get(self, request, quantity):
 
-        categories = ['Мужские кофты', 'Платья']
+        categories = ['Майки', 'Футболки']
         count = 1
         images = [
-            'https://cvetogis.kz/wp-content/uploads/2021/03/belo-roz-300x400.jpg',
-            'https://cvetogis.kz/wp-content/uploads/2021/03/kremovye-300x400.jpg',
-            'https://cvetogis.kz/wp-content/uploads/2021/03/belaya-300x400.jpg',
-            'https://cvetogis.kz/wp-content/uploads/2021/03/krasnaya-300x400.jpg',
-            'https://cvetogis.kz/wp-content/uploads/2021/02/3-.jpg',
-            'https://cvetogis.kz/wp-content/uploads/2021/02/3-bel.jpg',
-            'https://cvetogis.kz/wp-content/uploads/2021/02/3-.jpg'
+            'https://ae01.alicdn.com/kf/H9b5e8f7e12fd4feab3af3964d78ad7bbb/-.jpg_q50.jpg',
+            'https://ae01.alicdn.com/kf/H9b5e8f7e12fd4feab3af3964d78ad7bbb/-.jpg_q50.jpg',
+            'https://i5.walmartimages.com/asr/1aee6f35-1b05-4afd-9db1-61c4aeb0214c_1.5a39c700945f8e7a5e4c70c37ef0a983.jpeg',
+            'https://g.excellentorigin.co/img/products/56031-erkek-tops-goemlek-alfabe-serisi-fil-ve-kz-bask-yeni-t-shirt-oezel-oezel-ksa-kollu-tee-shirt-siyah-tisoert.jpg'
         ]
-        brands = ['fashion_5', 'Fashion 4', 'Fashion 3', 'Fashion 2']
+        brands = ['nike', 'adidas']
+        show_on_home_page = [True, False, False, False]
+        future = [True, False, False, False]
+        hit = [True, False, False, False]
+        latest = [True, False, False, False]
 
         for i in range(quantity):
             category = Category.objects.get(title=random.choice(categories))
@@ -179,7 +180,7 @@ class CreateProducts(APIView):
                 description='Краткое описание товара',
                 info='Дополнительная информация',
                 characteristic='Характеристики',
-                price=random.uniform(3000, 1000000),
+                price=random.uniform(3000, 500000),
                 miniature_url=random.choice(images),
                 image_url=random.choice(images),
                 rating=random.uniform(2, 5),

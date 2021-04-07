@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.conf import settings
 
-from .models import PaymentMethod, CallBack
+from .models import PaymentMethod, CallBack, GooglePay
 
 
 class PaymentMethodSerializer(serializers.ModelSerializer):
@@ -16,8 +16,17 @@ class PaymentMethodSerializer(serializers.ModelSerializer):
         exclude = ('order',)
 
 
+class GooglePaySerializer(serializers.ModelSerializer):
+    """Google pay"""
+
+    class Meta:
+        model = GooglePay
+        fields = '__all__'
+
+
 class CallBackCreateSerializer(serializers.ModelSerializer):
     """Обратный звонок +"""
     class Meta:
         model = CallBack
-        fields = ('__all__')
+        fields = '__all__'
+

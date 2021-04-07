@@ -11,7 +11,7 @@
       <p class="q-pl-lg">Для оформления заказа заполните форму ниже</p>
       <!--      Personal data   -->
       <q-step
-        :done="step > 1"
+        :done="formData.name !== '' && formData.phone !== '' ? step > 1 : false"
         :error="formData.name === '' || formData.phone === ''"
         :name="1"
         icon="user"
@@ -129,18 +129,25 @@
         icon="payments"
         title="Оплата"
       >
+        <div v-if="allFieldsCompleted">
         <p class="q-ml-lg text-bold q-pb-md ">Выберите способ оплаты</p>
-<!--        <q-card-->
-<!--          square-->
-<!--          class="grey-border shadow-0 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"-->
-<!--        >-->
-<!--          <div class=" text-center">-->
-<!--            <p class="q-pt-sm text-bold">Оплата онлайн</p>-->
-<!--            <div class="q-mt-sm">-->
-<!--              <pos-google-pay :amount="cartSum"/>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </q-card>-->
+        <q-card
+          v-if="googlePayMerchantId"
+          square
+          class="grey-border shadow-0 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"
+          @click="googlePayDialog = true"
+        >
+          <div class=" text-center">
+            <p class="q-pt-sm text-bold">Оплата картой онлайн</p>
+            <div class="q-mt-sm">
+              <div style="height: 50px">
+                <img src="../../assets/Gpay.png" style="height: 50px"
+                     class="cursor-pointer q-ml-md"
+                />
+              </div>
+            </div>
+          </div>
+        </q-card>
         <q-card
           square
           class="grey-border shadow-0 q-pa-sm cursor-pointer shadow-on-hover q-mt-sm"
@@ -153,6 +160,21 @@
             <p class="q-pt-sm text-bold">{{ payment.title }}</p>
           </div>
         </q-card>
+        </div>
+        <div v-else>
+          <q-card
+            square
+            class="shadow-0 q-px-sm q-py-lg bg-negative text-white text-center"
+          >
+            <p>Для того, чтобы выбрать способ оплаты необходимо заполнить все обязательные поля.</p>
+            <q-btn
+              label="ok"
+              outline
+              class="q-mt-md q-px-sm"
+              @click="step = 1"
+            />
+          </q-card>
+        </div>
       </q-step>
       <!--      xxxxx   -->
       <template v-slot:navigation>
@@ -176,6 +198,48 @@
       </template>
     </q-stepper>
 
+<!--    Google pay dialog   -->
+    <q-dialog
+      v-model="googlePayDialog"
+    >
+      <q-card
+        style="width: 500px; max-width: 100%"
+        class="bg-grey-2"
+      >
+        <q-toolbar class="bg-dark text-white">
+        <q-toolbar-title>Ваш заказ</q-toolbar-title>
+          <q-btn icon="close" flat dense v-close-popup/>
+        </q-toolbar>
+        <q-card-section>
+          <div class="cart-items q-mt-md">
+            <pos-cart-item
+              v-for="product in products"
+              :key="product.timeID"
+              :product="product"
+            />
+          </div>
+          <p class="text-bold q-pt-md">Всего товаров: {{ cartLen }}</p>
+          <p class="text-bold">Общая сумма заказа: {{ cartSum|formatPrice }}
+            <q-icon name="mdi-currency-kzt" class="icon-wrapper"/>
+          </p>
+          <q-separator class="q-mt-sm"/>
+          <p class="text-bold q-pt-sm">Получатель: <span
+            class="text-weight-regular">{{ formData.name ? formData.name : 'не указан' }}</span></p>
+          <p class="text-bold">Телефон: <span
+            class="text-weight-regular">{{ formData.phone ? formData.phone : 'не указан' }}</span></p>
+          <p class="text-bold">Адрес доставки: <span class="text-weight-regular">{{
+              formData.region ? formData.region : 'регион не указан'
+            }}, {{
+              formData.city ? formData.city : 'город не указан'
+            }}, {{ formData.address ? formData.address : 'адрес не указан' }}</span></p>
+          <div class="q-pt-lg text-center">
+            <pos-google-pay :amount="cartSum" @createOrder="createNewOrder" :merchant-id="googlePayMerchantId"/>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+<!--    xxxxx -->
+
   </div>
 </template>
 
@@ -183,10 +247,11 @@
 import formatPrice from "src/filters/format_price";
 import {QSpinnerFacebook} from "quasar";
 import PosGooglePay from "components/cart/posGooglePay";
+import PosCartItem from "components/cart/posCartItem";
 
 export default {
   name: "posCheckoutForm",
-  components: {},
+  components: {PosCartItem, PosGooglePay},
   filters: {formatPrice},
   props: {
     cartLen: {
@@ -202,6 +267,17 @@ export default {
       default: null
     }
   },
+  computed: {
+
+    allFieldsCompleted() {
+      let allFieldsCompleted = true
+      let data = this.formData
+      for (let key in data) {
+        if(key !== 'email' && data[key] === '') allFieldsCompleted = false
+      }
+      return allFieldsCompleted
+    }
+  },
   data() {
     return {
       paymentMethods: [],
@@ -214,10 +290,12 @@ export default {
         city: '',
         region: '',
         address: '',
-      }
+      },
+      googlePayMerchantId: null,
+      googlePayDialog: false
     }
   },
-  mounted() {
+  created() {
     this.loadPaymentMethods()
   },
   methods: {
@@ -225,6 +303,11 @@ export default {
       this.paymentMethods = await this.$axios.get(`${this.$store.getters.getServerURL}/orders/payments/`)
         .then(({data}) => {
           return data
+        })
+
+      this.googlePayMerchantId = await this.$axios.get(`${this.$store.getters.getServerURL}/orders/google_pay_merchant/`)
+        .then(({data}) => {
+          return data.merchantId
         })
     },
     checkData(dataName, message, step) {
@@ -237,7 +320,7 @@ export default {
       return true
     },
     // New order
-    async createNewOrder(paymentMethod, slug) {
+    async createNewOrder(paymentMethod, slug, paid=false, notice='') {
 
       if (
         !this.checkData(this.formData.name, 'Необходимо указать имя*', 1) ||
@@ -272,6 +355,8 @@ export default {
       let data = this.formData
       data.products = productsForOrder
       data.order_sum = this.cartSum
+      data.paid = paid
+      data.notice = notice
       data.payment_method = paymentMethod
 
       await fetch(`${this.$store.getters.getServerURL}/orders/create_order/`, {

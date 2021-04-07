@@ -8,8 +8,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .tg_bot import tg_send_order, tg_send_call_back
 
-from .models import PaymentMethod, Order, OrderItem
-from .serializers import PaymentMethodSerializer, CallBackCreateSerializer
+from .models import PaymentMethod, Order, OrderItem, GooglePay
+from .serializers import PaymentMethodSerializer, CallBackCreateSerializer, GooglePaySerializer
 from shop.serializers import ProductDetailSerializer
 from shop.models import Product
 
@@ -20,6 +20,15 @@ class PaymentMethodsView(APIView):
     def get(self, request):
         payments = PaymentMethod.objects.all()
         serializer = PaymentMethodSerializer(payments, many=True)
+        return Response(serializer.data)
+
+
+class GooglePayMerchantView(APIView):
+    """Google pay data"""
+
+    def get(self, request):
+        merchant = GooglePay.objects.last()
+        serializer = GooglePaySerializer(merchant, many=False)
         return Response(serializer.data)
 
 
@@ -45,7 +54,9 @@ class CreateOrderView(APIView):
             city=str(data['city']),
             address=str(data['address']),
             order_sum=(data['order_sum']),
-            payment_method=(data['payment_method'])
+            payment_method=(data['payment_method']),
+            paid=(data['paid']),
+            notice=(data['notice'])
         )
         for i in data['products']:
             if i['price'] is None:

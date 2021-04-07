@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Order, OrderItem, PaymentMethod, CallBack
+from .models import Order, OrderItem, PaymentMethod, CallBack, GooglePay
 
 
 admin.site.register(PaymentMethod)
+admin.site.register(GooglePay)
 
 
 class OrderItemInline(admin.TabularInline):

@@ -34,6 +34,10 @@ export default {
     amount: {
       type: Number,
       default: 0
+    },
+    merchantId: {
+      type: String,
+      default: ''
     }
   },
   data: () => ({
@@ -60,20 +64,24 @@ export default {
         },
       ],
       merchantInfo: {
-        merchantId: "12345678901234567890",
-        merchantName: "POS SHOP",
+        merchantId: '',
+        merchantName: '',
       },
     },
   }),
+  mounted() {
+    this.paymentRequest.merchantInfo.merchantId = this.merchantId
+    this.paymentRequest.merchantInfo.merchantName = this.$store.getters.getCompanyInfo.name
+  },
   methods: {
     onLoadPaymentData: (event) => {
-      console.log("load payment data", event.detail);
+      console.log('pay')
     },
     onError: (event) => {
-      console.error("error", event.error);
+      this.$emit('createOrder', 'Google Pay', 'google_pay', false, 'Не удалось оплатить с Google pay')
     },
-    onPaymentDataAuthorized: (paymentData) => {
-      console.log("payment authorized", paymentData);
+    onPaymentDataAuthorized (paymentData) {
+      this.$emit('createOrder', 'Google Pay', 'google_pay', true)
       return {
         transactionState: "SUCCESS",
       };

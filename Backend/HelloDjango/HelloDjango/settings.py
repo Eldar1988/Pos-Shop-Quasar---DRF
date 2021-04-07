@@ -27,7 +27,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['192.168.0.155']
 SITE_URL = 'http://192.168.0.199:8080'
-ALLOWED_HOSTS = ['192.168.0.199']
+ALLOWED_HOSTS = ['192.168.0.199', 'https://192.168.0.199:8080']
 APP_PATH = 'http://192.168.0.199:8000'
 
 # Application definition
@@ -179,6 +179,7 @@ CACHES = {
     }
 }
 TABBED_ADMIN_USE_JQUERY_UI = True
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 500000
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #
 # EMAIL_HOST = 'smtp.yandex.ru'

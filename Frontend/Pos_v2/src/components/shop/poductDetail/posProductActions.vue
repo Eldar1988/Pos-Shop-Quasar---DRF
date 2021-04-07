@@ -57,9 +57,19 @@
           />
         </div>
       </div>
+      <div class="flex" style="align-items: center">
       <!--            Kaspi button   -->
-      <div v-if="this.$store.state.kaspiButton" class="q-mt-sm q-ml-sm" id="dynamic"></div>
+      <div v-if="this.$store.state.kaspiButton" class="q-mt-sm q-ml-sm" id="dynamic" style="height: 50px"></div>
       <!--            xxxxx   -->
+      </div>
+      <!--      Google pay   -->
+      <div v-if="googlePayMerchantId" style="height: 50px">
+        <img src="../../../assets/Gpay.png" style="height: 50px; margin-top: 6px"
+             @click="selfAddToCart(product, quantity, true)"
+             class="cursor-pointer q-ml-md"
+        />
+      </div>
+      <!--      xxxxx   -->
     </div>
     <div v-else>
       <q-card
@@ -107,6 +117,7 @@ export default {
       quantity: 1,
       cartDialog: false,
       productInWishList: false,
+      googlePayMerchantId: null
     }
   },
   watch: {
@@ -117,6 +128,7 @@ export default {
   },
   mounted() {
     this.checkWishList()
+    this.googlePay()
     if (this.$store.state.kaspiButton) this.kaspiButton()
   },
   methods: {
@@ -166,6 +178,12 @@ export default {
         })
       }
     },
+    async googlePay() {
+      this.googlePayMerchantId = await this.$axios.get(`${this.$store.getters.getServerURL}/orders/google_pay_merchant/`)
+        .then(({data}) => {
+          return data.merchantId
+        })
+    }
   }
 }
 </script>

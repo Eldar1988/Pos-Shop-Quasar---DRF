@@ -109,7 +109,7 @@ class Product(models.Model):
     characteristic = RichTextUploadingField('Характеристики', null=True, blank=True, help_text='Необязательно')
     video = models.CharField('Видео с Youtube', max_length=255, null=True, blank=True,
                              help_text='Скопировать код в url после знака =')
-    price = models.IntegerField('Цена товара', null=True, blank=True, db_index=True)
+    price = models.IntegerField('Цена товара', null=True, blank=True)
     old_price = models.IntegerField('Старая цена', null=True, blank=True, help_text='Необязательно')
     purchase_price = models.IntegerField('Закуп', null=True, blank=True,
                                          help_text='Закупочная стоимость товара (необязательно)', default=0)
