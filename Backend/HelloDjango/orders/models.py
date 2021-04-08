@@ -22,6 +22,8 @@ class PaymentMethod(models.Model):
 
 class GooglePay(models.Model):
     merchantId = models.CharField('merchant Id', max_length=255)
+    merchantName = models.CharField('merchant name', max_length=255, null=True, blank=True)
+    test = models.BooleanField('Тестовая среда', default=True)
 
     def __str__(self):
         return self.merchantId

@@ -138,8 +138,7 @@
           @click="googlePayDialog = true"
         >
           <div class=" text-center">
-            <p class="q-pt-sm text-bold">Оплата картой онлайн</p>
-            <div class="q-mt-sm">
+            <div class="">
               <div style="height: 50px">
                 <img src="../../assets/Gpay.png" style="height: 50px"
                      class="cursor-pointer q-ml-md"
@@ -292,6 +291,8 @@ export default {
         address: '',
       },
       googlePayMerchantId: null,
+      googlePayMerchantName: null,
+      googleIsTest: null,
       googlePayDialog: false
     }
   },
@@ -307,6 +308,8 @@ export default {
 
       this.googlePayMerchantId = await this.$axios.get(`${this.$store.getters.getServerURL}/orders/google_pay_merchant/`)
         .then(({data}) => {
+          this.googlePayMerchantName = data.merchantName
+          this.googleIsTest = data.test
           return data.merchantId
         })
     },

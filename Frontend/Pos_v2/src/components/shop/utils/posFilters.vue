@@ -65,7 +65,18 @@
               color="dark"
             />
           </div>
-
+          <div class="col-sm-6 col-12 q-mt-md">
+            <q-radio v-model="orderingBy" val="priceFromMin" label="Цена: сначала дешевые" />
+            <q-radio v-model="orderingBy" val="priceFromMax" label="Цена: сначала дорогие" />
+          </div>
+          <div class="col-sm-6 col-12 q-mt-md">
+            <div>
+            <q-radio v-model="orderingBy" val="rating" label="По рейтингу" />
+            </div>
+            <div>
+            <q-radio v-model="orderingBy" val="date" label="По дате: сначала новые" />
+            </div>
+          </div>
         </div>
           <div class="text-right">
           <q-btn
@@ -98,7 +109,8 @@ export default {
       SelectedCharacteristics: [],
       minPrice: null,
       maxPrice: null,
-      resetFiltersBtn: false
+      resetFiltersBtn: false,
+      orderingBy: 'priceFromMin'
     }
   },
   watch: {
@@ -108,7 +120,7 @@ export default {
   },
   methods: {
     filtration() {
-      this.$emit('filtration', this.SelectedCharacteristics.join(','), this.minPrice ? this.minPrice : '', this.maxPrice ? this.maxPrice : '')
+      this.$emit('filtration', this.SelectedCharacteristics.join(','), this.minPrice ? this.minPrice : '', this.maxPrice ? this.maxPrice : '', `${this.orderingBy}`)
       this.resetFiltersBtn = true
       this.filtersCard = false
     },
@@ -117,6 +129,7 @@ export default {
       this.SelectedCharacteristics = []
       this.minPrice = null
       this.maxPrice = null
+      this.orderingBy = 'priceFromMin'
       if (reloadProducts) this.$emit('resetFilters')
     }
   }

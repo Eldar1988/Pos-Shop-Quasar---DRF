@@ -33,7 +33,7 @@
     <div class="flex justify-between" style="align-items: center">
       <pos-filters
         :filters="category.characteristic_types"
-        @filtration="filtration"
+        @filtration="setFilters"
         @resetFilters="resetFilters"
       />
       <div class="q-px-sm text-right">
@@ -52,7 +52,7 @@
             v-model="currentPage"
             :max="productsData ? +(Math.ceil(productsData.count/30)) : 0"
             direction-links
-            :max-pages="7"
+            :max-pages="5"
             @click="scrollToTop"
             unelevated
           />
@@ -111,7 +111,8 @@ export default {
   },
   data() {
     return {
-      currentPage: 1
+      currentPage: 1,
+      filters: ''
     }
   },
   computed: {
@@ -133,10 +134,17 @@ export default {
       this.loadProductData()
     },
     currentPage() {
-      this.$store.dispatch('fetchShopProducts', `category_slug=${this.$route.params.slug}&page=${this.currentPage}`)
+      this.$store.dispatch('fetchShopProducts', `category_slug=${this.$route.params.slug}&page=${this.currentPage}&${this.filters}`)
+    },
+    filters() {
+      this.$store.dispatch('fetchShopProducts', `category_slug=${this.$route.params.slug}&page=${this.currentPage}&${this.filters}`)
     }
   },
   methods: {
+    setFilters(characteristics, minPrice, maxPrice, orderBy) {
+      this.currentPage = 1
+      this.filters = `characteristics=${characteristics}&price_min=${minPrice}&price_max=${maxPrice}&order_by=${orderBy}`
+    },
     loadProductData() {
       this.$store.dispatch('fetchShopProducts', `category_slug=${this.$route.params.slug}`)
     },
@@ -148,12 +156,9 @@ export default {
         })
       },200)
     },
-    filtration(characteristics, minPrice, maxPrice) {
-      this.$store.dispatch('fetchShopProducts',
-        `category_slug=${this.$route.params.slug}&characteristics=${characteristics}&price_min=${minPrice}&price_max=${maxPrice}`)
-    },
     resetFilters() {
-      this.$store.dispatch('fetchShopProducts', `category_slug=${this.$route.params.slug}`)
+      this.filters = ''
+      this.currentPage = 1
     }
   },
   preFetch({store, currentRoute}) {

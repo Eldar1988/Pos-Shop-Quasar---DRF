@@ -71,11 +71,23 @@ class CategoryDetailView(APIView):
 
 class ProductListView(generics.ListAPIView):
     """Список товаров"""
-    queryset = Product.objects.filter(public=True)
     serializer_class = ProductListSerializer
     pagination_class = ProductsPagination
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProductsFilter
+
+    def get_queryset(self):
+        queryset = Product.objects.filter(public=True)
+        if self.request.query_params.get('order_by') == 'priceFromMax':
+            queryset = Product.objects.filter(public=True).order_by('-price')
+
+        if self.request.query_params.get('order_by') == 'date':
+            queryset = Product.objects.filter(public=True).order_by('-pub_date')
+
+        if self.request.query_params.get('order_by') == 'rating':
+            queryset = Product.objects.filter(public=True).order_by('-rating')
+
+        return queryset
 
 
 class LabelDetailView(APIView):

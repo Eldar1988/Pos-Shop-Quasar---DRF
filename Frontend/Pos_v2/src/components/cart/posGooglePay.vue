@@ -1,7 +1,7 @@
 <template>
 <div>
   <google-pay-button
-    environment="TEST"
+    :environment="this.isTest ? 'TEST' : 'PRODUCTION'"
     v-bind:button-type="buttonType"
     v-bind:button-color="buttonColor"
     v-bind:existing-payment-method-required="existingPaymentMethodRequired"
@@ -38,6 +38,14 @@ export default {
     merchantId: {
       type: String,
       default: ''
+    },
+    merchantName: {
+      type: String,
+      default: ''
+    },
+    isTest: {
+      type: Boolean,
+      default: true
     }
   },
   data: () => ({
@@ -71,11 +79,11 @@ export default {
   }),
   mounted() {
     this.paymentRequest.merchantInfo.merchantId = this.merchantId
-    this.paymentRequest.merchantInfo.merchantName = this.$store.getters.getCompanyInfo.name
+    this.paymentRequest.merchantInfo.merchantName = this.merchantName
   },
   methods: {
     onLoadPaymentData: (event) => {
-      console.log('pay')
+
     },
     onError: (event) => {
       this.$emit('createOrder', 'Google Pay', 'google_pay', false, 'Не удалось оплатить с Google pay')
