@@ -75,7 +75,7 @@ cfg.module.rules.push({
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
-      https: true,
+      https: false,
       port: 8080,
       // host: '192.168.0.155',
       host: '192.168.0.199',

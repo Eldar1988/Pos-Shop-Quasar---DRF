@@ -1,0 +1,11 @@
+{
+  "name": "js-code",
+  "version": "0.0.3",
+  "description": "Pos shop web-app",
+  "author": "JS Code",
+  "private": true,
+  "dependencies": {
+    "@capacitor/cli": "^2.0.0",
+    "@capacitor/core": "^2.0.0"
+  }
+}

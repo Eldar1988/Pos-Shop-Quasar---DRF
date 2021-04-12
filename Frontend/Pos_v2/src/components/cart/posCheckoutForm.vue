@@ -372,6 +372,10 @@ export default {
           let cart = []
           localStorage.setItem('cart', JSON.stringify(cart))
           this.$root.$emit('updateCart')
+          document.querySelector('#q-app').scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          })
           this.$q.loading.hide()
           this.$router.push(`/thanks/${slug}`)
 

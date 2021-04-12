@@ -1,8 +1,8 @@
 {
-  "name": "pos-shop",
-  "version": "0.0.2",
+  "name": "js-code",
+  "version": "0.0.3",
   "description": "Pos shop web-app",
-  "productName": "Pos shop",
+  "productName": "JS Code",
   "author": "JS Code",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
+    "@capacitor/android": "^2.4.7",
     "@capacitor/cli": "^2.4.6",
     "@capacitor/core": "^2.4.6",
     "@cookieseater/vue-yandex-share": "^0.2.1",

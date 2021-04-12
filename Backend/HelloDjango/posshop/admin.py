@@ -20,7 +20,8 @@ class ShopReviewAdmin(admin.ModelAdmin):
     save_on_top = True
 
     def get_image(self, obj):
-        return mark_safe(f'<img src={obj.avatar.url} height=30px style="object-fit: cover; border-radius: 5px;">')
+        if obj.avatar:
+            return mark_safe(f'<img src={obj.avatar.url} height=30px style="object-fit: cover; border-radius: 5px;">')
 
     get_image.short_description = 'Фото'
 
@@ -32,7 +33,8 @@ class ClientAdmin(admin.ModelAdmin):
     save_on_top = True
 
     def get_image(self, obj):
-        return mark_safe(f"<img src={obj.logo.url} height=30px>")
+        if obj.logo:
+            return mark_safe(f"<img src={obj.logo.url} height=30px>")
 
     get_image.short_description = 'Логотип'
 
@@ -46,8 +48,9 @@ class SliderAdmin(admin.ModelAdmin):
     save_on_top = True
 
     def get_image(self, obj):
-        return mark_safe(
-            f'<img src={obj.image.url} style="height: 50px; object-fit: cover; border-radius: 5px;">')
+        if obj.image:
+            return mark_safe(
+                f'<img src={obj.image.url} style="height: 50px; object-fit: cover; border-radius: 5px;">')
 
     get_image.short_description = 'Фото'
 
@@ -62,8 +65,8 @@ class BannerAdmin(admin.ModelAdmin):
     save_on_top = True
 
     def get_image(self, obj):
-        # return 'wad'
-        return mark_safe(f'<img src="{obj.image.url}" style="height: 50px; object-fit: cover; border-radius: 5px;">')
+        if obj.image:
+            return mark_safe(f'<img src="{obj.image.url}" style="height: 50px; object-fit: cover; border-radius: 5px;">')
 
     get_image.short_description = 'Баннер'
 
