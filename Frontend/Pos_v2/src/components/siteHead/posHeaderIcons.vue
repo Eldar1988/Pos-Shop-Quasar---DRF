@@ -1,10 +1,10 @@
 <template>
   <div>
-    <q-tabs align="center" shrink narrow-indicator active-bg-color="grey-2" indicator-color="grey-2" >
-      <q-route-tab to="/" icon="roofing" class="small-tabs text-dark"/>
+    <q-tabs align="center" shrink narrow-indicator active-bg-color="grey-2" indicator-color="transparent" >
+      <q-route-tab to="/" icon="las la-home" class="small-tabs text-dark"/>
       <q-route-tab to="/search" icon="search" class="small-tabs hide-on-mobile text-dark"/>
-      <q-route-tab to="/wishList" icon="favorite" class="small-tabs text-dark"><q-badge v-if="wishList" color="accent">{{ wishList }}</q-badge></q-route-tab>
-      <q-route-tab to="/cart" icon="shopping_bag" class="small-tabs text-dark"><q-badge v-if="cartLen" color="accent">{{ cartLen }}</q-badge></q-route-tab>
+      <q-route-tab to="/wishList" icon="lar la-star" class="small-tabs text-dark"><q-badge v-if="wishList" color="accent">{{ wishList }}</q-badge></q-route-tab>
+      <q-route-tab to="/cart" icon="las la-shopping-cart" class="small-tabs text-dark"><q-badge v-if="cartLen" color="accent">{{ cartLen }}</q-badge></q-route-tab>
     </q-tabs>
   </div>
 </template>

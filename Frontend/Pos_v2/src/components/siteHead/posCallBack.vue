@@ -6,7 +6,8 @@
       :color="color"
       class="full-width text-bold"
       @click="dialog = true"
-      unelevated
+      style="height: 50px"
+      unelevated stretch
     />
 
     <q-dialog

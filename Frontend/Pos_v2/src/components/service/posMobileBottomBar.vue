@@ -5,7 +5,7 @@
     <div class="flex flex-center">
       <a :href="`tel:${contacts.phone}`">
         <q-btn
-          icon="call"
+          icon="las la-phone-volume"
           flat round
           color="dark"
           size="20px"
@@ -17,7 +17,7 @@
 
       <a :href="`https://wa.me/${contacts.whatsapp}`">
         <q-btn
-          icon="mdi-whatsapp"
+          icon="lab la-whatsapp"
           flat round
           color="dark"
           size="20px"
@@ -27,10 +27,11 @@
     </div>
     <div class="flex flex-center">
       <q-btn
-        icon="menu"
-        outline round
+        icon="las la-ellipsis-h"
         color="dark"
-        style="margin-top: 2px"
+        flat
+        size="24px"
+        style="margin-top: -8px"
         @click="$emit('openDraw')"
       />
     </div>
@@ -38,9 +39,9 @@
       <q-fab
         v-model="fab"
         vertical-actions-align="right"
-        color="dark"
+        color="dark" active-icon="lar la-times-circle"
         flat
-        icon="help_outline"
+        icon="lar la-question-circle"
         direction="up" padding="10px"
         style="z-index: 100"
       >
@@ -50,7 +51,7 @@
     </div>
     <div class="flex flex-center">
       <q-btn
-        icon="search"
+        icon="las la-search"
         round flat
         color="dark"
         to="/search"

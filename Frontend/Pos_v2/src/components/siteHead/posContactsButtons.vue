@@ -5,7 +5,7 @@
         :label="contacts.phone"
         class="full-width bg-white text-bold"
         color="dark"
-        outline
+        flat
         icon="call"
         type="a"
         :href="`tel:${contacts.phone}`"
@@ -15,7 +15,7 @@
         :label="contacts.whatsapp"
         class="full-width bg-white text-bold"
         color="dark"
-        outline
+        flat
         icon="mdi-whatsapp"
         type="a"
         :href="`https://wa.me/${contacts.whatsapp}`"

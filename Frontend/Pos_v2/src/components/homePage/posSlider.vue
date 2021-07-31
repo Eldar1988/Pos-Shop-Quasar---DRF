@@ -21,6 +21,7 @@
         :key="index"
         :name="index"
       >
+        <router-link :to="slide.url">
         <q-img
           :src="slide.image"
           :contain="slide.contain"
@@ -48,7 +49,7 @@
             </div>
           </div>
         </q-img>
-
+        </router-link>
       </q-carousel-slide>
     </q-carousel>
     <q-skeleton

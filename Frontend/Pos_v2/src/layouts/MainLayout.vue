@@ -5,7 +5,7 @@
       <q-toolbar>
         <!--        Shop logo   -->
         <q-toolbar-title>
-          <router-link to="/">
+          <router-link to="/" class="q-ml-sm">
             <q-img :src="info.logo" height="40px" contain style="width: 190px; max-width: 90%;" position="left">
               <template v-slot:loading>
                 <q-skeleton height="40px" style="width: 190px; max-width: 90%" square/>
@@ -24,7 +24,7 @@
         <!--        Header tabs   -->
         <pos-header-icons/>
         <!--        xxxxx   -->
-        <q-btn size="lg" dense flat round icon="view_list" color="dark" @click="right = !right"/>
+        <q-btn size="lg" dense flat icon="las la-ellipsis-v" color="dark" @click="right = !right"/>
       </q-toolbar>
     </q-header>
     <q-drawer show-if-above v-model="right" side="right" class="text-dark">

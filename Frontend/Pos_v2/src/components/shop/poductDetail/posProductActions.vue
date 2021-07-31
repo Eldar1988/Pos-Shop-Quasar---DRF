@@ -34,7 +34,7 @@
           color="accent"
           unelevated
           class="full-width q-py-sm text-bold"
-          icon-right="forward"
+          icon-right="las la-angle-right"
           @click="selfAddToCart(product, quantity, true)"
         />
       </div>
@@ -44,7 +44,7 @@
             label="В корзину"
             color="positive"
             class="full-width q-py-sm text-bold"
-            icon-right="add_shopping_cart"
+            icon-right="las la-cart-arrow-down"
             unelevated
             @click="selfAddToCart(product, quantity, false)"
           />
@@ -53,7 +53,7 @@
             @click="addToWishList(product)"
             text-color="accent"
             unelevated flat
-            :icon="productInWishList ? 'favorite' : 'favorite_border'"
+            :icon="productInWishList ? 'las la-star' : 'lar la-star'"
           />
         </div>
       </div>

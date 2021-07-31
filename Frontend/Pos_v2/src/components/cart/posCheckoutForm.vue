@@ -11,20 +11,18 @@
       <p class="q-pl-lg">Для оформления заказа заполните форму ниже</p>
       <!--      Personal data   -->
       <q-step
-        :done="formData.name !== '' && formData.phone !== '' ? step > 1 : false"
-        :error="formData.name === '' || formData.phone === ''"
+        :done="formData.phone !== '' ? step > 1 : false"
         :name="1"
         icon="user"
         title="Персональные данные"
         done-color="positive"
-        error-color="negative"
+        error-color="negative" color="negative"
         class="q-mt-md"
       >
         <div class="row">
           <div class="col-12" style="padding: 2px">
             <q-input
               v-model="formData.name"
-              :rules="[val => !!val || 'Это обязательное поле*']"
               label="ФИО"
               outlined square
               type="text"
@@ -55,20 +53,19 @@
       <!--      xxxxx   -->
       <!--      Address   -->
       <q-step
-        :error="formData.region === '' || formData.city === '' || formData.address === ''"
+        :error="false"
         :done="step > 2"
         :name="2"
         icon="edit_location_alt"
         title="Адрес доставки"
         done-color="positive"
-        error-color="negative"
+        error-color="positive"
       >
         <div class="row">
           <div class="col-12 col-sm-6" style="padding: 2px">
             <q-input
               v-model="formData.region"
-              :rules="[val => !!val || 'Это обязательное поле*']"
-              label="Область*"
+              label="Область"
               outlined square
               type="text"
               maxlength="200" counter
@@ -77,8 +74,7 @@
           <div class="col-12 col-sm-6" style="padding: 2px">
             <q-input
               v-model="formData.city"
-              :rules="[val => !!val || 'Это обязательное поле*']"
-              label="Город*"
+              label="Город"
               outlined square
               type="text"
               maxlength="200" counter
@@ -87,8 +83,7 @@
           <div class="col-12" style="padding: 2px">
             <q-input
               v-model="formData.address"
-              :rules="[val => !!val || 'Это обязательное поле*']"
-              label="Адрес*"
+              label="Адрес"
               outlined square
               type="text"
               onautocomplete
@@ -129,7 +124,7 @@
         icon="payments"
         title="Оплата"
       >
-        <div v-if="allFieldsCompleted">
+        <div>
         <p class="q-ml-lg text-bold q-pb-md ">Выберите способ оплаты</p>
         <q-card
           v-if="googlePayMerchantId"
@@ -155,25 +150,25 @@
           @click="createNewOrder(payment.title, payment.slug)"
         >
           <div class="flex justify-center">
-            <q-img :src="payment.image" height="50px" contain/>
+            <q-img :src="payment.image" height="35px" contain/>
             <p class="q-pt-sm text-bold">{{ payment.title }}</p>
           </div>
         </q-card>
         </div>
-        <div v-else>
-          <q-card
-            square
-            class="shadow-0 q-px-sm q-py-lg bg-negative text-white text-center"
-          >
-            <p>Для того, чтобы выбрать способ оплаты необходимо заполнить все обязательные поля.</p>
-            <q-btn
-              label="ok"
-              outline
-              class="q-mt-md q-px-sm"
-              @click="step = 1"
-            />
-          </q-card>
-        </div>
+<!--        <div v-else>-->
+<!--          <q-card-->
+<!--            square-->
+<!--            class="shadow-0 q-px-sm q-py-lg bg-negative text-white text-center"-->
+<!--          >-->
+<!--            <p>Для того, чтобы выбрать способ оплаты необходимо заполнить все обязательные поля.</p>-->
+<!--            <q-btn-->
+<!--              label="ok"-->
+<!--              outline-->
+<!--              class="q-mt-md q-px-sm"-->
+<!--              @click="step = 1"-->
+<!--            />-->
+<!--          </q-card>-->
+<!--        </div>-->
       </q-step>
       <!--      xxxxx   -->
       <template v-slot:navigation>
@@ -325,15 +320,11 @@ export default {
     // New order
     async createNewOrder(paymentMethod, slug, paid=false, notice='') {
 
-      if (
-        !this.checkData(this.formData.name, 'Необходимо указать имя*', 1) ||
-        !this.checkData(this.formData.phone, 'Необходимо указать номер телефона*', 1) ||
-        !this.checkData(this.formData.region, 'Необходимо указать область доставки*', 2) ||
-        !this.checkData(this.formData.city, 'Необходимо указать город доставки*', 2) ||
-        !this.checkData(this.formData.address, 'Необходимо указать адрес доставки*', 2)
-      ) {
-        return null
-      }
+      if (!this.checkData(this.formData.phone, 'Необходимо указать номер телефона*', 1)) return null
+      if (!this.checkData(this.formData.name)) this.formData.name = 'Не указан'
+      if (!this.checkData(this.formData.region)) this.formData.region = 'Не указан'
+      if (!this.checkData(this.formData.city)) this.formData.city = 'Не указан'
+      if (!this.checkData(this.formData.address)) this.formData.address = 'Не указан'
 
       this.$q.loading.show({
         spinner: QSpinnerFacebook,

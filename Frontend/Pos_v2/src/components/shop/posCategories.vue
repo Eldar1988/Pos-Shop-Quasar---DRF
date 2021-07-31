@@ -12,9 +12,9 @@
           class="shadow-0 relative-position shadow-on-hover bg-white cursor-pointer"
           @click="showChildCategories (parentCategory)"
         >
-          <div class="category-card-wrapper text-left">
+          <div class="category-card-wrapper text-left q-px-md">
             <div>
-              <p class="category-card-title q-px-sm q-pt-sm text-bold" style="line-height: 1.2">{{
+              <p class="category-card-title q-px-sm text-bold" style="line-height: 1.2">{{
                   parentCategory.title
                 }}</p>
               <p v-if="parentCategory.label" class="text-accent category-card-label q-px-sm q-pb-sm">
@@ -25,8 +25,8 @@
                 :src="parentCategory.image"
                 class="category-card-image"
                 cover
-                height="70px"
-                width="70px"
+                height="50px"
+                width="50px"
               >
                 <template v-slot:loading>
                   <q-skeleton class="full-width category-card-image" square/>
@@ -47,9 +47,9 @@
           class="shadow-0 relative-position shadow-on-hover bg-white cursor-pointer"
         >
           <router-link :to="`/shop/${category.slug}`">
-            <div class="category-card-wrapper text-left">
+            <div class="category-card-wrapper text-left q-px-md">
               <div>
-                <p class="text-bold category-card-title q-px-sm q-pt-sm" style="line-height: 1.2">{{
+                <p class="category-card-title q-px-sm text-bold" style="line-height: 1.2">{{
                     category.title
                   }}</p>
                 <p v-if="category.label" class="text-accent category-card-label q-px-sm q-pb-sm">
@@ -60,8 +60,8 @@
                   :src="category.image"
                   class="category-card-image"
                   cover
-                  height="70px"
-                  width="70px"
+                  height="50px"
+                  width="50px"
                 >
                   <template v-slot:loading>
                     <q-skeleton class="full-width category-card-image" square/>
@@ -76,7 +76,7 @@
     <q-dialog v-model="dialog" maximized>
       <q-card
         square
-        style="width: 500px; max-width: 100%"
+        style="width: 992px; max-width: 100%"
         class="bg-grey-2"
       >
         <q-toolbar
@@ -87,11 +87,11 @@
         </q-toolbar>
         <q-scroll-area style="height: 85vh">
           <q-card-section>
-            <div>
+            <div class="row q-col-gutter-md">
               <div
                 v-for="category in childCategories"
                 :key="category.id"
-                class="q-mt-md"
+                class="col-md-6 col-12"
               >
                 <q-card
                   square
@@ -114,7 +114,7 @@
                         </q-img>
                       </div>
                       <div>
-                        <p class="category-card-title q-px-sm q-pt-sm text-bold" style="line-height: 1.2">
+                        <p class="ccategory-card-title q-px-sm text-bold" style="line-height: 1.2">
                           {{ category.title }}</p>
                         <p v-if="category.label" class="text-accent category-card-label q-px-sm q-pb-sm">
                           {{ category.label }}</p>
@@ -174,7 +174,7 @@ export default {
 
 <style lang="sass">
 .category-card-title
-  font-size: 14px
+  font-size: 16px
 
 .category-card-label
   font-size: 14px !important
@@ -201,6 +201,10 @@ export default {
 @media screen and (max-width: 1280px)
   .categories-wrapper
     grid-template-columns: 1fr 1fr 1fr
+
+@media screen and (max-width: 992px)
+  .category-card-title
+    font-size: 14px
 
 @media screen and (max-width: 650px)
   .categories-wrapper

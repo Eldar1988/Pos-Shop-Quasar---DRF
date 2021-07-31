@@ -28,10 +28,10 @@
             <!--            Title   -->
             <h1 class="product-header-text q-mt-sm">{{ productData.product.title }}</h1>
             <!--          Rating   -->
-            <div v-if="productData.product.rating" class="q-mt-sm">
-              <q-rating v-model="productData.product.rating" size="28px" color="orange" readonly
-                        style="text-shadow: none !important;"/>
-            </div>
+<!--            <div v-if="productData.product.rating" class="q-mt-sm">-->
+<!--              <q-rating v-model="productData.product.rating" size="28px" color="orange" readonly-->
+<!--                        style="text-shadow: none !important;"/>-->
+<!--            </div>-->
           </div>
           <!--          Short description  -->
           <div class="product-info-section">

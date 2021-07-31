@@ -9,9 +9,9 @@
       active-color="accent"
       indicator-color="accent"
     >
-      <q-tab class="text-dark" name="hits" label="Хиты продаж" icon="mdi-alert-decagram" />
-      <q-tab class="text-dark" name="sales" label="Скидки" icon="mdi-sale" />
-      <q-tab class="text-dark" name="future" label="Рекомендуем" icon="loyalty" />
+      <q-tab class="text-dark" name="hits" label="Хиты продаж" icon="lar la-star" />
+      <q-tab class="text-dark" name="sales" label="Скидки" icon="las la-percent" />
+      <q-tab class="text-dark" name="future" label="Рекомендуем" icon="lar la-thumbs-up" />
     </q-tabs>
 
     <div class="q-mt-lg">

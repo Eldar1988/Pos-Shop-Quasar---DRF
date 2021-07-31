@@ -6,7 +6,7 @@
   >
     <!--    Add to wish button   -->
     <q-btn
-      :icon="productInWishList ? 'favorite' : 'favorite_border'"
+      :icon="productInWishList ? 'las la-star' : 'lar la-star'"
       style="position: absolute; top:0; right:0;z-index:30"
       round flat
       color=""
@@ -34,9 +34,9 @@
           </template>
         </q-img>
         <!--      Rating   -->
-        <div class="rating-wrapper">
-          <q-rating v-model="product.rating" color="orange" size="14px" readonly/>
-        </div>
+<!--        <div class="rating-wrapper">-->
+<!--          <q-rating v-model="product.rating" color="orange" size="14px" readonly/>-->
+<!--        </div>-->
       </div>
     </router-link>
     <div class="product-meta">
@@ -47,7 +47,7 @@
         color="accent"
         flat dense
         unelevated disable padding="0"
-        class="q-ma-sm"
+        class="q-ma-md"
         style="bottom: -4px; left: 0; position: absolute"
       >
         {{ getSalePercent }}
@@ -62,7 +62,7 @@
       </router-link>
 
       <!--      Product price   -->
-      <div v-if="product.price" class="product-card-price-wrapper text-right text-positive">
+      <div v-if="product.price" class="product-card-price-wrapper text-right text-positive q-pa-sm">
         <p class="text-weight-bold product-card-price">
           {{ product.price|formatPrice }}
           <q-icon name="mdi-currency-kzt" class="icon-wrapper"/>
@@ -142,7 +142,7 @@ export default {
 .product-card-title
   font-size: 15px
   font-weight: 700
-  height: 40px
+  height: 50px
 
 
 .product-card-price

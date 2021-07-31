@@ -1,9 +1,9 @@
 <template>
   <nav class="bg-grey-2">
     <q-toolbar class="bg-grey-2">
-      <q-toolbar-title class="text-uppercase text-weight-bold text-subtitle1 letter-5">Магазин</q-toolbar-title>
+      <q-toolbar-title class="text-uppercase text-weight-bold text-subtitle1 letter-5 q-mt-lg">Магазин</q-toolbar-title>
     </q-toolbar>
-    <q-list class="bg-grey-2">
+    <q-list class="bg-grey-2 q-mt-md">
       <!--    Category skeletons-->
       <div v-if="categories && categories.length < 1">
         <q-item
@@ -123,7 +123,7 @@
         title="Перейти на главную"
       >
         <q-item-section avatar>
-          <q-icon name="home"/>
+          <q-icon name="las la-home"/>
         </q-item-section>
         <q-item-section class="text-subtitle1">
           Главная
@@ -140,7 +140,7 @@
         title="Информация о магазине"
       >
         <q-item-section avatar>
-          <q-icon name="store"/>
+          <q-icon name="las la-info-circle"/>
         </q-item-section>
         <q-item-section class="text-subtitle1">
           О магазине
@@ -157,7 +157,7 @@
         title="Часто задаваемые вопросы и ответы на них"
       >
         <q-item-section avatar>
-          <q-icon name="question_answer"/>
+          <q-icon name="lar la-question-circle"/>
         </q-item-section>
         <q-item-section class="text-subtitle1">
           Вопросы и ответы
@@ -174,10 +174,10 @@
         title="Файлы для загрузки"
       >
         <q-item-section avatar>
-          <q-icon name="cloud_download"/>
+          <q-icon name="las la-file-download"/>
         </q-item-section>
         <q-item-section class="text-subtitle1">
-          Файлы
+          Драйверы
         </q-item-section>
       </q-item>
       <!--      xxxxx   -->
@@ -191,7 +191,7 @@
         title="Контактная информация"
       >
         <q-item-section avatar>
-          <q-icon name="place"/>
+          <q-icon name="lar la-address-book"/>
         </q-item-section>
         <q-item-section class="text-subtitle1">
           Контакты
@@ -209,7 +209,7 @@
         :title="page.title"
       >
         <q-item-section avatar>
-          <q-icon name="keyboard_arrow_right"/>
+          <q-icon name="las la-angle-right"/>
         </q-item-section>
         <q-item-section class="text-subtitle1">
           {{ page.title }}
@@ -225,7 +225,7 @@
         to="/privacy_policy"
       >
         <q-item-section avatar>
-          <q-icon name="assignment"/>
+          <q-icon name="lar la-file-alt"/>
         </q-item-section>
         <q-item-section class="text-subtitle1">
           Политика конфиденциальности
